@@ -1,0 +1,47 @@
+{
+  "if": {
+    "prefix": "if",
+    "body": "if ${1}\n\t${0}\nend",
+    "description": "An IF statement."
+  },
+  "ifelse": {
+    "prefix": "ife",
+    "body": "if ${1}\n\t${2}\nelse\n\t${0}\nend",
+    "description": "Add an elseif to an if statement."
+  },
+  "else": {
+    "prefix": "el",
+    "body": "else\n\t${0}",
+    "description": "else"
+  },
+  "elseif": {
+    "prefix": "eif",
+    "body": "elseif ${1}\n\t${0}",
+    "description": "else"
+  },
+  "while": {
+    "prefix": "while",
+    "body": "while ${1}\n\t${0}\nend",
+    "description": "A while loop."
+  },
+  "for": {
+    "prefix": "for",
+    "body": "for ${1:i} = ${2:1:n}\n\t${0}\nend",
+    "description": "A for loop."
+  },
+  "parfor": {
+    "prefix": "parfor",
+    "body": "parfor ${1:i} = ${2:1:n}\n\t${0}\nend",
+    "description": "A parfor loop."
+  },
+  "try": {
+    "prefix": "try",
+    "body": "try\n\t${1}\ncatch ${2:err}\n\t${0}\nend",
+    "description": "A try."
+  },
+  "switch": {
+    "prefix": "switch",
+    "body": "switch ${1:n}\n\tcase ${2:0}\n\t\t${0}\nend",
+    "description": "Switch case."
+  }
+}
