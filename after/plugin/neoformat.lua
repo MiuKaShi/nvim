@@ -57,9 +57,9 @@ augroup fmt
 autocmd!
 autocmd BufWritePre *.sh Neoformat
 autocmd BufWritePre *.py Neoformat
+autocmd BufWritePre *.c,*.h,*.cc,*.hh,*.cpp,*.hpp Neoformat
 " autocmd BufWritePre *.lua lua require("stylua-nvim").format_file()
 " autocmd BufWritePre *.md Neoformat
-autocmd BufWritePre *.json, yaml,*.yml Neoformat
-autocmd BufWritePre *.c,*.h,*.cc,*.hh,*.cpp,*.hpp Neoformat
+" autocmd BufWritePre *.json, yaml,*.yml Neoformat
 augroup END
 ]]
