@@ -70,11 +70,8 @@ cmp.setup {
     snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
-            -- vim.fn['vsnip#anonymous'](args.body) -- For `vsnip` users.
             require('luasnip').lsp_expand(args.body)
-            -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-            -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-        end,
+        end
     },
     formatting = {
         fields = { 'kind', 'abbr', 'menu' },
