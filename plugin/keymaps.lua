@@ -34,8 +34,6 @@ end
 -- insert mode
 set_keymap('i', '<C-a>', '<Esc>0i', {})
 set_keymap('i', '<C-e>', '<End>', {})
-set_keymap('i', '<C-d>', '<Del>', {})
-set_keymap('i', '<C-c>', '<C-r>=KillLine()<CR>', {})
 set_keymap('i', '<C-n>', '<Plug>(fzf-complete-wordnet)', {}) -- dicitonal
 
 -- normal mode
