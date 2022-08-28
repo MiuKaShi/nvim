@@ -92,6 +92,7 @@ return require('packer').startup(function(use)
     }
     use 'L3MON4D3/LuaSnip'
     use 'windwp/nvim-autopairs'
+	use { 'github/copilot.vim', opt = true }
     -- AI Completion
     -- use {
     --     'tzachar/cmp-tabnine',
@@ -99,7 +100,6 @@ return require('packer').startup(function(use)
     --     requires = 'hrsh7th/nvim-cmp',
     --     config = [[require('configs.tabnine')]],
     -- }
-    use { 'github/copilot.vim', opt = true }
 
     -- Comment
     use 'numToStr/Comment.nvim'
