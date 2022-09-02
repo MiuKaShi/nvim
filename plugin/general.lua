@@ -114,5 +114,6 @@ autocmd BufRead,BufNewFile *.tp set filetype=type
 autocmd BufRead,BufNewFile *.m set filetype=matlab
 autocmd BufRead,BufNewFile *.md set filetype=markdown.pandoc
 autocmd BufRead,BufNewFile lfrc set filetype=lf
+autocmd BufRead,BufNewFile *.sage set filetype=sage
 autocmd BufRead,BufNewFile sxhkdrc,*.sxhkdrc set filetype=sxhkdrc
 ]]
