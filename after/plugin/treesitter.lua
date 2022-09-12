@@ -20,8 +20,7 @@ local ts_install = {
     'toml',
     'vim',
     'yaml',
-    'julia',
-    'markdown_inline',
+    'julia'
 }
 
 require('nvim-treesitter.configs').setup {
