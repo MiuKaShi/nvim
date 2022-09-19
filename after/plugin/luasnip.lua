@@ -1,4 +1,4 @@
-local ls = require 'luasnip'
+local ls    = require 'luasnip'
 local types = require 'luasnip.util.types'
 
 ls.config.setup {
@@ -7,10 +7,10 @@ ls.config.setup {
     ext_opts = {
         [types.choiceNode] = {
             active = {
-                virt_text = { { '« ', 'NonText' } },
+                virt_text = { { '« ', 'NonText' } }
             },
-        },
-    },
+        }
+    }
 }
 
 vim.keymap.set({ 'i', 's' }, '<C-j>', function()
@@ -29,6 +29,4 @@ vim.keymap.set('i', '<C-l>', function()
     end
 end, { desc = 'LuaSnip Next Choice' })
 
-require('luasnip.loaders.from_lua').lazy_load {
-    paths = { '~/.config/nvim/luasnippets' },
-}
+require('luasnip.loaders.from_lua').lazy_load()

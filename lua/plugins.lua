@@ -29,10 +29,10 @@ end
 
 vim.api.nvim_create_augroup('packer_user_config', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
-	command = 'source <afile> | PackerCompile',
-	pattern = 'plugins.lua',
-	group   = 'packer_user_config',
-	desc    = 'Compile whenever plugins.lua is updated',
+    command = 'source <afile> | PackerCompile',
+    pattern = 'plugins.lua',
+    group   = 'packer_user_config',
+    desc    = 'Compile whenever plugins.lua is updated',
 })
 
 -- plugin lists
@@ -52,37 +52,30 @@ return require('packer').startup(function(use)
     -- Format
     use 'sbdchd/neoformat'
     use 'junegunn/vim-easy-align'
-    use 'ckipp01/stylua-nvim'
 
     -- Syntax
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'nvim-treesitter/playground', opt = true }
-	use 'nvim-treesitter/nvim-treesitter-context'
-    use 'lambdalisue/vim-cython-syntax' 
+    use 'nvim-treesitter/nvim-treesitter-context'
+    use 'lambdalisue/vim-cython-syntax'
     use 'vim-pandoc/vim-pandoc-syntax' -- markdown 高亮
     use 'luochen1990/rainbow' -- 嵌套括号高亮
-    use 'RRethy/vim-illuminate' -- 高亮选中单词
     use 'folke/lua-dev.nvim' -- lua 语法提示 for lsp
     use 'tridactyl/vim-tridactyl' -- tridactyl 高亮
 
     -- Completion
-    use {
-        'hrsh7th/nvim-cmp',
-        requires = {
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-nvim-lua',
-            'saadparwaiz1/cmp_luasnip',
-            'hrsh7th/cmp-path',
-            'hrsh7th/cmp-cmdline',
-            'lukas-reineke/cmp-rg',
-            -- 'mstanciu552/cmp-octave', -- octave 自动补偿
-            'mstanciu552/cmp-matlab', -- matlab 自动补偿
-        },
-    }
+    use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-cmdline'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-path'
+    use 'lukas-reineke/cmp-rg'
+    use 'saadparwaiz1/cmp_luasnip'
+    use 'mstanciu552/cmp-matlab'
+
     use 'L3MON4D3/LuaSnip'
     use 'windwp/nvim-autopairs'
-	use { 'github/copilot.vim', opt = true }
+    use { 'github/copilot.vim', opt = true }
     -- AI Completion
     -- use {
     --     'tzachar/cmp-tabnine',
@@ -97,7 +90,7 @@ return require('packer').startup(function(use)
     -- GUI
     use 'nvim-lualine/lualine.nvim' -- 底部状态栏
     use 'declancm/cinnamon.nvim' -- smooth scroll
-    
+
 
     -- Writting
     use 'lukas-reineke/indent-blankline.nvim' -- Indent
@@ -105,9 +98,9 @@ return require('packer').startup(function(use)
     use 'kylechui/nvim-surround' -- 修改包围符合
     use 'wellle/targets.vim' -- 修改包围内内容
     use 'MiuKaShi/bibtexcite.vim' -- bib 引用
-    
+
     use { 'iamcco/markdown-preview.nvim', run = ':call mkdp#util#install()' }
-	use 'stevearc/aerial.nvim' --outline
+    use 'stevearc/aerial.nvim' --outline
     -- use {
     --     'nvim-neorg/neorg', -- org 模式
     --     tag = '0.0.11',
@@ -116,7 +109,6 @@ return require('packer').startup(function(use)
     -- }
 
     -- Search
-    -- use 'easymotion/vim-easymotion' -- 单词搜索
     use { 'ggandor/leap.nvim', config = [[require('leap').set_default_keymaps()]] }
     use { 'junegunn/fzf', dir = '~/.fzf', run = ':call fzf#install()' } -- fuzzy 查找
     use 'junegunn/fzf.vim' -- needed for previews

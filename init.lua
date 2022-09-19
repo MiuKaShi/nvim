@@ -36,4 +36,4 @@ hi EndOfBuffer guibg=NONE ctermbg=NONE
 -- PLUGINS And LSP LIST
 vim.defer_fn(function()
 	require 'plugins'
-end, 800)
+end, 500)
