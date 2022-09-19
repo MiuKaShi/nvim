@@ -156,7 +156,6 @@ wk.register({
     t           = { ':Lspsaga open_floaterm<CR>', 'Open Terminal(exit with <ESC>)' }, -- 打开终端
     l           = { ':call ToggleHiddenAll()<CR>', 'LSP Toggle' }, -- LSP 开关
     i           = { ':setlocal spell! spelllang=en_us<CR>', 'Spell Check' }, -- Spell check
-    o           = { ':AerialToggle<CR>', 'Outline' }, -- Outline
     ['*']       = { "<cmd>lua require('telescope.builtin').lsp_references()<cr>", 'Search reference in current project' }, -- lsp 查找引用
     ['/']       = { ':Telescope live_grep<CR>', 'Fuzzy search in project' }, -- 项目内查找
     ['!']       = { ':Telescope help_tags theme=ivy<CR>', 'Help commands by fuzzy search' }, -- vim帮助查找
