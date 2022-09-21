@@ -116,4 +116,5 @@ autocmd BufRead,BufNewFile *.md set filetype=markdown.pandoc
 autocmd BufRead,BufNewFile lfrc set filetype=lf
 autocmd BufRead,BufNewFile *.sage set filetype=sage
 autocmd BufRead,BufNewFile sxhkdrc,*.sxhkdrc set filetype=sxhkdrc
+autocmd BufRead,BufNewFile  *tridactylrc set filetype=tridactyl
 ]]

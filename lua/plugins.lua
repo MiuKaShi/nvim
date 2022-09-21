@@ -48,6 +48,7 @@ return require('packer').startup(function(use)
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
     use 'onsails/lspkind-nvim' -- vscode-like lsp 提示
     use 'tami5/lspsaga.nvim' -- LSP UI
+    use 'folke/lua-dev.nvim' -- lua 语法提示 for lsp
 
     -- Format
     use 'sbdchd/neoformat'
@@ -60,8 +61,6 @@ return require('packer').startup(function(use)
     use 'lambdalisue/vim-cython-syntax'
     use 'vim-pandoc/vim-pandoc-syntax' -- markdown 高亮
     use 'luochen1990/rainbow' -- 嵌套括号高亮
-    use 'folke/lua-dev.nvim' -- lua 语法提示 for lsp
-    use 'tridactyl/vim-tridactyl' -- tridactyl 高亮
 
     -- Completion
     use 'hrsh7th/nvim-cmp'
@@ -91,10 +90,8 @@ return require('packer').startup(function(use)
     use 'nvim-lualine/lualine.nvim' -- 底部状态栏
     use 'declancm/cinnamon.nvim' -- smooth scroll
 
-
     -- Writting
     use 'lukas-reineke/indent-blankline.nvim' -- Indent
-    use { 'junegunn/limelight.vim', requires = 'junegunn/goyo.vim' } -- another zen mode
     use 'kylechui/nvim-surround' -- 修改包围符合
     use 'wellle/targets.vim' -- 修改包围内内容
     use 'MiuKaShi/bibtexcite.vim' -- bib 引用
@@ -109,8 +106,8 @@ return require('packer').startup(function(use)
     -- }
 
     -- Search
-    use { 'ggandor/leap.nvim', config = [[require('leap').set_default_keymaps()]] }
-    use { 'junegunn/fzf', dir = '~/.fzf', run = ':call fzf#install()' } -- fuzzy 查找
+	use 'ggandor/leap.nvim'
+    -- use { 'junegunn/fzf', dir = '~/.fzf', run = ':call fzf#install()' } -- fuzzy 查找
     use 'junegunn/fzf.vim' -- needed for previews
     use 'Avi-D-coder/fzf-wordnet.vim' -- 英文词典
     use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim' }
