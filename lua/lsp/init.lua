@@ -3,17 +3,14 @@ local lspconfig = require 'lspconfig'
 
 -- Diagnostics symbols for display in the sign column.
 local signs = { Error = '🔥', Warn = '💩', Info = '💬', Hint = '💡' }
-for sign, icon in pairs(signs) do
-    vim.fn.sign_define('DiagnosticSign' .. sign, {
-        text = icon,
-        texthl = 'Diagnostic' .. sign,
-        linehl = false,
-        numhl = 'Diagnostic' .. sign,
-    })
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
+
 local on_attach = function(client, bufnr)
-    if client.resolved_capabilities.document_highlight then
+    if client.server_capabilities.document_highlight then
         vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
         vim.api.nvim_clear_autocmds {
             buffer = bufnr,

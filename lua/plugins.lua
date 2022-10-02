@@ -106,7 +106,7 @@ return require('packer').startup(function(use)
     -- }
 
     -- Search
-	use 'ggandor/leap.nvim'
+    use 'ggandor/leap.nvim'
     -- use { 'junegunn/fzf', dir = '~/.fzf', run = ':call fzf#install()' } -- fuzzy 查找
     use 'junegunn/fzf.vim' -- needed for previews
     use 'Avi-D-coder/fzf-wordnet.vim' -- 英文词典
@@ -119,6 +119,7 @@ return require('packer').startup(function(use)
 
     -- Language
     use 'JuliaEditorSupport/julia-vim' --Julia
+    -- use 'kdheepak/JuliaFormatter.vim' -- Julia formatter
 
     -- Others
     use 'folke/which-key.nvim' -- 快捷键 maps

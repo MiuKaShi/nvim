@@ -6,7 +6,7 @@ M.setup = function(on_attach, capabilities)
     require('lspconfig').julials.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-        cmd = { "juliacli", "server" },
+        cmd = { "juliacli", "server", "--download" },
         settings = {
             julia = {
                 usePlotPane = false,

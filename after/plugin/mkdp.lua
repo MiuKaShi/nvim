@@ -1,6 +1,6 @@
 vim.cmd [[
 function! g:Open_browser(url)
-    silent exec "!surf " . a:url . " &"
+    silent exec "! firefox --new-window  " . a:url . " &"
 endfunction
 ]]
 
