@@ -58,23 +58,23 @@ set_keymap('c', '<C-k>', '<C-f>D<C-c><C-c>:<Up>', { noremap = true })
 -- End of setup for emacs keybindings
 
 -- lspconfig 服务地址 https://github.com/neovim/nvim-lspconfig
-nmap('gd',         '<cmd>lua vim.lsp.buf.definition()<CR>') -- 跳转定义
-nmap('J',          "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>") -- 预览定义
-nmap('K',          "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>") -- 显示文档定义
-nmap('<C-n>',      "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>") -- 滚动hover 下
-nmap('<C-p>',      "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>") -- 滚动hover 上
-nmap('<C-f>',      '<cmd>Telescope find_files<CR>') -- 查找文件
-nmap('gF',         ':Telescope live_grep<CR>') -- 模糊查找文件
-nmap('gs',         "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>") -- 签名查看
-nmap('gS',         "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>") -- 诊断问题
-nmap('gi',         '<cmd>lua vim.lsp.buf.implementation()<CR>') -- 跳转实现
-nmap('gn',         ':BufferLineCycleNext<CR>') -- 下一个文件
-nmap('gp',         ':BufferLineCyclePrev<CR>') -- 上一个文件
-nmap('gr',         "<cmd>lua require('lspsaga.rename').rename()<CR>") -- 重命名变量
-nmap('ca',         "<cmd>lua require('lspsaga.codeaction').code_action()<CR>") -- 代码操作
-vmap('ca',         ":<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>") -- 选中的代码操作
-nmap('gh',         "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>") -- 异步查找单词定义、引用
-tmap('<ESC>',      '<C-\\><C-n>:Lspsaga close_floaterm<CR>') -- 关闭终端
+nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>') -- 跳转定义
+nmap('J', "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>") -- 预览定义
+nmap('K', "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>") -- 显示文档定义
+nmap('<C-n>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>") -- 滚动hover 下
+nmap('<C-p>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>") -- 滚动hover 上
+nmap('<C-f>', '<cmd>Telescope find_files<CR>') -- 查找文件
+nmap('gF', ':Telescope live_grep<CR>') -- 模糊查找文件
+nmap('gs', "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>") -- 签名查看
+nmap('gS', "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>") -- 诊断问题
+nmap('gi', '<cmd>lua vim.lsp.buf.implementation()<CR>') -- 跳转实现
+nmap('gn', ':BufferLineCycleNext<CR>') -- 下一个文件
+nmap('gp', ':BufferLineCyclePrev<CR>') -- 上一个文件
+nmap('gr', "<cmd>lua require('lspsaga.rename').rename()<CR>") -- 重命名变量
+nmap('ca', "<cmd>lua require('lspsaga.codeaction').code_action()<CR>") -- 代码操作
+vmap('ca', ":<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>") -- 选中的代码操作
+nmap('gh', "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>") -- 异步查找单词定义、引用
+tmap('<ESC>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>') -- 关闭终端
 
 local wk = require 'which-key'
 wk.register({
@@ -98,7 +98,7 @@ wk.register({
         n = { ':BufferLineCycleNext<CR>', 'Next buffer' },
         p = { ':BufferLineCyclePrev<CR>', 'Previous buffer' },
         d = { ':bw<CR>', 'Delete buffer' },
-        f = { '<cmd>lua vim.lsp.buf.formatting_sync(nil, 200)<cr>', 'Format' },
+        f = { '<cmd>lua vim.lsp.buf.format(nil, 200)<cr>', 'Format' },
         c = { '<cmd>BibtexciteInsert<CR>', 'Bib citation insert' },
         v = { '<cmd>BibtexciteShowcite<CR>', 'Bib citation view' },
         o = { '<cmd>BibtexciteOpenfile<CR>', 'Bib Open pdf' },
@@ -124,7 +124,8 @@ wk.register({
     ['s']       = {
         name = '+Search/Symbols',
         e = { ':Lspsaga rename<CR>', 'Edit symbol' },
-        s = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find { fuzzy = false,  case_mode = 'ignore_case' }<cr>", 'Search current buffer' },
+        s = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find { fuzzy = false,  case_mode = 'ignore_case' }<cr>",
+            'Search current buffer' },
         h = { "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", 'Hover symbol' },
         p = { "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", 'Preview symbol' },
         H = { "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", 'Show symbol signature' },
