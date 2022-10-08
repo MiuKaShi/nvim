@@ -67,30 +67,15 @@ vim.keymap.set('n', '<leader>fs', function()
 	tb.current_buffer_fuzzy_find({fuzzy = false,  case_mode = 'ignore_case', previewer = false})
 end, { desc = 'Search current buffer' })
 
-vim.keymap.set('n', '<leader>fm', function()
-	tb.builtin()
-end, { desc = 'Telescope Meta' })
-
 vim.keymap.set('n', '<leader>fd', function()
 	tb.find_files(themes.get_ivy {})
 end, { desc = 'Find Files' })
+
+vim.keymap.set('n', '<leader>fm', function()
+	tb.builtin()
+end, { desc = 'Telescope Meta' })
 
 vim.keymap.set('n', '<leader>fh', function()
 	tb.help_tags { show_version = true }
 end, { desc = 'Help Tags' })
 
-vim.keymap.set('n', '<leader>fz', function()
-	tb.find_files(themes.get_ivy {
-		find_command = { 'rg', '--files', '--type', vim.fn.input 'Type: ' }
-	})
-end, { desc = 'Search Certain Type Files' })
-
-vim.keymap.set('n', '<leader>f/', function()
-	tb.grep_string { path_display = { 'shorten' }, search = vim.fn.input 'Grep String > ' }
-end, { desc = 'Grep Strings' })
-
-vim.keymap.set('n', '<leader>en', function()
-	tb.find_files(themes.get_ivy {
-		cwd = '~/.config/nvim', prompt_title = 'Nvim Configs'
-	})
-end, { desc = 'Neovim Config Files' })
