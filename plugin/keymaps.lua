@@ -64,7 +64,6 @@ nmap('K', "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>") -- 显示�
 nmap('<C-n>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>") -- 滚动hover 下
 nmap('<C-p>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>") -- 滚动hover 上
 nmap('<C-f>', '<cmd>Telescope find_files<CR>') -- 查找文件
-nmap('gF', ':Telescope live_grep<CR>') -- 模糊查找文件
 nmap('gs', "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>") -- 签名查看
 nmap('gS', "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>") -- 诊断问题
 nmap('gi', '<cmd>lua vim.lsp.buf.implementation()<CR>') -- 跳转实现
@@ -75,6 +74,11 @@ nmap('ca', "<cmd>lua require('lspsaga.codeaction').code_action()<CR>") -- 代码
 vmap('ca', ":<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>") -- 选中的代码操作
 nmap('gh', "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>") -- 异步查找单词定义、引用
 tmap('<ESC>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>') -- 关闭终端
+
+-- telescope alias
+local themes = require 'telescope.themes'
+local tb = require 'telescope.builtin'
+local te = require('telescope').extensions
 
 local wk = require 'which-key'
 wk.register({
@@ -104,12 +108,8 @@ wk.register({
         o = { '<cmd>BibtexciteOpenfile<CR>', 'Bib Open pdf' },
     },
     ['f']       = {
-        name = '+Files',
-        f = { "<cmd> lua require('telescope.builtin').builtin()<CR>", 'current working directory' },
-        r = { '<cmd>Telescope oldfiles<CR>', 'Open recent file', noremap = false },
-        w = { '<cmd>Telescope grep_string theme=ivy<CR>', 'Find cursor word' },
-        s = { '<cmd>w ! sudo tee > /dev/null %<CR>', 'Force save file' },
-        t = { "<cmd> lua require('telescope.builtin').treesitter()<CR>", 'trees of functions/variables' },
+        name = '+Find',
+        -- use keys from telescope configs,
     },
     ['p']       = {
         name = '+Projects',
@@ -122,10 +122,9 @@ wk.register({
         i = { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", 'Jump to symbol' },
     },
     ['s']       = {
-        name = '+Search/Symbols',
+        name = '+Save/Symbols',
+        s = { '<cmd>w ! sudo tee > /dev/null %<CR>', 'Force save file' },
         e = { ':Lspsaga rename<CR>', 'Edit symbol' },
-        s = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find { fuzzy = false,  case_mode = 'ignore_case' }<cr>",
-            'Search current buffer' },
         h = { "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", 'Hover symbol' },
         p = { "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", 'Preview symbol' },
         H = { "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", 'Show symbol signature' },
@@ -158,7 +157,7 @@ wk.register({
     l           = { ':call ToggleHiddenAll()<CR>', 'LSP Toggle' }, -- LSP 开关
     i           = { ':setlocal spell! spelllang=en_us<CR>', 'Spell Check' }, -- Spell check
     ['*']       = { "<cmd>lua require('telescope.builtin').lsp_references()<cr>", 'Search reference in current project' }, -- lsp 查找引用
-    ['/']       = { ':Telescope live_grep<CR>', 'Fuzzy search in project' }, -- 项目内查找
+    ['/']       = { ':Telescope live_grep previewer=false <CR>', 'Fuzzy search in project' }, -- 项目内查找
     ['!']       = { ':Telescope help_tags theme=ivy<CR>', 'Help commands by fuzzy search' }, -- vim帮助查找
     ['<Tab>']   = { ':b#<CR>', 'Last buffer' },
     ['<Space>'] = { ':Lf<CR>', 'Toggle directory tree' }, -- 查找命令

@@ -31,3 +31,7 @@ require('nvim-treesitter.configs').setup {
     playground = { enable = true },
     query_linter = { enable = true },
 }
+
+-- Folding
+-- vim.opt_local.foldmethod = 'expr'
+-- vim.opt_local.foldexpr = 'nvim_treesitter#foldexpr()'

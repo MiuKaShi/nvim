@@ -29,7 +29,7 @@ end
 
 vim.api.nvim_create_augroup('packer_user_config', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
-    command = 'source <afile> | PackerCompile',
+    command = 'source | PackerCompile',
     pattern = 'plugins.lua',
     group   = 'packer_user_config',
     desc    = 'Compile whenever plugins.lua is updated',
@@ -110,7 +110,14 @@ return require('packer').startup(function(use)
     -- use { 'junegunn/fzf', dir = '~/.fzf', run = ':call fzf#install()' } -- fuzzy 查找
     use 'junegunn/fzf.vim' -- needed for previews
     use 'Avi-D-coder/fzf-wordnet.vim' -- 英文词典
-    use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim' }
+	use {
+		'nvim-telescope/telescope.nvim',
+		requires = {
+			'nvim-lua/plenary.nvim',
+			'kyazdani42/nvim-web-devicons'
+		}
+	}
+	use { 'nvim-telescope/telescope-frecency.nvim', requires = 'kkharji/sqlite.lua' }
     use 'nvim-telescope/telescope-file-browser.nvim'
     use 'nvim-telescope/telescope-ui-select.nvim' -- 选择框 vim.ui.select
 
