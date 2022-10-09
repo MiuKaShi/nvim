@@ -8,7 +8,6 @@ vim.opt.number         = true
 vim.opt.textwidth      = 120 -- Line wrap (number of cols)
 vim.opt.linebreak      = true
 vim.opt.showbreak      = '> '
-vim.opt.title          = true
 
 -- search
 vim.opt.hlsearch   = true -- 保持匹配项目高亮
@@ -51,8 +50,6 @@ vim.opt.encoding                = 'UTF-8'
 vim.opt.fileencoding            = 'UTF-8'
 vim.opt.fileencodings           = 'UTF-8'
 vim.o.termguicolors             = true
-vim.opt.lazyredraw              = true -- Speeds up scrolling
-vim.opt.redrawtime              = 10000
 vim.opt.regexpengine            = 1
 vim.opt.scrolloff               = 8 -- Always show at least one line above/below the cursor.
 vim.opt.showmatch               = true
