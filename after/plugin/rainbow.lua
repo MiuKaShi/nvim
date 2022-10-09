@@ -50,8 +50,3 @@ let g:rainbow_conf = {
 \	}
 \}
 ]]
--- fixup nvim-treesitter cause luochen1990/rainbow not working problem
-
--- require 'nvim-treesitter.highlight'
--- local hlmap = vim.treesitter.highlighter.hl_map
--- hlmap['punctuation.bracket'] = nil

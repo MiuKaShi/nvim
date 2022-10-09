@@ -28,8 +28,9 @@ require('nvim-treesitter.configs').setup {
     highlight = { enable = true, additional_vim_regex_highlighting = { 'latex' } },
     incremental_selection = { enable = true },
     indent = { enable = true },
-    playground = { enable = true },
-    query_linter = { enable = true },
+	rainbow = { enable = true, extended_mode = false },
+	playground = { enable = true },
+	query_linter = { enable = true },
 }
 
 -- Folding

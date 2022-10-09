@@ -40,9 +40,19 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'lewis6991/impatient.nvim'
 
-    -- theme
+    -- GUI
+    use 'lukas-reineke/indent-blankline.nvim' -- Indent
     use 'ellisonleao/gruvbox.nvim'
     use 'norcalli/nvim-colorizer.lua' -- editor 内颜色显示
+	use({
+		'folke/noice.nvim',
+		requires = {
+			'MunifTanjim/nui.nvim',
+			'rcarriga/nvim-notify',
+		}
+	})
+    use 'nvim-lualine/lualine.nvim' -- 底部状态栏
+    use 'declancm/cinnamon.nvim' -- smooth scroll
 
     -- LSP
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
@@ -58,9 +68,10 @@ return require('packer').startup(function(use)
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'nvim-treesitter/playground', opt = true }
     use 'nvim-treesitter/nvim-treesitter-context'
+	use 'p00f/nvim-ts-rainbow'
+    use 'luochen1990/rainbow' -- 嵌套括号高亮
     use 'lambdalisue/vim-cython-syntax'
     use 'vim-pandoc/vim-pandoc-syntax' -- markdown 高亮
-    use 'luochen1990/rainbow' -- 嵌套括号高亮
 
     -- Completion
     use 'hrsh7th/nvim-cmp'
@@ -86,16 +97,10 @@ return require('packer').startup(function(use)
     -- Comment
     use 'numToStr/Comment.nvim'
 
-    -- GUI
-    use 'nvim-lualine/lualine.nvim' -- 底部状态栏
-    use 'declancm/cinnamon.nvim' -- smooth scroll
-
     -- Writting
-    use 'lukas-reineke/indent-blankline.nvim' -- Indent
     use 'kylechui/nvim-surround' -- 修改包围符合
     use 'wellle/targets.vim' -- 修改包围内内容
     use 'MiuKaShi/bibtexcite.vim' -- bib 引用
-
     use { 'iamcco/markdown-preview.nvim', run = ':call mkdp#util#install()' }
     use 'stevearc/aerial.nvim' --outline
     -- use {
@@ -107,7 +112,6 @@ return require('packer').startup(function(use)
 
     -- Search
     use 'ggandor/leap.nvim'
-    -- use { 'junegunn/fzf', dir = '~/.fzf', run = ':call fzf#install()' } -- fuzzy 查找
     use 'junegunn/fzf.vim' -- needed for previews
     use 'Avi-D-coder/fzf-wordnet.vim' -- 英文词典
 	use {

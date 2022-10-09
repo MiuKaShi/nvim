@@ -1,9 +1,7 @@
 vim.g.mapleader = ' '
 
-local set_keymap = vim.api.nvim_set_keymap
-
 local function _map(mode, shortcut, command)
-    set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+    vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
 
 local function map(shortcut, command)
@@ -30,31 +28,28 @@ local function tmap(shortcut, command)
     _map('t', shortcut, command)
 end
 
--- Setup for emacs keybindings
+-- Setup for keybindings
 -- insert mode
-set_keymap('i', '<C-a>', '<Esc>0i', {})
-set_keymap('i', '<C-e>', '<End>', {})
-set_keymap('i', '<C-n>', '<Plug>(fzf-complete-wordnet)', {}) -- dicitonal
+imap('<C-a>', '<Esc>0i')
+imap('<C-e>', '<End>')
+imap('<C-n>', '<Plug>(fzf-complete-wordnet)')
 
 -- normal mode
-set_keymap('n', '<C-l>', ':bnext<CR>', {}) -- buffer 跳转
-set_keymap('n', '<C-h>', ':bprev<CR>', {})
-set_keymap('n', '<C-s>', ':w<CR>', {}) -- save file
-set_keymap('n', '<C-e>', ':Lf<CR>', {}) -- file tree
-set_keymap('n', '<C-w>', ':bdelete<CR>', {}) -- file tree
-set_keymap('n', 'j', 'gj', {}) -- gj
-set_keymap('n', 'k', 'gk', {}) -- gk
--- set_keymap('n', 's', '<Plug>(easymotion-overwin-f)', {})
-set_keymap('n', '<leader>;;', 'gcc', {})
-set_keymap('v', '<leader>;', 'gcc<esc>', {})
+nmap('<C-l>', '<cmd>bnext<CR>') -- buffer 跳转
+nmap('<C-h>', '<cmd>bprev<CR>')
+nmap('<C-s>', '<cmd>write<CR>')
+nmap('<C-w>', '<cmd>bdelete<CR>') -- file tree
+nmap('j', 'gj')
+nmap('k', 'gk')
+nmap('<leader>;;', 'gcc')
+
+vmap('<leader>;', 'gcc<esc>')
 
 -- command line mode
-set_keymap('c', '<C-a>', '<Home>', {})
-set_keymap('c', '<C-e>', '<End>', {})
--- C-d 本身表示显示详情，可用命令
--- set_keymap('c', '<C-d>', '<Del>', {})
-set_keymap('c', '<C-h>', '<BS>', { noremap = true })
-set_keymap('c', '<C-k>', '<C-f>D<C-c><C-c>:<Up>', { noremap = true })
+cmap('<C-a>', '<Home>')
+cmap('<C-e>', '<End>')
+cmap('<C-h>', '<BS>')
+cmap('<C-k>', '<C-f>D<C-c><C-c>:<Up>')
 -- End of setup for emacs keybindings
 
 -- lspconfig 服务地址 https://github.com/neovim/nvim-lspconfig
