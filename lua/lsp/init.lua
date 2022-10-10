@@ -8,27 +8,51 @@ for type, icon in pairs(signs) do
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-
 local on_attach = function(client, bufnr)
-    if client.server_capabilities.document_highlight then
-        vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
-        vim.api.nvim_clear_autocmds {
+
+    local tb = require 'telescope.builtin'
+    local themes = require 'telescope.themes'
+
+    vim.keymap.set('n', 'gd', function()
+        tb.lsp_definitions(themes.get_dropdown {})
+    end, { buffer = bufnr, desc = 'Go to Definitions' })
+
+    vim.keymap.set('n', 'gl', function()
+        tb.lsp_references(themes.get_dropdown {})
+    end, { buffer = bufnr, desc = 'Go to References' })
+
+    if client.server_capabilities.documentHighlightProvider then
+        vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
+        vim.api.nvim_clear_autocmds({
             buffer = bufnr,
             group = 'lsp_document_highlight',
-        }
+        })
         vim.api.nvim_create_autocmd('CursorHold', {
             callback = vim.lsp.buf.document_highlight,
-            buffer = bufnr,
-            group = 'lsp_document_highlight',
-            desc = 'Document Highlight',
+            buffer   = bufnr,
+            group    = 'lsp_document_highlight',
         })
         vim.api.nvim_create_autocmd('CursorMoved', {
             callback = vim.lsp.buf.clear_references,
-            buffer = bufnr,
-            group = 'lsp_document_highlight',
-            desc = 'Clear All the References',
+            buffer   = bufnr,
+            group    = 'lsp_document_highlight',
         })
     end
+
+    if client.server_capabilities.codeActionProvider then
+        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action,
+            { buffer = bufnr, desc = '(Range) Code Actions' })
+    end
+
+    if client.server_capabilities.documentFormattingProvider then
+        vim.keymap.set('n', '<leader>bf', function()
+            vim.lsp.buf.format { async = true }
+        end, { buffer = bufnr, desc = 'Formmating' })
+    end
+    if client.server_capabilities.documentRangeFormattingProvider then
+        vim.keymap.set('v', '<leader>bf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Range Formmating' })
+    end
+
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -19,4 +19,4 @@ vim.g.mkdp_preview_options = {
     hide_yaml_meta = 1
 }
 -- set default theme (dark or light)
-vim.g.mkdp_theme = 'dark'
+-- vim.g.mkdp_theme = 'dark'

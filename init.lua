@@ -1,9 +1,6 @@
 require 'impatient' -- 加速度模块
 require 'lsp'
 
--- notify setting
-vim.notify = require 'notify'
-
 -- TURN OFF SOME BUILTIN PLUGINS
 vim.g.loaded_gzip = 1
 vim.g.loaded_man = 1
