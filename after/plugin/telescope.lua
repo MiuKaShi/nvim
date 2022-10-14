@@ -42,8 +42,7 @@ require('telescope').setup {
 }
 
 local extensions = {
-	'file_browser', 'frecency', 'ui-select', 'aerial', 'notify', 'noice'
-}
+	'file_browser', 'frecency', 'ui-select', 'aerial' }
 for _, ext in ipairs(extensions) do
 	require('telescope').load_extension(ext)
 end

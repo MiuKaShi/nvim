@@ -44,13 +44,6 @@ return require('packer').startup(function(use)
     use 'lukas-reineke/indent-blankline.nvim' -- Indent
     use 'ellisonleao/gruvbox.nvim'
     use 'norcalli/nvim-colorizer.lua' -- editor 内颜色显示
-	use({
-		'folke/noice.nvim',
-		requires = {
-			'MunifTanjim/nui.nvim',
-			'rcarriga/nvim-notify',
-		}
-	})
     use 'nvim-lualine/lualine.nvim' -- 底部状态栏
     use 'declancm/cinnamon.nvim' -- smooth scroll
 
@@ -58,7 +51,7 @@ return require('packer').startup(function(use)
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
     use 'onsails/lspkind-nvim' -- vscode-like lsp 提示
     use 'tami5/lspsaga.nvim' -- LSP UI
-    use 'folke/lua-dev.nvim' -- lua 语法提示 for lsp
+    use "folke/neodev.nvim" -- lua 语法提示 for lsp
 
     -- Format
     use 'sbdchd/neoformat'

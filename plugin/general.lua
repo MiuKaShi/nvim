@@ -8,6 +8,7 @@ vim.opt.number         = true
 vim.opt.textwidth      = 120 -- Line wrap (number of cols)
 vim.opt.linebreak      = true
 vim.opt.showbreak      = '> '
+vim.opt.title = true
 
 -- search
 vim.opt.hlsearch   = true -- 保持匹配项目高亮
