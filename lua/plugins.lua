@@ -1,20 +1,9 @@
-local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
-local packer_bootstrap = nil
+local fn = vim.fn
 
 -- Automatically install packer
-if not packer_exists then
-    if vim.fn.input 'Download Packer? (y for yes) ' ~= 'y' then
-        print 'Please install Packer first!'
-        return
-    end
-
-    local directory = string.format('%s/site/pack/packer/opt/', vim.fn.stdpath 'data')
-
-    vim.fn.mkdir(directory, 'p')
-
-    print ' Downloading packer.nvim...'
-    local install_path = directory .. '/packer.nvim'
-    packer_bootstrap = vim.fn.system {
+local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+    PACKER_BOOTSTRAP = fn.system {
         'git',
         'clone',
         '--depth',
@@ -22,20 +11,34 @@ if not packer_exists then
         'https://github.com/wbthomason/packer.nvim',
         install_path,
     }
-    print(packer_bootstrap)
-
+    print 'Installing packer close and reopen Neovim...'
     vim.cmd [[packadd packer.nvim]]
 end
 
-vim.api.nvim_create_augroup('packer_user_config', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-    command = 'source | PackerCompile',
-    pattern = 'plugins.lua',
-    group   = 'packer_user_config',
-    desc    = 'Compile whenever plugins.lua is updated',
-})
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
+vim.cmd [[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]]
 
--- plugin lists
+-- Use a protected call so we don't error out on first use
+local status_ok, packer = pcall(require, 'packer')
+if not status_ok then
+    return
+end
+
+-- Have packer use a popup window
+packer.init {
+    display = {
+        open_fn = function()
+            return require('packer.util').float { border = 'rounded' }
+        end,
+    },
+}
+
+-- Install your plugins here
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'lewis6991/impatient.nvim'
@@ -49,19 +52,20 @@ return require('packer').startup(function(use)
 
     -- LSP
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
-    use 'onsails/lspkind-nvim' -- vscode-like lsp 提示
+    use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
     use 'tami5/lspsaga.nvim' -- LSP UI
-    use "folke/neodev.nvim" -- lua 语法提示 for lsp
+    use 'folke/neodev.nvim' -- lua 语法提示 for lsp
+    use 'sbdchd/neoformat'
 
     -- Format
-    use 'sbdchd/neoformat'
+    --use 'sbdchd/neoformat'
     use 'junegunn/vim-easy-align'
 
     -- Syntax
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'nvim-treesitter/playground', opt = true }
     use 'nvim-treesitter/nvim-treesitter-context'
-	use 'p00f/nvim-ts-rainbow'
+    use 'p00f/nvim-ts-rainbow'
     use 'luochen1990/rainbow' -- 嵌套括号高亮
     use 'lambdalisue/vim-cython-syntax'
     use 'vim-pandoc/vim-pandoc-syntax' -- markdown 高亮
@@ -77,6 +81,7 @@ return require('packer').startup(function(use)
     use 'mstanciu552/cmp-matlab'
 
     use 'L3MON4D3/LuaSnip'
+    use 'rafamadriz/friendly-snippets'
     use 'windwp/nvim-autopairs'
     use { 'github/copilot.vim', opt = true }
     -- AI Completion
@@ -94,8 +99,8 @@ return require('packer').startup(function(use)
     use 'kylechui/nvim-surround' -- 修改包围符合
     use 'wellle/targets.vim' -- 修改包围内内容
     use 'MiuKaShi/bibtexcite.vim' -- bib 引用
-    use { 'iamcco/markdown-preview.nvim', run = ':call mkdp#util#install()' }
     use 'stevearc/aerial.nvim' --outline
+    use { 'iamcco/markdown-preview.nvim', run = ':call mkdp#util#install()' }
     -- use {
     --     'nvim-neorg/neorg', -- org 模式
     --     tag = '0.0.11',
@@ -104,18 +109,21 @@ return require('packer').startup(function(use)
     -- }
 
     -- Search
-    use 'ggandor/leap.nvim'
+    use 'ggandor/leap.nvim' -- word search
     use 'junegunn/fzf.vim' -- needed for previews
     use 'Avi-D-coder/fzf-wordnet.vim' -- 英文词典
-	use {
-		'nvim-telescope/telescope.nvim',
-		requires = {
-			'nvim-lua/plenary.nvim',
-			'kyazdani42/nvim-web-devicons'
-		}
-	}
-	use { 'nvim-telescope/telescope-frecency.nvim', requires = 'kkharji/sqlite.lua' }
-    use 'nvim-telescope/telescope-file-browser.nvim'
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'kyazdani42/nvim-web-devicons',
+        },
+    }
+    use {
+        'nvim-telescope/telescope-frecency.nvim',
+        requires = 'kkharji/sqlite.lua',
+    }
+    use 'nvim-telescope/telescope-file-browser.nvim' -- file select
     use 'nvim-telescope/telescope-ui-select.nvim' -- 选择框 vim.ui.select
 
     -- File manager
@@ -132,4 +140,10 @@ return require('packer').startup(function(use)
     use 'MiuKaShi/vim-gf-list' -- gf 自定义
     use 'justinmk/vim-gtfo' -- gf打开文件
     use 'skywind3000/asyncrun.vim' -- 异步运行
+
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if PACKER_BOOTSTRAP then
+        require('packer').sync()
+    end
 end)

@@ -1,2 +1,0 @@
-# nvim
-my personal nvim

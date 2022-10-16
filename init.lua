@@ -1,6 +1,3 @@
-require 'impatient' -- 加速度模块
-require 'lsp'
-
 -- TURN OFF SOME BUILTIN PLUGINS
 vim.g.loaded_gzip = 1
 vim.g.loaded_man = 1
@@ -19,21 +16,37 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 
--- 主题设置
-vim.g.gruvbox_contrast_dark = "hard"
-vim.cmd 'colorscheme gruvbox'
-vim.cmd [[
-hi Normal ctermbg=NONE guibg=NONE
-hi NonText ctermbg=NONE guibg=NONE
-hi LineNR guibg=NONE ctermbg=NONE
-hi CursorLineNR guibg=NONE ctermbg=NONE
-hi SignColumn ctermbg=NONE guibg=NONE
-hi MsgArea ctermbg=NONE guibg=NONE
-hi Pmenu guibg=NONE ctermbg=NONE
-hi EndOfBuffer guibg=NONE ctermbg=NONE
-]]
+--加速启动
+require "user.impatient" 
 
--- PLUGINS And LSP LIST
-vim.defer_fn(function()
-	require 'plugins'
-end, 500)
+--基本设置
+require "options"
+require "keymaps"
+require "functions"
+require "plugins"
+
+--插件设置
+require "user.colorscheme"
+require "user.cmp"
+require "user.lsp"
+require "user.lspsaga"
+require "user.neoformat"
+require "user.telescope"
+require "user.treesitter"
+require "user.autopairs"
+require "user.bibtexcite"
+require "user.surround"
+require "user.aerial"
+require "user.leap"
+require "user.colorizer"
+require "user.rainbow"
+require "user.comment"
+require "user.lualine"
+require "user.easyalign"
+require "user.fm"
+require "user.mkdp"
+require "user.julia"
+require "user.cinnamon"
+require "user.indentline"
+require "user.whichkey"
+require "user.autocmds"
