@@ -52,8 +52,8 @@ return require('packer').startup(function(use)
 
     -- LSP
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
-    use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
     use 'tami5/lspsaga.nvim' -- LSP UI
+    use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
     use 'folke/neodev.nvim' -- lua 语法提示 for lsp
     use 'sbdchd/neoformat'
 

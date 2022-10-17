@@ -13,10 +13,6 @@ local on_attach = function(client, bufnr)
         tb.lsp_definitions(themes.get_dropdown {})
     end, { buffer = bufnr, desc = 'Go to Definitions' })
 
-    vim.keymap.set('n', 'gl', function()
-        tb.lsp_references(themes.get_dropdown {})
-    end, { buffer = bufnr, desc = 'Go to References' })
-
     if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
         vim.api.nvim_clear_autocmds {

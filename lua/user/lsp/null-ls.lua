@@ -34,7 +34,6 @@ local sources = {
     b.formatting.shfmt.with {
         extra_args = { '-i', '4', '-ci', '-bn' },
     },
-    b.diagnostics.shellcheck.with { diagnostics_format = '#{m} [#{c}]' },
 }
 
 null_ls.setup {
