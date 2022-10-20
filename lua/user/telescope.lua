@@ -29,8 +29,29 @@ telescope.setup {
             },
         },
     },
+    pickers = {
+        buffers = {
+            theme = 'dropdown',
+            sort_mru = true,
+            previewer = false,
+        },
+        current_buffer_fuzzy_find = {
+            previewer = false,
+        },
+        find_files = {
+            theme = 'ivy',
+            follow = true,
+        },
+        grep_string = {
+            path_display = { 'shorten' },
+        },
+        live_grep = {
+            path_display = { 'shorten' },
+        },
+    },
     extensions = {
         frecency = {
+            theme = themes.get_dropdown,
             show_scores = true,
             workspaces = {
                 ['conf'] = home .. '/.config',
@@ -63,30 +84,12 @@ vim.keymap.set('n', '<leader>ff', function()
     tb.treesitter(themes.get_ivy {})
 end, { desc = 'Search Functions/variables' })
 
-vim.keymap.set('n', '<leader>fw', function()
-    tb.grep_string(themes.get_ivy {})
-end, { desc = 'Find cursor word' })
-
 vim.keymap.set('n', '<leader>fr', function()
     te.frecency.frecency(themes.get_ivy {})
 end, { desc = 'Recent Files' })
 
-vim.keymap.set('n', '<leader>fs', function()
-    tb.current_buffer_fuzzy_find {
-        fuzzy = false,
-        case_mode = 'ignore_case',
-        previewer = false,
-    }
-end, { desc = 'Search current buffer' })
-
-vim.keymap.set('n', '<leader>fd', function()
-    tb.find_files(themes.get_ivy {})
-end, { desc = 'Find Files' })
-
-vim.keymap.set('n', '<leader>fm', function()
-    tb.builtin()
-end, { desc = 'Telescope Meta' })
-
-vim.keymap.set('n', '<leader>fh', function()
-    tb.help_tags { show_version = true }
-end, { desc = 'Help Tags' })
+vim.keymap.set('n', '<leader>fs', tb.current_buffer_fuzzy_find, { desc = 'Search current buffer' })
+vim.keymap.set('n', '<leader>fw', tb.grep_string, { desc = 'Find cursor word' })
+vim.keymap.set('n', '<leader>fd', tb.find_files, { desc = 'Find Files' })
+vim.keymap.set('n', '<leader>fm', tb.builtin, { desc = 'Telescope Meta' })
+vim.keymap.set('n', '<leader>fh', tb.help_tags, { desc = 'Help Tags' })

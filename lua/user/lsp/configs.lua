@@ -13,7 +13,9 @@ local on_attach = function(client, bufnr)
         tb.lsp_definitions(themes.get_dropdown {})
     end, { buffer = bufnr, desc = 'Go to Definitions' })
 
-    if client.server_capabilities.documentHighlightProvider then
+    local caps = client.server_capabilities
+
+    if caps.documentHighlightProvider then
         vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
         vim.api.nvim_clear_autocmds {
             buffer = bufnr,
@@ -31,7 +33,7 @@ local on_attach = function(client, bufnr)
         })
     end
 
-    if client.server_capabilities.codeActionProvider then
+    if caps.codeActionProvider then
         vim.keymap.set(
             { 'n', 'v' },
             '<leader>ca',
@@ -40,12 +42,12 @@ local on_attach = function(client, bufnr)
         )
     end
 
-    if client.server_capabilities.documentFormattingProvider then
+    if caps.documentFormattingProvider then
         vim.keymap.set('n', '<leader>bf', function()
             vim.lsp.buf.format { async = true }
         end, { buffer = bufnr, desc = 'Formmating' })
     end
-    if client.server_capabilities.documentRangeFormattingProvider then
+    if caps.documentRangeFormattingProvider then
         vim.keymap.set(
             'v',
             '<leader>bf',
