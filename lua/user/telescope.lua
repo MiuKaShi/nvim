@@ -32,7 +32,7 @@ telescope.setup {
     pickers = {
         buffers = {
             theme = 'dropdown',
-            sort_mru = true,
+            sort_lastused = true,
             previewer = false,
         },
         current_buffer_fuzzy_find = {
