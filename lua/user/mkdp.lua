@@ -1,6 +1,6 @@
 vim.cmd [[
 function! g:Open_browser(url)
-    silent exec "!surf " . a:url . " &"
+    silent exec "!qutebrowser --target window " . a:url . " &"
 endfunction
 ]]
 
