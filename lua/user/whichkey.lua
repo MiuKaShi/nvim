@@ -106,10 +106,6 @@ local mappings = {
         v = { '<cmd>BibtexciteShowcite<CR>', 'Bib citation view' },
         o = { '<cmd>BibtexciteOpenfile<CR>', 'Bib Open pdf' },
     },
-    ['f'] = {
-        name = '+Find',
-        -- use keys from telescope configs,
-    },
     ['p'] = {
         name = '+Projects',
         f = { '<cmd>Telescope find_files<CR>', 'Find file by name(<CTRL-P>)' },
@@ -180,7 +176,7 @@ local mappings = {
     },
     t = { ':Lspsaga open_floaterm<CR>', 'Open Terminal(exit with <ESC>)' }, -- 打开终端
     l = { ':call ToggleHiddenAll()<CR>', 'LSP Toggle' }, -- LSP 开关
-    i = { ':setlocal spell! spelllang=en_us<CR>', 'Spell Check' }, -- Spell check
+    i = { ':setlocal spell! spelllang=en_us<CR>', 'Spell Check Toggle' }, -- Spell check
     ['/'] = {
         ':Telescope live_grep previewer=false <CR>',
         'Fuzzy search in project',
@@ -190,7 +186,7 @@ local mappings = {
         'Help commands by fuzzy search',
     }, -- vim帮助查找
     ['<Tab>'] = { ':b#<CR>', 'Last buffer' },
-    ['<Space>'] = { ':Lf<CR>', 'Toggle directory tree' }, -- 查找命令
+    ['<Space>'] = { ':Lf<CR>', 'Lf Toggle' }, -- 查找命令
 }
 
 which_key.setup(setup)

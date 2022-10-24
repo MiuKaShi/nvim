@@ -1,11 +1,42 @@
-local signs = { Error = '🔥', Warn = '💩', Info = '💬', Hint = '💡' }
+local status_cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+if not status_cmp_ok then
+    return
+end
 
-for type, icon in pairs(signs) do
-    local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.offsetEncoding = { 'utf-16' }
+capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+
+local signs = {
+    { name = 'DiagnosticSignError', text = '🔥' },
+    { name = 'DiagnosticSignWarn', text = '💩' },
+    { name = 'DiagnosticSignHint', text = '💡' },
+    { name = 'DiagnosticSignInfo', text = '💬' },
+}
+
+for _, sign in ipairs(signs) do
+    vim.fn.sign_define(
+        sign.name,
+        { texthl = sign.name, text = sign.text, numhl = '' }
+    )
 end
 
 local on_attach = function(client, bufnr)
+    vim.keymap.set(
+        'n',
+        'gD',
+        vim.lsp.buf.declaration,
+        { buffer = bufnr, desc = 'Go to Declaration' }
+    )
+
+    vim.keymap.set(
+        'n',
+        'gi',
+        vim.lsp.buf.implementation,
+        { buffer = bufnr, desc = 'Go to Implementation' }
+    )
+
     local tb = require 'telescope.builtin'
     local themes = require 'telescope.themes'
 
@@ -14,7 +45,6 @@ local on_attach = function(client, bufnr)
     end, { buffer = bufnr, desc = 'Go to Definitions' })
 
     local caps = client.server_capabilities
-
     if caps.documentHighlightProvider then
         vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
         vim.api.nvim_clear_autocmds {
@@ -56,11 +86,6 @@ local on_attach = function(client, bufnr)
         )
     end
 end
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.offsetEncoding = { 'utf-16' }
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 for _, server in ipairs {
     'pyright',

@@ -68,24 +68,11 @@ end
 -- lspconfig 服务地址 https://github.com/neovim/nvim-lspconfig
 
 nmap('J', "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>") -- 预览定义
-nmap('K', "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>") -- 显示文档定义
-nmap('gD', '<cmd>lua vim.lsp.buf.declaration()<CR>') -- Declaration
-
-nmap('gr', "<cmd>lua require('lspsaga.rename').rename()<CR>") -- 重命名变量
-nmap('gi', '<cmd>lua vim.lsp.buf.implementation()<CR>') -- 跳转实现
-nmap('gs', "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>") -- 签名查看
+nmap('K', "<cmd>lua require'lspsaga.hover'.render_hover_doc()<CR>") -- 显示文档定义
+nmap('gr', "<cmd>lua require'lspsaga.rename'.rename()<CR>") -- 重命名变量
+nmap('gs', "<cmd>lua require'lspsaga.signaturehelp').signature_help()<CR>") -- 签名查看
 nmap('gS', "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>") -- 诊断问题
 nmap('gh', "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>") -- 异步查找单词定义、引用
-nmap(
-    '<C-n>',
-    "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>"
-) -- 滚动hover 下
-nmap(
-    '<C-p>',
-    "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>"
-) -- 滚动hover 上
+nmap('<C-n>', "<cmd>lua require'lspsaga.action'.smart_scroll_with_saga(1)<CR>") -- 滚动hover 下
+nmap('<C-p>', "<cmd>lua require'lspsaga.action'.smart_scroll_with_saga(-1)<CR>") -- 滚动hover 上
 tmap('<ESC>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>') -- 关闭终端
-
-nmap('<C-f>', '<cmd>Telescope find_files<CR>') -- 查找文件
-nmap('gn', ':BufferLineCycleNext<CR>') -- 下一个文件
-nmap('gp', ':BufferLineCyclePrev<CR>') -- 上一个文件

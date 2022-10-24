@@ -55,4 +55,7 @@ cmap('<C-a>', '<Home>')
 cmap('<C-e>', '<End>')
 cmap('<C-h>', '<BS>')
 cmap('<C-k>', '<C-f>D<C-c><C-c>:<Up>')
+
+nmap('gn', ':BufferLineCycleNext<CR>') -- 下一个文件
+nmap('gp', ':BufferLineCyclePrev<CR>') -- 上一个文件
 -- End of setup for emacs keybindings
