@@ -44,7 +44,6 @@ imap('<C-n>', '<Plug>(fzf-complete-wordnet)')
 nmap('<C-l>', '<cmd>bnext<CR>') -- buffer 跳转
 nmap('<C-h>', '<cmd>bprev<CR>')
 nmap('<C-s>', '<cmd>write<CR>')
-nmap('<C-w>', '<cmd>bdelete<CR>') -- file tree
 nmap('j', 'gj')
 nmap('k', 'gk')
 nmap('<leader>;;', 'gcc')

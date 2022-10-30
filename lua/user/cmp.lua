@@ -12,46 +12,35 @@ require('luasnip/loaders/from_vscode').lazy_load()
 
 local check_backspace = function()
     local col = vim.fn.col '.' - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s'
-end
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
+ end
 
 local cmp_kinds = {
-    Text          = '',
-    Method        = 'm',
-    Function      = '',
-    Constructor   = '',
-    Field         = '',
-    Variable      = '',
-    Class         = '',
-    Interface     = '',
-    Module        = '',
-    Property      = '',
-    Unit          = '',
-    Value         = '',
-    Enum          = '',
-    Keyword       = '',
-    Snippet       = '',
-    Color         = '',
-    File          = '',
-    Reference     = '',
-    Folder        = '',
-    EnumMember    = '',
-    Constant      = '',
-    Struct        = '',
-    Event         = '',
-    Operator      = '',
+    Text = '',
+    Method = 'm',
+    Function = '',
+    Constructor = '',
+    Field = '',
+    Variable = '',
+    Class = '',
+    Interface = '',
+    Module = '',
+    Property = '',
+    Unit = '',
+    Value = '',
+    Enum = '',
+    Keyword = '',
+    Snippet = '',
+    Color = '',
+    File = '',
+    Reference = '',
+    Folder = '',
+    EnumMember = '',
+    Constant = '',
+    Struct = '',
+    Event = '',
+    Operator = '',
     TypeParameter = '',
-}
-
-local source_names = {
-    buffer = { '[Buf]', 'String' },
-    nvim_lsp = { '[LSP]', 'Question' },
-    path = { '[Path]', 'WarningMsg' },
-    cmdline = { '[Cmd]', 'CmpItemMenu' },
-    luasnip = { '[Snip]', 'CmpItemMenu' },
-    -- neorg    = { '[Org]', 'CmpItemMenu' },
-    cmp_matlab = { '[MATLAB]', 'CmpItemMenu' },
-    rg = { '[RG]', 'CmpItemMenu' },
 }
 
 cmp.setup {
@@ -65,7 +54,7 @@ cmp.setup {
         ['<C-j>'] = cmp.mapping.select_next_item(),
         ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { 'i', 'c' }),
-        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete({}), { 'i', 'c' }),
         ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
         ['<C-e>'] = cmp.mapping {
             i = cmp.mapping.abort(),
@@ -78,7 +67,7 @@ cmp.setup {
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expandable() then
-                luasnip.expand()
+                luasnip.expand({})
             elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
             elseif check_backspace() then
@@ -107,20 +96,16 @@ cmp.setup {
         fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
             vim_item.kind = cmp_kinds[vim_item.kind]
-
-            local nm = source_names[entry.source.name]
-            if nm then
-                vim_item.menu = nm[1]
-                vim_item.menu_hl_group = nm[2]
-                vim_item.kind_hl_group = nm[2]
-            else
-                vim_item.menu = entry.source.name
-            end
-
-            local maxwidth = 50
-            if #vim_item.abbr > maxwidth then
-                vim_item.abbr = vim_item.abbr:sub(1, maxwidth) .. '...'
-            end
+            vim_item.menu = ({
+                buffer = '[Buf]',
+                nvim_lsp = '[LSP]',
+                path = '[Path]',
+                cmdline = '[Cmd]',
+                luasnip = '[Snip]',
+                -- neorg    = '[Norg]',
+                cmp_matlab = '[MATLAB]',
+                rg = '[RG]',
+            })[entry.source.name]
             return vim_item
         end,
     },
@@ -138,7 +123,11 @@ cmp.setup {
     matching = { disallow_prefix_unmatching = true },
     sources = {
         { name = 'nvim_lsp', priority = 80 },
-        { name = 'luasnip', priority = 80 },
+        {
+            name = 'luasnip',
+            priority = 80,
+            option = { show_autosnippets = true },
+        },
         { name = 'path', priority = 40, max_item_count = 4 },
         -- { name = 'neorg' },
         {
