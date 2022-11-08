@@ -95,6 +95,9 @@ return require('packer').startup(function(use)
     -- Comment
     use 'numToStr/Comment.nvim'
 
+    -- notes
+    use 'epwalsh/obsidian.nvim'
+
     -- Writting
     use 'kylechui/nvim-surround' -- 修改包围符合
     use 'wellle/targets.vim' -- 修改包围内内容
@@ -116,7 +119,7 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim',
         requires = {
             'nvim-lua/plenary.nvim',
-            'kyazdani42/nvim-web-devicons',
+            'nvim-tree/nvim-web-devicons'
         },
     }
     use {

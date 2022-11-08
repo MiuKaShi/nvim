@@ -58,3 +58,13 @@ cmap('<C-k>', '<C-f>D<C-c><C-c>:<Up>')
 nmap('gn', ':BufferLineCycleNext<CR>') -- 下一个文件
 nmap('gp', ':BufferLineCyclePrev<CR>') -- 上一个文件
 -- End of setup for emacs keybindings
+
+-- better gx mapping
+local function gmap(mode, lhs, rhs, opts)
+    local options = { noremap = true }
+    if opts then
+        options = vim.tbl_extend("force", options, opts)
+    end
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
+gmap("", "gx", '<Cmd>call jobstart(["linkhandler", expand("<cfile>")], {"detach": v:true})<CR>', {})
