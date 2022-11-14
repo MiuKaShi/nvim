@@ -100,7 +100,7 @@ cmp.setup {
                 buffer = '[Buf]',
                 nvim_lsp = '[LSP]',
                 path = '[Path]',
-                cmdline = '[Cmd]',
+                -- cmdline = '[Cmd]',
                 luasnip = '[Snip]',
                 -- neorg    = '[Norg]',
                 cmp_matlab = '[MATLAB]',
@@ -148,16 +148,16 @@ cmp.setup {
     },
 }
 
-cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = { { name = 'buffer' } },
-})
-
-cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        { name = 'path' },
-        { name = 'cmdline' },
-    },
-})
+-- cmp.setup.cmdline({ '/', '?' }, {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     sources = { { name = 'buffer' } },
+-- })
+--
+-- cmp.setup.cmdline(':', {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     sources = {
+--         { name = 'path' },
+--         { name = 'cmdline' },
+--     },
+-- })
 -- End of setup for nvim-cmp.

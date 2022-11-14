@@ -21,6 +21,7 @@ local sources = {
             vim.fn.expand '~/.config/stylua/stylua.toml',
         },
     },
+    b.diagnostics.luacheck,
     -- markdown
     b.diagnostics.markdownlint.with {
         args = {
