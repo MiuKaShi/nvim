@@ -56,7 +56,8 @@ vim.opt.scrolloff = 8 -- Always show at least one line above/below the cursor.
 vim.opt.showmatch = true
 vim.opt.visualbell = true
 -- vim.opt.cursorline              = true -- 高亮当前行
-vim.opt.whichwrap = 'b,s,<,>,[,]'
+vim.opt.shortmess:append('c')
+vim.opt.whichwrap:append('[,]')
 vim.g.user_emmet_settings = {
     javascript = { extends = 'jsx' },
     typescript = { extends = 'tsx' },
