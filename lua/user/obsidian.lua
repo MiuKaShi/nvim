@@ -5,7 +5,7 @@ end
 
 obsidian.setup {
     dir = '~/notes/Study_Notes',
-    notes_subdir = '2021',
+    notes_subdir = '2022',
     note_id_func = function(title)
         -- Create note IDs in a Zettelkasten format.
         local suffix = ''
