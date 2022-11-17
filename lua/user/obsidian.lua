@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 obsidian.setup {
-    dir = '~/notes/Study_Notes',
+    dir = '~/notes',
     notes_subdir = 'day_notes',
     note_id_func = function(title)
         -- Create note IDs in a Zettelkasten format.
