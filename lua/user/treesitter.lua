@@ -13,6 +13,7 @@ local ts_install = {
     'cmake',
     'css',
     'comment',
+    'diff',
     'dockerfile',
     'go',
     'json',
