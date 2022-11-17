@@ -78,7 +78,11 @@ return require('packer').startup(function(use)
         requires = {
             { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
             { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-            { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp', commit = "d2dfa338520c99c1f2dc6af9388de081a6e63296" },
+            {
+                'hrsh7th/cmp-cmdline',
+                after = 'nvim-cmp',
+                commit = 'd2dfa338520c99c1f2dc6af9388de081a6e63296',
+            },
             { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
             { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' },
             { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
