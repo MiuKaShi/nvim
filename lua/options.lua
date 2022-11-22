@@ -55,6 +55,7 @@ vim.opt.regexpengine = 1
 vim.opt.scrolloff = 8 -- Always show at least one line above/below the cursor.
 vim.opt.showmatch = true
 vim.opt.visualbell = true
+vim.opt.spellsuggest='best,9'
 -- vim.opt.cursorline              = true -- 高亮当前行
 vim.opt.shortmess:append('c')
 vim.opt.whichwrap:append('[,]')
