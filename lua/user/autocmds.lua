@@ -1,16 +1,12 @@
-vim.api.nvim_create_augroup('HighlightYank', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-    group = 'HighlightYank',
-    desc = 'Highlight the yanked text',
-})
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
 
-vim.api.nvim_create_autocmd('FileType', {
+-- Highlight yanked text
+augroup('HighlightYank', { clear = true })
+autocmd('TextYankPost', {
 	callback = function()
-		vim.keymap.set('n', 'q', '<Cmd>close<CR>', { buffer = true, silent = true })
-		vim.keymap.set('n', '<Esc>', '<Cmd>close<CR>', { buffer = true, silent = true })
+		vim.highlight.on_yank()
 	end,
-	pattern = { 'help', 'man', 'qf', 'tsplaygound' }
+	group    = 'HighlightYank',
+	desc     = 'Highlight the yanked text',
 })
