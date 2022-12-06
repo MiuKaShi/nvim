@@ -63,7 +63,8 @@ return require('packer').startup(function(use)
 
     -- Syntax
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use { 'nvim-treesitter/playground', opt = true }
+    -- use { 'nvim-treesitter/playground', opt = true }
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/nvim-treesitter-context'
     use 'p00f/nvim-ts-rainbow'
     use 'luochen1990/rainbow' -- 嵌套括号高亮
@@ -71,24 +72,20 @@ return require('packer').startup(function(use)
     use 'vim-pandoc/vim-pandoc-syntax' -- markdown 高亮
 
     -- Completion
+    use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use {
+        'hrsh7th/cmp-cmdline',
+        commit = 'd2dfa338520c99c1f2dc6af9388de081a6e63296',
+    }
+    use 'hrsh7th/cmp-path'
+    use 'lukas-reineke/cmp-rg'
+    use 'saadparwaiz1/cmp_luasnip'
+    use 'mstanciu552/cmp-matlab'
+
     use 'L3MON4D3/LuaSnip'
     use 'rafamadriz/friendly-snippets'
-    use {
-        'hrsh7th/nvim-cmp',
-        requires = {
-            { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-            { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-            {
-                'hrsh7th/cmp-cmdline',
-                after = 'nvim-cmp',
-                commit = 'd2dfa338520c99c1f2dc6af9388de081a6e63296',
-            },
-            { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-            { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' },
-            { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
-            { 'mstanciu552/cmp-matlab', after = 'nvim-cmp' },
-        },
-    }
     use 'windwp/nvim-autopairs'
     use { 'github/copilot.vim', opt = true }
     -- AI Completion

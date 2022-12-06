@@ -5,9 +5,8 @@ endfunction
 ]]
 
 vim.g.mkdp_browserfunc = 'g:Open_browser'
-vim.g.mkdp_markdown_css = '/home/miuka/.config/nvim/github-markdown-dark.css'
+vim.g.mkdp_markdown_css = ''
 vim.g.mkdp_page_title = '${name}.md'
-vim.g.mkdp_port = '8915'
 vim.g.mkdp_filetypes = { 'markdown' }
 vim.g.mkdp_preview_options = {
     mkit = {},

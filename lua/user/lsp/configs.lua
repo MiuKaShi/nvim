@@ -67,7 +67,9 @@ local on_attach = function(client, bufnr)
         vim.keymap.set(
             { 'n', 'v' },
             '<leader>ca',
-            vim.lsp.buf.code_action,
+			function()
+				require('lspsaga.codeaction'):code_action()
+			end,
             { buffer = bufnr, desc = '(Range) Code Actions' }
         )
     end
