@@ -174,6 +174,7 @@ local mappings = {
         name = 'comment',
         [';'] = { 'gcc<esc>', 'comment line', noremap = false, mode = 'v' },
     },
+	o = { "<cmd>AerialToggle<cr>", 'Outlines' },
     t = { ':Lspsaga open_floaterm<CR>', 'Open Terminal(exit with <ESC>)' }, -- 打开终端
     l = { ':call ToggleHiddenAll()<CR>', 'LSP Toggle' }, -- LSP 开关
     i = { ':setlocal spell! spelllang=en_us<CR>', 'Spell Check Toggle' }, -- Spell check
