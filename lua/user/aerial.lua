@@ -4,18 +4,21 @@ if not status_ok then
 end
 
 aerial.setup {
-    backends = {'lsp', 'markdown'},
+    backends = { 'lsp', 'markdown' },
     nerd_font = 'auto',
     filter_kind = {
-        "Class",
-        "Constructor",
-        "Enum",
-        "Function",
-        "Interface",
-        "Module",
-        "Method",
-        "Struct",
+        'Class',
+        'Constructor',
+        'Enum',
+        'Function',
+        'Interface',
+        'Module',
+        'Method',
+        'Struct',
     },
     update_events = 'TextChanged,InsertLeave',
     show_guides = true,
+    layout = {
+        min_width = 30,
+    },
 }

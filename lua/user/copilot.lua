@@ -1,9 +1,6 @@
-vim.keymap.set(
-    'i',
-    '<C-j>',
-    'copilot#Accept("\\<CR>")',
-    { silent = true, script = true, expr = true, desc = 'Copilot Accept' }
-)
+local status_ok, copilot = pcall(require, 'copilot')
+if not status_ok then
+    return
+end
 
-vim.g.copilot_no_tab_map = true
-vim.g.copilot_assume_mapped = true
+copilot.setup()

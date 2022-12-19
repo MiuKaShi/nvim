@@ -84,13 +84,13 @@ return require('packer').startup(function(use)
     use 'L3MON4D3/LuaSnip'
     use 'rafamadriz/friendly-snippets'
     use 'windwp/nvim-autopairs'
-    use { 'github/copilot.vim', opt = true }
+
     -- AI Completion
+    use 'zbirenbaum/copilot.lua'
+    use 'zbirenbaum/copilot-cmp'
     -- use {
     --     'tzachar/cmp-tabnine',
     --     run = './install.sh',
-    --     requires = 'hrsh7th/nvim-cmp',
-    --     config = [[require('configs.tabnine')]],
     -- }
 
     -- Comment

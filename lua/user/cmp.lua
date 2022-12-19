@@ -8,6 +8,7 @@ if not snip_status_ok then
     return
 end
 
+require("copilot_cmp").setup{ }
 require('luasnip/loaders/from_vscode').lazy_load()
 
 local check_backspace = function()
@@ -98,6 +99,7 @@ cmp.setup {
             vim_item.kind = cmp_kinds[vim_item.kind]
             vim_item.menu = ({
                 buffer = '[Buf]',
+                copilot = '[Cop]',
                 nvim_lsp = '[LSP]',
                 path = '[Path]',
                 cmdline = '[Cmd]',
@@ -128,6 +130,7 @@ cmp.setup {
             priority = 80,
             option = { show_autosnippets = true },
         },
+        { name = 'copilot', priority = 80, max_item_count = 3 },
         { name = 'path', priority = 40, max_item_count = 4 },
         -- { name = 'neorg' },
         {
