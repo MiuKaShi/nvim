@@ -29,8 +29,8 @@ configs.setup {
     incremental_selection = { enable = true },
     indent = { enable = true },
     rainbow = { enable = true },
-    playground = { enable = true },
-    query_linter = { enable = true },
+    -- playground = { enable = true },
+    -- query_linter = { enable = true },
     textobjects = {
         select = {
             enable = true,

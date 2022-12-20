@@ -46,12 +46,7 @@ null_ls.setup {
             end, { buffer = bufnr, desc = 'Formmating' })
         end
         if client.server_capabilities.documentRangeFormattingProvider then
-            vim.keymap.set(
-                'v',
-                '<leader>bf',
-                vim.lsp.buf.format,
-                { buffer = bufnr, desc = 'Range Formmating' }
-            )
+            vim.keymap.set('v', '<leader>bf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Range Formmating' })
         end
     end,
 }

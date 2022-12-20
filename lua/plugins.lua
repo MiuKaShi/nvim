@@ -2,6 +2,7 @@ local fn = vim.fn
 
 -- Automatically install packer
 local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+local PACKER_BOOTSTRAP
 if fn.empty(fn.glob(install_path)) > 0 then
     PACKER_BOOTSTRAP = fn.system {
         'git',
@@ -55,10 +56,13 @@ return require('packer').startup(function(use)
     use 'tami5/lspsaga.nvim' -- LSP UI
     use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
     use 'folke/neodev.nvim' -- lua 语法提示 for lsp
-    use 'sbdchd/neoformat'
+
+    -- Extend Language Support
+    use 'JuliaEditorSupport/julia-vim' --Julia
+    -- use 'kdheepak/JuliaFormatter.vim' -- Julia formatter
 
     -- Format
-    --use 'sbdchd/neoformat'
+    use 'sbdchd/neoformat'
     use 'junegunn/vim-easy-align'
 
     -- Syntax
@@ -67,8 +71,7 @@ return require('packer').startup(function(use)
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/nvim-treesitter-context'
     use 'p00f/nvim-ts-rainbow'
-    use 'luochen1990/rainbow' -- 嵌套括号高亮
-    use 'lambdalisue/vim-cython-syntax'
+    use 'luochen1990/rainbow' -- 补充ts-rainbow不支持的language
     use 'vim-pandoc/vim-pandoc-syntax' -- markdown 高亮
 
     -- Completion
@@ -93,29 +96,7 @@ return require('packer').startup(function(use)
     --     run = './install.sh',
     -- }
 
-    -- Comment
-    use 'numToStr/Comment.nvim'
-
-    -- notes
-    use 'epwalsh/obsidian.nvim'
-
-    -- Writting
-    use 'kylechui/nvim-surround' -- 修改包围符合
-    use 'wellle/targets.vim' -- 修改包围内内容
-    use 'MiuKaShi/bibtexcite.vim' -- bib 引用
-    use 'stevearc/aerial.nvim' --outline
-    use { 'iamcco/markdown-preview.nvim', run = ':call mkdp#util#install()' }
-    -- use {
-    --     'nvim-neorg/neorg', -- org 模式
-    --     tag = '0.0.11',
-    --     requires = { 'nvim-lua/plenary.nvim', 'nvim-neorg/neorg-telescope' },
-    --     config = [[require('configs.neorg')]],
-    -- }
-
     -- Search
-    use 'ggandor/leap.nvim' -- word search
-    use 'junegunn/fzf.vim' -- needed for previews
-    use 'Avi-D-coder/fzf-wordnet.vim' -- 英文词典
     use {
         'nvim-telescope/telescope.nvim',
         requires = {
@@ -133,14 +114,30 @@ return require('packer').startup(function(use)
     -- File manager
     use 'is0n/fm-nvim'
 
-    -- Language
-    use 'JuliaEditorSupport/julia-vim' --Julia
-    -- use 'kdheepak/JuliaFormatter.vim' -- Julia formatter
+    -- Writting
+    use 'kylechui/nvim-surround' -- 修改包围符合
+    use 'wellle/targets.vim' -- 修改包围内内容
+    use 'MiuKaShi/bibtexcite.vim' -- bib 引用
+    use 'stevearc/aerial.nvim' -- outline
+    use { 'iamcco/markdown-preview.nvim', run = ':call mkdp#util#install()' }
+    use 'epwalsh/obsidian.nvim' -- notes
+    -- use {
+    --     'nvim-neorg/neorg', -- org 模式
+    --     tag = '0.0.11',
+    --     requires = { 'nvim-lua/plenary.nvim', 'nvim-neorg/neorg-telescope' },
+    --     config = [[require('configs.neorg')]],
+    -- }
 
-    -- Others
+    -- Utils
+    use 'numToStr/Comment.nvim' -- comment
+    use 'ggandor/leap.nvim' -- quick move
+    use {
+        'Avi-D-coder/fzf-wordnet.vim',
+        requires = 'junegunn/fzf.vim',
+    } -- en dict
     use 'folke/which-key.nvim' -- 快捷键 maps
     use 'h-hg/fcitx.nvim' -- fcitx5 自动切换
-    use 'wakatime/vim-wakatime'
+    use 'wakatime/vim-wakatime' -- time tracker
     use 'MiuKaShi/vim-gf-list' -- gf 自定义
     use 'justinmk/vim-gtfo' -- gf打开文件
     use 'skywind3000/asyncrun.vim' -- 异步运行

@@ -13,8 +13,7 @@ M.setup = function(on_attach, capabilities)
         filetypes = { 'fortran', 'Fortran77' },
         root_dir = function(fname)
             local util = require 'lspconfig/util'
-            return util.root_pattern('.fortls', '.git')(fname)
-                or vim.fn.getcwd()
+            return util.root_pattern('.fortls', '.git')(fname) or vim.fn.getcwd()
         end,
         settings = { nthreads = 2 },
     }

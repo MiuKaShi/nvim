@@ -2,12 +2,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 local function _map(mode, shortcut, command)
-    vim.api.nvim_set_keymap(
-        mode,
-        shortcut,
-        command,
-        { noremap = true, silent = true }
-    )
+    vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
 
 local function map(shortcut, command)
@@ -63,8 +58,9 @@ nmap('gp', ':BufferLineCyclePrev<CR>') -- 上一个文件
 local function gmap(mode, lhs, rhs, opts)
     local options = { noremap = true }
     if opts then
-        options = vim.tbl_extend("force", options, opts)
+        options = vim.tbl_extend('force', options, opts)
     end
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
-gmap("", "gx", '<Cmd>call jobstart(["linkhandler", expand("<cfile>")], {"detach": v:true})<CR>', {})
+
+gmap('', 'gx', '<Cmd>call jobstart(["linkhandler", expand("<cfile>")], {"detach": v:true})<CR>', {})

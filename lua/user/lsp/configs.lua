@@ -16,26 +16,13 @@ local signs = {
 }
 
 for _, sign in ipairs(signs) do
-    vim.fn.sign_define(
-        sign.name,
-        { texthl = sign.name, text = sign.text, numhl = '' }
-    )
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
 end
 
 local on_attach = function(client, bufnr)
-    vim.keymap.set(
-        'n',
-        'gD',
-        vim.lsp.buf.declaration,
-        { buffer = bufnr, desc = 'Go to Declaration' }
-    )
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = 'Go to Declaration' })
 
-    vim.keymap.set(
-        'n',
-        'gi',
-        vim.lsp.buf.implementation,
-        { buffer = bufnr, desc = 'Go to Implementation' }
-    )
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr, desc = 'Go to Implementation' })
 
     local tb = require 'telescope.builtin'
     local themes = require 'telescope.themes'
@@ -64,14 +51,9 @@ local on_attach = function(client, bufnr)
     end
 
     if caps.codeActionProvider then
-        vim.keymap.set(
-            { 'n', 'v' },
-            '<leader>ca',
-			function()
-				require('lspsaga.codeaction'):code_action()
-			end,
-            { buffer = bufnr, desc = '(Range) Code Actions' }
-        )
+        vim.keymap.set({ 'n', 'v' }, '<leader>ca', function()
+            require('lspsaga.codeaction'):code_action()
+        end, { buffer = bufnr, desc = '(Range) Code Actions' })
     end
 
     if caps.documentFormattingProvider then
@@ -80,12 +62,7 @@ local on_attach = function(client, bufnr)
         end, { buffer = bufnr, desc = 'Formmating' })
     end
     if caps.documentRangeFormattingProvider then
-        vim.keymap.set(
-            'v',
-            '<leader>bf',
-            vim.lsp.buf.format,
-            { buffer = bufnr, desc = 'Range Formmating' }
-        )
+        vim.keymap.set('v', '<leader>bf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Range Formmating' })
     end
 end
 
