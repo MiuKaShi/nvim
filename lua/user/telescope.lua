@@ -30,24 +30,11 @@ telescope.setup {
         },
     },
     pickers = {
-        buffers = {
-            theme = 'dropdown',
-            sort_lastused = true,
-            previewer = false,
-        },
-        current_buffer_fuzzy_find = {
-            previewer = false,
-        },
-        find_files = {
-            theme = 'ivy',
-            follow = true,
-        },
-        grep_string = {
-            path_display = { 'shorten' },
-        },
-        live_grep = {
-            path_display = { 'shorten' },
-        },
+        buffers = { theme = 'dropdown', sort_lastused = true, previewer = false },
+        current_buffer_fuzzy_find = { previewer = false },
+        find_files = { theme = 'ivy', follow = true },
+        grep_string = { path_display = { 'shorten' } },
+        live_grep = { path_display = { 'shorten' } },
     },
     extensions = {
         frecency = {
@@ -59,10 +46,7 @@ telescope.setup {
                 ['proj'] = home .. '/Projects',
             },
         },
-        file_browser = {
-            theme = 'ivy',
-            hijack_netrw = true,
-        },
+        file_browser = { theme = 'ivy', hijack_netrw = true },
         ['ui-select'] = themes.get_dropdown(),
     },
 }

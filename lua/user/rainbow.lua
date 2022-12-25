@@ -1,4 +1,4 @@
-vim.g['rainbow_active'] = 1
+vim.g.rainbow_active = 1
 
 vim.cmd [[
 let g:rainbow_conf = {

@@ -21,7 +21,6 @@ end
 
 local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = 'Go to Declaration' })
-
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr, desc = 'Go to Implementation' })
 
     local tb = require 'telescope.builtin'
@@ -34,24 +33,19 @@ local on_attach = function(client, bufnr)
     local caps = client.server_capabilities
     if caps.documentHighlightProvider then
         vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
-        vim.api.nvim_clear_autocmds {
-            buffer = bufnr,
-            group = 'lsp_document_highlight',
-        }
-        vim.api.nvim_create_autocmd('CursorHold', {
-            callback = vim.lsp.buf.document_highlight,
-            buffer = bufnr,
-            group = 'lsp_document_highlight',
-        })
-        vim.api.nvim_create_autocmd('CursorMoved', {
-            callback = vim.lsp.buf.clear_references,
-            buffer = bufnr,
-            group = 'lsp_document_highlight',
-        })
+        vim.api.nvim_clear_autocmds { buffer = bufnr, group = 'lsp_document_highlight' }
+        vim.api.nvim_create_autocmd(
+            'CursorHold',
+            { callback = vim.lsp.buf.document_highlight, buffer = bufnr, group = 'lsp_document_highlight' }
+        )
+        vim.api.nvim_create_autocmd(
+            'CursorMoved',
+            { callback = vim.lsp.buf.clear_references, buffer = bufnr, group = 'lsp_document_highlight' }
+        )
     end
 
     if caps.codeActionProvider then
-        vim.keymap.set({ 'n', 'v' }, '<leader>ca', function()
+        vim.keymap.set({ 'n', 'x' }, '<leader>ca', function()
             require('lspsaga.codeaction'):code_action()
         end, { buffer = bufnr, desc = '(Range) Code Actions' })
     end

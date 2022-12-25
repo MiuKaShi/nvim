@@ -37,27 +37,49 @@ vim.bo.undofile = true
 vim.bo.undolevels = 1000
 vim.bo.swapfile = false
 
--- Completion
-o.completeopt = 'menu,menuone,noselect'
-
 -- opt
 o.shortmess:append('c')
 o.whichwrap:append('[,]')
+o.backup = true
 o.backspace = 'indent,eol,start' -- 使 backspace 按您预期的方式工作
+--
 o.timeoutlen = 500
 o.go = 'a'
 o.mouse = 'a'
+--o.regexpengine = 1
 o.showmatch = true
 o.visualbell = true
 o.spellsuggest='best,9'
---o.regexpengine = 1
 -- o.cursorline              = true -- 高亮当前行
 
--- backup
-o.backup = true
+-- Completion
+vim.opt.completeopt = 'menu,menuone,noselect'
+
+-- Others
+vim.g.rainbow_active = 1
+vim.g.neon_style = 'doom'
+vim.g.EasyMotion_do_mapping = 0
+vim.g.EasyMotion_smartcase = 1
+vim.g.swoopAutoInsertMode = 1
+vim.g.user_emmet_install_global = 0
+vim.g.GfList_map_n_gf = 'gf' -- gf 自定义
+vim.g.GfList_map_v_gf = 'gf'
+
+vim.cmd [[
+let g:gtfo#terminals = { 'unix': 'st -e nvim' }
+]]
+
+vim.cmd [[
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+]]
+
 vim.cmd [[
 set undodir=$HOME/.cache/nvim/undo
 set backupdir=$HOME/.cache/nvim/backup
+]]
+
+vim.cmd [[
 if !isdirectory(&undodir)
   call mkdir(&undodir, 'p')
 endif
@@ -66,12 +88,6 @@ if !isdirectory(&backupdir)
 endif
 ]]
 
--- Others
-vim.g.GfList_map_n_gf = 'gf' -- gf 自定义
-vim.g.GfList_map_v_gf = 'gf'
-vim.cmd [[
-let g:gtfo#terminals = { 'unix': 'st -e nvim' }
-]]
 vim.cmd [[
 let g:fzf_wordnet_preview_arg = ''
 ]]
