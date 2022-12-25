@@ -1,3 +1,5 @@
+vim.cmd 'syntax on' -- 打开语法高亮
+vim.cmd 'filetype plugin indent on'
 local o = vim.opt
 
 -- global
