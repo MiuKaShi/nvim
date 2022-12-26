@@ -49,7 +49,6 @@ return require('packer').startup(function(use)
     use 'ellisonleao/gruvbox.nvim'
     use 'norcalli/nvim-colorizer.lua' -- editor 内颜色显示
     use 'nvim-lualine/lualine.nvim' -- 底部状态栏
-    use 'declancm/cinnamon.nvim' -- smooth scroll
 
     -- LSP
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
