@@ -56,10 +56,6 @@ return require('packer').startup(function(use)
     use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
     use 'folke/neodev.nvim' -- lua 语法提示 for lsp
 
-    -- Extend Language Support
-    use 'JuliaEditorSupport/julia-vim' --Julia
-    -- use 'kdheepak/JuliaFormatter.vim' -- Julia formatter
-
     -- Format
     use 'sbdchd/neoformat'
     use 'junegunn/vim-easy-align'
@@ -115,7 +111,6 @@ return require('packer').startup(function(use)
 
     -- Writting
     use 'kylechui/nvim-surround' -- 修改包围符合
-    use 'wellle/targets.vim' -- 修改包围内内容
     use 'MiuKaShi/bibtexcite.vim' -- bib 引用
     use 'stevearc/aerial.nvim' -- outline
     use { 'iamcco/markdown-preview.nvim', run = ':call mkdp#util#install()' }
