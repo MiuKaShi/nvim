@@ -105,9 +105,4 @@ vim.g.easy_align_delimiters = {
 
 vim.g.easy_align_bypass_fold = 1
 
-vim.keymap.set(
-    { 'n', 'v' },
-    '<Leader>a',
-    '<Plug>(EasyAlign)',
-    { silent = true }
-)
+vim.keymap.set({ 'n', 'v' }, '<Leader>a', '<Plug>(EasyAlign)', { silent = true })

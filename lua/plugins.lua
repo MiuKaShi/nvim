@@ -58,7 +58,7 @@ return require('packer').startup(function(use)
 
     -- Format
     use 'sbdchd/neoformat'
-    use 'junegunn/vim-easy-align'
+    use { 'junegunn/vim-easy-align', event = 'CursorHold' }
 
     -- Syntax
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -66,8 +66,7 @@ return require('packer').startup(function(use)
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/nvim-treesitter-context'
     use 'p00f/nvim-ts-rainbow'
-    use 'luochen1990/rainbow' -- 补充ts-rainbow不支持的language
-    use 'vim-pandoc/vim-pandoc-syntax' -- markdown 高亮
+    use { 'luochen1990/rainbow', ft = 'matlab' } -- 补充ts-rainbow不支持的language
 
     -- Completion
     use 'hrsh7th/nvim-cmp'
@@ -81,7 +80,6 @@ return require('packer').startup(function(use)
 
     use 'L3MON4D3/LuaSnip'
     use 'rafamadriz/friendly-snippets'
-    use 'windwp/nvim-autopairs'
 
     -- AI Completion
     use 'zbirenbaum/copilot.lua'
@@ -109,12 +107,12 @@ return require('packer').startup(function(use)
     -- File manager
     use 'is0n/fm-nvim'
 
-    -- Writting
-    use 'kylechui/nvim-surround' -- 修改包围符合
-    use 'MiuKaShi/bibtexcite.vim' -- bib 引用
-    use 'stevearc/aerial.nvim' -- outline
-    use { 'iamcco/markdown-preview.nvim', run = ':call mkdp#util#install()' }
-    use 'epwalsh/obsidian.nvim' -- notes
+    -- markdown
+    use { 'iamcco/markdown-preview.nvim', run = ':call mkdp#util#install()', cmd = 'MarkdownPreview', ft = 'markdown' }
+    use { 'vim-pandoc/vim-pandoc-syntax', ft = 'markdown' } -- markdown 高亮
+    use { 'MiuKaShi/bibtexcite.vim', ft = 'markdown' } -- bib 引用
+    use { 'epwalsh/obsidian.nvim', ft = 'markdown' } -- notes
+    use { 'Avi-D-coder/fzf-wordnet.vim', requires = 'junegunn/fzf.vim', ft = 'markdown' } -- en dict
     -- use {
     --     'nvim-neorg/neorg', -- org 模式
     --     tag = '0.0.11',
@@ -123,12 +121,11 @@ return require('packer').startup(function(use)
     -- }
 
     -- Utils
+    use 'windwp/nvim-autopairs'
+    use 'kylechui/nvim-surround' -- 修改包围符合
+    use 'stevearc/aerial.nvim' -- outline
     use 'numToStr/Comment.nvim' -- comment
     use 'ggandor/leap.nvim' -- quick move
-    use {
-        'Avi-D-coder/fzf-wordnet.vim',
-        requires = 'junegunn/fzf.vim',
-    } -- en dict
     use 'folke/which-key.nvim' -- 快捷键 maps
     use 'h-hg/fcitx.nvim' -- fcitx5 自动切换
     use 'wakatime/vim-wakatime' -- time tracker

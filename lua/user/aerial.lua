@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 aerial.setup {
-    backends = { 'lsp', 'markdown' },
+    backends = { 'treesitter', 'markdown' },
     nerd_font = 'auto',
     filter_kind = {
         'Class',

@@ -1,8 +1,5 @@
 local M = {}
 
--- require('neodev').setup {
---     lspconfig = {
-
 M.setup = function(on_attach, capabilities)
     -- this block must come before lua LSP setup
     require("neodev").setup {
