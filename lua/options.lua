@@ -50,6 +50,7 @@ endif
 o.completeopt = 'menu,menuone,noselect'
 
 -- opt
+o.encoding = 'UTF-8'
 o.shortmess:append 'c'
 o.whichwrap:append '[,]'
 o.backspace = 'indent,eol,start' -- 使 backspace 按您预期的方式工作
