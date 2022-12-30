@@ -1,4 +1,3 @@
-vim.cmd 'syntax on' -- 打开语法高亮
 local o = vim.opt
 
 -- global
@@ -34,40 +33,41 @@ vim.o.softtabstop = indent -- Number of spaces per <Tab> (use value of sw)
 
 -- local to buffer
 vim.bo.smartindent = true -- Enable smart-indent
-vim.bo.undofile = true
-vim.bo.undolevels = 1000
 vim.bo.swapfile = false
+o.backup = false
+
+-- undofile
+vim.cmd [[
+set undofile
+set undodir=~/.cache/nvim/undo
+set viminfo=!,'10000,<50,s10,h
+if !isdirectory(&undodir)
+  call mkdir(&undodir, 'p')
+endif
+]]
 
 -- Completion
 o.completeopt = 'menu,menuone,noselect'
 
 -- opt
-o.shortmess:append('c')
-o.whichwrap:append('[,]')
+o.shortmess:append 'c'
+o.whichwrap:append '[,]'
 o.backspace = 'indent,eol,start' -- 使 backspace 按您预期的方式工作
 o.timeoutlen = 500
 o.go = 'a'
 o.mouse = 'a'
 o.showmatch = true
 o.visualbell = true
-o.spellsuggest='best,9'
+o.spellsuggest = 'best,9'
 --o.regexpengine = 1
 -- o.cursorline              = true -- 高亮当前行
 
--- backup
-o.backup = true
-vim.cmd [[
-set undodir=$HOME/.cache/nvim/undo
-set backupdir=$HOME/.cache/nvim/backup
-if !isdirectory(&undodir)
-  call mkdir(&undodir, 'p')
-endif
-if !isdirectory(&backupdir)
-  call mkdir(&backupdir, 'p')
-endif
-]]
-
 -- Others
+-- 光标回到上次位置
+vim.cmd 'syntax on' -- 打开语法高亮
+vim.cmd [[ 
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
+]]
 vim.g.GfList_map_n_gf = 'gf' -- gf 自定义
 vim.g.GfList_map_v_gf = 'gf'
 vim.cmd [[
