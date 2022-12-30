@@ -43,11 +43,16 @@ packer.init {
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'lewis6991/impatient.nvim'
+    use { 'dstein64/vim-startuptime', cmd = 'StartupTime' }
 
     -- GUI
-    use 'lukas-reineke/indent-blankline.nvim' -- Indent
+    use { 'lukas-reineke/indent-blankline.nvim', event = 'BufRead', config = "require('user.indentline').config()" } -- Indent
+    use {
+        'norcalli/nvim-colorizer.lua',
+        event = { 'BufRead', 'BufNewFile' },
+        config = "require('user.colorizer').config()",
+    } -- editor 内颜色显示
     use 'ellisonleao/gruvbox.nvim'
-    use 'norcalli/nvim-colorizer.lua' -- editor 内颜色显示
     use 'nvim-lualine/lualine.nvim' -- 底部状态栏
 
     -- LSP
@@ -61,25 +66,37 @@ return require('packer').startup(function(use)
     use { 'junegunn/vim-easy-align', event = 'CursorHold' }
 
     -- Syntax
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    -- use { 'nvim-treesitter/playground', opt = true }
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use 'nvim-treesitter/nvim-treesitter-context'
-    use 'p00f/nvim-ts-rainbow'
+    use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
+    use { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' }
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        event = { 'BufRead', 'BufNewFile' },
+        cmd = {
+            'TSInstall',
+            'TSInstallInfo',
+            'TSInstallSync',
+            'TSUninstall',
+            'TSUpdate',
+            'TSUpdateSync',
+            'TSDisableAll',
+            'TSEnableAll',
+        },
+        config = "require('user.treesitter').config()",
+    }
     use { 'luochen1990/rainbow', ft = 'matlab' } -- 补充ts-rainbow不支持的language
 
     -- Completion
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/cmp-path'
-    use 'lukas-reineke/cmp-rg'
-    use 'saadparwaiz1/cmp_luasnip'
-    use 'mstanciu552/cmp-matlab'
-
-    use 'L3MON4D3/LuaSnip'
-    use 'rafamadriz/friendly-snippets'
+    use { 'rafamadriz/friendly-snippets', event = 'InsertEnter' }
+    use { 'L3MON4D3/LuaSnip', after = 'friendly-snippets' }
+    use { 'hrsh7th/nvim-cmp', after = 'LuaSnip', config = "require('user.cmp').config()" }
+    use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
+    use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
+    use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
+    use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
+    use { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' }
+    use { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' }
+    use { 'mstanciu552/cmp-matlab', after = 'nvim-cmp' }
 
     -- AI Completion
     use 'zbirenbaum/copilot.lua'
@@ -88,21 +105,25 @@ return require('packer').startup(function(use)
     --     'tzachar/cmp-tabnine',
     --     run = './install.sh',
     -- }
+    --
+
+    -- Icons
+    use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', config = "require('user.icons').config()" }
 
     -- Search
+    use 'kkharji/sqlite.lua'
+    use { 'nvim-lua/plenary.nvim', module = 'plenary' }
     use {
         'nvim-telescope/telescope.nvim',
+        cmd = 'Telescope',
+        module = 'telescope',
         requires = {
-            'nvim-lua/plenary.nvim',
-            'nvim-tree/nvim-web-devicons',
+            'nvim-telescope/telescope-file-browser.nvim',
+            'nvim-telescope/telescope-ui-select.nvim',
+            'nvim-telescope/telescope-frecency.nvim',
         },
+        config = "require('user.telescope').config()",
     }
-    use {
-        'nvim-telescope/telescope-frecency.nvim',
-        requires = 'kkharji/sqlite.lua',
-    }
-    use 'nvim-telescope/telescope-file-browser.nvim' -- file select
-    use 'nvim-telescope/telescope-ui-select.nvim' -- 选择框 vim.ui.select
 
     -- File manager
     use 'is0n/fm-nvim'
@@ -121,9 +142,18 @@ return require('packer').startup(function(use)
     -- }
 
     -- Utils
-    use 'windwp/nvim-autopairs'
+    use {
+        'windwp/nvim-autopairs',
+        event = 'InsertEnter',
+        config = "require('user.autopairs').config()",
+    }
     use 'kylechui/nvim-surround' -- 修改包围符合
-    use 'stevearc/aerial.nvim' -- outline
+    use {
+        'stevearc/aerial.nvim',
+        module = 'aerial',
+        cmd = { 'AerialToggle', 'AerialOpen', 'AerialInfo' },
+        config = "require('user.aerial').config()",
+    } -- outline
     use 'numToStr/Comment.nvim' -- comment
     use 'ggandor/leap.nvim' -- quick move
     use 'folke/which-key.nvim' -- 快捷键 maps

@@ -1,6 +1,10 @@
-local cmp_status_ok, color = pcall(require, 'colorizer')
-if not cmp_status_ok then
-    return
+local M = {}
+
+function M.config()
+    local status_ok, colorizer = pcall(require, 'colorizer')
+    if status_ok then
+        colorizer.setup()
+    end
 end
 
-color.setup()
+return M
