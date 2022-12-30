@@ -129,7 +129,13 @@ return require('packer').startup(function(use)
     use 'is0n/fm-nvim'
 
     -- markdown
-    use { 'iamcco/markdown-preview.nvim', run = ':call mkdp#util#install()', cmd = 'MarkdownPreview', ft = 'markdown' }
+    use {
+        'iamcco/markdown-preview.nvim',
+        config = "require('user.mkdp').config()",
+        run = 'cd app && npm install',
+        cmd = 'MarkdownPreview',
+        ft = 'markdown',
+    }
     use { 'vim-pandoc/vim-pandoc-syntax', ft = 'markdown' } -- markdown 高亮
     use { 'MiuKaShi/bibtexcite.vim', ft = 'markdown' } -- bib 引用
     use { 'epwalsh/obsidian.nvim', ft = 'markdown' } -- notes
