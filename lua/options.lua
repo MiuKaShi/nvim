@@ -2,8 +2,11 @@ local o = vim.opt
 
 -- global
 vim.o.clipboard = 'unnamedplus'
-vim.o.shell = 'zsh'
 vim.o.cmdheight = 0
+vim.o.shell = 'zsh'
+vim.o.fillchars = 'eob: ,diff: '
+vim.o.grepformat = '%f:%l:%c:%m'
+vim.o.grepprg = 'rg --vimgrep'
 vim.o.laststatus = 0
 vim.o.pumheight = 10
 vim.o.scrolloff = 8 -- Always show at least one line above/below the cursor.
@@ -11,43 +14,6 @@ vim.o.showbreak = '> '
 vim.o.title = true
 vim.o.termguicolors = true
 vim.o.updatetime = 200 -- default updatetime 4000ms is not good for async update (vim/signify)
-
--- local to window
-vim.wo.relativenumber = true -- Show relative line numbers
-vim.wo.number = true
-vim.wo.colorcolumn = '120'
-vim.wo.linebreak = true
-
--- search
-vim.o.smartcase = true
-vim.o.ignorecase = true
--- vim.o.hlsearch = true -- 保持匹配项目高亮
--- vim.o.incsearch = true -- 搜索时高亮
--- vim.o.copyindent = true
-
--- indention & tab
-local indent = 4
-vim.o.tabstop = indent -- Ensure files with tabs look the same
-vim.o.shiftwidth = indent -- Number of auto-indent spaces
-vim.o.softtabstop = indent -- Number of spaces per <Tab> (use value of sw)
-
--- local to buffer
-vim.bo.smartindent = true -- Enable smart-indent
-vim.bo.swapfile = false
-o.backup = false
-
--- undofile
-vim.cmd [[
-set undofile
-set undodir=~/.cache/nvim/undo
-set viminfo=!,'10000,<50,s10,h
-if !isdirectory(&undodir)
-  call mkdir(&undodir, 'p')
-endif
-]]
-
--- Completion
-o.completeopt = 'menu,menuone,noselect'
 
 -- opt
 o.encoding = 'UTF-8'
@@ -62,6 +28,44 @@ o.visualbell = true
 o.spellsuggest = 'best,9'
 --o.regexpengine = 1
 -- o.cursorline              = true -- 高亮当前行
+
+-- Completion
+o.completeopt = 'menu,menuone,noselect'
+
+-- search
+vim.o.smartcase = true
+vim.o.ignorecase = true
+-- vim.o.hlsearch = true -- 保持匹配项目高亮
+-- vim.o.incsearch = true -- 搜索时高亮
+-- vim.o.copyindent = true
+
+-- local to buffer
+vim.bo.swapfile = false
+-- undofile
+vim.cmd [[
+set undofile
+set undodir=~/.cache/nvim/undo
+set viminfo=!,'10000,<50,s10,h
+if !isdirectory(&undodir)
+  call mkdir(&undodir, 'p')
+endif
+]]
+
+-- Tabs
+vim.bo.expandtab = true -- Use spaces instead of tabs
+vim.bo.smartindent = true -- Enable smart-indent
+vim.bo.shiftwidth = 2 -- Number of auto-indent spaces
+vim.bo.softtabstop = 2 -- Number of spaces per <Tab> (use value of sw)
+vim.bo.tabstop = 2 -- Ensure files with tabs look the same
+
+-- local to window
+vim.wo.breakindent = true
+vim.wo.colorcolumn = '120'
+vim.wo.number = true
+vim.wo.linebreak = true
+vim.wo.relativenumber = true -- Show relative line numbers
+--vim.wo.cursorline = true
+--vim.wo.signcolumn = "yes"
 
 -- Others
 -- 光标回到上次位置
