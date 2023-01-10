@@ -5,6 +5,8 @@ end
 
 copilot.setup {
     filetypes = {
+        c = false,
+        cpp = false,
         yaml = false,
         markdown = false,
         help = false,
