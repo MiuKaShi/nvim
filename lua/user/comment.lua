@@ -1,10 +1,13 @@
 local M = {}
 
 function M.config()
+    vim.cmd [[nmap <leader>; gcc<esc>]]
+    vim.cmd [[vmap <leader>; gcc<esc>]]
+end
+
+function M.setup()
     local status_ok, comment = pcall(require, 'Comment')
     if status_ok then
-        vim.cmd [[nmap <leader>; gcc<esc>]]
-        vim.cmd [[vmap <leader>; gcc<esc>]]
         comment.setup {
             pre_hook = function(ctx)
                 local U = require 'Comment.utils'

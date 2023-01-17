@@ -1,6 +1,6 @@
 local M = {}
 
-function M.config()
+function M.setup()
     local cmp_status_ok, cmp = pcall(require, 'cmp')
     local snip_status_ok, luasnip = pcall(require, 'luasnip')
     if cmp_status_ok and snip_status_ok then

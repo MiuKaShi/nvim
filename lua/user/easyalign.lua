@@ -1,108 +1,112 @@
--- extending alignment rules
-vim.g.easy_align_delimiters = {
-    [' '] = {
-        pattern = ' ',
-        left_margin = 0,
-        right_margin = 0,
-        stick_to_left = 0,
-    },
-    ['+'] = {
-        pattern = '+',
-        left_margin = 1,
-        right_margin = 1,
-        stick_to_left = 0,
-    },
-    ['-'] = {
-        pattern = '-',
-        left_margin = 1,
-        right_margin = 1,
-        stick_to_left = 0,
-    },
-    ['='] = {
-        pattern = [[===\|<=>\|\(&&\|||\|<<\|>>\)=\|=\~[#?]\?\|=>\|[:+/*!%^=><&|.-]\?=[#?]\?]],
-        left_margin = 1,
-        right_margin = 1,
-        stick_to_left = 0,
-    },
-    [':'] = {
-        pattern = ':',
-        left_margin = 0,
-        right_margin = 1,
-        stick_to_left = 1,
-    },
-    [','] = {
-        pattern = ',',
-        left_margin = 0,
-        right_margin = 1,
-        stick_to_left = 1,
-    },
-    ['|'] = {
-        pattern = '|',
-        left_margin = 1,
-        right_margin = 1,
-        stick_to_left = 0,
-    },
-    ['.'] = {
-        pattern = '.',
-        left_margin = 0,
-        right_margin = 0,
-        stick_to_left = 0,
-    },
-    ['&'] = {
-        pattern = [[\\\@<!&\|\\\\]],
-        left_margin = 1,
-        right_margin = 1,
-        stick_to_left = 0,
-    },
-    ['{'] = {
-        pattern = [[(\@<!{]],
-        left_margin = 1,
-        right_margin = 1,
-        stick_to_left = 0,
-    },
-    ['}'] = {
-        pattern = '}',
-        left_margin = 1,
-        right_margin = 0,
-        stick_to_left = 0,
-    },
-    ['\\'] = {
-        pattern = '\\',
-        left_margin = 1,
-        right_margin = 0,
-        stick_to_left = 0,
-    },
-    ['<'] = {
-        pattern = '<',
-        left_margin = 1,
-        right_margin = 0,
-        stick_to_left = 0,
-    },
-    ['d'] = {
-        pattern = [[ \(\S\+\s*[;=]\)\@=]],
-        left_margin = 0,
-        right_margin = 0,
-    },
-    ['#'] = {
-        pattern = '#',
-        left_margin = 1,
-        right_margin = 1,
-        stick_to_left = 0,
-    },
-    ['['] = {
-        pattern = [[(\@<![]],
-        left_margin = 1,
-        right_margin = 1,
-        stick_to_left = 0,
-    },
-    [']'] = {
-        pattern = ']',
-        left_margin = 1,
-        right_margin = 0,
-        stick_to_left = 0,
-    },
-}
+local M = {}
 
-vim.g.easy_align_bypass_fold = 1
+function M.config()
+    -- extending alignment rules
+    vim.g.easy_align_delimiters = {
+        [' '] = {
+            pattern = ' ',
+            left_margin = 0,
+            right_margin = 0,
+            stick_to_left = 0,
+        },
+        ['+'] = {
+            pattern = '+',
+            left_margin = 1,
+            right_margin = 1,
+            stick_to_left = 0,
+        },
+        ['-'] = {
+            pattern = '-',
+            left_margin = 1,
+            right_margin = 1,
+            stick_to_left = 0,
+        },
+        ['='] = {
+            pattern = [[===\|<=>\|\(&&\|||\|<<\|>>\)=\|=\~[#?]\?\|=>\|[:+/*!%^=><&|.-]\?=[#?]\?]],
+            left_margin = 1,
+            right_margin = 1,
+            stick_to_left = 0,
+        },
+        [':'] = {
+            pattern = ':',
+            left_margin = 0,
+            right_margin = 1,
+            stick_to_left = 1,
+        },
+        [','] = {
+            pattern = ',',
+            left_margin = 0,
+            right_margin = 1,
+            stick_to_left = 1,
+        },
+        ['|'] = {
+            pattern = '|',
+            left_margin = 1,
+            right_margin = 1,
+            stick_to_left = 0,
+        },
+        ['.'] = {
+            pattern = '.',
+            left_margin = 0,
+            right_margin = 0,
+            stick_to_left = 0,
+        },
+        ['&'] = {
+            pattern = [[\\\@<!&\|\\\\]],
+            left_margin = 1,
+            right_margin = 1,
+            stick_to_left = 0,
+        },
+        ['{'] = {
+            pattern = [[(\@<!{]],
+            left_margin = 1,
+            right_margin = 1,
+            stick_to_left = 0,
+        },
+        ['}'] = {
+            pattern = '}',
+            left_margin = 1,
+            right_margin = 0,
+            stick_to_left = 0,
+        },
+        ['\\'] = {
+            pattern = '\\',
+            left_margin = 1,
+            right_margin = 0,
+            stick_to_left = 0,
+        },
+        ['<'] = {
+            pattern = '<',
+            left_margin = 1,
+            right_margin = 0,
+            stick_to_left = 0,
+        },
+        ['d'] = {
+            pattern = [[ \(\S\+\s*[;=]\)\@=]],
+            left_margin = 0,
+            right_margin = 0,
+        },
+        ['#'] = {
+            pattern = '#',
+            left_margin = 1,
+            right_margin = 1,
+            stick_to_left = 0,
+        },
+        ['['] = {
+            pattern = [[(\@<![]],
+            left_margin = 1,
+            right_margin = 1,
+            stick_to_left = 0,
+        },
+        [']'] = {
+            pattern = ']',
+            left_margin = 1,
+            right_margin = 0,
+            stick_to_left = 0,
+        },
+    }
+    vim.g.easy_align_bypass_fold = 1
+    vim.keymap.set({ 'n', 'v' }, '<Leader>a', '<Plug>(EasyAlign)', { silent = true })
+end
 
-vim.keymap.set({ 'n', 'v' }, '<Leader>a', '<Plug>(EasyAlign)', { silent = true })
+return M

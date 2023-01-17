@@ -1,6 +1,8 @@
-vim.g.rainbow_active = 1
+local M = {}
 
-vim.cmd [[
+function M.config()
+    vim.g.rainbow_active = 1
+    vim.cmd [[
 let g:rainbow_conf = {
 \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
 \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
@@ -17,3 +19,6 @@ let g:rainbow_conf = {
 \	}
 \}
 ]]
+end
+
+return M

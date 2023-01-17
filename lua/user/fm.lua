@@ -1,6 +1,6 @@
 local M = {}
 
-function M.config()
+function M.setup()
     local status_ok, fm = pcall(require, 'fm-nvim')
     if status_ok then
         fm.setup {

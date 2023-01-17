@@ -1,6 +1,6 @@
 local M = {}
 
-function M.config()
+function M.setup()
     local status_ok, which_key = pcall(require, 'which-key')
     if status_ok then
         local setup = {

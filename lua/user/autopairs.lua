@@ -1,6 +1,6 @@
 local M = {}
 
-function M.config()
+function M.setup()
     local status_ok, npairs = pcall(require, 'nvim-autopairs')
     if status_ok then
         npairs.setup {

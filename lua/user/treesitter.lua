@@ -1,6 +1,6 @@
 local M = {}
 
-function M.config()
+function M.setup()
     local status_ok, treesitter = pcall(require, 'nvim-treesitter.configs')
     if status_ok then
         local langs = {

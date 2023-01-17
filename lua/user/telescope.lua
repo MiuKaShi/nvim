@@ -1,6 +1,6 @@
 local M = {}
 
-function M.config()
+function M.setup()
     local status_ok, telescope = pcall(require, 'telescope')
     if status_ok then
         local home = os.getenv 'HOME'

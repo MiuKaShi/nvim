@@ -26,13 +26,8 @@ require 'options'
 require 'keymaps'
 require 'functions'
 require 'plugins'
+require 'autocmds'
 
---utilis设置
+--theme and lsp设置
 require 'user.colorscheme'
-require 'user.autocmds'
 require 'user.lsp'
-require 'user.neoformat'
-require 'user.bibtexcite'
-require 'user.rainbow'
-require 'user.easyalign'
-require 'user.julia'

@@ -1,6 +1,6 @@
 local M = {}
 
-function M.config()
+function M.setup()
     local status_ok, obsidian = pcall(require, 'obsidian')
     if status_ok then
         obsidian.setup {

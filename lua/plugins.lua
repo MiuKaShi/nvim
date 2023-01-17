@@ -46,16 +46,17 @@ return require('packer').startup(function(use)
     use { 'dstein64/vim-startuptime', cmd = 'StartupTime' }
 
     -- GUI
-    use { 'lukas-reineke/indent-blankline.nvim', event = 'BufRead', config = "require('user.indentline').config()" } -- Indent
+    require('user.indentline').config()
+    use { 'lukas-reineke/indent-blankline.nvim', event = 'BufRead', config = "require('user.indentline').setup()" } -- Indent
     use {
         'norcalli/nvim-colorizer.lua',
         event = { 'BufRead', 'BufNewFile' },
-        config = "require('user.colorizer').config()",
+        config = "require('user.colorizer').setup()",
     } -- editor 内颜色显示
     use 'ellisonleao/gruvbox.nvim'
     use {
         'nvim-lualine/lualine.nvim',
-        config = "require('user.lualine').config()",
+        config = "require('user.lualine').setup()",
     } -- 底部状态栏
     -- LSP
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
@@ -64,10 +65,13 @@ return require('packer').startup(function(use)
     use 'folke/neodev.nvim' -- lua 语法提示 for lsp
 
     -- Format
+    require('user.neoformat').config()
     use 'sbdchd/neoformat'
+    require('user.easyalign').config()
     use { 'junegunn/vim-easy-align', event = 'CursorHold' }
 
     -- Syntax
+    require('user.rainbow').config()
     use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
     use { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' }
     use {
@@ -84,14 +88,14 @@ return require('packer').startup(function(use)
             'TSDisableAll',
             'TSEnableAll',
         },
-        config = "require('user.treesitter').config()",
+        config = "require('user.treesitter').setup()",
     }
     use { 'luochen1990/rainbow', ft = 'matlab' } -- 补充ts-rainbow不支持的language
 
     -- Completion
     use { 'rafamadriz/friendly-snippets', event = 'InsertEnter' }
     use { 'L3MON4D3/LuaSnip', after = 'friendly-snippets' }
-    use { 'hrsh7th/nvim-cmp', after = 'LuaSnip', config = "require('user.cmp').config()" }
+    use { 'hrsh7th/nvim-cmp', after = 'LuaSnip', config = "require('user.cmp').setup()" }
     use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
@@ -103,7 +107,7 @@ return require('packer').startup(function(use)
     -- AI Completion
     use {
         'zbirenbaum/copilot.lua',
-        config = "require('user.copilot').config()",
+        config = "require('user.copilot').setup()",
     }
     use 'zbirenbaum/copilot-cmp'
     -- use {
@@ -113,7 +117,7 @@ return require('packer').startup(function(use)
     --
 
     -- Icons
-    use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', config = "require('user.icons').config()" }
+    use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', config = "require('user.icons').setup()" }
 
     -- Search
     use 'kkharji/sqlite.lua'
@@ -127,28 +131,30 @@ return require('packer').startup(function(use)
             'nvim-telescope/telescope-ui-select.nvim',
             'nvim-telescope/telescope-frecency.nvim',
         },
-        config = "require('user.telescope').config()",
+        config = "require('user.telescope').setup()",
     }
 
     -- File manager
     use {
         'is0n/fm-nvim',
-        config = "require('user.fm').config()",
+        config = "require('user.fm').setup()",
     }
     -- markdown
+    require('user.mkdp').config()
     use {
         'iamcco/markdown-preview.nvim',
-        config = "require('user.mkdp').config()",
         run = 'cd app && npm install',
         cmd = 'MarkdownPreview',
         ft = 'markdown',
     }
     use { 'vim-pandoc/vim-pandoc-syntax', ft = 'markdown' } -- markdown 高亮
-    use { 'MiuKaShi/bibtexcite.vim', ft = 'markdown' } -- bib 引用
+    -- bib 引用
+    require('user.bibtexcite').config()
+    use { 'MiuKaShi/bibtexcite.vim', ft = 'markdown' }
     use {
         'epwalsh/obsidian.nvim',
         ft = 'markdown',
-        config = "require('user.obsidian').config()",
+        config = "require('user.obsidian').setup()",
     } -- notes
     use { 'Avi-D-coder/fzf-wordnet.vim', requires = 'junegunn/fzf.vim', ft = 'markdown' } -- en dict
     -- use {
@@ -162,31 +168,32 @@ return require('packer').startup(function(use)
     use {
         'windwp/nvim-autopairs',
         event = 'InsertEnter',
-        config = "require('user.autopairs').config()",
+        config = "require('user.autopairs').setup()",
     }
     use {
         'kylechui/nvim-surround',
-        config = "require('user.surround').config()",
+        config = "require('user.surround').setup()",
     } -- 修改包围符合
     use {
         'stevearc/aerial.nvim',
         module = 'aerial',
         cmd = { 'AerialToggle', 'AerialOpen', 'AerialInfo' },
-        config = "require('user.aerial').config()",
+        config = "require('user.aerial').setup()",
     } -- outline
+    require('user.comment').config()
     use {
         'numToStr/Comment.nvim',
-        config = "require('user.comment').config()",
+        config = "require('user.comment').setup()",
     } -- comment
     use {
         'ggandor/leap.nvim',
-        config = "require('user.leap').config()",
+        config = "require('user.leap').setup()",
     } -- quick move
     use {
         'folke/which-key.nvim',
         module = 'which-key',
         event = 'InsertEnter',
-        config = "require('user.whichkey').config()",
+        config = "require('user.whichkey').setup()",
     } -- whichkey
     use 'h-hg/fcitx.nvim' -- fcitx5 自动切换
     use 'wakatime/vim-wakatime' -- time tracker

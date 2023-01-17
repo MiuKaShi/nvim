@@ -1,6 +1,6 @@
 local M = {}
 
-function M.config()
+function M.setup()
     local status_ok, copilot = pcall(require, 'copilot')
     if status_ok then
         copilot.setup {
