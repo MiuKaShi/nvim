@@ -53,8 +53,10 @@ return require('packer').startup(function(use)
         config = "require('user.colorizer').config()",
     } -- editor 内颜色显示
     use 'ellisonleao/gruvbox.nvim'
-    use 'nvim-lualine/lualine.nvim' -- 底部状态栏
-
+    use {
+        'nvim-lualine/lualine.nvim',
+        config = "require('user.lualine').config()",
+    } -- 底部状态栏
     -- LSP
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
     use 'tami5/lspsaga.nvim' -- LSP UI
@@ -99,7 +101,10 @@ return require('packer').startup(function(use)
     use { 'mstanciu552/cmp-matlab', after = 'nvim-cmp' }
 
     -- AI Completion
-    use 'zbirenbaum/copilot.lua'
+    use {
+        'zbirenbaum/copilot.lua',
+        config = "require('user.copilot').config()",
+    }
     use 'zbirenbaum/copilot-cmp'
     -- use {
     --     'tzachar/cmp-tabnine',
@@ -126,8 +131,10 @@ return require('packer').startup(function(use)
     }
 
     -- File manager
-    use 'is0n/fm-nvim'
-
+    use {
+        'is0n/fm-nvim',
+        config = "require('user.fm').config()",
+    }
     -- markdown
     use {
         'iamcco/markdown-preview.nvim',
@@ -138,7 +145,11 @@ return require('packer').startup(function(use)
     }
     use { 'vim-pandoc/vim-pandoc-syntax', ft = 'markdown' } -- markdown 高亮
     use { 'MiuKaShi/bibtexcite.vim', ft = 'markdown' } -- bib 引用
-    use { 'epwalsh/obsidian.nvim', ft = 'markdown' } -- notes
+    use {
+        'epwalsh/obsidian.nvim',
+        ft = 'markdown',
+        config = "require('user.obsidian').config()",
+    } -- notes
     use { 'Avi-D-coder/fzf-wordnet.vim', requires = 'junegunn/fzf.vim', ft = 'markdown' } -- en dict
     -- use {
     --     'nvim-neorg/neorg', -- org 模式
@@ -153,16 +164,30 @@ return require('packer').startup(function(use)
         event = 'InsertEnter',
         config = "require('user.autopairs').config()",
     }
-    use 'kylechui/nvim-surround' -- 修改包围符合
+    use {
+        'kylechui/nvim-surround',
+        config = "require('user.surround').config()",
+    } -- 修改包围符合
     use {
         'stevearc/aerial.nvim',
         module = 'aerial',
         cmd = { 'AerialToggle', 'AerialOpen', 'AerialInfo' },
         config = "require('user.aerial').config()",
     } -- outline
-    use 'numToStr/Comment.nvim' -- comment
-    use 'ggandor/leap.nvim' -- quick move
-    use 'folke/which-key.nvim' -- 快捷键 maps
+    use {
+        'numToStr/Comment.nvim',
+        config = "require('user.comment').config()",
+    } -- comment
+    use {
+        'ggandor/leap.nvim',
+        config = "require('user.leap').config()",
+    } -- quick move
+    use {
+        'folke/which-key.nvim',
+        module = 'which-key',
+        event = 'InsertEnter',
+        config = "require('user.whichkey').config()",
+    } -- whichkey
     use 'h-hg/fcitx.nvim' -- fcitx5 自动切换
     use 'wakatime/vim-wakatime' -- time tracker
     use 'MiuKaShi/vim-gf-list' -- gf 自定义

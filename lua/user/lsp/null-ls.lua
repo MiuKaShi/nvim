@@ -7,7 +7,7 @@ local b = null_ls.builtins
 
 local sources = {
     b.formatting.prettierd.with {
-        filetypes = { 'html', 'json', 'yaml', 'markdown' },
+        filetypes = { 'css', 'json', 'yaml', 'markdown' },
         extra_args = { '--no-semi', '--single-quote', '--jsx-single-quote' },
     },
     -- CMake

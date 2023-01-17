@@ -41,8 +41,13 @@ nmap('<C-h>', '<cmd>bprev<CR>')
 nmap('<C-s>', '<cmd>write<CR>')
 nmap('j', 'gj')
 nmap('k', 'gk')
-nmap('<leader>;;', 'gcc')
-vmap('<leader>;', 'gcc<esc>')
+nmap('gn', ':BufferLineCycleNext<CR>') -- 下一个文件
+nmap('gp', ':BufferLineCyclePrev<CR>') -- 上一个文件
+nmap('<leader>/', ':Telescope live_grep previewer=false <CR>') -- fuzzy_find
+nmap('<leader><Space>', ':Lf<CR>') -- finder
+nmap('<leader>o', ':AerialToggle<CR>') -- Outlines
+nmap('<leader>l', ':call ToggleHiddenAll()<CR>') -- LSP 开关
+nmap('<leader>t', ':Lspsaga open_floaterm<CR>') -- 打开终端
 
 -- command line mode
 cmap('<C-a>', '<Home>')
@@ -50,9 +55,7 @@ cmap('<C-e>', '<End>')
 cmap('<C-h>', '<BS>')
 cmap('<C-k>', '<C-f>D<C-c><C-c>:<Up>')
 
-nmap('gn', ':BufferLineCycleNext<CR>') -- 下一个文件
-nmap('gp', ':BufferLineCyclePrev<CR>') -- 上一个文件
--- End of setup for emacs keybindings
+-- End of setup for keybindings
 
 -- better gx mapping
 local function gmap(mode, lhs, rhs, opts)

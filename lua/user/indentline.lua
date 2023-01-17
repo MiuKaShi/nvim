@@ -13,7 +13,7 @@ vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 function M.config()
     local status_ok, indent_blankline = pcall(require, 'indent_blankline')
     if status_ok then
-        require('indent_blankline').setup {
+        indent_blankline.setup {
             buftype_exclude = {
                 'nofile',
                 'terminal',
