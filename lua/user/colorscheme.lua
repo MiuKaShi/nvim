@@ -1,9 +1,5 @@
-local colorscheme = 'gruvbox'
-local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
-if not status_ok then
-    return
-end
-
+-- Theme
+vim.cmd [[colorscheme gruvbox]]
 -- 透明设置
 vim.g.gruvbox_contrast_dark = 'hard'
 vim.cmd [[

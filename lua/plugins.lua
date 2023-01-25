@@ -47,7 +47,11 @@ return require('packer').startup(function(use)
 
     -- GUI
     require('user.indentline').config()
-    use { 'lukas-reineke/indent-blankline.nvim', event = 'BufRead', config = "require('user.indentline').setup()" } -- Indent
+    use {
+        'lukas-reineke/indent-blankline.nvim',
+        event = { 'BufRead', 'BufNewFile' },
+        config = "require('user.indentline').setup()",
+    } -- Indent
     use {
         'norcalli/nvim-colorizer.lua',
         event = { 'BufRead', 'BufNewFile' },
@@ -153,8 +157,8 @@ return require('packer').startup(function(use)
     use { 'MiuKaShi/bibtexcite.vim', ft = 'markdown' }
     use {
         'epwalsh/obsidian.nvim',
-        ft = 'markdown',
         config = "require('user.obsidian').setup()",
+        ft = 'markdown',
     } -- notes
     use { 'Avi-D-coder/fzf-wordnet.vim', requires = 'junegunn/fzf.vim', ft = 'markdown' } -- en dict
     -- use {

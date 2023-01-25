@@ -1,47 +1,50 @@
-local o = vim.opt
+local opt = vim.opt
 
--- global
-vim.o.clipboard = 'unnamedplus'
-vim.o.cmdheight = 0
-vim.o.shell = 'zsh'
-vim.o.fillchars = 'eob: ,diff: '
-vim.o.grepformat = '%f:%l:%c:%m'
-vim.o.grepprg = 'rg --vimgrep'
-vim.o.laststatus = 0
-vim.o.pumheight = 10
-vim.o.scrolloff = 8 -- Always show at least one line above/below the cursor.
-vim.o.showbreak = '> '
-vim.o.title = true
-vim.o.termguicolors = true
-vim.o.updatetime = 200 -- default updatetime 4000ms is not good for async update (vim/signify)
+-- misc
+opt.clipboard = 'unnamedplus'
+opt.encoding = 'UTF-8'
+opt.shell = 'zsh'
+
+-- UI
+opt.title = true
+opt.relativenumber = true -- Show relative line numbers
+opt.number = true
+opt.colorcolumn = '120'
+opt.cmdheight = 0
+opt.fillchars = { eob = ' ', diff = ' ' }
+opt.laststatus = 0
+opt.pumheight = 10
+opt.scrolloff = 8 -- Always show at least one line above/below the cursor.
+opt.termguicolors = true
+opt.shortmess:append 'c'
+opt.grepformat = '%f:%l:%c:%m'
+opt.grepprg = 'rg --vimgrep'
+-- opt.cursorline = true
+-- opt.signcolumn = "yes"
+-- opt.cursorline              = true -- 高亮当前行
 
 -- opt
-o.encoding = 'UTF-8'
-o.shortmess:append 'c'
-o.whichwrap:append '[,]'
-o.backspace = 'indent,eol,start' -- 使 backspace 按您预期的方式工作
-o.timeoutlen = 500
-o.go = 'a'
-o.mouse = 'a'
-o.showmatch = true
-o.visualbell = true
-o.spellsuggest = 'best,9'
---o.regexpengine = 1
--- o.cursorline              = true -- 高亮当前行
+opt.go = 'a'
+opt.mouse = 'a'
+opt.backspace = 'indent,eol,start' -- 使 backspace 按您预期的方式工作
+opt.showmatch = true
+opt.visualbell = true
+
+-- Spell
+opt.spellsuggest = 'best,9'
 
 -- Completion
-o.completeopt = 'menu,menuone,noselect'
+opt.completeopt = 'menu,menuone,noselect'
 
 -- search
-vim.o.smartcase = true
-vim.o.ignorecase = true
--- vim.o.hlsearch = true -- 保持匹配项目高亮
--- vim.o.incsearch = true -- 搜索时高亮
--- vim.o.copyindent = true
+opt.smartcase = true
+opt.ignorecase = true
+-- opt.hlsearch = true -- 保持匹配项目高亮
+-- opt.incsearch = true -- 搜索时高亮
+-- opt.copyindent = true
 
--- local to buffer
-vim.bo.swapfile = false
--- undofile
+-- State
+opt.swapfile = false
 vim.cmd [[
 set undofile
 set undodir=~/.cache/nvim/undo
@@ -51,21 +54,22 @@ if !isdirectory(&undodir)
 endif
 ]]
 
--- Tabs
-vim.bo.expandtab = true -- Use spaces instead of tabs
-vim.bo.smartindent = true -- Enable smart-indent
-vim.bo.shiftwidth = 2 -- Number of auto-indent spaces
-vim.bo.softtabstop = 2 -- Number of spaces per <Tab> (use value of sw)
-vim.bo.tabstop = 2 -- Ensure files with tabs look the same
+-- Indent
+-- opt.expandtab = false -- Use spaces instead of tabs
+-- opt.smartindent = true -- Enable smart-indent
+opt.shiftwidth = 4 -- Number of auto-indent spaces
+opt.softtabstop = 4 -- Number of spaces per <Tab> (use value of sw)
+opt.tabstop = 4 -- Ensure files with tabs look the same
 
--- local to window
-vim.wo.breakindent = true
-vim.wo.colorcolumn = '120'
-vim.wo.number = true
-vim.wo.linebreak = true
-vim.wo.relativenumber = true -- Show relative line numbers
---vim.wo.cursorline = true
---vim.wo.signcolumn = "yes"
+-- Time
+opt.timeoutlen = 500
+opt.updatetime = 200 -- default updatetime 4000ms is not good for async update (vim/signify)
+
+-- Wrap
+opt.breakindent = true
+opt.linebreak = true
+opt.showbreak = '> '
+opt.whichwrap:append '[,]'
 
 -- Others
 -- 光标回到上次位置

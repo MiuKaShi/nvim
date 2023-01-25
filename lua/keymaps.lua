@@ -48,6 +48,7 @@ nmap('<leader><Space>', ':Lf<CR>') -- finder
 nmap('<leader>o', ':AerialToggle<CR>') -- Outlines
 nmap('<leader>l', ':call ToggleHiddenAll()<CR>') -- LSP 开关
 nmap('<leader>t', ':Lspsaga open_floaterm<CR>') -- 打开终端
+nmap('<leader>nh', ':nohl<CR>') -- disable highlight
 
 -- command line mode
 cmap('<C-a>', '<Home>')
