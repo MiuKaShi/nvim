@@ -168,7 +168,7 @@ return require('packer').startup(function(use)
     --     config = [[require('configs.neorg')]],
     -- }
 
-    -- Utils
+    -- Editor
     use {
         'windwp/nvim-autopairs',
         event = 'InsertEnter',
@@ -189,10 +189,26 @@ return require('packer').startup(function(use)
         'numToStr/Comment.nvim',
         config = "require('user.comment').setup()",
     } -- comment
+    require('user.todo').config()
+    use {
+        'folke/todo-comments.nvim',
+        event = { 'BufRead', 'BufNewFile' },
+        cmd = { 'TodoTelescope' },
+        config = "require('user.todo').setup()",
+    } --Todo
     use {
         'ggandor/leap.nvim',
+        event = 'InsertEnter',
         config = "require('user.leap').setup()",
     } -- quick move
+    use {
+        'sindrets/diffview.nvim',
+        event = 'InsertEnter',
+        cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
+        config = "require('user.diffview').setup()",
+    } -- diffview
+
+    -- Utils
     use {
         'folke/which-key.nvim',
         module = 'which-key',

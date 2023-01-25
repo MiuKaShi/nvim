@@ -131,6 +131,14 @@ function M.setup()
                     "<cmd> lua require('telescope.builtin').git_branches()<CR>",
                     'Show branches(grep)',
                 }, -- git branchs 可过滤
+                d = {
+                    '<cmd>DiffviewOpen<CR>',
+                    'Diff View',
+                }, -- open diff view
+                x = {
+                    '<cmd>DiffviewClose<CR>',
+                    'Close Diff View',
+                }, -- close diff view
             },
             ['e'] = {
                 name = '+Errors',

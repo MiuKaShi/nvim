@@ -32,47 +32,13 @@ lspsaga.setup {
     rename_action_keys = { quit = { 'q', '<ESC>' } },
 }
 
-local function _map(mode, shortcut, command)
-    vim.api.nvim_set_keymap(
-        mode,
-        shortcut,
-        command,
-        { noremap = true, silent = true }
-    )
-end
-
-local function map(shortcut, command)
-    _map('', shortcut, command)
-end
-
-local function nmap(shortcut, command)
-    _map('n', shortcut, command)
-end
-
-local function imap(shortcut, command)
-    _map('i', shortcut, command)
-end
-
-local function vmap(shortcut, command)
-    _map('v', shortcut, command)
-end
-
-local function cmap(shortcut, command)
-    _map('c', shortcut, command)
-end
-
-local function tmap(shortcut, command)
-    _map('t', shortcut, command)
-end
-
 -- lspconfig 服务地址 https://github.com/neovim/nvim-lspconfig
-
-nmap('J', "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>") -- 预览定义
-nmap('K', "<cmd>lua require'lspsaga.hover'.render_hover_doc()<CR>") -- 显示文档定义
-nmap('gr', "<cmd>lua require'lspsaga.rename'.rename()<CR>") -- 重命名变量
-nmap('gs', "<cmd>lua require'lspsaga.signaturehelp').signature_help()<CR>") -- 签名查看
-nmap('gS', "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>") -- 诊断问题
-nmap('gh', "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>") -- 异步查找单词定义、引用
-nmap('<C-n>', "<cmd>lua require'lspsaga.action'.smart_scroll_with_saga(1)<CR>") -- 滚动hover 下
-nmap('<C-p>', "<cmd>lua require'lspsaga.action'.smart_scroll_with_saga(-1)<CR>") -- 滚动hover 上
-tmap('<ESC>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>') -- 关闭终端
+vim.keymap.set('n', 'J', "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>") -- 预览定义
+vim.keymap.set('n', 'K', "<cmd>lua require'lspsaga.hover'.render_hover_doc()<CR>") -- 显示文档定义
+vim.keymap.set('n', 'gr', "<cmd>lua require'lspsaga.rename'.rename()<CR>") -- 重命名变量
+vim.keymap.set('n', 'gs', "<cmd>lua require'lspsaga.signaturehelp').signature_help()<CR>") -- 签名查看
+vim.keymap.set('n', 'gS', "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>") -- 诊断问题
+vim.keymap.set('n', 'gh', "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>") -- 异步查找单词定义、引用
+vim.keymap.set('n', '<C-n>', "<cmd>lua require'lspsaga.action'.smart_scroll_with_saga(1)<CR>") -- 滚动hover 下
+vim.keymap.set('n', '<C-p>', "<cmd>lua require'lspsaga.action'.smart_scroll_with_saga(-1)<CR>") -- 滚动hover 上
+vim.keymap.set('t', '<ESC>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>') -- 关闭终端
