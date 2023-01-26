@@ -6,7 +6,7 @@ function M.setup()
         obsidian.setup {
             dir = '~/notes',
             completion = {
-                nvim_cmp = false, -- if using nvim-cmp, otherwise set to false
+                nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
             },
             notes_subdir = 'day_notes',
             note_id_func = function(title)

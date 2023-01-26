@@ -98,8 +98,7 @@ return require('packer').startup(function(use)
     use { 'luochen1990/rainbow', ft = 'matlab' } -- 补充ts-rainbow不支持的language
 
     -- Completion
-    use { 'rafamadriz/friendly-snippets', event = 'InsertEnter' }
-    use { 'L3MON4D3/LuaSnip', after = 'friendly-snippets' }
+    use { 'L3MON4D3/LuaSnip', event = 'InsertEnter' }
     use { 'hrsh7th/nvim-cmp', after = 'LuaSnip', config = "require('user.cmp').setup()" }
     use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
@@ -144,6 +143,7 @@ return require('packer').startup(function(use)
         'is0n/fm-nvim',
         config = "require('user.fm').setup()",
     }
+
     -- markdown
     require('user.mkdp').config()
     use {
@@ -153,14 +153,13 @@ return require('packer').startup(function(use)
         ft = 'markdown',
     }
     use { 'vim-pandoc/vim-pandoc-syntax', ft = 'markdown' } -- markdown 高亮
-    -- bib 引用
-    require('user.bibtexcite').config()
-    use { 'MiuKaShi/bibtexcite.vim', ft = 'markdown' }
     use {
         'epwalsh/obsidian.nvim',
         config = "require('user.obsidian').setup()",
-        ft = 'markdown',
+        cmd = { 'ObsidianFollowLink', 'ObsidianLink', 'ObsidianLinkNew', 'ObsidianBacklinks', 'ObsidianOpen' },
     } -- notes
+    require('user.bibtexcite').config()
+    use { 'MiuKaShi/bibtexcite.vim', ft = 'markdown' } -- bib 引用
     use { 'Avi-D-coder/fzf-wordnet.vim', requires = 'junegunn/fzf.vim', ft = 'markdown' } -- en dict
     -- use {
     --     'nvim-neorg/neorg', -- org 模式

@@ -4,12 +4,15 @@ function M.setup()
     local cmp_status_ok, cmp = pcall(require, 'cmp')
     local snip_status_ok, luasnip = pcall(require, 'luasnip')
     if cmp_status_ok and snip_status_ok then
+        require('copilot_cmp').setup {}
+        require('luasnip.loaders.from_vscode').lazy_load()
+        require('luasnip.loaders.from_vscode').lazy_load { paths = { '~/.config/nvim/my_snippets' } }
+        require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/my_snippets/lua/' }
+
         local check_backspace = function()
             local col = vim.fn.col '.' - 1
             return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s'
         end
-        require('copilot_cmp').setup {}
-        require('luasnip/loaders/from_vscode').lazy_load()
         local cmp_kinds = {
             Text = '',
             Method = 'm',
@@ -128,11 +131,14 @@ function M.setup()
                 -- {name = 'cmp_octave'}
             },
         }
-        cmp.setup.cmdline({ '/', '?' }, { mapping = cmp.mapping.preset.cmdline(), sources = { { name = 'buffer' } } })
-        cmp.setup.cmdline(
-            ':',
-            { mapping = cmp.mapping.preset.cmdline(), sources = { { name = 'path' }, { name = 'cmdline' } } }
-        )
+        cmp.setup.cmdline(':', {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = { { name = 'path' }, { name = 'cmdline' } },
+        })
+        cmp.setup.cmdline({ '/', '?' }, {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = { { name = 'buffer' } },
+        })
     end
 end
 
