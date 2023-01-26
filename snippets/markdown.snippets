@@ -1,0 +1,74 @@
+# Markdown
+
+
+snippet wikinote
+	---
+	Type: Permanent Note
+	Topic: $1
+	Title: $2
+	Related: $3
+	---
+
+	$4
+
+snippet csnote
+	---
+	Type: Permanent Note
+	Topic: CS
+	Title: $1
+	Related: $2
+	---
+
+	$3
+
+snippet langnote
+	---
+	Type: Permanent Note
+	Topic: Language/$1
+	Title: $2
+	---
+
+	$3
+
+snippet litnote
+	---
+	Type: Literature Note
+	Book: $1
+	Author: $2
+	---
+
+	$4
+
+snippet source
+	Source
+	---
+	$1
+
+snippet related
+	[[./${1:file}]]$2
+
+snippet url
+	[${1:title}](${2:url})$3
+
+snippet img
+	![${1:alttext}](${2:/images/image.jpg})$3
+
+snippet ** "Bold"
+	**$1** $2
+
+snippet _ "Italic"
+	_$1_ $2
+
+snippet Header
+	---
+	$1
+	---
+
+	$2
+
+snippet codeblock
+	\`\`\`${1:language}
+
+	${2:code}
+
+	\`\`\`

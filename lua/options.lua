@@ -2,7 +2,10 @@ local opt = vim.opt
 
 -- misc
 opt.clipboard = 'unnamedplus'
-opt.encoding = 'UTF-8'
+opt.encoding       = 'utf-8'
+opt.fileencoding   = 'utf-8'
+opt.termencoding   = 'utf-8'
+
 opt.shell = 'zsh'
 
 -- UI
@@ -19,6 +22,7 @@ opt.termguicolors = true
 opt.shortmess:append 'c'
 opt.grepformat = '%f:%l:%c:%m'
 opt.grepprg = 'rg --vimgrep'
+opt.syntax = 'on' -- 打开语法高亮
 -- opt.cursorline = true
 -- opt.signcolumn = 'yes:1'
 -- opt.cursorline              = true -- 高亮当前行
@@ -35,24 +39,6 @@ opt.spellsuggest = 'best,9'
 
 -- Completion
 opt.completeopt = 'menu,menuone,noselect'
-
--- search
-opt.smartcase = true
-opt.ignorecase = true
--- opt.hlsearch = true -- 保持匹配项目高亮
--- opt.incsearch = true -- 搜索时高亮
--- opt.copyindent = true
-
--- State
-opt.swapfile = false
-vim.cmd [[
-set undofile
-set undodir=~/.cache/nvim/undo
-set viminfo=!,'10000,<50,s10,h
-if !isdirectory(&undodir)
-  call mkdir(&undodir, 'p')
-endif
-]]
 
 -- Indent
 -- opt.expandtab = false -- Use spaces instead of tabs
@@ -71,14 +57,33 @@ opt.linebreak = true
 opt.showbreak = '> '
 opt.whichwrap:append '[,]'
 
+
+-- search
+opt.smartcase = true
+opt.ignorecase = true
+-- opt.hlsearch = true -- 保持匹配项目高亮
+-- opt.incsearch = true -- 搜索时高亮
+-- opt.copyindent = true
+
+-- HISTORY
+opt.swapfile       = false
+opt.backup         = false
+opt.undofile       = true
+opt.undolevels     = 10000
+vim.cmd [[
+set undodir=~/.cache/nvim/undo
+if !isdirectory(&undodir)
+  call mkdir(&undodir, 'p')
+endif
+]]
+
 -- Others
+vim.g.GfList_map_n_gf = 'gf' -- gf 自定义
+vim.g.GfList_map_v_gf = 'gf'
 -- 光标回到上次位置
-vim.cmd 'syntax on' -- 打开语法高亮
 vim.cmd [[ 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
 ]]
-vim.g.GfList_map_n_gf = 'gf' -- gf 自定义
-vim.g.GfList_map_v_gf = 'gf'
 vim.cmd [[
 let g:gtfo#terminals = { 'unix': 'st -e nvim' }
 ]]
@@ -99,4 +104,5 @@ autocmd BufRead,BufNewFile *tridactylrc set filetype=tridactyl
 autocmd BufRead,BufNewFile *.pyx set filetype=cython
 autocmd BufRead,BufNewFile *.pxd set filetype=cython
 autocmd BufRead,BufNewFile *.pxi set filetype=cython
+autocmd BufRead,BufNewFile *.snippets set filetype=snippets
 ]]

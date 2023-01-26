@@ -5,9 +5,7 @@ function M.setup()
     local snip_status_ok, luasnip = pcall(require, 'luasnip')
     if cmp_status_ok and snip_status_ok then
         require('copilot_cmp').setup {}
-        require('luasnip.loaders.from_vscode').lazy_load()
-        require('luasnip.loaders.from_vscode').lazy_load { paths = { '~/.config/nvim/my_snippets' } }
-        require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/my_snippets/lua/' }
+        require('luasnip.loaders.from_snipmate').lazy_load() --Snipmate like snippets
 
         local check_backspace = function()
             local col = vim.fn.col '.' - 1
