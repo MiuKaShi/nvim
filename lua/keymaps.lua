@@ -49,10 +49,10 @@ nmap('<leader>o', ':AerialToggle<CR>') -- Outlines
 nmap('<leader>l', ':call ToggleHiddenAll()<CR>') -- LSP 开关
 nmap('<leader>t', ':Lspsaga open_floaterm<CR>') -- 打开终端
 nmap('<leader>nh', ':nohl<CR>') -- disable highlight
-nmap(']l', ':ObsidianFollowLink<CR>') -- follow link
-nmap('[l', ':ObsidianBacklinks<CR>') -- back link 
-nmap('lo', ':ObsidianOpen<CR>') -- link open
 
+-- nmap(']l', ':ObsidianFollowLink<CR>') -- follow link
+-- nmap('[l', ':ObsidianBacklinks<CR>') -- back link
+-- nmap('lo', ':ObsidianOpen<CR>') -- link open
 
 -- command line mode
 cmap('<C-a>', '<Home>')

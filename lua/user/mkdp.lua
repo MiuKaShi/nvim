@@ -6,6 +6,7 @@ function! g:Open_browser(url)
     silent exec "!qutebrowser --target window " . a:url . " &"
 endfunction
 ]]
+
     vim.g.mkdp_browserfunc = 'g:Open_browser'
     vim.g.mkdp_markdown_css = '/home/miuka/.config/nvim/customStyle.css'
     vim.g.mkdp_highlight_css = '/home/miuka/.cache/wal/colors'

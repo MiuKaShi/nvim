@@ -145,22 +145,39 @@ return require('packer').startup(function(use)
     }
 
     -- markdown
+    use 'vim-pandoc/vim-pandoc-syntax' -- markdown 高亮
     require('user.mkdp').config()
     use {
         'iamcco/markdown-preview.nvim',
         run = 'cd app && npm install',
-        cmd = 'MarkdownPreview',
-        ft = 'markdown',
+        setup = function()
+            vim.g.mkdp_filetypes = { 'markdown.pandoc' }
+        end,
+        ft = { 'markdown.pandoc' },
     }
-    use { 'vim-pandoc/vim-pandoc-syntax', ft = 'markdown' } -- markdown 高亮
+
+    require('user.obsidian').config()
     use {
         'epwalsh/obsidian.nvim',
         config = "require('user.obsidian').setup()",
-        cmd = { 'ObsidianFollowLink', 'ObsidianLink', 'ObsidianLinkNew', 'ObsidianBacklinks', 'ObsidianOpen' },
+        cmd = {
+            'ObsidianFollowLink',
+            'ObsidianLink',
+            'ObsidianLinkNew',
+            'ObsidianQuickSwitch',
+            'ObsidianSearch',
+            'ObsidianBacklinks',
+            'ObsidianOpen',
+            'ObsidianNew',
+            'ObsidianLinkNew',
+        },
     } -- notes
     require('user.bibtexcite').config()
-    use { 'MiuKaShi/bibtexcite.vim', ft = 'markdown' } -- bib 引用
-    use { 'Avi-D-coder/fzf-wordnet.vim', requires = 'junegunn/fzf.vim', ft = 'markdown' } -- en dict
+    use {
+        'MiuKaShi/bibtexcite.vim',
+        cmd = { 'BibtexciteInsert', 'BibtexciteShowcite', 'BibtexciteOpenfile' },
+    } -- bib 引用
+    use { 'Avi-D-coder/fzf-wordnet.vim', requires = 'junegunn/fzf.vim', ft = 'markdown.pandoc' } -- en dict
     -- use {
     --     'nvim-neorg/neorg', -- org 模式
     --     tag = '0.0.11',
