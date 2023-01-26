@@ -4,41 +4,50 @@ if not status_ok then
 end
 
 lspsaga.setup {
-    error_sign = '🔥',
-    warn_sign = '💩',
-    hint_sign = '💡',
-    infor_sign = '💬',
-    diagnostic_header_icon = ' ',
-    -- 正在写入的行提示
-    code_action_icon = ' ',
-    finder_action_keys = {
-        open = '<CR>',
-        vsplit = 's',
-        split = 'o',
-        quit = '<Esc>',
-        scroll_down = '<C-f>',
-        scroll_up = '<C-b>',
-    },
-    code_action_prompt = {
-        -- 显示写入行提示
-        -- 如果为 true ，则写代码时会在左侧行号栏中显示你所定义的图标
+    symbol_in_winbar = {
         enable = false,
-        sign = true,
+    },
+    lightbulb = {
+        enable = true,
+        enable_in_insert = true,
+        sign = false,
         sign_priority = 40,
         virtual_text = true,
     },
-    -- 快捷键配置
-    code_action_keys = { quit = { 'q', '<ESC>' } },
-    rename_action_keys = { quit = { 'q', '<ESC>' } },
+    ui = {
+        theme = 'round',
+        title = false,
+        winblend = 0,
+        border = 'single',
+        expand = '',
+        collapse = '',
+        preview = '💬',
+        code_action = '💡',
+        diagnostic = '🔥',
+        incoming = ' ',
+        outgoing = ' ',
+        colors = {
+            normal_bg = 'none',
+            title_bg = 'none',
+            red = '#ff757f',
+            magenta = '#c099ff',
+            orange = '#ff966c',
+            yellow = '#ffc777',
+            green = '#c3e88d',
+            cyan = '#86e1fc',
+            blue = '#82aaff',
+            purple = '#fca7ea',
+            white = '#d1d4cf',
+            black = '#1e2030',
+        },
+    },
 }
-
--- lspconfig 服务地址 https://github.com/neovim/nvim-lspconfig
-vim.keymap.set('n', 'J', "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>") -- 预览定义
-vim.keymap.set('n', 'K', "<cmd>lua require'lspsaga.hover'.render_hover_doc()<CR>") -- 显示文档定义
-vim.keymap.set('n', 'gr', "<cmd>lua require'lspsaga.rename'.rename()<CR>") -- 重命名变量
-vim.keymap.set('n', 'gs', "<cmd>lua require'lspsaga.signaturehelp').signature_help()<CR>") -- 签名查看
-vim.keymap.set('n', 'gS', "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>") -- 诊断问题
-vim.keymap.set('n', 'gh', "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>") -- 异步查找单词定义、引用
-vim.keymap.set('n', '<C-n>', "<cmd>lua require'lspsaga.action'.smart_scroll_with_saga(1)<CR>") -- 滚动hover 下
-vim.keymap.set('n', '<C-p>', "<cmd>lua require'lspsaga.action'.smart_scroll_with_saga(-1)<CR>") -- 滚动hover 上
-vim.keymap.set('t', '<ESC>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>') -- 关闭终端
+local keymap = vim.keymap.set
+keymap('n', 'J', '<cmd>Lspsaga peek_definition<CR>') -- 预览定义
+keymap('n', 'K', '<cmd>Lspsaga hover_doc<CR>') -- 显示文档定义
+keymap('n', 'gr', '<cmd>Lspsaga rename<CR>') -- 重命名变量
+keymap('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>') -- 诊断问题
+keymap('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>') -- 查找变量名
+keymap({ 'n', 'v' }, '<leader>ca', '<cmd>Lspsaga code_action<CR>')
+keymap('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>') -- 滚动hover 上
+keymap('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<CR>') -- 滚动hover 下

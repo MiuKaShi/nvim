@@ -21,10 +21,14 @@ function M.setup()
             'toml',
             'yaml',
             'julia',
+            'markdown',
         }
         treesitter.setup {
             ensure_installed = langs,
-            highlight = { enable = true, additional_vim_regex_highlighting = false },
+            highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = { 'markdown' },
+            },
             context_commentstring = { enable = true, enable_autocmd = false },
             autopairs = { enable = true },
             incremental_selection = { enable = true },

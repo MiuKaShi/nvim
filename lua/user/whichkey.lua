@@ -121,15 +121,13 @@ function M.setup()
             },
             ['g'] = {
                 name = '+Git',
-                s = { ':Magit<CR>', 'Magit status, see: vimagit' }, -- git状态显示
-                g = { ':Flog<CR>', 'Show git commit graph' }, -- git图像显示
                 c = {
                     "<cmd> lua require('telescope.builtin').git_commits()<CR>",
-                    'Show commits(grep)',
+                    'Show commits',
                 }, -- git commits 可过滤
                 b = {
                     "<cmd> lua require('telescope.builtin').git_branches()<CR>",
-                    'Show branches(grep)',
+                    'Show branches',
                 }, -- git branchs 可过滤
                 d = {
                     '<cmd>DiffviewOpen<CR>',
@@ -148,11 +146,11 @@ function M.setup()
                 },
                 k = {
                     '<cmd>lua vim.diagnostic.goto_prev()<CR>',
-                    'lspsaga.diagnostic PREV',
+                    'diagnostic PREV',
                 },
                 j = {
                     '<cmd>lua vim.diagnostic.goto_next()<CR>',
-                    'lspsaga.diagnostic NEXT',
+                    'diagnostic NEXT',
                 },
                 f = { '<cmd>lua vim.lsp.buf.code_action()<CR>', 'Fix error' },
             },
