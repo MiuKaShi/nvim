@@ -20,7 +20,7 @@ opt.shortmess:append 'c'
 opt.grepformat = '%f:%l:%c:%m'
 opt.grepprg = 'rg --vimgrep'
 -- opt.cursorline = true
--- opt.signcolumn = "yes"
+-- opt.signcolumn = 'yes:1'
 -- opt.cursorline              = true -- 高亮当前行
 
 -- opt
