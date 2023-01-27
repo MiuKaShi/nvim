@@ -64,10 +64,16 @@ return require('packer').startup(function(use)
     } -- 底部状态栏
     -- LSP
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
-    -- use 'tami5/lspsaga.nvim' -- LSP UI
     use 'glepnir/lspsaga.nvim' -- LSP UI
     use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
     use 'folke/neodev.nvim' -- lua 语法提示 for lsp
+
+    require('user.trouble').config()
+    use {
+        'folke/trouble.nvim',
+        config = "require('user.trouble').setup()",
+        cmd = { 'TroubleToggle', 'Trouble' },
+    } -- trouble
 
     -- Format
     require('user.neoformat').config()
@@ -108,6 +114,7 @@ return require('packer').startup(function(use)
     use { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' }
     use { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' }
     use { 'mstanciu552/cmp-matlab', after = 'nvim-cmp' }
+
     use {
         'windwp/nvim-autopairs',
         after = 'nvim-cmp',
@@ -130,8 +137,7 @@ return require('packer').startup(function(use)
     --     'tzachar/cmp-tabnine',
     --     run = './install.sh',
     -- }
-    --
-
+	--
     -- Icons
     use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', config = "require('user.icons').setup()" }
 

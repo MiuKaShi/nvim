@@ -129,22 +129,6 @@ function M.setup()
                     'Close Diff View',
                 }, -- close diff view
             },
-            ['e'] = {
-                name = '+Errors',
-                a = {
-                    "<cmd>lua require('telescope.builtin').diagnostics{ bufnr=0 }<CR>",
-                    'List all errors',
-                },
-                k = {
-                    '<cmd>lua vim.diagnostic.goto_prev()<CR>',
-                    'diagnostic PREV',
-                },
-                j = {
-                    '<cmd>lua vim.diagnostic.goto_next()<CR>',
-                    'diagnostic NEXT',
-                },
-                f = { '<cmd>lua vim.lsp.buf.code_action()<CR>', 'Fix error' },
-            },
             ['c'] = {
                 name = '+Compiler',
                 c = { ':!compiler <c-r>%<CR><CR>', 'Compiler files' },

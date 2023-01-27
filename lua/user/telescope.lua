@@ -20,7 +20,7 @@ function M.setup()
                 selection_caret = ' ',
                 path_display = { 'absolute' },
                 set_env = { ['COLORTERM'] = 'truecolor' },
-                file_ignore_patterns = { '%.jpeg$', '%.jpg$', '%.png$', '%.pdf$' },
+                file_ignore_patterns = { '%.jpeg$', '%.jpg$', '%.png$', '%.pdf$', '.git/', '%_cache', 'node_modules' },
                 mappings = {
                     i = {
                         ['<C-a>'] = { '<esc>0i', type = 'command' },
@@ -31,7 +31,22 @@ function M.setup()
             pickers = {
                 buffers = { theme = 'dropdown', sort_lastused = true, previewer = false },
                 current_buffer_fuzzy_find = { previewer = false },
-                find_files = { theme = 'ivy', follow = true },
+                find_files = {
+                    theme = 'ivy',
+                    follow = true,
+                    hidden = true,
+                    find_command = {
+                        'rg',
+                        '--no-ignore',
+                        '--files',
+                        '--hidden',
+                        '--glob',
+                        '!.git/*',
+                        '--glob',
+                        '!**/.Rproj.user/*',
+                        '-L',
+                    },
+                },
                 grep_string = { path_display = { 'shorten' } },
                 live_grep = { path_display = { 'shorten' } },
             },
