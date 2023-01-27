@@ -3,13 +3,14 @@ local M = {}
 function M.config()
     vim.cmd [[
 function! g:Open_browser(url)
-    silent exec "!qutebrowser --target window " . a:url . " &"
+    execute "silent" "!surf" a:url "&"
 endfunction
 ]]
+    -- silent exec "!qutebrowser --target window " . a:url . " &"
 
     vim.g.mkdp_browserfunc = 'g:Open_browser'
-    vim.g.mkdp_markdown_css = '/home/miuka/.config/nvim/customStyle.css'
-    vim.g.mkdp_highlight_css = '/home/miuka/.cache/wal/colors'
+    vim.g.mkdp_markdown_css = '/home/miuka/.config/nvim/markdown.css'
+    -- vim.g.mkdp_highlight_css = '/home/miuka/.cache/wal/colors'
     vim.g.mkdp_page_title = '${name}.md'
     vim.g.mkdp_preview_options = {
         mkit = {},
