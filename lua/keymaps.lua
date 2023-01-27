@@ -50,6 +50,9 @@ nmap('<leader>l', ':call ToggleHiddenAll()<CR>') -- LSP 开关
 nmap('<leader>t', ':Lspsaga open_floaterm<CR>') -- 打开终端
 nmap('<leader>nh', ':nohl<CR>') -- disable highlight
 
+nmap('<leader>a', ':EasyAlign<CR>') -- EasyAlign
+vmap('<leader>a', ':EasyAlign<CR>') -- EasyAlign
+
 -- nmap(']l', ':ObsidianFollowLink<CR>') -- follow link
 -- nmap('[l', ':ObsidianBacklinks<CR>') -- back link
 -- nmap('lo', ':ObsidianOpen<CR>') -- link open

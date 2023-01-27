@@ -71,14 +71,12 @@ return require('packer').startup(function(use)
 
     -- Format
     require('user.neoformat').config()
-    use 'sbdchd/neoformat'
+    use { 'sbdchd/neoformat', cmd = 'Neoformat' }
+
     require('user.easyalign').config()
-    use { 'junegunn/vim-easy-align', event = 'CursorHold' }
+    use { 'junegunn/vim-easy-align', opt = true, cmd = 'EasyAlign' }
 
     -- Syntax
-    require('user.rainbow').config()
-    use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
-    use { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' }
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -95,6 +93,9 @@ return require('packer').startup(function(use)
         },
         config = "require('user.treesitter').setup()",
     }
+    require('user.rainbow').config()
+    use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
+    use { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' }
     use { 'luochen1990/rainbow', ft = 'matlab' } -- 补充ts-rainbow不支持的language
 
     -- Completion
@@ -111,9 +112,10 @@ return require('packer').startup(function(use)
     -- AI Completion
     use {
         'zbirenbaum/copilot.lua',
+        event = 'InsertEnter',
         config = "require('user.copilot').setup()",
     }
-    use 'zbirenbaum/copilot-cmp'
+    use { 'zbirenbaum/copilot-cmp', module = 'copilot_cmp' }
     -- use {
     --     'tzachar/cmp-tabnine',
     --     run = './install.sh',
@@ -142,10 +144,11 @@ return require('packer').startup(function(use)
     use {
         'is0n/fm-nvim',
         config = "require('user.fm').setup()",
+        cmd = 'Lf',
     }
 
     -- markdown
-    use 'vim-pandoc/vim-pandoc-syntax' -- markdown 高亮
+    use { 'vim-pandoc/vim-pandoc-syntax', ft = 'markdown.pandoc' } -- markdown 高亮
     require('user.mkdp').config()
     use {
         'iamcco/markdown-preview.nvim',
@@ -177,7 +180,7 @@ return require('packer').startup(function(use)
         'MiuKaShi/bibtexcite.vim',
         cmd = { 'BibtexciteInsert', 'BibtexciteShowcite', 'BibtexciteOpenfile' },
     } -- bib 引用
-    use { 'Avi-D-coder/fzf-wordnet.vim', requires = 'junegunn/fzf.vim', ft = 'markdown.pandoc' } -- en dict
+    use { 'Avi-D-coder/fzf-wordnet.vim', requires = 'junegunn/fzf.vim', event = 'InsertEnter' } -- en dict
     -- use {
     --     'nvim-neorg/neorg', -- org 模式
     --     tag = '0.0.11',
@@ -205,6 +208,7 @@ return require('packer').startup(function(use)
     use {
         'numToStr/Comment.nvim',
         config = "require('user.comment').setup()",
+        event = { 'BufRead', 'BufNewFile' },
     } -- comment
     require('user.todo').config()
     use {
@@ -232,11 +236,11 @@ return require('packer').startup(function(use)
         event = 'InsertEnter',
         config = "require('user.whichkey').setup()",
     } -- whichkey
-    use 'h-hg/fcitx.nvim' -- fcitx5 自动切换
-    use 'wakatime/vim-wakatime' -- time tracker
+    use { 'h-hg/fcitx.nvim', event = 'InsertEnter' } -- fcitx5 自动切换
+    use { 'wakatime/vim-wakatime', event = 'InsertEnter' } -- time tracker
     use 'MiuKaShi/vim-gf-list' -- gf 自定义
     use 'justinmk/vim-gtfo' -- gf打开文件
-    use 'skywind3000/asyncrun.vim' -- 异步运行
+    use { 'skywind3000/asyncrun.vim', cmd = 'AsyncRun' } -- 异步运行
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
