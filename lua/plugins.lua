@@ -98,7 +98,7 @@ return require('packer').startup(function(use)
     use { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' }
     use { 'luochen1990/rainbow', ft = 'matlab' } -- 补充ts-rainbow不支持的language
 
-    -- Completion
+    -- CMP&Editor
     use { 'L3MON4D3/LuaSnip', event = 'InsertEnter' }
     use { 'hrsh7th/nvim-cmp', after = 'LuaSnip', config = "require('user.cmp').setup()" }
     use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
@@ -108,6 +108,16 @@ return require('packer').startup(function(use)
     use { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' }
     use { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' }
     use { 'mstanciu552/cmp-matlab', after = 'nvim-cmp' }
+    use {
+        'windwp/nvim-autopairs',
+        after = 'nvim-cmp',
+        config = "require('user.autopairs').setup()",
+    }
+    use {
+        'kylechui/nvim-surround',
+        after = 'nvim-cmp',
+        config = "require('user.surround').setup()",
+    } -- 修改包围符合
 
     -- AI Completion
     use {
@@ -189,15 +199,6 @@ return require('packer').startup(function(use)
     -- }
 
     -- Editor
-    use {
-        'windwp/nvim-autopairs',
-        event = 'InsertEnter',
-        config = "require('user.autopairs').setup()",
-    }
-    use {
-        'kylechui/nvim-surround',
-        config = "require('user.surround').setup()",
-    } -- 修改包围符合
     use {
         'stevearc/aerial.nvim',
         module = 'aerial',
