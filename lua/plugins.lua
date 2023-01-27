@@ -137,7 +137,7 @@ return require('packer').startup(function(use)
     --     'tzachar/cmp-tabnine',
     --     run = './install.sh',
     -- }
-	--
+    --
     -- Icons
     use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', config = "require('user.icons').setup()" }
 
@@ -231,18 +231,11 @@ return require('packer').startup(function(use)
     } -- quick move
     use {
         'sindrets/diffview.nvim',
-        event = 'InsertEnter',
         cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
         config = "require('user.diffview').setup()",
     } -- diffview
 
     -- Utils
-    use {
-        'folke/which-key.nvim',
-        module = 'which-key',
-        event = 'InsertEnter',
-        config = "require('user.whichkey').setup()",
-    } -- whichkey
     use { 'h-hg/fcitx.nvim', event = 'InsertEnter' } -- fcitx5 自动切换
     use { 'wakatime/vim-wakatime', event = 'InsertEnter' } -- time tracker
     use 'MiuKaShi/vim-gf-list' -- gf 自定义
