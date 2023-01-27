@@ -48,8 +48,8 @@ nmap('<leader><Space>', ':Lf<CR>') -- finder
 nmap('<leader>/', ':Telescope live_grep previewer=false <CR>') -- fuzzy_find
 nmap('<leader>i', '<cmd>setlocal spell! spelllang=en_us<CR>') -- spell check
 nmap('<leader>o', ':AerialToggle<CR>') -- Outlines
-nmap('<leader>l', ':call ToggleHiddenAll()<CR>') -- LSP 开关
-nmap('<leader>t', ':Lspsaga open_floaterm<CR>') -- 打开终端
+nmap('<leader>.', ':call ToggleHiddenAll()<CR>') -- LSP 开关  
+nmap('<leader>t', ':Lspsaga open_floaterm<CR>') -- 打开终端 
 
 nmap('<leader>nh', ':nohl<CR>') -- disable highlight
 nmap('<leader>ss', '<cmd>w ! sudo tee > /dev/null %<CR>') -- force save files

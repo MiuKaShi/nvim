@@ -1,11 +1,10 @@
 local M = {}
 
 function M.config()
-    local keymap = vim.keymap.set
-    keymap('n', ']l', '<cmd>ObsidianFollowLink<CR>')
-    keymap('n', '[l', '<cmd>ObsidianBacklinks<CR>')
-    keymap('n', 'lo', '<cmd>ObsidianOpen<CR>')
-    keymap('n', 'ls', '<cmd>ObsidianSearch<CR>')
+    vim.keymap.set('n', '<leader>nj', '<cmd>ObsidianFollowLink<CR>')
+    vim.keymap.set('n', '<leader>nk', '<cmd>ObsidianBacklinks<CR>')
+    vim.keymap.set('n', '<leader>no', '<cmd>ObsidianOpen<CR>')
+    vim.keymap.set('n', '<leader>ns', '<cmd>ObsidianSearch<CR>')
 end
 
 function M.setup()
