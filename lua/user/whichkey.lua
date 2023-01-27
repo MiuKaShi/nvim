@@ -86,9 +86,6 @@ function M.setup()
                 n = { ':BufferLineCycleNext<CR>', 'Next buffer' },
                 p = { ':BufferLineCyclePrev<CR>', 'Previous buffer' },
                 d = { ':bw<CR>', 'Delete buffer' },
-                c = { '<cmd>BibtexciteInsert<CR>', 'Bib citation insert' },
-                v = { '<cmd>BibtexciteShowcite<CR>', 'Bib citation view' },
-                o = { '<cmd>BibtexciteOpenfile<CR>', 'Bib Open pdf' },
             },
             ['p'] = {
                 name = '+Projects',
@@ -108,16 +105,10 @@ function M.setup()
             },
             ['j'] = {
                 name = '+Jump',
-                j = { '<Plug>(easymotion-s)', 'Jump to char' },
-                l = { '<Plug>(easymotion-bd-jk)', 'Jump to line' },
                 i = {
                     "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>",
                     'Jump to symbol',
                 },
-            },
-            ['s'] = {
-                name = '+Save/Symbols',
-                s = { '<cmd>w ! sudo tee > /dev/null %<CR>', 'Force save file' },
             },
             ['g'] = {
                 name = '+Git',
@@ -157,10 +148,8 @@ function M.setup()
             ['c'] = {
                 name = '+Compiler',
                 c = { ':!compiler <c-r>%<CR><CR>', 'Compiler files' },
-                p = { ':silent !st autoprev <c-r>%<CR><CR>', 'Preivew files' },
-                m = { ':MarkdownPreviewToggle <CR>', 'Markdown Preivew' },
+                p = { ':silent !st autoprev <c-r>%<CR><CR>', 'Compiler and preivew files' },
             },
-            i = { ':setlocal spell! spelllang=en_us<CR>', 'Spell Check Toggle' }, -- Spell check
             ['!'] = {
                 ':Telescope help_tags theme=ivy<CR>',
                 'Help commands by fuzzy search',

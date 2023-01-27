@@ -42,12 +42,11 @@ lspsaga.setup {
         },
     },
 }
-local keymap = vim.keymap.set
-keymap('n', 'J', '<cmd>Lspsaga peek_definition<CR>') -- 预览定义
-keymap('n', 'K', '<cmd>Lspsaga hover_doc<CR>') -- 显示文档定义
-keymap('n', 'gr', '<cmd>Lspsaga rename<CR>') -- 重命名变量
-keymap('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>') -- 诊断问题
-keymap('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>') -- 查找变量名
-keymap({ 'n', 'v' }, '<leader>ca', '<cmd>Lspsaga code_action<CR>')
-keymap('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>') -- 滚动hover 上
-keymap('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<CR>') -- 滚动hover 下
+vim.keymap.set('n', 'J', '<cmd>Lspsaga peek_definition<CR>') -- 预览定义
+vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>') -- 显示文档定义
+vim.keymap.set('n', 'gr', '<cmd>Lspsaga rename<CR>') -- 重命名变量
+vim.keymap.set('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>') -- 诊断问题
+vim.keymap.set('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>') -- 查找变量名
+vim.keymap.set({ 'n', 'v' }, '<leader>ca', '<cmd>Lspsaga code_action<CR>')
+vim.keymap.set('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>') -- 滚动hover 上
+vim.keymap.set('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<CR>') -- 滚动hover 下

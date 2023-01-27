@@ -43,19 +43,16 @@ nmap('j', 'gj')
 nmap('k', 'gk')
 nmap('gn', ':BufferLineCycleNext<CR>') -- 下一个文件
 nmap('gp', ':BufferLineCyclePrev<CR>') -- 上一个文件
-nmap('<leader>/', ':Telescope live_grep previewer=false <CR>') -- fuzzy_find
+
 nmap('<leader><Space>', ':Lf<CR>') -- finder
+nmap('<leader>/', ':Telescope live_grep previewer=false <CR>') -- fuzzy_find
+nmap('<leader>i', '<cmd>setlocal spell! spelllang=en_us<CR>') -- spell check
 nmap('<leader>o', ':AerialToggle<CR>') -- Outlines
 nmap('<leader>l', ':call ToggleHiddenAll()<CR>') -- LSP 开关
 nmap('<leader>t', ':Lspsaga open_floaterm<CR>') -- 打开终端
+
 nmap('<leader>nh', ':nohl<CR>') -- disable highlight
-
-nmap('<leader>a', ':EasyAlign<CR>') -- EasyAlign
-vmap('<leader>a', ':EasyAlign<CR>') -- EasyAlign
-
--- nmap(']l', ':ObsidianFollowLink<CR>') -- follow link
--- nmap('[l', ':ObsidianBacklinks<CR>') -- back link
--- nmap('lo', ':ObsidianOpen<CR>') -- link open
+nmap('<leader>ss', '<cmd>w ! sudo tee > /dev/null %<CR>') -- force save files
 
 -- command line mode
 cmap('<C-a>', '<Home>')

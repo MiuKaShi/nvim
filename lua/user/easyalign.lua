@@ -106,6 +106,9 @@ function M.config()
         },
     }
     vim.g.easy_align_bypass_fold = 1
+
+    vim.keymap.set('n', '<leader>a', '<cmd>EasyAlign<CR>')
+    vim.keymap.set('v', '<leader>a', '<cmd>EasyAlign<CR>')
 end
 
 return M

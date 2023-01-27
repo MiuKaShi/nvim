@@ -25,6 +25,7 @@ endfunction
     }
     -- set default theme (dark or light)
     -- vim.g.mkdp_theme = 'dark'
+    vim.keymap.set('n', '<leader>pp', '<cmd>MarkdownPreviewToggle<CR>') -- 预览
 end
 
 return M
