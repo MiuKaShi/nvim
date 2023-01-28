@@ -64,7 +64,7 @@ return require('packer').startup(function(use)
     } -- 底部状态栏
     -- LSP
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
-    use { 'glepnir/lspsaga.nvim', commit = '842bdddcd34ddff370aa71984370b9cc6dfba6ef' } -- LSP UI
+    use 'glepnir/lspsaga.nvim' -- LSP UI
     use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
     use 'folke/neodev.nvim' -- lua 语法提示 for lsp
 
