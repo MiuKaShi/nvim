@@ -85,12 +85,13 @@ function M.setup()
         end, { desc = 'Recent Files' })
 
         vim.keymap.set('n', '<leader>fl', tb.lsp_document_symbols, { desc = 'LSP search' })
-        vim.keymap.set('n', '<C-f>', tb.current_buffer_fuzzy_find, { desc = 'Search current buffer' })
         vim.keymap.set('n', '<leader>fw', tb.grep_string, { desc = 'Find cursor word' })
         vim.keymap.set('n', '<leader>ff', tb.find_files, { desc = 'Find Files' })
         vim.keymap.set('n', '<leader>fm', tb.builtin, { desc = 'Telescope Meta' })
         vim.keymap.set('n', '<leader>fh', tb.help_tags, { desc = 'Help Tags' })
-        vim.keymap.set('n', '<leader>fb', tb.buffers, { desc = 'buffer list' })
+
+        vim.keymap.set('n', '<C-f>', tb.current_buffer_fuzzy_find, { desc = 'Search current buffer' })
+        vim.keymap.set('n', '<leader>bl', tb.buffers, { desc = 'buffer list' })
 
         vim.keymap.set('n', '<leader>gc', tb.git_commits, { desc = 'git commits' })
         vim.keymap.set('n', '<leader>gb', tb.git_branches, { desc = 'git branches' })

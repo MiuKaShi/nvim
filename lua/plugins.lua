@@ -64,7 +64,7 @@ return require('packer').startup(function(use)
     } -- 底部状态栏
     -- LSP
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
-    use 'glepnir/lspsaga.nvim' -- LSP UI
+    use { 'glepnir/lspsaga.nvim', commit = '842bdddcd34ddff370aa71984370b9cc6dfba6ef' } -- LSP UI
     use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
     use 'folke/neodev.nvim' -- lua 语法提示 for lsp
 
@@ -239,8 +239,7 @@ return require('packer').startup(function(use)
     use { 'h-hg/fcitx.nvim', event = 'InsertEnter' } -- fcitx5 自动切换
     use { 'wakatime/vim-wakatime', event = 'InsertEnter' } -- time tracker
     use 'MiuKaShi/vim-gf-list' -- gf 自定义
-    use 'justinmk/vim-gtfo' -- gf打开文件
-    use { 'skywind3000/asyncrun.vim', cmd = 'AsyncRun' } -- 异步运行
+    -- use { 'skywind3000/asyncrun.vim', cmd = 'AsyncRun' } -- 异步运行
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

@@ -41,8 +41,6 @@ nmap('<C-h>', '<cmd>bprev<CR>')
 nmap('<C-s>', '<cmd>write<CR>')
 nmap('j', 'gj')
 nmap('k', 'gk')
-nmap('gn', ':BufferLineCycleNext<CR>') -- 下一个文件
-nmap('gp', ':BufferLineCyclePrev<CR>') -- 上一个文件
 
 nmap('<leader><Space>', ':Lf<CR>') -- finder
 nmap('<leader>/', ':Telescope live_grep previewer=false <CR>') -- fuzzy_find
@@ -54,9 +52,9 @@ nmap('<leader>t', ':Lspsaga open_floaterm<CR>') -- 打开终端
 nmap('<leader>nh', ':nohl<CR>') -- disable highlight
 nmap('<leader>ss', '<cmd>w ! sudo tee > /dev/null %<CR>') -- force save files
 
-nmap('<leader>bn', ':BufferLineCycleNext<CR>')
-nmap('<leader>bp', ':BufferLineCyclePrev<CR>')
-nmap('<leader>bd', ':bw<CR>')
+-- nmap('<leader>bn', ':BufferLineCycleNext<CR>')
+-- nmap('<leader>bp', ':BufferLineCyclePrev<CR>')
+-- nmap('<leader>bd', ':bw<CR>')
 
 nmap('<leader>gd', '<cmd>DiffviewOpen<CR>')
 nmap('<leader>gx', '<cmd>DiffviewClose<CR>')

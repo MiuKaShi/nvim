@@ -78,15 +78,12 @@ endif
 ]]
 
 -- Others
-vim.g.GfList_map_n_gf = 'gf' -- gf 自定义
-vim.g.GfList_map_v_gf = 'gf'
 -- 光标回到上次位置
 vim.cmd [[ 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
 ]]
-vim.cmd [[
-let g:gtfo#terminals = { 'unix': 'st -e nvim' }
-]]
+vim.g.GfList_map_n_gf = 'gf' -- gf 自定义
+vim.g.GfList_map_v_gf = 'gf'
 vim.cmd [[
 let g:fzf_wordnet_preview_arg = ''
 ]]
