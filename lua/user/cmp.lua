@@ -124,11 +124,19 @@ function M.setup()
                     },
                 },
                 { name = 'rg', keyword_length = 4, max_item_count = 10, priority = 1 },
-                { name = 'cmp_matlab' },
                 -- { name = 'cmp_tabnine' },
                 -- {name = 'cmp_octave'}
             },
         }
+        cmp.setup.filetype('markdown.pandoc', {
+            sources = cmp.config.sources({
+                { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
+                { name = 'rg', keyword_length = 4, max_item_count = 10, priority = 1 },
+            }, {
+                { name = 'buffer', keyword_length = 3 },
+            }),
+        })
+
         cmp.setup.cmdline(':', {
             mapping = cmp.mapping.preset.cmdline(),
             sources = { { name = 'path' }, { name = 'cmdline' } },
