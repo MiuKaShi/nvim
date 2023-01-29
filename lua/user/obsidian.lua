@@ -5,6 +5,7 @@ function M.config()
     vim.keymap.set('n', '<leader>nk', '<cmd>ObsidianBacklinks<CR>')
     vim.keymap.set('n', '<leader>no', '<cmd>ObsidianOpen<CR>')
     vim.keymap.set('n', '<leader>ns', '<cmd>ObsidianSearch<CR>')
+    vim.keymap.set('n', '<leader>nn', '<cmd>ObsidianNew<CR>')
 end
 
 function M.setup()
