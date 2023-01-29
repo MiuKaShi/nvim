@@ -19,15 +19,18 @@ function M.setup()
             notes_subdir = 'day_notes',
             note_id_func = function(title)
                 -- Create note IDs in a Zettelkasten format.
-                local suffix = ''
-                if title ~= nil then
+				local suffix = tostring(os.date '%Y%m%d%H%M%S')
+
+                --local suffix = ''
+                --if title ~= nil then
                     -- If title is given, transform it into lowercase.
-                    suffix = title:gsub(' ', '-'):gsub('[^A-Za-z0-9-]', ''):lower()
-                    suffix = tostring(os.date '%Y%m%d%H%M%S') .. '-' .. suffix
-                else
+					-- suffix = title:gsub(' ', '-'):gsub('[^A-Za-z0-9-]', ''):lower()
+                    -- suffix = tostring(os.date '%Y%m%d%H%M%S') .. '-' .. suffix
+                --else
                     -- If title is nil, Zettelkasten format file name.
-                    suffix = tostring(os.date '%Y%m%d%H%M%S')
-                end
+                    --suffix = tostring(os.date '%Y%m%d%H%M%S')
+                --end
+
                 return suffix
             end,
         }
