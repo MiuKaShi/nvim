@@ -3,27 +3,33 @@ if not null_ls_status_ok then
     return
 end
 
-local b = null_ls.builtins
+local formatting = null_ls.builtins.formatting
+local diagnostics = null_ls.builtins.diagnostics
+local code_actions = null_ls.builtins.code_actions
 
 local sources = {
-    b.formatting.prettierd.with {
+    formatting.prettierd.with {
         filetypes = { 'css', 'json', 'yaml', 'markdown' },
         extra_args = { '--no-semi', '--single-quote', '--jsx-single-quote' },
     },
     -- CMake
-    b.formatting.cmake_format,
+    formatting.cmake_format,
     -- python
-    b.formatting.black.with { extra_args = { '--fast' } },
+    formatting.black.with { extra_args = { '--fast' } },
     -- lua
-    b.formatting.stylua.with {
+    formatting.stylua.with {
         extra_args = {
             '--config-path',
             vim.fn.expand '~/.config/stylua/stylua.toml',
         },
     },
-    b.diagnostics.luacheck,
+    formatting.shfmt.with {
+        extra_args = { '-i', '4', '-ci', '-bn' },
+    },
+    diagnostics.mlint, -- linting for MATLAB files
+    diagnostics.luacheck,
     -- markdown
-    b.diagnostics.markdownlint.with {
+    diagnostics.markdownlint.with {
         args = {
             '--config',
             '~/.config/markdownlint/markdownlint.yaml',
@@ -31,13 +37,11 @@ local sources = {
         },
     },
     -- shell
-    b.code_actions.shellcheck,
-    b.formatting.shfmt.with {
-        extra_args = { '-i', '4', '-ci', '-bn' },
-    },
+    code_actions.shellcheck,
 }
 
 null_ls.setup {
+    debug = false,
     sources = sources,
     on_attach = function(client, bufnr)
         if client.server_capabilities.documentFormattingProvider then

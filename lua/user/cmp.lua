@@ -7,6 +7,8 @@ function M.setup()
         require('copilot_cmp').setup {}
         require('luasnip.loaders.from_snipmate').lazy_load() --Snipmate like snippets
 
+        local compare = require 'cmp.config.compare'
+
         local check_backspace = function()
             local col = vim.fn.col '.' - 1
             return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s'
@@ -96,6 +98,18 @@ function M.setup()
                     return vim_item
                 end,
             },
+            sorting = {
+                comparators = {
+                    compare.sort_text,
+                    compare.offset,
+                    compare.exact,
+                    compare.score,
+                    compare.recently_used,
+                    compare.kind,
+                    compare.length,
+                    compare.order,
+                },
+            },
             window = {
                 documentation = { border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' } },
                 completion = {
@@ -130,6 +144,7 @@ function M.setup()
         }
         cmp.setup.filetype('markdown.pandoc', {
             sources = cmp.config.sources({
+                { name = 'nvim_lsp', priority = 80 },
                 { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
                 { name = 'rg', keyword_length = 4, max_item_count = 10, priority = 1 },
             }, {

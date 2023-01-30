@@ -2,9 +2,9 @@ local opt = vim.opt
 
 -- misc
 opt.clipboard = 'unnamedplus'
-opt.encoding       = 'utf-8'
-opt.fileencoding   = 'utf-8'
-opt.termencoding   = 'utf-8'
+opt.encoding = 'utf-8'
+opt.fileencoding = 'utf-8'
+opt.termencoding = 'utf-8'
 
 opt.shell = 'zsh'
 
@@ -57,7 +57,6 @@ opt.linebreak = true
 opt.showbreak = '> '
 opt.whichwrap:append '[,]'
 
-
 -- search
 opt.smartcase = true
 opt.ignorecase = true
@@ -66,10 +65,10 @@ opt.ignorecase = true
 -- opt.copyindent = true
 
 -- HISTORY
-opt.swapfile       = false
-opt.backup         = false
-opt.undofile       = true
-opt.undolevels     = 10000
+opt.swapfile = false
+opt.backup = false
+opt.undofile = true
+opt.undolevels = 10000
 vim.cmd [[
 set undodir=~/.cache/nvim/undo
 if !isdirectory(&undodir)

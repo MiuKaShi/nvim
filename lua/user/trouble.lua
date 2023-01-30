@@ -16,7 +16,7 @@ function M.setup()
                 information = '💬',
                 other = '📌',
             },
-            use_diagnostic_sign = true,
+            use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
         }
     end
 end
