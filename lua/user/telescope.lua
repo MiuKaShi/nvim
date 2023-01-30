@@ -13,7 +13,7 @@ function M.setup()
                     width = 0.8,
                     height = 0.9,
                     horizontal = {
-                        preview_cutoff = 120,
+                        preview_cutoff = 0,
                     },
                 },
                 prompt_prefix = '   ',

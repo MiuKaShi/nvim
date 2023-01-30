@@ -10,7 +10,7 @@ configs.rime_ls = {
     default_config = {
         name = 'rime_ls',
         cmd = { 'rime_ls' },
-        filetypes = { 'markdown.pandoc', 'org' },
+        filetypes = { 'markdown.pandoc', 'org', 'matlab' },
         root_dir = util.find_git_ancestor,
         single_file_support = true,
     },
