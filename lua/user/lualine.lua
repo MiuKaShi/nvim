@@ -52,6 +52,15 @@ function M.setup()
             return vim.fn.winwidth(0) > 80
         end
 
+		-- rime_status
+        local function rime_status()
+            if vim.g.rime_enabled then
+                return 'CN'
+            else
+                return 'EN'
+            end
+        end
+
         local diff = {
             'diff',
             colored = false,
@@ -69,7 +78,7 @@ function M.setup()
             sections = {
                 lualine_a = { { 'mode', right_padding = 2 } },
                 lualine_b = { 'branch', 'diff', 'diagnostics', 'filename' },
-                lualine_x = { 'encoding', 'fileformat', 'filetype' },
+                lualine_x = { rime_status, 'encoding', 'fileformat', 'filetype' },
                 lualine_y = { 'progress' },
                 lualine_z = { { 'location', left_padding = 2 } },
             },
