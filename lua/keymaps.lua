@@ -29,31 +29,38 @@ local function tmap(shortcut, command)
     _map('t', shortcut, command)
 end
 
--- Setup for keybindings
+-------------
 -- insert mode
+-------------
+
 imap('<C-a>', '<Esc>0i')
 imap('<C-e>', '<End>')
 imap('<C-n>', '<Plug>(fzf-complete-wordnet)')
 
+-------------
 -- normal mode
+-------------
+
+-- buffer
 nmap('<C-l>', '<cmd>bnext<CR>') -- buffer 跳转
 nmap('<C-h>', '<cmd>bprev<CR>')
 nmap('<C-s>', '<cmd>write<CR>')
 nmap('j', 'gj')
 nmap('k', 'gk')
 
+-- vim-bookmarks
+nmap('mm', '<cmd>BookmarkToggle<CR>')
+nmap('mn', '<cmd>BookmarkNext<CR>')
+nmap('mp', '<cmd>BookmarkPrev<CR>')
+nmap('mc', '<cmd>BookmarkClear<CR>')
+
 nmap('<leader>t', ':Lf<CR>') -- finder
--- nmap('<leader>/', '<cmd>lua require("telescope.builtin").live_grep({ previewer=false })<CR>') -- fuzzy_find
 nmap('<leader>i', '<cmd>setlocal spell! spelllang=en_us<CR>') -- spell check
 nmap('<leader>o', ':AerialToggle<CR>') -- Outlines
 nmap('<leader>.', ':call ToggleHiddenAll()<CR>') -- LSP 开关
 
-nmap('<leader>nh', ':nohl<CR>') -- disable highlight
+nmap('<leader>hn', ':nohl<CR>') -- disable highlight
 nmap('<leader>ss', '<cmd>w ! sudo tee > /dev/null %<CR>') -- force save files
-
--- nmap('<leader>bn', ':BufferLineCycleNext<CR>')
--- nmap('<leader>bp', ':BufferLineCyclePrev<CR>')
--- nmap('<leader>bd', ':bw<CR>')
 
 nmap('<leader>gd', '<cmd>DiffviewOpen<CR>')
 nmap('<leader>gx', '<cmd>DiffviewClose<CR>')
