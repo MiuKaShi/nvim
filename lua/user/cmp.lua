@@ -147,6 +147,7 @@ function M.setup()
                 { name = 'nvim_lsp', priority = 80 },
                 { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
                 { name = 'rg', keyword_length = 4, max_item_count = 10, priority = 1 },
+                { name = 'latex_symbols', option = { strategy = 0 } },
             }, {
                 { name = 'buffer', keyword_length = 3 },
             }),

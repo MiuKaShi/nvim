@@ -64,9 +64,15 @@ return require('packer').startup(function(use)
     } -- 底部状态栏
     -- LSP
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
-    use 'glepnir/lspsaga.nvim' -- LSP UI
     use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
     use 'folke/neodev.nvim' -- lua 语法提示 for lsp
+
+    require('user.lsp.lspsaga').config()
+    use {
+        'glepnir/lspsaga.nvim',
+        config = "require('user.lsp.lspsaga').setup()",
+        cmd = { 'Lspsaga' },
+    } -- better LSP
 
     require('user.trouble').config()
     use {
@@ -114,6 +120,7 @@ return require('packer').startup(function(use)
     use { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' }
     use { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' }
     use { 'mstanciu552/cmp-matlab', after = 'nvim-cmp' }
+    use { 'kdheepak/cmp-latex-symbols', after = 'nvim-cmp' }
 
     use {
         'windwp/nvim-autopairs',
@@ -142,19 +149,22 @@ return require('packer').startup(function(use)
     use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', config = "require('user.icons').setup()" }
 
     -- Search
-    use 'kkharji/sqlite.lua'
+    use { 'kkharji/sqlite.lua', module = 'sqlite' } -- for telescope-frecency
     use { 'nvim-lua/plenary.nvim', module = 'plenary' }
+
+    require('user.telescope').config()
     use {
         'nvim-telescope/telescope.nvim',
-        cmd = 'Telescope',
         module = 'telescope',
-        requires = {
-            'nvim-telescope/telescope-file-browser.nvim',
-            'nvim-telescope/telescope-ui-select.nvim',
-            'nvim-telescope/telescope-frecency.nvim',
-        },
         config = "require('user.telescope').setup()",
     }
+    use { 'nvim-telescope/telescope-file-browser.nvim', module = 'telescope._extensions.file_browser' }
+    use { 'nvim-telescope/telescope-ui-select.nvim', module = 'telescope._extensions.ui-select' }
+    use { 'nvim-telescope/telescope-frecency.nvim', module = 'telescope._extensions.frecency' }
+    use { 'tom-anders/telescope-vim-bookmarks.nvim', module = 'telescope._extensions.vim_bookmarks' }
+
+    --Bookmarks
+    use { 'mattesgroeger/vim-bookmarks', after = 'telescope.nvim' }
 
     -- File manager
     use {
@@ -196,7 +206,8 @@ return require('packer').startup(function(use)
         'MiuKaShi/bibtexcite.vim',
         cmd = { 'BibtexciteInsert', 'BibtexciteShowcite', 'BibtexciteOpenfile' },
     } -- bib 引用
-    use { 'Avi-D-coder/fzf-wordnet.vim', requires = 'junegunn/fzf.vim', event = 'InsertEnter' } -- en dict
+    use { 'junegunn/fzf.vim', event = 'InsertEnter' }
+    use { 'Avi-D-coder/fzf-wordnet.vim', after = 'fzf.vim' } -- en dic00t
     -- use {
     --     'nvim-neorg/neorg', -- org 模式
     --     tag = '0.0.11',
@@ -238,7 +249,7 @@ return require('packer').startup(function(use)
     -- Utils
     use { 'h-hg/fcitx.nvim', event = 'InsertEnter' } -- fcitx5 自动切换
     use { 'wakatime/vim-wakatime', event = 'InsertEnter' } -- time tracker
-    use 'MiuKaShi/vim-gf-list' -- gf 自定义
+    use { 'MiuKaShi/vim-gf-list', keys = 'gf' } -- gf 自定义
     -- use { 'skywind3000/asyncrun.vim', cmd = 'AsyncRun' } -- 异步运行
 
     -- Automatically set up your configuration after cloning packer.nvim

@@ -43,7 +43,7 @@ nmap('j', 'gj')
 nmap('k', 'gk')
 
 nmap('<leader>t', ':Lf<CR>') -- finder
-nmap('<leader>/', ':Telescope live_grep previewer=false <CR>') -- fuzzy_find
+-- nmap('<leader>/', '<cmd>lua require("telescope.builtin").live_grep({ previewer=false })<CR>') -- fuzzy_find
 nmap('<leader>i', '<cmd>setlocal spell! spelllang=en_us<CR>') -- spell check
 nmap('<leader>o', ':AerialToggle<CR>') -- Outlines
 nmap('<leader>.', ':call ToggleHiddenAll()<CR>') -- LSP 开关
