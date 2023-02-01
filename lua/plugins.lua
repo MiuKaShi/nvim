@@ -57,7 +57,9 @@ return require('packer').startup(function(use)
         event = { 'BufRead', 'BufNewFile' },
         config = "require('user.colorizer').setup()",
     } -- editor 内颜色显示
+
     use 'ellisonleao/gruvbox.nvim'
+
     use {
         'nvim-lualine/lualine.nvim',
         config = "require('user.lualine').setup()",
@@ -243,8 +245,15 @@ return require('packer').startup(function(use)
     use {
         'sindrets/diffview.nvim',
         cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
-        config = "require('user.diffview').setup()",
+        config = "require('uer.diffview').setup()",
     } -- diffview
+
+    require('user.mywords').config()
+    use {
+        'dwrdx/mywords.nvim',
+        module = 'mywords',
+        -- event = 'InsertEnter',
+    } -- highlight words
 
     -- Utils
     use { 'h-hg/fcitx.nvim', event = 'InsertEnter' } -- fcitx5 自动切换
