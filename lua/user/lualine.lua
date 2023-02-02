@@ -52,7 +52,7 @@ function M.setup()
             return vim.fn.winwidth(0) > 80
         end
 
-		-- rime_status
+        -- rime_status
         local function rime_status()
             if vim.g.rime_enabled then
                 return 'CN'
@@ -68,6 +68,22 @@ function M.setup()
             cond = hide_in_width,
         }
 
+        local getWords = {
+            'getWords',
+            fmt = function()
+                if vim.bo.filetype == 'md' or vim.bo.filetype == 'text' or vim.bo.filetype == 'markdown.pandoc' then
+                    if vim.fn.wordcount().visual_words == nil then
+                        return tostring(vim.fn.wordcount().words)
+                    end
+                    return  tostring(vim.fn.wordcount().visual_words)
+                else
+                    return ''
+                end
+            end,
+            padding = 1,
+            color = { fg = colors.orange2 },
+        }
+
         lualine.setup {
             options = {
                 theme = gruvboxline,
@@ -78,7 +94,7 @@ function M.setup()
             sections = {
                 lualine_a = { { 'mode', right_padding = 2 } },
                 lualine_b = { 'branch', 'diff', 'diagnostics', 'filename' },
-                lualine_x = { rime_status, 'encoding', 'fileformat', 'filetype' },
+                lualine_x = { rime_status, 'encoding', 'fileformat', 'filetype', getWords },
                 lualine_y = { 'progress' },
                 lualine_z = { { 'location', left_padding = 2 } },
             },
