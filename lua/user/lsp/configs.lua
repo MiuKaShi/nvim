@@ -20,16 +20,6 @@ for _, sign in ipairs(signs) do
 end
 
 local on_attach = function(client, bufnr)
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = 'Go to Declaration' })
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr, desc = 'Go to Implementation' })
-
-    local tb = require 'telescope.builtin'
-    local themes = require 'telescope.themes'
-
-    vim.keymap.set('n', 'gd', function()
-        tb.lsp_definitions(themes.get_dropdown {})
-    end, { buffer = bufnr, desc = 'Go to Definitions' })
-
     local caps = client.server_capabilities
     if caps.documentHighlightProvider then
         vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
@@ -42,12 +32,6 @@ local on_attach = function(client, bufnr)
             'CursorMoved',
             { callback = vim.lsp.buf.clear_references, buffer = bufnr, group = 'lsp_document_highlight' }
         )
-    end
-
-    if caps.codeActionProvider then
-        vim.keymap.set({ 'n', 'x' }, '<leader>ca', function()
-            require('lspsaga.codeaction'):code_action()
-        end, { buffer = bufnr, desc = '(Range) Code Actions' })
     end
 
     if caps.documentFormattingProvider then
