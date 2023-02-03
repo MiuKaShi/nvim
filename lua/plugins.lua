@@ -114,7 +114,7 @@ return require('packer').startup(function(use)
 
     -- CMP&Editor
     use { 'L3MON4D3/LuaSnip', event = 'InsertEnter' }
-    use { 'hrsh7th/nvim-cmp', after = 'LuaSnip', config = "require('user.cmp').setup()" }
+    use { 'hrsh7th/nvim-cmp', after = 'LuaSnip', module = 'cmp', config = "require('user.cmp').setup()" }
     use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
@@ -157,6 +157,7 @@ return require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim',
         config = "require('user.telescope').setup()",
+		after = 'nvim-cmp',
         keys = {
             'ms',
             '<leader>fr',
