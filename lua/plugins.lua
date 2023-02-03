@@ -154,11 +154,24 @@ return require('packer').startup(function(use)
     use { 'kkharji/sqlite.lua', module = 'sqlite' } -- for telescope-frecency
     use { 'nvim-lua/plenary.nvim', module = 'plenary' }
 
-    require('user.telescope').config()
     use {
         'nvim-telescope/telescope.nvim',
-        module = 'telescope',
         config = "require('user.telescope').setup()",
+        keys = {
+            'ms',
+            '<leader>fr',
+            '<leader>fs',
+            '<leader>/',
+            '<leader>fl',
+            '<leader>fw',
+            '<leader>ff',
+            '<leader>fm',
+            '<leader>fh',
+            '<leader>bl',
+            '<leader>gc',
+            '<leader>gb',
+            '<C-f>',
+        },
     }
     use { 'nvim-telescope/telescope-file-browser.nvim', module = 'telescope._extensions.file_browser' }
     use { 'nvim-telescope/telescope-ui-select.nvim', module = 'telescope._extensions.ui-select' }
