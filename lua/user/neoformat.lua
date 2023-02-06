@@ -48,7 +48,6 @@ function M.config()
 augroup fmt
 autocmd!
 autocmd BufWritePre *.md Neoformat
-autocmd BufWritePre *.m Neoformat
 "autocmd BufWritePre *.c,*.h,*.cc,*.hh,*.cpp,*.hpp Neoformat
 augroup END
 ]]

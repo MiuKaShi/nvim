@@ -3,9 +3,26 @@ if not null_ls_status_ok then
     return
 end
 
+local helpers = require 'null-ls.helpers'
+local methods = require 'null-ls.methods'
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 local code_actions = null_ls.builtins.code_actions
+local mh_style = {
+    name = 'mh_style',
+    meta = {
+        url = 'https://github.com/florianschanda/miss_hit',
+        description = 'formatter for matlab',
+    },
+    method = methods.internal.FORMATTING,
+    filetypes = { 'matlab' },
+    generator_opts = {
+        command = '/home/miuka/.local/bin/mh_style',
+        args = { '--input-encoding=utf-8', '--fix', '$FILENAME' },
+        to_temp_file = true,
+    },
+    factory = helpers.formatter_factory,
+}
 
 local sources = {
     formatting.prettierd.with {
@@ -26,7 +43,9 @@ local sources = {
     formatting.shfmt.with {
         extra_args = { '-i', '4', '-ci', '-bn' },
     },
-    diagnostics.mlint, -- linting for MATLAB files
+    -- MATLAB files
+    diagnostics.mlint,
+    helpers.make_builtin(mh_style),
     diagnostics.luacheck,
     -- markdown
     diagnostics.markdownlint.with {
