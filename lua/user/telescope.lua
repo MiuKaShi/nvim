@@ -137,7 +137,7 @@ function M.setup()
 
     vim.keymap.set('n', 'ms', function()
         te.vim_bookmarks.all { hide_filename = false, shorten_path = true }
-    end, { desc = 'Recent Files' })
+    end, { desc = 'List bookmarks' })
 
     vim.keymap.set('n', '<leader>fs', function()
         tb.treesitter(themes.get_ivy {})

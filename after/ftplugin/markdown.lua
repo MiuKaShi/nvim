@@ -13,4 +13,5 @@ vim.g['pandoc#syntax#conceal#blacklist'] = {
     'codeblock_delim',
 }
 vim.g.tex_conceal = 'amgs' --disable equation conceal
-vim.g['pandoc#syntax#codeblocks#embeds#langs'] = { 'python', 'bash=sh', 'c', 'cpp', 'latex=tex', 'diff', 'julia' }
+vim.g['pandoc#syntax#codeblocks#embeds#langs'] =
+    { 'python', 'bash=sh', 'c', 'cpp', 'latex=tex', 'diff', 'julia', 'rust' }

@@ -1,7 +1,6 @@
 vim.bo.shiftwidth = 4
 vim.bo.tabstop = 4
 vim.bo.softtabstop = 4
-vim.bo.colorcolumn=92
 
 vim.g.latex_to_unicode_tab = 'off'
 vim.g.latex_to_unicode_suggestions = 0
