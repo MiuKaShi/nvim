@@ -135,7 +135,7 @@ return require('packer').startup(function(use)
         config = "require('user.surround').setup()",
     } -- 修改包围符合
 
-    -- AI Completion
+    -- AI
     use {
         'zbirenbaum/copilot.lua',
         event = 'InsertEnter',
@@ -146,7 +146,13 @@ return require('packer').startup(function(use)
     --     'tzachar/cmp-tabnine',
     --     run = './install.sh',
     -- }
-    --
+    -- use {
+    --     'jackMort/ChatGPT.nvim',
+    --     config = "require('user.chatgpt').setup()",
+    --     event = 'InsertEnter',
+    -- }
+    -- use { 'MunifTanjim/nui.nvim', after = 'ChatGPT.nvim' }
+
     -- Icons
     use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', config = "require('user.icons').setup()" }
 
@@ -157,7 +163,7 @@ return require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim',
         config = "require('user.telescope').setup()",
-		after = 'nvim-cmp',
+        after = 'nvim-cmp',
         keys = {
             'ms',
             '<leader>fr',

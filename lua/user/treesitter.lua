@@ -22,6 +22,7 @@ function M.setup()
             'yaml',
             'julia',
             'markdown',
+            'markdown_inline',
         }
         treesitter.setup {
             ensure_installed = langs,

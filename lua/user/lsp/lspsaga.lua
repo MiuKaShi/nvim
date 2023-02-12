@@ -50,6 +50,10 @@ function M.setup()
                 black = '#1e2030',
             },
         },
+        scroll_preview = {
+            scroll_down = '<C-9>',
+            scroll_up = '<C-0>',
+        },
     }
 end
 
