@@ -87,6 +87,11 @@ vim.cmd [[
 let g:fzf_wordnet_preview_arg = ''
 ]]
 
+-- neovide setting
+if vim.g.neovide then
+    require 'user.neovide'
+end
+
 -- 文件格式设置
 vim.cmd [[
 autocmd BufRead,BufNewFile *.tex set filetype=tex
