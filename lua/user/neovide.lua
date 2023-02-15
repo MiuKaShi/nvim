@@ -2,6 +2,7 @@ vim.g.gui_font_default_size = 16
 vim.g.gui_font_size = vim.g.gui_font_default_size
 vim.g.gui_font_face = 'MonoLisa Custom'
 vim.g.neovide_font_subpixel_antialiasing = 1
+vim.g.neovide_remember_window_size = true
 
 vim.g.neovide_floating_blur_amount_x = 2.0
 vim.g.neovide_floating_blur_amount_y = 2.0
