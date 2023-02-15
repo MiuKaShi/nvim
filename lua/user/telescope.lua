@@ -147,6 +147,10 @@ function M.setup()
         tb.live_grep { previewer = false }
     end, { desc = 'fuzz find' })
 
+    vim.keymap.set('n', '<leader>sr', function()
+        require('spectre').open()
+    end, { desc = 'Replace in files (Spectre)' })
+
     vim.keymap.set('n', '<leader>fl', tb.lsp_document_symbols, { desc = 'LSP search' })
     vim.keymap.set('n', '<leader>fw', tb.grep_string, { desc = 'Find cursor word' })
     vim.keymap.set('n', '<leader>ff', tb.find_files, { desc = 'Find Files' })

@@ -34,7 +34,10 @@ function M.setup()
             autopairs = { enable = true },
             incremental_selection = { enable = true },
             indent = { enable = false },
-            rainbow = { enable = true },
+            rainbow = {
+                enable = true,
+                disable = { 'jsx' },
+            },
         }
         -- Folding
         -- vim.opt_local.foldmethod = 'expr'
