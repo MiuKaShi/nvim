@@ -146,12 +146,18 @@ return require('packer').startup(function(use)
     --     'tzachar/cmp-tabnine',
     --     run = './install.sh',
     -- }
-    -- use {
-    --     'jackMort/ChatGPT.nvim',
-    --     config = "require('user.chatgpt').setup()",
-    --     event = 'InsertEnter',
-    -- }
-    -- use { 'MunifTanjim/nui.nvim', after = 'ChatGPT.nvim' }
+    use {
+        'jackMort/ChatGPT.nvim',
+        config = "require('user.chatgpt').setup()",
+        cmd = {
+            'ChatGPT',
+            'ChatGPTRun',
+            'ChatGPTActAs',
+            'ChatGPTCompleteCode',
+            'ChatGPTEditWithInstructions',
+        },
+    }
+    use { 'MunifTanjim/nui.nvim', module = 'chatgpt' }
 
     -- Icons
     use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', config = "require('user.icons').setup()" }
