@@ -28,7 +28,8 @@ function M.setup()
             ensure_installed = langs,
             highlight = {
                 enable = true,
-                additional_vim_regex_highlighting = { 'markdown' },
+                disable = { 'markdown' },
+                -- additional_vim_regex_highlighting = { 'markdown' },
             },
             context_commentstring = { enable = true, enable_autocmd = false },
             autopairs = { enable = true },
