@@ -4,7 +4,7 @@ M.setup = function(on_attach, capabilities)
     require('lspconfig').jsonls.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-        cmd = { 'vscode-json-languageserver', '--stdio' },
+        cmd = { 'vscode-json-language-server', '--stdio' },
         settings = {
             json = {
                 format = { enable = false },
