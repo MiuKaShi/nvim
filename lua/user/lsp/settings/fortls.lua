@@ -9,9 +9,8 @@ M.setup = function(on_attach, capabilities)
             '--notify_init',
             '--hover_signature',
             '--hover_language=fortran',
-            '--use_signature_help',
+            '--lowercase_intrinsics',
         },
-        filetypes = { 'fortran', 'Fortran77' },
         root_dir = function(fname)
             local util = require 'lspconfig/util'
             return util.root_pattern('.fortls', '.git')(fname) or vim.fn.getcwd()

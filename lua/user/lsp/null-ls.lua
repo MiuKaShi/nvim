@@ -31,6 +31,22 @@ local sources = {
     },
     -- CMake
     formatting.cmake_format,
+    -- Fortran
+    formatting.fprettify.with {
+        extra_args = {
+            '--indent',
+            '4',
+            '--whitespace',
+            '3',
+            '--strict-indent',
+            '--enable-decl',
+            '--case',
+            '1',
+            '1',
+            '1',
+            '0',
+        },
+    },
     -- python
     formatting.black.with { extra_args = { '--fast' } },
     -- lua
