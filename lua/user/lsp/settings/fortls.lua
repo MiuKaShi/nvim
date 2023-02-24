@@ -6,6 +6,7 @@ M.setup = function(on_attach, capabilities)
         capabilities = capabilities,
         cmd = {
             'fortls',
+            '--notify_init',
             '--hover_signature',
             '--hover_language=fortran',
             '--use_signature_help',

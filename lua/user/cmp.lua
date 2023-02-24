@@ -123,9 +123,7 @@ function M.setup()
             sources = {
                 { name = 'nvim_lsp', priority = 80 },
                 { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
-                { name = 'copilot', priority = 80, max_item_count = 3 },
                 { name = 'path', priority = 40, max_item_count = 4 },
-                -- { name = 'neorg' },
                 {
                     name = 'buffer',
                     priority = 5,
@@ -137,7 +135,7 @@ function M.setup()
                         end,
                     },
                 },
-                { name = 'rg', keyword_length = 4, max_item_count = 10, priority = 1 },
+                -- { name = 'neorg' },
                 -- { name = 'cmp_tabnine' },
                 -- {name = 'cmp_octave'}
             },
@@ -147,6 +145,17 @@ function M.setup()
                 { name = 'nvim_lsp', priority = 80 },
                 { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
                 { name = 'rg', keyword_length = 4, max_item_count = 10, priority = 1 },
+                { name = 'latex_symbols', option = { strategy = 0 } },
+            }, {
+                { name = 'buffer', keyword_length = 3 },
+            }),
+        })
+
+        cmp.setup.filetype({ 'julia', 'matlab' }, {
+            sources = cmp.config.sources({
+                { name = 'nvim_lsp', priority = 80 },
+                { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
+                { name = 'copilot', priority = 80, max_item_count = 3 },
                 { name = 'latex_symbols', option = { strategy = 0 } },
             }, {
                 { name = 'buffer', keyword_length = 3 },

@@ -25,8 +25,8 @@ function M.setup()
         },
         ui = {
             theme = 'round',
-            title = false,
             winblend = 0,
+            title = false,
             border = 'single',
             expand = '',
             collapse = '',
