@@ -91,6 +91,7 @@ function M.setup()
                         path = '[Path]',
                         cmdline = '[Cmd]',
                         luasnip = '[Snip]',
+                        latex_symbols = '[Tex]',
                         -- neorg    = '[Norg]',
                         cmp_matlab = '[MATLAB]',
                         rg = '[RG]',
@@ -140,12 +141,12 @@ function M.setup()
                 -- {name = 'cmp_octave'}
             },
         }
-        cmp.setup.filetype('markdown.pandoc', {
+        cmp.setup.filetype({ 'markdown.pandoc', 'tex' }, {
             sources = cmp.config.sources({
                 { name = 'nvim_lsp', priority = 80 },
                 { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
                 { name = 'rg', keyword_length = 4, max_item_count = 10, priority = 1 },
-                { name = 'latex_symbols', option = { strategy = 0 } },
+                { name = 'latex_symbols', option = { strategy = 0 }, keyword_length = 3, priority = 80 },
             }, {
                 { name = 'buffer', keyword_length = 3 },
             }),
@@ -156,7 +157,7 @@ function M.setup()
                 { name = 'nvim_lsp', priority = 80 },
                 { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
                 { name = 'copilot', priority = 80, max_item_count = 3 },
-                { name = 'latex_symbols', option = { strategy = 0 } },
+                { name = 'latex_symbols', option = { strategy = 0 }, keyword_length = 3, priority = 80 },
             }, {
                 { name = 'buffer', keyword_length = 3 },
             }),
