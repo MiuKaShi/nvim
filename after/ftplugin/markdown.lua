@@ -16,3 +16,5 @@ vim.g['pandoc#syntax#conceal#blacklist'] = {
 vim.g.tex_conceal = 'amgs' --disable equation conceal
 vim.g['pandoc#syntax#codeblocks#embeds#langs'] =
     { 'python', 'bash=sh', 'c', 'cpp', 'latex=tex', 'diff', 'julia', 'rust' }
+
+vim.keymap.set('n', '<leader>pp', '<cmd>MarkdownPreviewToggle<CR>') -- 预览

@@ -29,6 +29,8 @@ local sources = {
         filetypes = { 'css', 'json', 'yaml', 'markdown' },
         extra_args = { '--no-semi', '--single-quote', '--jsx-single-quote' },
     },
+    -- Latex
+    formatting.latexindent,
     -- CMake
     formatting.cmake_format,
     -- Fortran

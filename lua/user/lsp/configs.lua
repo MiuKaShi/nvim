@@ -51,13 +51,13 @@ for _, server in ipairs {
     'gopls',
     'jsonls',
     'htmls',
-    'ltex',
     'yamlls',
     'bashls',
     'vimls',
     'julials',
     'luals',
     'fortls',
+    'texlab',
 } do
     require('user.lsp.settings.' .. server).setup(on_attach, capabilities)
 end

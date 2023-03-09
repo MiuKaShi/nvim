@@ -10,7 +10,6 @@ function M.setup()
             'c',
             'cpp',
             'cmake',
-            'css',
             'comment',
             'diff',
             'dockerfile',
@@ -21,6 +20,7 @@ function M.setup()
             'toml',
             'yaml',
             'julia',
+            'matlab',
             'markdown',
             'markdown_inline',
         }

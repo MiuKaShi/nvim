@@ -66,7 +66,7 @@ nmap('<leader>gd', '<cmd>DiffviewOpen<CR>')
 nmap('<leader>gx', '<cmd>DiffviewClose<CR>')
 
 nmap('<leader>cc', ':!compiler <c-r>%<CR><CR>')
-nmap('<leader>cp', ':silent !st autoprev <c-r>%<CR><CR>')
+nmap('<leader>cp', '<Cmd>call jobstart(["autoprev", expand("%:p")])<CR>')
 
 -- command line mode
 cmap('<C-a>', '<Home>')

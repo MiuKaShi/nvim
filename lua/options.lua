@@ -94,7 +94,6 @@ end
 
 -- 文件格式设置
 vim.cmd [[
-autocmd BufRead,BufNewFile *.tex set filetype=tex
 autocmd BufRead,BufNewFile *.tp set filetype=type
 autocmd BufRead,BufNewFile *.m set filetype=matlab
 autocmd BufRead,BufNewFile *.md set filetype=markdown.pandoc

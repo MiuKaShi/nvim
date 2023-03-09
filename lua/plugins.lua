@@ -109,8 +109,6 @@ return require('packer').startup(function(use)
     }
     use { 'HiPhish/nvim-ts-rainbow2', after = 'nvim-treesitter' }
     use { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' }
-    require('user.rainbow').config()
-    use { 'luochen1990/rainbow', ft = 'matlab' } -- 补充ts-rainbow不支持的language
 
     -- CMP&Editor
     use { 'L3MON4D3/LuaSnip', event = 'InsertEnter' }
@@ -131,8 +129,14 @@ return require('packer').startup(function(use)
     }
     use {
         'kylechui/nvim-surround',
-        after = 'nvim-cmp',
         config = "require('user.surround').setup()",
+        module = 'nvim-surround',
+        keys = {
+            'cs',
+            'ds',
+            'ys',
+            'yS',
+        },
     } -- 修改包围符合
 
     -- AI
@@ -146,18 +150,18 @@ return require('packer').startup(function(use)
     --     'tzachar/cmp-tabnine',
     --     run = './install.sh',
     -- }
-    use {
-        'jackMort/ChatGPT.nvim',
-        config = "require('user.chatgpt').setup()",
-        cmd = {
-            'ChatGPT',
-            'ChatGPTRun',
-            'ChatGPTActAs',
-            'ChatGPTCompleteCode',
-            'ChatGPTEditWithInstructions',
-        },
-    }
-    use { 'MunifTanjim/nui.nvim', module = 'chatgpt' }
+    -- use {
+    --     'jackMort/ChatGPT.nvim',
+    --     config = "require('user.chatgpt').setup()",
+    --     cmd = {
+    --         'ChatGPT',
+    --         'ChatGPTRun',
+    --         'ChatGPTActAs',
+    --         'ChatGPTCompleteCode',
+    --         'ChatGPTEditWithInstructions',
+    --     },
+    -- }
+    -- use { 'MunifTanjim/nui.nvim', module = 'chatgpt' }
 
     -- Icons
     use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', config = "require('user.icons').setup()" }
@@ -201,6 +205,21 @@ return require('packer').startup(function(use)
         'is0n/fm-nvim',
         config = "require('user.fm').setup()",
         cmd = 'Lf',
+    }
+
+    -- Latex
+    use {
+        'ryleelyman/latex.nvim',
+        config = "require('user.latex').setup()",
+        ft = { 'tex' },
+    }
+    use {
+        'f3fora/nvim-texlabconfig',
+        config = function()
+            require('texlabconfig').setup(config)
+        end,
+        run = 'go build',
+        ft = { 'tex' },
     }
 
     -- markdown
