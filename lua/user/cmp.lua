@@ -143,10 +143,10 @@ function M.setup()
         }
         cmp.setup.filetype({ 'markdown.pandoc', 'tex' }, {
             sources = cmp.config.sources({
-                { name = 'nvim_lsp', priority = 80 },
+                { name = 'latex_symbols', option = { strategy = 2 }, keyword_length = 3, priority = 80 },
+                { name = 'nvim_lsp', keyword_length = 2, priority = 60 },
                 { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
                 { name = 'rg', keyword_length = 4, max_item_count = 10, priority = 1 },
-                { name = 'latex_symbols', option = { strategy = 0 }, keyword_length = 3, priority = 80 },
             }, {
                 { name = 'buffer', keyword_length = 3 },
             }),
