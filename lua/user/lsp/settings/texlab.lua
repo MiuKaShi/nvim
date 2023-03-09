@@ -10,7 +10,7 @@ M.setup = function(on_attach, capabilities)
             texlab = {
                 build = {
                     executable = 'tectonic',
-                    args = { '-X', 'compile', '%f', '--synctex', '--keep-logs', '--keep-intermediates' },
+                    args = { '-X', 'compile', '%f', '--synctex' },
                     onSave = true,
                 },
                 forwardSearch = {
