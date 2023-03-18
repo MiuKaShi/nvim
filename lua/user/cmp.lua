@@ -40,6 +40,16 @@ function M.setup()
             Operator = '',
             TypeParameter = '',
         }
+        local border_thin = {
+            { '╭', 'CmpBorder' },
+            { '─', 'CmpBorder' },
+            { '╮', 'CmpBorder' },
+            { '│', 'CmpBorder' },
+            { '╯', 'CmpBorder' },
+            { '─', 'CmpBorder' },
+            { '╰', 'CmpBorder' },
+            { '│', 'CmpBorder' },
+        }
         cmp.setup {
             snippet = {
                 expand = function(args)
@@ -112,11 +122,13 @@ function M.setup()
                 },
             },
             window = {
-                documentation = { border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' } },
+                documentation = {
+                    border = border_thin,
+                },
                 completion = {
                     col_offset = -2,
                     side_padding = 1,
-                    border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+                    border = border_thin,
                     winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
                 },
             },

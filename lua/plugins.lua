@@ -84,9 +84,6 @@ return require('packer').startup(function(use)
     } -- trouble
 
     -- Format
-    require('user.neoformat').config()
-    use { 'sbdchd/neoformat', cmd = 'Neoformat' }
-
     require('user.easyalign').config()
     use { 'junegunn/vim-easy-align', opt = true, cmd = 'EasyAlign' }
 

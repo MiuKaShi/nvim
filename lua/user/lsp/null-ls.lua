@@ -27,7 +27,31 @@ local mh_style = {
 local sources = {
     formatting.prettierd.with {
         filetypes = { 'css', 'json', 'yaml', 'markdown' },
-        extra_args = { '--no-semi', '--single-quote', '--jsx-single-quote' },
+    },
+    formatting.astyle.with {
+        filetypes = { 'arduino' },
+        extra_args = {
+            '--mode=c',
+            '--indent=spaces=4',
+            '--convert-tabs',
+            '--pad-oper',
+            '--indent-col1-comments',
+            '--unpad-paren',
+            '--max-code-length=120',
+            '--add-one-line-brackets',
+            '--style=linux',
+            '--indent-classes',
+            '--keep-one-line-statements',
+            '--add-brackets',
+            '--pad-header',
+            '--break-blocks',
+            '--indent=spaces=4',
+            '--convert-tabs',
+            '--break-after-logical',
+            '--min-conditional-indent=2',
+            '--max-instatement-indent=40',
+            '--keep-one-line-blocks',
+        },
     },
     -- Latex
     formatting.latexindent,
