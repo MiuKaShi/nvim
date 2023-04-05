@@ -164,12 +164,12 @@ function M.setup()
             }),
         })
 
-        cmp.setup.filetype({ 'julia', 'matlab' }, {
+        cmp.setup.filetype({ 'julia', 'matlab', 'sh', 'python' }, {
             sources = cmp.config.sources({
                 { name = 'nvim_lsp', priority = 80 },
                 { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
+                { name = 'path', priority = 40, max_item_count = 4 },
                 { name = 'copilot', priority = 80, max_item_count = 3 },
-                { name = 'latex_symbols', option = { strategy = 0 }, keyword_length = 3, priority = 80 },
             }, {
                 { name = 'buffer', keyword_length = 3 },
             }),
