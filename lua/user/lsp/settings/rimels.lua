@@ -57,6 +57,7 @@ require('lspconfig').rime_ls.setup {
         log_dir = vim.fn.expand '~/.local/share/rime-ls/log', -- 日志目录
         max_candidates = 9, -- 与 rime 的候选数量配置最好保持一致
         trigger_characters = {}, -- 为空表示全局开启
+        schema_trigger_character = '&', -- 当输入此字符串时请求补全会触发 “方案选单”
     },
     on_attach = on_attach,
     capabilities = capabilities,

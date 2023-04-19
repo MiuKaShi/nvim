@@ -73,8 +73,8 @@ function M.setup()
                 'import_statement',
                 'operation_type',
             },
-            -- use_treesitter = true,
-            -- show_trailing_blankline_indent = false,
+            use_treesitter = true,
+            show_trailing_blankline_indent = false,
             -- show_current_context = true,
             -- char_highlight_list = {
             --     'IndentBlanklineIndent1',

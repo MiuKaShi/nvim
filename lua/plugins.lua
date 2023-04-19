@@ -52,6 +52,12 @@ return require('packer').startup(function(use)
         event = { 'BufRead', 'BufNewFile' },
         config = "require('user.indentline').setup()",
     } -- Indent
+    --
+    use {
+        'utilyre/sentiment.nvim',
+        event = 'InsertEnter',
+        config = "require('user.sentiment').setup()",
+    } -- 匹配号提示
     use {
         'norcalli/nvim-colorizer.lua',
         event = { 'BufRead', 'BufNewFile' },
@@ -71,7 +77,7 @@ return require('packer').startup(function(use)
 
     require('user.lsp.lspsaga').config()
     use {
-        'glepnir/lspsaga.nvim',
+        'nvimdev/lspsaga.nvim',
         config = "require('user.lsp.lspsaga').setup()",
         cmd = { 'Lspsaga' },
     } -- better LSP
@@ -159,6 +165,16 @@ return require('packer').startup(function(use)
     --     },
     -- }
     -- use { 'MunifTanjim/nui.nvim', module = 'chatgpt' }
+
+    require('user.backseat').config()
+    use {
+        'james1236/backseat.nvim',
+        cmd = {
+            'Backseat',
+            'BackseatAsk',
+            'BackseatClear',
+        },
+    }
 
     -- Icons
     use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', config = "require('user.icons').setup()" }
