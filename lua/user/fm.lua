@@ -11,7 +11,7 @@ function M.setup()
             },
             cmds = {
                 -- https://gist.github.com/Provessor/dbb4a6d22945e7a42c3b904302ee273c
-                lf_cmd = '/usr/bin/lfrun',
+                lf_cmd = '~/.local/bin/lfub',
             },
         }
     end

@@ -1,3 +1,10 @@
+--[[
+Description: file content
+Author: Zhang Ke
+Date: 2023-05-10 16:07:57
+LastEditors: Zhang Ke
+LastEditTime: 2023-05-10 16:10:57
+--]]
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -45,8 +52,24 @@ imap('<C-n>', '<Plug>(fzf-complete-wordnet)')
 nmap('<C-l>', '<cmd>bnext<CR>') -- buffer 跳转
 nmap('<C-h>', '<cmd>bprev<CR>')
 nmap('<C-s>', '<cmd>write<CR>')
-nmap('j', 'gj')
-nmap('k', 'gk')
+-- https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
+vim.keymap.set('n', 'j', [[v:count ? 'j' : 'gj']], { noremap = true, expr = true })
+vim.keymap.set('n', 'k', [[v:count ? 'k' : 'gk']], { noremap = true, expr = true })
+
+-- split window
+nmap('<Leader>s', ':sp<CR>')
+nmap('<Leader>v', ':vsp<CR>')
+nmap('<Leader>h', '<C-w>h')
+nmap('<Leader>l', '<C-w>l')
+nmap('<Leader>j', '<C-w>j')
+nmap('<Leader>k', '<C-w>k')
+
+-- resize split window
+nmap('<Leader>=', '10<C-w>+')
+nmap('<Leader>-', '10<C-w>-')
+nmap('<Leader>[', '10<C-w><')
+nmap('<Leader>]', '10<C-w>>')
+
 
 -- vim-bookmarks
 nmap('mm', '<cmd>BookmarkToggle<CR>')
@@ -54,7 +77,7 @@ nmap('mn', '<cmd>BookmarkNext<CR>')
 nmap('mp', '<cmd>BookmarkPrev<CR>')
 nmap('mc', '<cmd>BookmarkClear<CR>')
 
-nmap('<leader>t', ':Lf<CR>') -- finder
+nmap('<leader>lf', ':Lf<CR>') -- finder
 nmap('<leader>i', '<cmd>setlocal spell! spelllang=en_us<CR>') -- spell check
 nmap('<leader>o', ':AerialToggle<CR>') -- Outlines
 nmap('<leader>.', ':call ToggleHiddenAll()<CR>') -- LSP 开关

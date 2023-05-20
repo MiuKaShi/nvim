@@ -52,36 +52,28 @@ return require('packer').startup(function(use)
         event = { 'BufRead', 'BufNewFile' },
         config = "require('user.indentline').setup()",
     } -- Indent
-    --
-    use {
-        'utilyre/sentiment.nvim',
-        event = 'InsertEnter',
-        config = "require('user.sentiment').setup()",
-    } -- 匹配号提示
     use {
         'norcalli/nvim-colorizer.lua',
         event = { 'BufRead', 'BufNewFile' },
         config = "require('user.colorizer').setup()",
     } -- editor 内颜色显示
-
-    use 'ellisonleao/gruvbox.nvim'
-
+    use 'ellisonleao/gruvbox.nvim' -- theme
     use {
         'nvim-lualine/lualine.nvim',
         config = "require('user.lualine').setup()",
     } -- 底部状态栏
+    use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', config = "require('user.icons').setup()" } -- Icons
+
     -- LSP
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
     use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
     use 'folke/neodev.nvim' -- lua 语法提示 for lsp
-
     require('user.lsp.lspsaga').config()
     use {
         'nvimdev/lspsaga.nvim',
         config = "require('user.lsp.lspsaga').setup()",
         cmd = { 'Lspsaga' },
     } -- better LSP
-
     require('user.trouble').config()
     use {
         'folke/trouble.nvim',
@@ -90,8 +82,8 @@ return require('packer').startup(function(use)
     } -- trouble
 
     -- Format
-    require('user.easyalign').config()
-    use { 'junegunn/vim-easy-align', opt = true, cmd = 'EasyAlign' }
+    require('user.align').config()
+    use { 'Vonr/align.nvim', module = 'align' }
 
     -- Syntax
     use {
@@ -124,12 +116,17 @@ return require('packer').startup(function(use)
     use { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' }
     use { 'mstanciu552/cmp-matlab', after = 'nvim-cmp' }
     use { 'kdheepak/cmp-latex-symbols', after = 'nvim-cmp' }
-
     use {
-        'windwp/nvim-autopairs',
-        after = 'nvim-cmp',
-        config = "require('user.autopairs').setup()",
-    }
+        'altermo/ultimate-autopair.nvim',
+        event = { 'InsertEnter', 'CmdlineEnter' },
+        config = function()
+            require('ultimate-autopair').setup {
+                cr = {
+                    addsemi = {},
+                },
+            }
+        end,
+    } -- auto pairs
     use {
         'kylechui/nvim-surround',
         config = "require('user.surround').setup()",
@@ -141,6 +138,11 @@ return require('packer').startup(function(use)
             'yS',
         },
     } -- 修改包围符合
+    use {
+        'utilyre/sentiment.nvim',
+        event = 'InsertEnter',
+        config = "require('user.sentiment').setup()",
+    } -- 括号提示
 
     -- AI
     use {
@@ -165,7 +167,6 @@ return require('packer').startup(function(use)
     --     },
     -- }
     -- use { 'MunifTanjim/nui.nvim', module = 'chatgpt' }
-
     require('user.backseat').config()
     use {
         'james1236/backseat.nvim',
@@ -174,15 +175,12 @@ return require('packer').startup(function(use)
             'BackseatAsk',
             'BackseatClear',
         },
-    }
+    } -- based on GPT
 
-    -- Icons
-    use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', config = "require('user.icons').setup()" }
+    -- Search
 
-    -- Search/replace
-    use { 'kkharji/sqlite.lua', module = 'sqlite' } -- for telescope-frecency
-    use { 'nvim-lua/plenary.nvim', module = 'plenary' }
-
+    use { 'kkharji/sqlite.lua', module = 'sqlite' } -- telescope-frecency dependence
+    use { 'nvim-lua/plenary.nvim', module = 'plenary' } -- dependence
     use {
         'nvim-telescope/telescope.nvim',
         config = "require('user.telescope').setup()",
@@ -208,7 +206,20 @@ return require('packer').startup(function(use)
     use { 'nvim-telescope/telescope-ui-select.nvim', module = 'telescope._extensions.ui-select' }
     use { 'nvim-telescope/telescope-frecency.nvim', module = 'telescope._extensions.frecency' }
     use { 'tom-anders/telescope-vim-bookmarks.nvim', module = 'telescope._extensions.vim_bookmarks' }
-    use { 'windwp/nvim-spectre', module = 'spectre' }
+
+    -- replace
+    use { 'nvim-pack/nvim-spectre', module = 'spectre' }
+    require('user.muren').config()
+    use {
+        'AckslD/muren.nvim',
+        config = "require('user.muren').setup()",
+        cmd = {
+            'MurenToggle',
+            'MurenOpen',
+            'MurenUnique',
+            'MurenUniqueVisual',
+        },
+    }
 
     --Bookmarks
     use { 'mattesgroeger/vim-bookmarks', after = 'telescope.nvim' }
@@ -235,7 +246,7 @@ return require('packer').startup(function(use)
         ft = { 'tex' },
     }
 
-    -- markdown
+    -- markdown && writing
     use { 'vim-pandoc/vim-pandoc-syntax', ft = 'markdown.pandoc' } -- markdown 高亮
     require('user.mkdp').config()
     use {
@@ -246,7 +257,6 @@ return require('packer').startup(function(use)
         end,
         ft = { 'markdown.pandoc' },
     }
-
     require('user.obsidian').config()
     use {
         'epwalsh/obsidian.nvim',
@@ -307,7 +317,6 @@ return require('packer').startup(function(use)
         cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
         config = "require('uer.diffview').setup()",
     } -- diffview
-
     require('user.mywords').config()
     use {
         'dwrdx/mywords.nvim',
