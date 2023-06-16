@@ -233,7 +233,7 @@ return require('packer').startup(function(use)
 
     -- Latex
     use {
-        'mathjiajia/latex.nvim',
+        'ryleelyman/latex.nvim',
         config = "require('user.latex').setup()",
         ft = { 'tex' },
     }
