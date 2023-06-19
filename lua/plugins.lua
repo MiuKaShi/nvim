@@ -37,6 +37,14 @@ packer.init {
             return require('packer.util').float { border = 'rounded' }
         end,
     },
+    git = {
+        subcommands = {
+            -- Fix for https://github.com/wbthomason/packer.nvim/issues/1100,
+            -- which blocks updating the nvim-tree nightly tag
+            update = 'pull --ff-only --progress --rebase=false --force',
+            fetch = 'fetch --depth 999999 --progress --force',
+        },
+    },
 }
 
 -- Install your plugins here
