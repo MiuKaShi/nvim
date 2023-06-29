@@ -5,7 +5,6 @@ opt.clipboard = 'unnamedplus'
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
 opt.termencoding = 'utf-8'
-
 opt.shell = 'zsh'
 
 -- UI
@@ -19,13 +18,19 @@ opt.laststatus = 0
 opt.pumheight = 10
 opt.scrolloff = 8 -- Always show at least one line above/below the cursor.
 opt.termguicolors = true
-opt.shortmess:append 'c'
+opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.grepformat = '%f:%l:%c:%m'
 opt.grepprg = 'rg --vimgrep'
 opt.syntax = 'on' -- 打开语法高亮
 -- opt.cursorline = true
 -- opt.signcolumn = 'yes:1'
 -- opt.cursorline              = true -- 高亮当前行
+
+-- Diff
+opt.diffopt:append({ linematch = 60 })
+
+-- Format
+opt.formatoptions = "tcroqnlj"
 
 -- opt
 opt.go = 'a'
@@ -105,4 +110,5 @@ autocmd BufRead,BufNewFile *.pyx set filetype=cython
 autocmd BufRead,BufNewFile *.pxd set filetype=cython
 autocmd BufRead,BufNewFile *.pxi set filetype=cython
 autocmd BufRead,BufNewFile *.snippets set filetype=snippets
+autocmd BufRead,BufNewFile *.isy set filetype=xml
 ]]

@@ -60,11 +60,6 @@ return require('packer').startup(function(use)
         event = { 'BufRead', 'BufNewFile' },
         config = "require('user.indentline').setup()",
     } -- Indent
-    use {
-        'norcalli/nvim-colorizer.lua',
-        event = { 'BufRead', 'BufNewFile' },
-        config = "require('user.colorizer').setup()",
-    } -- editor 内颜色显示
     use 'ellisonleao/gruvbox.nvim' -- theme
     use {
         'nvim-lualine/lualine.nvim',
@@ -308,13 +303,11 @@ return require('packer').startup(function(use)
         config = "require('user.comment').setup()",
         event = { 'BufRead', 'BufNewFile' },
     } -- comment
-    require('user.todo').config()
     use {
-        'folke/todo-comments.nvim',
+        'echasnovski/mini.hipatterns',
+        config = "require('user.mini').setup()",
         event = { 'BufRead', 'BufNewFile' },
-        cmd = { 'TodoTelescope' },
-        config = "require('user.todo').setup()",
-    } --Todo
+    } -- editor 高亮
     use {
         'ggandor/leap.nvim',
         event = 'InsertEnter',

@@ -52,9 +52,11 @@ imap('<C-n>', '<Plug>(fzf-complete-wordnet)')
 nmap('<C-l>', '<cmd>bnext<CR>') -- buffer 跳转
 nmap('<C-h>', '<cmd>bprev<CR>')
 nmap('<C-s>', '<cmd>write<CR>')
+
+-- better up/down
 -- https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
-vim.keymap.set('n', 'j', [[v:count ? 'j' : 'gj']], { noremap = true, expr = true })
-vim.keymap.set('n', 'k', [[v:count ? 'k' : 'gk']], { noremap = true, expr = true })
+vim.keymap.set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- split window
 nmap('<Leader>s', ':sp<CR>')
@@ -69,7 +71,6 @@ nmap('<Leader>=', '10<C-w>+')
 nmap('<Leader>-', '10<C-w>-')
 nmap('<Leader>[', '10<C-w><')
 nmap('<Leader>]', '10<C-w>>')
-
 
 -- vim-bookmarks
 nmap('mm', '<cmd>BookmarkToggle<CR>')
