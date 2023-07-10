@@ -54,12 +54,19 @@ return require('packer').startup(function(use)
     use { 'dstein64/vim-startuptime', cmd = 'StartupTime' }
 
     -- GUI
-    require('user.indentline').config()
+    -- require('user.indentline').config()
+    -- use {
+    --     'lukas-reineke/indent-blankline.nvim',
+    --     event = { 'BufRead', 'BufNewFile' },
+    --     config = "require('user.indentline').setup()",
+    -- } -- Indent
+
     use {
-        'lukas-reineke/indent-blankline.nvim',
+        'shellRaining/hlchunk.nvim',
         event = { 'BufRead', 'BufNewFile' },
-        config = "require('user.indentline').setup()",
+        config = "require('user.hlchunk').setup()",
     } -- Indent
+
     use 'ellisonleao/gruvbox.nvim' -- theme
     use {
         'nvim-lualine/lualine.nvim',

@@ -54,9 +54,9 @@ for _, server in ipairs {
     'yamlls',
     'bashls',
     'vimls',
-    'julials',
     'luals',
     'fortls',
+    'julials',
     'texlab',
 } do
     require('user.lsp.settings.' .. server).setup(on_attach, capabilities)
