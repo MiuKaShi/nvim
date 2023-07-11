@@ -84,7 +84,7 @@ nmap('<leader>o', ':AerialToggle<CR>') -- Outlines
 nmap('<leader>.', ':call ToggleHiddenAll()<CR>') -- LSP 开关
 
 nmap('<leader>hn', ':nohl<CR>') -- disable highlight
-nmap('<leader>ss', '<cmd>w ! sudo tee > /dev/null %<CR>') -- force save files
+nmap('<leader><leader>s', '<cmd>w ! sudo tee > /dev/null %<CR>') -- force save files
 
 nmap('<leader>gd', '<cmd>DiffviewOpen<CR>')
 nmap('<leader>gx', '<cmd>DiffviewClose<CR>')

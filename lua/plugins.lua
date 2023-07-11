@@ -320,7 +320,7 @@ return require('packer').startup(function(use)
         config = "require('user.flash').setup()",
         keys = {
             '<leader>f',
-            '<leader>F',
+            '<leader><leader>f',
         },
     } -- quick move
     use {
