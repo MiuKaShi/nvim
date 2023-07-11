@@ -52,7 +52,7 @@ function M.setup()
                     yaml = true,
                     json = true,
                 },
-                chars = { '│' },
+                chars = { '│', '¦', '┆', '┊' },
             },
             line_num = {
                 enable = true,

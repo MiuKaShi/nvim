@@ -316,9 +316,12 @@ return require('packer').startup(function(use)
         event = { 'BufRead', 'BufNewFile' },
     } -- editor 高亮
     use {
-        'ggandor/leap.nvim',
-        event = 'InsertEnter',
-        config = "require('user.leap').setup()",
+        'folke/flash.nvim',
+        config = "require('user.flash').setup()",
+        keys = {
+            '<leader>f',
+            '<leader>F',
+        },
     } -- quick move
     use {
         'sindrets/diffview.nvim',
