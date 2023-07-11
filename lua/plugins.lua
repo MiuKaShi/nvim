@@ -128,7 +128,7 @@ return require('packer').startup(function(use)
     use { 'kdheepak/cmp-latex-symbols', after = 'nvim-cmp' }
     use {
         'altermo/ultimate-autopair.nvim',
-        event = { 'InsertEnter', 'CmdlineEnter' },
+        event = { 'InsertEnter' },
         config = function()
             require('ultimate-autopair').setup {
                 cr = {
@@ -314,7 +314,7 @@ return require('packer').startup(function(use)
         'echasnovski/mini.hipatterns',
         config = "require('user.mini').setup()",
         event = { 'BufRead', 'BufNewFile' },
-    } -- editor 高亮
+    } -- 高亮TODO
     use {
         'folke/flash.nvim',
         config = "require('user.flash').setup()",
