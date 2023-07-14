@@ -9,6 +9,8 @@ function M.config()
     vim.keymap.set('n', '<leader>bo', ':BibtexciteOpenfile<CR>') -- Bib Open pdf
     vim.keymap.set('n', '<leader>bv', ':BibtexciteShowcite<CR>') -- Bib citation view
     vim.keymap.set('n', '<leader>bc', ':BibtexciteInsert<CR>') -- Bib citation view
+    vim.keymap.set('n', '<leader>be', ':BibtexciteEdit<CR>') -- Bib citation view
+    vim.keymap.set('n', '<leader>bn', ':BibtexciteNote<CR>') -- Bib citation view
 
     vim.cmd [[autocmd FileType markdown.pandoc inoremap <buffer> <silent> @@ <Esc>:BibtexciteInsert<CR>]]
 end

@@ -96,19 +96,3 @@ let g:fzf_wordnet_preview_arg = ''
 if vim.g.neovide then
     require 'user.neovide'
 end
-
--- 文件格式设置
-vim.cmd [[
-autocmd BufRead,BufNewFile *.tp set filetype=type
-autocmd BufRead,BufNewFile *.m set filetype=matlab
-autocmd BufRead,BufNewFile *.md set filetype=markdown.pandoc
-autocmd BufRead,BufNewFile lfrc set filetype=lf
-autocmd BufRead,BufNewFile *.sage set filetype=sage
-autocmd BufRead,BufNewFile sxhkdrc,*.sxhkdrc set filetype=sxhkdrc
-autocmd BufRead,BufNewFile *tridactylrc set filetype=tridactyl
-autocmd BufRead,BufNewFile *.pyx set filetype=cython
-autocmd BufRead,BufNewFile *.pxd set filetype=cython
-autocmd BufRead,BufNewFile *.pxi set filetype=cython
-autocmd BufRead,BufNewFile *.snippets set filetype=snippets
-autocmd BufRead,BufNewFile *.isy set filetype=xml
-]]

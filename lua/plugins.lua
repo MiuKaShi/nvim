@@ -286,7 +286,13 @@ return require('packer').startup(function(use)
     require('user.bibtexcite').config()
     use {
         'MiuKaShi/bibtexcite.vim',
-        cmd = { 'BibtexciteInsert', 'BibtexciteShowcite', 'BibtexciteOpenfile' },
+        cmd = {
+            'BibtexciteInsert',
+            'BibtexciteShowcite',
+            'BibtexciteOpenfile',
+            'BibtexciteEditfile',
+            'BibtexciteNote',
+        },
     } -- bib 引用
     use { 'junegunn/fzf.vim', event = 'InsertEnter' }
     use { 'Avi-D-coder/fzf-wordnet.vim', after = 'fzf.vim' } -- en dic00t
