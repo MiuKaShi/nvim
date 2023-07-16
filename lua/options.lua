@@ -11,26 +11,28 @@ opt.shell = 'zsh'
 opt.title = true
 opt.relativenumber = true -- Show relative line numbers
 opt.number = true
-opt.colorcolumn = '120'
+-- opt.colorcolumn = '120'
 opt.cmdheight = 0
 opt.fillchars = { eob = ' ', diff = ' ' }
 opt.laststatus = 0
-opt.pumheight = 10
-opt.scrolloff = 8 -- Always show at least one line above/below the cursor.
-opt.termguicolors = true
-opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.pumheight = 10 -- Height of the pop up menu
+opt.scrolloff = 4 -- Number of lines to keep above and below the cursor
+opt.sidescrolloff = 4 -- Number of columns to keep at the sides of the cursor
+opt.termguicolors = true -- Enable 24-bit RGB color
+opt.shortmess:append { W = true, I = true, c = true, C = true }
 opt.grepformat = '%f:%l:%c:%m'
-opt.grepprg = 'rg --vimgrep'
+opt.grepprg = 'rg --hidden --vimgrep --smart-case --' -- Replace Vimgrep with Ripgrep   hlsearch = true,
 opt.syntax = 'on' -- 打开语法高亮
--- opt.cursorline = true
--- opt.signcolumn = 'yes:1'
--- opt.cursorline              = true -- 高亮当前行
+opt.signcolumn = 'yes:1'
+opt.cursorline = true
+opt.cursorlineopt = 'number'
+opt.numberwidth = 3
 
 -- Diff
-opt.diffopt:append({ linematch = 60 })
+opt.diffopt:append { linematch = 60 }
 
 -- Format
-opt.formatoptions = "tcroqnlj"
+opt.formatoptions = 'tcroqnlj'
 
 -- opt
 opt.go = 'a'
@@ -48,15 +50,18 @@ opt.completeopt = 'menu,menuone,noselect'
 -- Indent
 -- opt.expandtab = false -- Use spaces instead of tabs
 -- opt.smartindent = true -- Enable smart-indent
-opt.shiftwidth = 4 -- Number of auto-indent spaces
-opt.softtabstop = 4 -- Number of spaces per <Tab> (use value of sw)
-opt.tabstop = 4 -- Ensure files with tabs look the same
+opt.shiftwidth = 2 -- Number of auto-indent spaces
+opt.softtabstop = 2 -- Number of spaces per <Tab> (use value of sw)
+opt.tabstop = 2 -- Ensure files with tabs look the same
+opt.preserveindent = true -- Preserve indent structure as much as possible
 
 -- Time
-opt.timeoutlen = 500
-opt.updatetime = 200 -- default updatetime 4000ms is not good for async update (vim/signify)
+opt.timeoutlen = 300
+opt.updatetime = 50 -- default updatetime 4000ms is not good for async update (vim/signify)
 
 -- Wrap
+-- wrap = false -- Disable wrapping of lines longer than the width of window
+-- enable wrap
 opt.breakindent = true
 opt.linebreak = true
 opt.showbreak = '> '
@@ -73,7 +78,9 @@ opt.ignorecase = true
 opt.swapfile = false
 opt.backup = false
 opt.undofile = true
-opt.undolevels = 10000
+opt.undolevels = 1000
+
+-- undofile
 vim.cmd [[
 set undodir=~/.cache/nvim/undo
 if !isdirectory(&undodir)
