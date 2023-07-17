@@ -27,6 +27,7 @@ opt.signcolumn = 'yes:1'
 opt.cursorline = true
 opt.cursorlineopt = 'number'
 opt.numberwidth = 3
+opt.guicursor = vim.opt.guicursor + { 'a:blinkon100' } -- Fix for blinking cursor
 
 -- Diff
 opt.diffopt:append { linematch = 60 }

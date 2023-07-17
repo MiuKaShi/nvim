@@ -1,26 +1,25 @@
--- Toggle LSP
-vim.cmd [[
-let s:hidden_all = 0
-lua vim.diagnostic.disable()
-function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
-        lua vim.diagnostic.disable()
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-        set signcolumn =no
+-- Toggle hidden_all
+vim.g.hidden_all = 0
+vim.diagnostic.disable()
+function ToggleHiddenAll()
+    if vim.g.hidden_all == 0 then
+        vim.g.hidden_all = 1
+        vim.diagnostic.disable()
+        vim.opt.showmode = false
+        vim.opt.ruler = false
+        vim.opt.laststatus = 0
+        vim.opt.showcmd = false
+        vim.opt.signcolumn = 'no'
     else
-        let s:hidden_all = 0
-        lua vim.diagnostic.enable()
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-        set signcolumn =yes
-    endif
-endfunction]]
+        vim.g.hidden_all = 0
+        vim.diagnostic.enable()
+        vim.opt.showmode = true
+        vim.opt.ruler = true
+        vim.opt.laststatus = 2
+        vim.opt.showcmd = true
+        vim.opt.signcolumn = 'yes'
+    end
+end
 
 -- Change directory
 vim.api.nvim_create_user_command('ChangeDirectory', function()

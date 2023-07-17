@@ -81,7 +81,7 @@ nmap('mc', '<cmd>BookmarkClear<CR>')
 nmap('<leader>lf', ':Lf<CR>') -- finder
 nmap('<leader>i', '<cmd>setlocal spell! spelllang=en_us<CR>') -- spell check
 nmap('<leader>o', ':AerialToggle<CR>') -- Outlines
-nmap('<leader>.', ':call ToggleHiddenAll()<CR>') -- LSP 开关
+nmap('<leader>.', ':lua ToggleHiddenAll()<CR>') -- LSP 开关
 
 nmap('<leader>hn', ':nohl<CR>') -- disable highlight
 nmap('<leader><leader>s', '<cmd>w ! sudo tee > /dev/null %<CR>') -- force save files

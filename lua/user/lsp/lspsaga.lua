@@ -5,7 +5,7 @@ function M.config()
     vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>') -- 显示文档定义
     vim.keymap.set('n', 'gr', '<cmd>Lspsaga rename<CR>') -- 重命名变量
     vim.keymap.set('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>') -- 诊断问题
-    vim.keymap.set('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>') -- 查找变量名
+    vim.keymap.set('n', 'gh', '<cmd>Lspsaga finder ref<CR>') -- 查找变量名
     vim.keymap.set({ 'n', 'v' }, '<leader>ca', '<cmd>Lspsaga code_action<CR>')
     vim.keymap.set('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>') -- 滚动hover 上
     vim.keymap.set('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<CR>') -- 滚动hover 下
@@ -17,11 +17,7 @@ function M.setup()
             enable = false,
         },
         lightbulb = {
-            enable = true,
-            enable_in_insert = true,
-            sign = false,
-            sign_priority = 40,
-            virtual_text = true,
+            enable = false,
         },
         ui = {
             theme = 'round',
@@ -30,11 +26,6 @@ function M.setup()
             border = 'single',
             expand = '',
             collapse = '',
-            preview = '💬',
-            code_action = '💡',
-            diagnostic = '🔥',
-            incoming = ' ',
-            outgoing = ' ',
             colors = {
                 normal_bg = 'none',
                 title_bg = 'none',
