@@ -1,25 +1,23 @@
--- Toggle hidden_all
-vim.g.hidden_all = 0
+-- Toggle diagnostic
+vim.g.diagnostics_visible = false
 vim.diagnostic.disable()
-function ToggleHiddenAll()
-    if vim.g.hidden_all == 0 then
-        vim.g.hidden_all = 1
+vim.api.nvim_create_user_command('ToggleDia', function()
+    if vim.g.diagnostics_visible then
+        vim.g.diagnostics_visible = false
         vim.diagnostic.disable()
         vim.opt.showmode = false
         vim.opt.ruler = false
         vim.opt.laststatus = 0
         vim.opt.showcmd = false
-        vim.opt.signcolumn = 'no'
     else
-        vim.g.hidden_all = 0
+        vim.g.diagnostics_visible = true
         vim.diagnostic.enable()
         vim.opt.showmode = true
         vim.opt.ruler = true
         vim.opt.laststatus = 2
         vim.opt.showcmd = true
-        vim.opt.signcolumn = 'yes'
     end
-end
+end, { desc = 'Toggle Diagnostic' })
 
 -- Change directory
 vim.api.nvim_create_user_command('ChangeDirectory', function()
