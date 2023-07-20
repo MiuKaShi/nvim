@@ -38,7 +38,15 @@ function M.setup()
             },
             context_commentstring = { enable = true, enable_autocmd = false },
             autopairs = { enable = true },
-            incremental_selection = { enable = true },
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = '<CR>',
+                    node_incremental = '<CR>',
+                    scope_incremental = '<TAB>',
+                    node_decremental = '<BS>',
+                },
+            },
             indent = { enable = false },
             rainbow = {
                 enable = true,
