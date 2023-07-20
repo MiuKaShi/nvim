@@ -65,11 +65,11 @@ return require('packer').startup(function(use)
         'nvim-lualine/lualine.nvim',
         config = "require('user.lualine').setup()",
     } -- 底部状态栏
-    use { 
-			'kyazdani42/nvim-web-devicons', 
-			event = 'VimEnter', 
-			config = "require('user.icons').setup()" 
-		} -- Icons
+    use {
+        'kyazdani42/nvim-web-devicons',
+        event = 'VimEnter',
+        config = "require('user.icons').setup()",
+    } -- Icons
 
     -- LSP
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
@@ -113,7 +113,7 @@ return require('packer').startup(function(use)
     use { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' }
 
     -- CMP&Editor
-    use { 'L3MON4D3/LuaSnip', event = 'InsertEnter' }
+    use { 'L3MON4D3/LuaSnip', event = 'InsertEnter', config = "require('user.luasnip').setup()" }
     use { 'hrsh7th/nvim-cmp', after = 'LuaSnip', module = 'cmp', config = "require('user.cmp').setup()" }
     use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
