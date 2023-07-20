@@ -4,7 +4,9 @@ function M.setup()
     local cmp_status_ok, cmp = pcall(require, 'cmp')
     local snip_status_ok, luasnip = pcall(require, 'luasnip')
     if cmp_status_ok and snip_status_ok then
+        -- copilot
         require('copilot_cmp').setup {}
+        -- snippets
         require('luasnip.loaders.from_snipmate').lazy_load() --Snipmate like snippets
 
         local compare = require 'cmp.config.compare'
