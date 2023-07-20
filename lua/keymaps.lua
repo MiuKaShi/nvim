@@ -1,10 +1,3 @@
---[[
-Description: file content
-Author: Zhang Ke
-Date: 2023-05-10 16:07:57
-LastEditors: Zhang Ke
-LastEditTime: 2023-05-10 16:10:57
---]]
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 

@@ -29,7 +29,7 @@ local sources = {
         filetypes = { 'css', 'json', 'yaml', 'markdown' },
     },
     formatting.astyle.with {
-        filetypes = { 'arduino' },
+        filetypes = { 'c' },
         extra_args = {
             '--mode=c',
             '--indent=spaces=4',

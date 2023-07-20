@@ -65,7 +65,11 @@ return require('packer').startup(function(use)
         'nvim-lualine/lualine.nvim',
         config = "require('user.lualine').setup()",
     } -- 底部状态栏
-    use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', config = "require('user.icons').setup()" } -- Icons
+    use { 
+			'kyazdani42/nvim-web-devicons', 
+			event = 'VimEnter', 
+			config = "require('user.icons').setup()" 
+		} -- Icons
 
     -- LSP
     use 'neovim/nvim-lspconfig' -- lsp 配置插件
