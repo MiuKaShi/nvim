@@ -1,3 +1,4 @@
+local option = vim.opt
 -- DISABLE REMOTE PLUGINS
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
@@ -19,7 +20,7 @@ vim.g.loaded_tutor = 1
 vim.g.loaded_zipPlugin = 1
 
 --加速启动
-require 'user.impatient'
+require('impatient').enable_profile()
 
 --基本设置
 require 'options'
@@ -27,6 +28,10 @@ require 'keymaps'
 require 'functions'
 require 'plugins'
 require 'autocmds'
+-- neovide setting
+if vim.g.neovide then
+    require 'neovide'
+end
 
 --theme and lsp设置
 require 'user.colorscheme'

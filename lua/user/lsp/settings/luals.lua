@@ -2,17 +2,8 @@ local M = {}
 
 M.setup = function(on_attach, capabilities)
     -- this block must come before lua LSP setup
-    require("neodev").setup {
-      settings = {
-        Lua = {
-          runtime = {
-            version = 'LuaJIT', -- Lua 5.1/LuaJIT
-          },
-          completion = { callSnippet = "Disable" },
-          workspace = { maxPreload = 10000 },
-        },
-      },
-    }
+    require('neodev').setup {}
+    -- lua_ls setup
     require('lspconfig').lua_ls.setup {
         on_attach = on_attach,
         capabilities = capabilities,

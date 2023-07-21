@@ -9,6 +9,7 @@ opt.shell = 'zsh'
 
 -- UI
 opt.title = true -- show title
+opt.showmode = false -- show mode
 opt.relativenumber = true -- Show relative line numbers
 opt.number = true
 -- opt.colorcolumn = '120'
@@ -61,7 +62,7 @@ opt.timeoutlen = 300 -- 键位响应视觉
 opt.updatetime = 50 -- default updatetime 4000ms is not good for async update (vim/signify)
 
 -- Wrap
--- wrap = false -- Disable wrapping of lines longer than the width of window
+-- opt.wrap = false -- Disable wrapping
 -- enable wrap
 opt.breakindent = true
 opt.linebreak = true
@@ -95,8 +96,3 @@ vim.g.GfList_map_v_gf = 'gf'
 
 --wordned
 vim.g.fzf_wordnet_preview_arg = ''
-
--- neovide setting
-if vim.g.neovide then
-    require 'user.neovide'
-end

@@ -72,13 +72,12 @@ return require('packer').startup(function(use)
     } -- Icons
 
     -- LSP
-    use 'neovim/nvim-lspconfig' -- lsp 配置插件
+    use { 'folke/neodev.nvim' } -- neovim api lsp
+    use { 'neovim/nvim-lspconfig' } -- lsp 配置插件
     use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
-    use 'folke/neodev.nvim' -- lua 语法提示 for lsp
-    require('user.lsp.lspsaga').config()
     use {
         'nvimdev/lspsaga.nvim',
-        config = "require('user.lsp.lspsaga').setup()",
+        config = "require('user.lspsaga').setup()",
         cmd = { 'Lspsaga' },
     } -- better LSP
     require('user.trouble').config()
@@ -307,12 +306,16 @@ return require('packer').startup(function(use)
         cmd = { 'AerialToggle', 'AerialOpen', 'AerialInfo' },
         config = "require('user.aerial').setup()",
     } -- outline
-    require('user.comment').config()
     use {
-        'numToStr/Comment.nvim',
-        config = "require('user.comment').setup()",
-        event = { 'BufRead', 'BufNewFile' },
-    } -- comment
+        'echasnovski/mini.comment',
+        config = function()
+            require('mini.comment').setup()
+        end,
+        keys = {
+            'gcc',
+            'gc',
+        },
+    }
     use {
         'echasnovski/mini.hipatterns',
         config = "require('user.mini').setup()",

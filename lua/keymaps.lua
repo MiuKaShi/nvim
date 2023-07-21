@@ -42,8 +42,8 @@ imap('<C-n>', '<Plug>(fzf-complete-wordnet)')
 -------------
 
 -- buffer
-nmap('<C-l>', '<cmd>bnext<CR>') -- buffer 跳转
-nmap('<C-h>', '<cmd>bprev<CR>')
+nmap('<A-Tab>', '<cmd>bnext<CR>') -- buffer 跳转
+nmap('<leader>bc', '<cmd>bd<CR>') -- buffer 关闭
 nmap('<C-s>', '<cmd>write<CR>')
 
 -- better up/down
@@ -51,13 +51,22 @@ nmap('<C-s>', '<cmd>write<CR>')
 vim.keymap.set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
+-- visual move
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
 -- split window
-nmap('<Leader>s', ':sp<CR>')
-nmap('<Leader>v', ':vsp<CR>')
+nmap('<Leader>s', '<cmd>sp<CR>')
+nmap('<Leader>v', '<cmd>vsp<CR>')
 nmap('<Leader>h', '<C-w>h')
 nmap('<Leader>l', '<C-w>l')
 nmap('<Leader>j', '<C-w>j')
 nmap('<Leader>k', '<C-w>k')
+
+-- toggle comment
+
+vim.cmd [[nmap <leader>; gcc<esc>]]
+vim.cmd [[vmap <leader>; gcc<esc>]]
 
 -- resize split window
 nmap('<Leader>=', '10<C-w>+')
@@ -71,12 +80,12 @@ nmap('mn', '<cmd>BookmarkNext<CR>')
 nmap('mp', '<cmd>BookmarkPrev<CR>')
 nmap('mc', '<cmd>BookmarkClear<CR>')
 
-nmap('<leader>lf', ':Lf<CR>') -- finder
+nmap('<leader>e', '<cmd>Lf<CR>') -- finder
 nmap('<leader>i', '<cmd>setlocal spell! spelllang=en_us<CR>') -- spell check
-nmap('<leader>o', ':AerialToggle<CR>') -- Outlines
+nmap('<leader>o', '<cmd>AerialToggle<CR>') -- Outlines
 nmap('<leader>.', '<cmd>ToggleDia<CR>') -- LSP 开关
 
-nmap('<leader>hn', ':nohl<CR>') -- disable highlight
+nmap('<leader>hn', '<cmd>nohl<CR>') -- disable highlight
 nmap('<leader><leader>s', '<cmd>w ! sudo tee > /dev/null %<CR>') -- force save files
 
 nmap('<leader>gd', '<cmd>DiffviewOpen<CR>')

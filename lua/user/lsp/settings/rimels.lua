@@ -2,7 +2,6 @@
 vim.g.rime_enabled = false
 
 -- add rime-ls to lspconfig as a custom server
-local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig.configs'
 local util = require 'lspconfig.util'
 
