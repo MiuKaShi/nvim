@@ -30,30 +30,25 @@ vim.g.neovide_cursor_animation_length = 0.03
 vim.opt.winblend = 10
 vim.opt.pumblend = 10
 
-RefreshGuiFont = function()
-    vim.opt.guifont = string.format('%s:h%s', vim.g.gui_font_face, vim.g.gui_font_size)
+local map = vim.keymap.set
+
+local function neovideScale(amount)
+    local temp = vim.g.neovide_scale_factor + amount
+
+    if temp < 0.5 then
+        return
+    end
+
+    vim.g.neovide_scale_factor = temp
 end
 
-ResizeGuiFont = function(delta)
-    vim.g.gui_font_size = vim.g.gui_font_size + delta
-    RefreshGuiFont()
-end
+map('n', '<M-k>', function()
+    neovideScale(0.1)
+end)
 
-ResetGuiFont = function()
-    vim.g.gui_font_size = vim.g.gui_font_default_size
-    RefreshGuiFont()
-end
+map('n', '<M-j>', function()
+    neovideScale(-0.1)
+end)
 
--- Call function on startup to set default font size
-ResetGuiFont()
-
--- Resize font
-local opts = { noremap = true, silent = true }
-vim.keymap.set({ 'n', 'i' }, '<M-k>', function()
-    ResizeGuiFont(1)
-end, opts)
-vim.keymap.set({ 'n', 'i' }, '<M-j>', function()
-    ResizeGuiFont(-1)
-end, opts)
 vim.keymap.set({ 'n', 'i' }, '<M-v>', 'p') --alt+v paste
 vim.keymap.set({ 'n', 'i' }, '<M-c>', 'y') --alt+c copy
