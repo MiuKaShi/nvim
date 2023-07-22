@@ -184,7 +184,6 @@ return require('packer').startup(function(use)
     } -- based on GPT
 
     -- Search
-
     use { 'kkharji/sqlite.lua', module = 'sqlite' } -- telescope-frecency dependence
     use { 'nvim-lua/plenary.nvim', module = 'plenary' } -- dependence
     use {
@@ -208,6 +207,8 @@ return require('packer').startup(function(use)
             '<C-f>',
         },
     }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', module = 'telescope._extensions.fzf' }
+    use { 'nvim-telescope/telescope-file-browser.nvim', module = 'telescope._extensions.file_browser' }
     use { 'nvim-telescope/telescope-file-browser.nvim', module = 'telescope._extensions.file_browser' }
     use { 'nvim-telescope/telescope-ui-select.nvim', module = 'telescope._extensions.ui-select' }
     use { 'nvim-telescope/telescope-frecency.nvim', module = 'telescope._extensions.frecency' }
