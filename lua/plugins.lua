@@ -121,7 +121,6 @@ return require('packer').startup(function(use)
     use { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' }
     use { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' }
     use { 'mstanciu552/cmp-matlab', after = 'nvim-cmp' }
-    use { 'kdheepak/cmp-latex-symbols', after = 'nvim-cmp' }
     use {
         'altermo/ultimate-autopair.nvim',
         event = { 'InsertEnter' },
@@ -208,7 +207,6 @@ return require('packer').startup(function(use)
         },
     }
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', module = 'telescope._extensions.fzf' }
-    use { 'nvim-telescope/telescope-file-browser.nvim', module = 'telescope._extensions.file_browser' }
     use { 'nvim-telescope/telescope-file-browser.nvim', module = 'telescope._extensions.file_browser' }
     use { 'nvim-telescope/telescope-ui-select.nvim', module = 'telescope._extensions.ui-select' }
     use { 'nvim-telescope/telescope-frecency.nvim', module = 'telescope._extensions.frecency' }

@@ -110,10 +110,9 @@ function M.setup()
                         path = '[Path]',
                         cmdline = '[Cmd]',
                         luasnip = '[Snip]',
-                        latex_symbols = '[Tex]',
-                        -- neorg    = '[Norg]',
                         cmp_matlab = '[MATLAB]',
-                        rg = '[RG]',
+                        -- neorg    = '[Norg]',
+                        -- rg = '[RG]',
                     })[entry.source.name]
                     return vim_item
                 end,
@@ -145,10 +144,10 @@ function M.setup()
             sources = {
                 { name = 'nvim_lsp', priority = 1000 },
                 { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
-                { name = 'path', priority = 750, max_item_count = 4 },
+                { name = 'path', priority = 700, max_item_count = 4 },
                 {
                     name = 'buffer',
-                    priority = 5,
+                    priority = 800,
                     keyword_length = 3,
                     max_item_count = 5,
                     option = {
@@ -163,35 +162,21 @@ function M.setup()
             },
         }
         cmp.setup.filetype({ 'markdown.pandoc', 'tex' }, {
-            sources = cmp.config.sources({
-                {
-                    name = 'latex_symbols',
-                    option = { strategy = 2 },
-                    keyword_length = 3,
-                    priority = 800,
-                },
+            sources = cmp.config.sources {
                 { name = 'nvim_lsp', keyword_length = 2, priority = 600 },
                 { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
-                {
-                    name = 'rg',
-                    keyword_length = 4,
-                    max_item_count = 10,
-                    priority = 1000,
-                },
-            }, {
-                { name = 'buffer', keyword_length = 3 },
-            }),
+                { name = 'buffer', keyword_length = 3, priority = 1000 },
+            },
         })
 
         cmp.setup.filetype({ 'julia', 'matlab', 'sh', 'python' }, {
-            sources = cmp.config.sources({
+            sources = cmp.config.sources {
                 { name = 'nvim_lsp', priority = 1000 },
                 { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
                 { name = 'path', priority = 700, max_item_count = 4 },
                 { name = 'copilot', priority = 800, max_item_count = 3 },
-            }, {
-                { name = 'buffer', keyword_length = 3 },
-            }),
+                { name = 'buffer', keyword_length = 3, priority = 600 },
+            },
         })
 
         cmp.setup.cmdline(':', {
