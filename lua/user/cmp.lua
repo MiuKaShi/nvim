@@ -15,6 +15,10 @@ function M.setup()
             local col = vim.fn.col '.' - 1
             return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s'
         end
+        local function has_words_before()
+            local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+            return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
+        end
         local cmp_kinds = {
             Array = '󰅪',
             Boolean = '',
@@ -68,38 +72,31 @@ function M.setup()
                 end,
             },
             mapping = {
+                ['<CR>'] = cmp.config.disable,
                 ['<C-j>'] = cmp.mapping.select_next_item(),
                 ['<C-k>'] = cmp.mapping.select_prev_item(),
-                ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-                ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+                ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+                ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
                 ['<C-Space>'] = cmp.mapping(cmp.mapping.complete {}, { 'i', 'c' }),
-                ['<C-y>'] = cmp.mapping.confirm { select = true }, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
                 ['<C-e>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
-                -- Accept currently selected item. If none selected, `select` first item.
-                -- Set `select` to `false` to only confirm explicitly selected items.
-                ['<CR>'] = cmp.mapping.confirm { select = true },
+                ['<C-y>'] = cmp.mapping.confirm { select = true },
                 ['<Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
-                        cmp.select_next_item()
-                    elseif luasnip.expandable() then
-                        luasnip.expand {}
-                    elseif luasnip.expand_or_jumpable() then
-                        luasnip.expand_or_jump()
-                    elseif check_backspace() then
-                        fallback()
+                        local entry = cmp.get_selected_entry()
+                        if not entry then
+                            cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+                        else
+                            if has_words_before() then
+                                cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+                            else
+                                cmp.confirm { behavior = cmp.ConfirmBehavior.Insert, select = false }
+                            end
+                        end
                     else
                         fallback()
                     end
                 end, { 'i', 's' }),
-                ['<S-Tab>'] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_prev_item()
-                    elseif luasnip.jumpable(-1) then
-                        luasnip.jump(-1)
-                    else
-                        fallback()
-                    end
-                end, { 'i', 's' }),
+                ['<S-Tab>'] = cmp.config.disable,
             },
             formatting = {
                 fields = { 'kind', 'abbr', 'menu' },
@@ -166,10 +163,20 @@ function M.setup()
         }
         cmp.setup.filetype({ 'markdown.pandoc', 'tex' }, {
             sources = cmp.config.sources({
-                { name = 'latex_symbols', option = { strategy = 2 }, keyword_length = 3, priority = 80 },
+                {
+                    name = 'latex_symbols',
+                    option = { strategy = 2 },
+                    keyword_length = 3,
+                    priority = 80,
+                },
                 { name = 'nvim_lsp', keyword_length = 2, priority = 60 },
                 { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
-                { name = 'rg', keyword_length = 4, max_item_count = 10, priority = 1 },
+                {
+                    name = 'rg',
+                    keyword_length = 4,
+                    max_item_count = 10,
+                    priority = 1,
+                },
             }, {
                 { name = 'buffer', keyword_length = 3 },
             }),

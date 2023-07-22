@@ -20,7 +20,10 @@ vim.g.loaded_tutor = 1
 vim.g.loaded_zipPlugin = 1
 
 --加速启动
-require('impatient').enable_profile()
+local status_ok, impatient = pcall(require, 'impatient')
+if status_ok then
+    impatient.enable_profile()
+end
 
 --基本设置
 require 'options'

@@ -74,7 +74,7 @@ return require('packer').startup(function(use)
     -- LSP
     use { 'folke/neodev.nvim' } -- neovim api lsp
     use { 'neovim/nvim-lspconfig' } -- lsp 配置插件
-    use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
+    use { 'jose-elias-alvarez/null-ls.nvim' } -- for formatters and linters
     use {
         'nvimdev/lspsaga.nvim',
         config = "require('user.lspsaga').setup()",

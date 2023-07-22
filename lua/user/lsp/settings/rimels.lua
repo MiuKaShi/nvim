@@ -45,7 +45,11 @@ end
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities.offsetEncoding = { 'utf-16' }
+local status_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+if status_ok then
+    capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+end
 
 -- rime_ls setup
 require('lspconfig').rime_ls.setup {
