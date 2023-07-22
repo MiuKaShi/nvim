@@ -71,6 +71,7 @@ function M.setup()
                     luasnip.lsp_expand(args.body) -- For `luasnip` users.
                 end,
             },
+            completion = { completeopt = 'menu,menuone,noinsert' },
             mapping = {
                 ['<CR>'] = cmp.config.disable,
                 ['<C-j>'] = cmp.mapping.select_next_item(),
@@ -142,9 +143,9 @@ function M.setup()
             },
             matching = { disallow_prefix_unmatching = true },
             sources = {
-                { name = 'nvim_lsp', priority = 80 },
-                { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
-                { name = 'path', priority = 40, max_item_count = 4 },
+                { name = 'nvim_lsp', priority = 1000 },
+                { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
+                { name = 'path', priority = 750, max_item_count = 4 },
                 {
                     name = 'buffer',
                     priority = 5,
@@ -167,15 +168,15 @@ function M.setup()
                     name = 'latex_symbols',
                     option = { strategy = 2 },
                     keyword_length = 3,
-                    priority = 80,
+                    priority = 800,
                 },
-                { name = 'nvim_lsp', keyword_length = 2, priority = 60 },
-                { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
+                { name = 'nvim_lsp', keyword_length = 2, priority = 600 },
+                { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
                 {
                     name = 'rg',
                     keyword_length = 4,
                     max_item_count = 10,
-                    priority = 1,
+                    priority = 1000,
                 },
             }, {
                 { name = 'buffer', keyword_length = 3 },
@@ -184,10 +185,10 @@ function M.setup()
 
         cmp.setup.filetype({ 'julia', 'matlab', 'sh', 'python' }, {
             sources = cmp.config.sources({
-                { name = 'nvim_lsp', priority = 80 },
-                { name = 'luasnip', priority = 80, option = { show_autosnippets = true } },
-                { name = 'path', priority = 40, max_item_count = 4 },
-                { name = 'copilot', priority = 80, max_item_count = 3 },
+                { name = 'nvim_lsp', priority = 1000 },
+                { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
+                { name = 'path', priority = 700, max_item_count = 4 },
+                { name = 'copilot', priority = 800, max_item_count = 3 },
             }, {
                 { name = 'buffer', keyword_length = 3 },
             }),
