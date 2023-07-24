@@ -9,8 +9,6 @@ function M.setup()
         -- snippets
         require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/LuaSnip' }
 
-        local compare = require 'cmp.config.compare'
-
         local check_backspace = function()
             local col = vim.fn.col '.' - 1
             return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s'
@@ -65,6 +63,7 @@ function M.setup()
             { '╰', 'CmpBorder' },
             { '│', 'CmpBorder' },
         }
+
         cmp.setup {
             snippet = {
                 expand = function(args)
@@ -76,11 +75,25 @@ function M.setup()
                 ['<CR>'] = cmp.config.disable,
                 ['<C-j>'] = cmp.mapping.select_next_item(),
                 ['<C-k>'] = cmp.mapping.select_prev_item(),
-                ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+                ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
                 ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
                 ['<C-Space>'] = cmp.mapping(cmp.mapping.complete {}, { 'i', 'c' }),
                 ['<C-e>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
                 ['<C-y>'] = cmp.mapping.confirm { select = true },
+                ['<C-d>'] = cmp.mapping(function(fallback)
+                    if luasnip.jumpable(1) then
+                        luasnip.jump(1)
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }),
+                ['<C-b>'] = cmp.mapping(function(fallback)
+                    if luasnip.jumpable(-1) then
+                        luasnip.jump(-1)
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }),
                 ['<Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         local entry = cmp.get_selected_entry()
@@ -117,27 +130,33 @@ function M.setup()
                     return vim_item
                 end,
             },
+            -- don't sort double underscore things first
             sorting = {
                 comparators = {
-                    compare.sort_text,
-                    compare.offset,
-                    compare.exact,
-                    compare.score,
-                    compare.recently_used,
-                    compare.kind,
-                    compare.length,
-                    compare.order,
+                    cmp.config.compare.offset,
+                    cmp.config.compare.exact,
+                    cmp.config.compare.score,
+                    cmp.config.compare.kind,
+                    cmp.config.compare.sort_text,
+                    cmp.config.compare.length,
+                    cmp.config.compare.order,
                 },
             },
+            duplicates = {
+                buffer = 1,
+                path = 1,
+                nvim_lsp = 0,
+                luasnip = 1,
+            },
             window = {
-                documentation = {
-                    border = border_thin,
-                },
                 completion = {
-                    col_offset = -2,
                     side_padding = 1,
+                    scrollbar = false,
                     border = border_thin,
                     winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
+                },
+                documentation = {
+                    border = border_thin,
                 },
             },
             matching = { disallow_prefix_unmatching = true },
