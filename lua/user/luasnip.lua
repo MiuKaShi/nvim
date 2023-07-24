@@ -7,6 +7,7 @@ function M.setup()
         luasnip.setup {
             update_events = 'TextChanged,TextChangedI',
             enable_autosnippets = true,
+            store_selection_keys = '`',
             ext_opts = {
                 [types.choiceNode] = { active = { virt_text = { { '« ', 'NonText' } } } },
             },

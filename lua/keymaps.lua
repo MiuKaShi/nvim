@@ -1,67 +1,52 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-local function _map(mode, shortcut, command)
-    vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
-end
-
-local function map(shortcut, command)
-    _map('', shortcut, command)
-end
-
-local function nmap(shortcut, command)
-    _map('n', shortcut, command)
-end
-
-local function imap(shortcut, command)
-    _map('i', shortcut, command)
-end
-
-local function vmap(shortcut, command)
-    _map('v', shortcut, command)
-end
-
-local function cmap(shortcut, command)
-    _map('c', shortcut, command)
-end
-
-local function tmap(shortcut, command)
-    _map('t', shortcut, command)
+local function map(mode, shortcut, command, opts)
+    opts = opts or {}
+    opts.silent = opts.silent ~= false
+    vim.keymap.set(mode, shortcut, command, opts)
 end
 
 -------------
 -- insert mode
 -------------
 
-imap('<C-a>', '<Esc>0i')
-imap('<C-e>', '<End>')
-imap('<C-n>', '<Plug>(fzf-complete-wordnet)')
+map('i', '<C-a>', '<Esc>0i')
+map('i', '<C-e>', '<End>')
+map('i', '<C-n>', '<Plug>(fzf-complete-wordnet)')
 
 -------------
 -- normal mode
 -------------
 
 -- buffer
-nmap('<A-Tab>', '<cmd>bnext<CR>') -- buffer 跳转
-nmap('<leader>bc', '<cmd>bd<CR>') -- buffer 关闭
-nmap('<C-s>', '<cmd>write<CR>')
+map('n', '<A-Tab>', '<cmd>bnext<CR>') -- buffer 跳转
+map('n', '<leader>bc', '<cmd>bd<CR>') -- buffer 关闭
+map({ 'i', 'v', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>')
 
--- better up/down
--- https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
-vim.keymap.set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- better movement
+map({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+map({ 'n', 'v', 'o' }, 'H', '^', { desc = "Use 'H' as '^'" })
+map({ 'n', 'v', 'o' }, 'L', '$', { desc = "Use 'L' as '$'" })
+
+-- better indenting
+map('v', '<', '<gv')
+map('v', '>', '>gv')
+map('n', '<', 'v<g')
+map('n', '>', 'v>g')
 
 -- visual move
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+map('v', 'J', ":m '>+1<CR>gv=gv")
+map('v', 'K', ":m '<-2<CR>gv=gv")
 
 -- split window
-nmap('<Leader>s', '<cmd>sp<CR>')
-nmap('<Leader>v', '<cmd>vsp<CR>')
-nmap('<Leader>h', '<C-w>h')
-nmap('<Leader>l', '<C-w>l')
-nmap('<Leader>j', '<C-w>j')
-nmap('<Leader>k', '<C-w>k')
+map('n', '<Leader>s', '<cmd>sp<CR>')
+map('n', '<Leader>v', '<cmd>vsp<CR>')
+map('n', '<Leader>h', '<C-w>h')
+map('n', '<Leader>l', '<C-w>l')
+map('n', '<Leader>j', '<C-w>j')
+map('n', '<Leader>k', '<C-w>k')
 
 -- toggle comment
 
@@ -69,46 +54,34 @@ vim.cmd [[nmap <leader>; gcc<esc>]]
 vim.cmd [[vmap <leader>; gcc<esc>]]
 
 -- resize split window
-nmap('<Leader>=', '10<C-w>+')
-nmap('<Leader>-', '10<C-w>-')
-nmap('<Leader>[', '10<C-w><')
-nmap('<Leader>]', '10<C-w>>')
+map('n', '<Leader>=', '10<C-w>+')
+map('n', '<Leader>-', '10<C-w>-')
+map('n', '<Leader>[', '10<C-w><')
+map('n', '<Leader>]', '10<C-w>>')
 
 -- vim-bookmarks
-nmap('mm', '<cmd>BookmarkToggle<CR>')
-nmap('mn', '<cmd>BookmarkNext<CR>')
-nmap('mp', '<cmd>BookmarkPrev<CR>')
-nmap('mc', '<cmd>BookmarkClear<CR>')
+map('n', 'mm', '<cmd>BookmarkToggle<CR>')
+map('n', 'mn', '<cmd>BookmarkNext<CR>')
+map('n', 'mp', '<cmd>BookmarkPrev<CR>')
+map('n', 'mc', '<cmd>BookmarkClear<CR>')
 
-nmap('<leader>e', '<cmd>Lf<CR>') -- finder
-nmap('<leader>i', '<cmd>setlocal spell! spelllang=en_us<CR>') -- spell check
-nmap('<leader>o', '<cmd>AerialToggle<CR>') -- Outlines
-nmap('<leader>.', '<cmd>ToggleDia<CR>') -- LSP 开关
+map('n', '<leader>e', '<cmd>Lf<CR>') -- finder
+map('n', '<leader>i', '<cmd>setlocal spell! spelllang=en_us<CR>') -- spell check
+map('n', '<leader>o', '<cmd>AerialToggle<CR>') -- Outlines
+map('n', '<leader>.', '<cmd>ToggleDia<CR>') -- LSP 开关
 
-nmap('<leader>hn', '<cmd>nohl<CR>') -- disable highlight
-nmap('<leader><leader>s', '<cmd>w ! sudo tee > /dev/null %<CR>') -- force save files
-
-nmap('<leader>gd', '<cmd>DiffviewOpen<CR>')
-nmap('<leader>gx', '<cmd>DiffviewClose<CR>')
-
-nmap('<leader>cc', ':!compiler <c-r>%<CR><CR>')
-nmap('<leader>cp', '<Cmd>call jobstart(["autoprev", expand("%:p")])<CR>')
+map('n', '<leader>hn', '<cmd>nohl<CR>') -- disable highlight
+map('n', '<leader><leader>s', '<cmd>w ! sudo tee > /dev/null %<CR>') -- force save files
+map('n', '<leader>gd', '<cmd>DiffviewOpen<CR>')
+map('n', '<leader>gx', '<cmd>DiffviewClose<CR>')
+map('n', '<leader>cc', ':!compiler <c-r>%<CR><CR>')
+map('n', '<leader>cp', '<Cmd>call jobstart(["autoprev", expand("%:p")])<CR>')
 
 -- command line mode
-cmap('<C-a>', '<Home>')
-cmap('<C-e>', '<End>')
-cmap('<C-h>', '<BS>')
-cmap('<C-k>', '<C-f>D<C-c><C-c>:<Up>')
+map('c', '<C-a>', '<Home>')
+map('c', '<C-e>', '<End>')
+map('c', '<C-h>', '<BS>')
+map('c', '<C-k>', '<C-f>D<C-c><C-c>:<Up>')
 
--- End of setup for keybindings
-
--- better gx mapping
-local function gmap(mode, lhs, rhs, opts)
-    local options = { noremap = true }
-    if opts then
-        options = vim.tbl_extend('force', options, opts)
-    end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
-gmap('', 'gx', '<Cmd>call jobstart(["linkhandler", expand("<cfile>")], {"detach": v:true})<CR>', {})
+-- better gx
+map('', 'gx', '<Cmd>call jobstart(["linkhandler", expand("<cfile>")], {"detach": v:true})<CR>', {})

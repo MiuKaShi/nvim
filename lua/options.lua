@@ -34,7 +34,7 @@ opt.guicursor = vim.opt.guicursor + { 'a:blinkon100' } -- 光标闪烁速度
 opt.diffopt:append { linematch = 60 } -- diff模式时,最大行数60
 
 -- Format
-opt.formatoptions = 'tcroqnlj'
+opt.formatoptions = 'jcroqlnt' -- tcqj
 
 -- opt
 opt.go = 'a'
@@ -96,3 +96,6 @@ vim.g.GfList_map_v_gf = 'gf'
 
 --wordned
 vim.g.fzf_wordnet_preview_arg = ''
+
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
