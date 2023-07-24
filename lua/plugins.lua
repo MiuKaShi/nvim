@@ -68,7 +68,7 @@ return require('packer').startup(function(use)
     use {
         'kyazdani42/nvim-web-devicons',
         event = 'VimEnter',
-        config = "require('user.icons').setup()",
+        config = "require('user.devicons').setup()",
     } -- Icons
 
     -- LSP

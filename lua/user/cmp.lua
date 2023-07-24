@@ -1,13 +1,10 @@
 local M = {}
 
 function M.setup()
-    local cmp_status_ok, cmp = pcall(require, 'cmp')
-    local snip_status_ok, luasnip = pcall(require, 'luasnip')
-    if cmp_status_ok and snip_status_ok then
+    local status_ok, cmp = pcall(require, 'cmp')
+    if status_ok then
         -- copilot
         require('copilot_cmp').setup {}
-        -- snippets
-        require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/LuaSnip' }
 
         local check_backspace = function()
             local col = vim.fn.col '.' - 1
@@ -18,40 +15,41 @@ function M.setup()
             return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
         end
         local cmp_kinds = {
-            Array = '󰅪',
-            Boolean = '',
-            Class = '󰌗',
-            Color = '',
-            Constant = '',
-            Constructor = '',
-            Enum = '',
-            EnumMember = '',
-            Event = '',
-            Field = '',
-            File = '󰈙',
-            Folder = '',
-            Function = '',
-            Interface = '',
-            Key = '󰌆',
-            Keyword = '',
-            Method = '',
-            Module = '',
-            Namespace = '󰅪',
-            Null = '󰟢',
-            Number = '',
-            Object = '󰀚',
-            Operator = '',
-            Package = '󰏗',
-            Property = '',
-            Reference = '',
-            Snippet = '',
-            String = '󰀬',
-            Struct = '',
-            Text = '',
-            TypeParameter = '󰊄',
-            Unit = '',
-            Value = '',
-            Variable = '',
+            Array = ' ',
+            Boolean = ' ',
+            Class = ' ',
+            Color = ' ',
+            Constant = ' ',
+            Constructor = ' ',
+            Copilot = ' ',
+            Enum = ' ',
+            EnumMember = ' ',
+            Event = ' ',
+            Field = ' ',
+            File = ' ',
+            Folder = ' ',
+            Function = ' ',
+            Interface = ' ',
+            Key = ' ',
+            Keyword = ' ',
+            Method = ' ',
+            Module = ' ',
+            Namespace = ' ',
+            Null = ' ',
+            Number = ' ',
+            Object = ' ',
+            Operator = ' ',
+            Package = ' ',
+            Property = ' ',
+            Reference = ' ',
+            Snippet = ' ',
+            String = ' ',
+            Struct = ' ',
+            Text = '',
+            TypeParameter = ' ',
+            Unit = ' ',
+            Value = ' ',
+            Variable = ' ',
         }
         local border_thin = {
             { '╭', 'CmpBorder' },
@@ -67,7 +65,7 @@ function M.setup()
         cmp.setup {
             snippet = {
                 expand = function(args)
-                    luasnip.lsp_expand(args.body) -- For `luasnip` users.
+                    require('luasnip').lsp_expand(args.body)
                 end,
             },
             completion = { completeopt = 'menu,menuone,noinsert' },
@@ -80,20 +78,6 @@ function M.setup()
                 ['<C-Space>'] = cmp.mapping(cmp.mapping.complete {}, { 'i', 'c' }),
                 ['<C-e>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
                 ['<C-y>'] = cmp.mapping.confirm { select = true },
-                ['<C-d>'] = cmp.mapping(function(fallback)
-                    if luasnip.jumpable(1) then
-                        luasnip.jump(1)
-                    else
-                        fallback()
-                    end
-                end, { 'i', 's' }),
-                ['<C-b>'] = cmp.mapping(function(fallback)
-                    if luasnip.jumpable(-1) then
-                        luasnip.jump(-1)
-                    else
-                        fallback()
-                    end
-                end, { 'i', 's' }),
                 ['<Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         local entry = cmp.get_selected_entry()
@@ -193,7 +177,7 @@ function M.setup()
                 { name = 'nvim_lsp', priority = 1000 },
                 { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
                 { name = 'path', priority = 700, max_item_count = 4 },
-                { name = 'copilot', priority = 800, max_item_count = 3 },
+                { name = 'copilot', priority = 750, max_item_count = 3 },
                 { name = 'buffer', keyword_length = 3, priority = 600 },
             },
         })

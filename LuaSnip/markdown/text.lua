@@ -1,4 +1,4 @@
-local ls = require("luasnip")
+local ls = require 'luasnip'
 local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
@@ -6,35 +6,61 @@ local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
 local c = ls.choice_node
-local fmt = require("luasnip.extras.fmt").fmt
-local fmta = require("luasnip.extras.fmt").fmta
-local rep = require("luasnip.extras").rep
+local p = require('luasnip.extras').partial
+local fmt = require('luasnip.extras.fmt').fmt
+local fmta = require('luasnip.extras.fmt').fmta
+local rep = require('luasnip.extras').rep
+
+local conds_expand = require 'luasnip.extras.conditions.expand'
+local pos = require 'snippets.position'
+
 local get_visual = function(args, parent)
-  if #parent.snippet.env.SELECT_RAW > 0 then
-    return sn(nil, i(1, parent.snippet.env.SELECT_RAW))
-  else -- If SELECT_RAW is empty, return a blank insert node
-    return sn(nil, i(1))
-  end
+    if #parent.snippet.env.SELECT_RAW > 0 then
+        return sn(nil, i(1, parent.snippet.env.SELECT_RAW))
+    else -- If SELECT_RAW is empty, return a blank insert node
+        return sn(nil, i(1))
+    end
 end
 
 return {
-  s(
-    "link",
-    fmta("[<>](<>)", { i(1), f(function(_, snip)
-      return snip.env.TM_SELECTED_TEXT[1] or {}
-    end, {}) })
-  ),
-  s({ trig = ";b", snippetType = "autosnippet" }, fmta("**<>**", i(1))),
-  s({ trig = ";t", snippetType = "autosnippet" }, fmta("*<>*", i(1))),
-  s(
-    { trig = ";c", snippetType = "autosnippet" },
-    fmta(
-      [[
+    s(
+        { trig = 'link', name = 'Markdown Links', dscr = 'Insert a Link' },
+        fmta(
+            '[<>](<>)',
+            { i(1), f(function(_, snip)
+                return snip.env.TM_SELECTED_TEXT[1] or {}
+            end, {}) }
+        )
+    ),
+    s({ trig = ';b', snippetType = 'autosnippet', name = 'bold' }, fmta('**<>**', { i(1) })),
+    s({ trig = ';t', snippetType = 'autosnippet', name = 'italic' }, fmta('*<>*', { i(1) })),
+    s({ trig = ';s', snippetType = 'autosnippet', name = 'strikethrough' }, fmta('~~<>~~', { i(1) })),
+    s(
+        { trig = ';c', snippetType = 'autosnippet', name = 'Insert fenced code block' },
+        fmta(
+            [[
       ```<>
       <>
       ```
       ]],
-      { i(1), i(0) }
-    )
-  ),
+            { i(1), i(0) }
+        )
+    ),
+    s({ trig = 'meta', name = 'Markdown front matter (YAML format)' }, {
+        t { '---', 'title: ' },
+        i(1),
+        t { '', 'date: ' },
+        p(os.date, '%Y-%m-%dT%H:%M:%S+0800'),
+        t { '', 'tags: ["' },
+        i(2),
+        t { '"]', 'categories: ["' },
+        i(3),
+        t { '"]', 'series: ["' },
+        i(4),
+        t { '"]', '---', '', '' },
+        i(0),
+    }, {
+        condition = pos.on_top * conds_expand.line_begin,
+        show_condition = pos.on_top * pos.line_begin,
+    }),
 }

@@ -1,9 +1,9 @@
 local M = {}
 
 function M.setup()
-    local status_ok, icons = pcall(require, 'nvim-web-devicons')
+    local status_ok, devicons = pcall(require, 'nvim-web-devicons')
     if status_ok then
-        icons.set_icon {
+        devicons.set_icon {
             deb = { icon = '', name = 'Deb' },
             lock = { icon = '', name = 'Lock' },
             mp3 = { icon = '', name = 'Mp3' },

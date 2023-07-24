@@ -37,5 +37,5 @@ if vim.g.neovide then
 end
 
 --theme and lsp设置
-require 'user.colorscheme'
+require 'theme.gruvbox'
 require 'user.lsp'
