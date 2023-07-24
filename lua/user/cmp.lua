@@ -7,7 +7,7 @@ function M.setup()
         -- copilot
         require('copilot_cmp').setup {}
         -- snippets
-        require('luasnip.loaders.from_snipmate').lazy_load() --Snipmate like snippets
+        require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/LuaSnip' }
 
         local compare = require 'cmp.config.compare'
 
