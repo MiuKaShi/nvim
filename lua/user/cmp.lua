@@ -166,7 +166,6 @@ function M.setup()
             sources = {
                 { name = 'nvim_lsp', priority = 1000 },
                 { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
-                { name = 'path', priority = 700, max_item_count = 4 },
                 {
                     name = 'buffer',
                     priority = 800,
@@ -178,6 +177,7 @@ function M.setup()
                         end,
                     },
                 },
+                { name = 'path', priority = 700, max_item_count = 4 },
                 -- { name = 'neorg' },
                 -- { name = 'cmp_tabnine' },
                 -- {name = 'cmp_octave'}
@@ -185,9 +185,9 @@ function M.setup()
         }
         cmp.setup.filetype({ 'markdown.pandoc', 'tex' }, {
             sources = cmp.config.sources {
-                { name = 'nvim_lsp', keyword_length = 2, priority = 600 },
-                { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
                 { name = 'buffer', keyword_length = 3, priority = 1000 },
+                { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
+                { name = 'nvim_lsp', keyword_length = 2, priority = 600 },
             },
         })
 
@@ -195,9 +195,9 @@ function M.setup()
             sources = cmp.config.sources {
                 { name = 'nvim_lsp', priority = 1000 },
                 { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
-                { name = 'path', priority = 700, max_item_count = 4 },
-                { name = 'copilot', priority = 750, max_item_count = 3 },
-                { name = 'buffer', keyword_length = 3, priority = 600 },
+                { name = 'copilot', priority = 800, max_item_count = 3 },
+                { name = 'buffer', keyword_length = 3, priority = 700 },
+                { name = 'path', priority = 600, max_item_count = 4 },
             },
         })
 
