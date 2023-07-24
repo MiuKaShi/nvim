@@ -22,12 +22,6 @@ function M.setup()
         require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/LuaSnip' }
 
         -- keymap
-        vim.keymap.set('i', '<C-l>', function()
-            if luasnip.expandable() then
-                luasnip.expand()
-            end
-        end, { desc = 'LuaSnip Expand' })
-
         vim.keymap.set({ 'i', 's' }, '<C-j>', function()
             if luasnip.locally_jumpable(1) then
                 luasnip.jump(1)

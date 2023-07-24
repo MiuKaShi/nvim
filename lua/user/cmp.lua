@@ -71,13 +71,31 @@ function M.setup()
             completion = { completeopt = 'menu,menuone,noinsert' },
             mapping = {
                 ['<CR>'] = cmp.config.disable,
+                ['<C-y>'] = cmp.mapping.confirm { select = true },
                 ['<C-j>'] = cmp.mapping.select_next_item(),
                 ['<C-k>'] = cmp.mapping.select_prev_item(),
                 ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
                 ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
                 ['<C-Space>'] = cmp.mapping(cmp.mapping.complete {}, { 'i', 'c' }),
                 ['<C-e>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
-                ['<C-y>'] = cmp.mapping.confirm { select = true },
+                ['<C-h>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        for i = 1, 10 do
+                            cmp.mapping.select_prev_item()(nil)
+                        end
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }),
+                ['<C-l>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        for i = 1, 10 do
+                            cmp.mapping.select_next_item()(nil)
+                        end
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }),
                 ['<Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         local entry = cmp.get_selected_entry()
@@ -117,11 +135,12 @@ function M.setup()
             -- don't sort double underscore things first
             sorting = {
                 comparators = {
+                    cmp.config.compare.sort_text,
                     cmp.config.compare.offset,
                     cmp.config.compare.exact,
                     cmp.config.compare.score,
+                    cmp.config.compare.recently_used,
                     cmp.config.compare.kind,
-                    cmp.config.compare.sort_text,
                     cmp.config.compare.length,
                     cmp.config.compare.order,
                 },
