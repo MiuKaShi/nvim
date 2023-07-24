@@ -63,9 +63,12 @@ function M.setup()
 
         local diff = {
             'diff',
-            colored = false,
-            symbols = { added = ' ', modified = ' ', removed = ' ' }, -- changes diff symbols
-            cond = hide_in_width,
+            symbols = { added = ' ', modified = ' ', removed = ' ' }, -- changes diff symbols
+        }
+
+        local diagnostics = {
+            'diagnostics',
+            symbols = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }, -- changes diff symbols
         }
 
         local getWords = {
@@ -75,7 +78,7 @@ function M.setup()
                     if vim.fn.wordcount().visual_words == nil then
                         return tostring(vim.fn.wordcount().words)
                     end
-                    return  tostring(vim.fn.wordcount().visual_words)
+                    return tostring(vim.fn.wordcount().visual_words)
                 else
                     return ''
                 end
@@ -93,20 +96,28 @@ function M.setup()
             },
             sections = {
                 lualine_a = { { 'mode', right_padding = 2 } },
-                lualine_b = { 'branch', 'diff', 'diagnostics', 'filename' },
-                lualine_x = { rime_status, 'encoding', 'fileformat', 'filetype', getWords },
-                lualine_y = { 'progress' },
-                lualine_z = { { 'location', left_padding = 2 } },
+                lualine_b = { 'branch' },
+                lualine_c = {
+                    'diagnostics',
+                    { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
+                    { 'filename', path = 1, symbols = { modified = '  ', readonly = '', unnamed = '' } },
+                },
+                lualine_x = {
+                    rime_status,
+                    'diff',
+                },
+
+                lualine_y = {
+                    getWords,
+                    { 'progress', separator = ' ', padding = { left = 1, right = 0 } },
+                    { 'location', padding = { left = 0, right = 1 } },
+                },
+                lualine_z = {
+                    function()
+                        return ' ' .. os.date '%R'
+                    end,
+                },
             },
-            inactive_sections = {
-                lualine_a = {},
-                lualine_b = {},
-                lualine_c = { 'filename' },
-                lualine_x = { 'location' },
-                lualine_y = {},
-                lualine_z = {},
-            },
-            tabline = {},
             extensions = {},
         }
     end

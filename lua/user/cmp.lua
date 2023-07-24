@@ -104,7 +104,7 @@ function M.setup()
                 format = function(entry, vim_item)
                     vim_item.kind = cmp_kinds[vim_item.kind]
                     vim_item.menu = ({
-                        buffer = '[Buf]',
+                        buffer = '[Text]',
                         copilot = '[Cop]',
                         nvim_lsp = '[LSP]',
                         path = '[Path]',
