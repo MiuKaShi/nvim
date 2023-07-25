@@ -164,7 +164,6 @@ function M.setup()
             },
             matching = { disallow_prefix_unmatching = true },
             sources = {
-                { name = 'nvim_lsp', priority = 1000 },
                 { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
                 {
                     name = 'buffer',
@@ -187,11 +186,10 @@ function M.setup()
             sources = cmp.config.sources {
                 { name = 'buffer', keyword_length = 3, priority = 1000 },
                 { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
-                { name = 'nvim_lsp', keyword_length = 2, priority = 600 },
             },
         })
 
-        cmp.setup.filetype({ 'julia', 'matlab', 'sh', 'python' }, {
+        cmp.setup.filetype({ 'julia', 'matlab', 'python' }, {
             sources = cmp.config.sources {
                 { name = 'nvim_lsp', priority = 1000 },
                 { name = 'luasnip', priority = 900, option = { show_autosnippets = true } },
