@@ -150,7 +150,6 @@ return {
 			'file_browser',
 			'frecency',
 			'ui-select',
-			'vim_bookmarks',
 		}
 		for _, extn in ipairs(extns) do
 			telescope.load_extension(extn)

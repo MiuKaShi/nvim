@@ -295,6 +295,14 @@ return {
   ),
 
   s(
+    { name = 'Partial', trig = 'pp', wordTrig = false, snippetType = 'autosnippet' },
+    fmta('\\partial <>', {
+      d(1, get_visual),
+    }),
+    { condition = markdown.in_mathzone }
+  ),
+
+  s(
     { name = 'Bar', trig = 'bar', wordTrig = false, snippetType = 'autosnippet' },
     fmta('\\bar <>', {
       d(1, get_visual),
