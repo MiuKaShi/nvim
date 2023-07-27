@@ -66,7 +66,6 @@ map("n", "mc", "<cmd>BookmarkClear<CR>")
 map("n", "<leader>e", "<cmd>Lf<CR>") -- finder
 map("n", "<leader>i", "<cmd>setlocal spell! spelllang=en_us<CR>") -- spell check
 map("n", "<leader>o", "<cmd>AerialToggle<CR>") -- Outlines
-map("n", "<leader>.", "<cmd>ToggleDia<CR>") -- LSP 开关
 
 map("n", "<leader>hn", "<cmd>nohl<CR>") -- disable highlight
 map("n", "<leader><leader>s", "<cmd>w ! sudo tee > /dev/null %<CR>") -- force save files
