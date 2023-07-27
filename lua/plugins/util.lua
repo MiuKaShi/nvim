@@ -18,6 +18,6 @@ return {
       vim.g.GfList_map_v_gf = "gf"
     end,
   },
-  { "junegunn/fzf", build = ":call fzf#install()", event = "VeryLazy" },
+  { "junegunn/fzf", build = "./install --bin", event = "VeryLazy" },
   -- { 'skywind3000/asyncrun.vim', cmd = 'AsyncRun' } -- 异步运行
 }
