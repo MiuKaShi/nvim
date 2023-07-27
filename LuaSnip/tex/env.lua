@@ -1,14 +1,14 @@
-local ls = require 'luasnip'
+local ls = require "luasnip"
 local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
-local fmta = require('luasnip.extras.fmt').fmta
-local rep = require('luasnip.extras').rep
-local line_begin = require('luasnip.extras.expand_conditions').line_begin
-local tex = require 'snippets.latex'
+local fmta = require("luasnip.extras.fmt").fmta
+local rep = require("luasnip.extras").rep
+local line_begin = require("luasnip.extras.expand_conditions").line_begin
+local tex = require "snippets.latex"
 local get_visual = function(args, parent)
   if #parent.snippet.env.SELECT_RAW > 0 then
     return sn(nil, i(1, parent.snippet.env.SELECT_RAW))
@@ -19,7 +19,7 @@ end
 
 return {
   s(
-    { trig = 'ii', wordTrig = false, snippetType = 'autosnippet' },
+    { trig = "ii", wordTrig = false, snippetType = "autosnippet" },
     fmta(
       [[
       \(<>\)
@@ -31,7 +31,7 @@ return {
     { condition = tex.in_text }
   ),
   s(
-    { trig = 'dd', snippetType = 'autosnippet' },
+    { trig = "dd", snippetType = "autosnippet" },
     fmta(
       [[
       \[
@@ -45,7 +45,7 @@ return {
     { condition = tex.in_text }
   ),
   s(
-    { trig = 'bp', snippetType = 'autosnippet' },
+    { trig = "bp", snippetType = "autosnippet" },
     fmta(
       [[
       \begin{homeworkProblem}[<>]
@@ -60,7 +60,7 @@ return {
     { condition = line_begin }
   ),
   s(
-    { trig = 'bf', snippetType = 'autosnippet' },
+    { trig = "bf", snippetType = "autosnippet" },
     fmta(
       [[
       \begin{proof}
@@ -74,7 +74,7 @@ return {
     { condition = line_begin }
   ),
   s(
-    { trig = 'beg', snippetType = 'autosnippet' },
+    { trig = "beg", snippetType = "autosnippet" },
     fmta(
       [[
       \begin{<>}[<>]
@@ -91,7 +91,7 @@ return {
     { condition = line_begin }
   ),
   s(
-    { trig = 'ben', snippetType = 'autosnippet' },
+    { trig = "ben", snippetType = "autosnippet" },
     fmta(
       [[
       \begin{enumerate}[<>]
@@ -99,14 +99,14 @@ return {
       \end{enumerate}
       ]],
       {
-        i(1, '(a)'),
+        i(1, "(a)"),
         i(0),
       }
     ),
     { condition = line_begin }
   ),
   s(
-    { trig = 'framed', snippetType = 'autosnippet' },
+    { trig = "framed", snippetType = "autosnippet" },
     fmta(
       [[
       \begin{framed}
@@ -120,7 +120,7 @@ return {
     { condition = tex.in_mathzone }
   ),
   s(
-    { trig = 'box', snippetType = 'autosnippet' },
+    { trig = "box", snippetType = "autosnippet" },
     fmta(
       [[
       \begin{framed}
@@ -134,7 +134,7 @@ return {
     { condition = tex.in_text * line_begin }
   ),
   s(
-    { trig = 'dcase', snippetType = 'autosnippet', priority = 2000 },
+    { trig = "dcase", snippetType = "autosnippet", priority = 2000 },
     fmta(
       [[
       \begin{dcases}
@@ -148,7 +148,7 @@ return {
     { condition = tex.in_mathzone }
   ),
   s(
-    { trig = 'case', snippetType = 'autosnippet' },
+    { trig = "case", snippetType = "autosnippet" },
     fmta(
       [[
       \begin{cases}
@@ -162,7 +162,7 @@ return {
     { condition = tex.in_mathzone }
   ),
   s(
-    { trig = 'bal', snippetType = 'autosnippet' },
+    { trig = "bal", snippetType = "autosnippet" },
     fmta(
       [[
       \begin{aligned}
@@ -176,7 +176,7 @@ return {
     { condition = tex.in_mathzone }
   ),
   s(
-    { trig = 'bal', snippetType = 'autosnippet', priority = 2000 },
+    { trig = "bal", snippetType = "autosnippet", priority = 2000 },
     fmta(
       [[
       \begin{aligned}
@@ -190,7 +190,7 @@ return {
     { condition = tex.in_mathzone }
   ),
   s(
-    { trig = 'bit', snippetType = 'autosnippet' },
+    { trig = "bit", snippetType = "autosnippet" },
     fmta(
       [[
       \begin{itemize}
@@ -203,11 +203,11 @@ return {
     ),
     { condition = line_begin }
   ),
-  s({ trig = 'im', snippetType = 'autosnippet' }, {
-    t '\\item',
+  s({ trig = "im", snippetType = "autosnippet" }, {
+    t "\\item",
   }, { condition = tex.in_item * line_begin }),
   s(
-    { trig = 'bcr', snippetType = 'autosnippet' },
+    { trig = "bcr", snippetType = "autosnippet" },
     fmta(
       [[
       \begin{center}
@@ -221,7 +221,7 @@ return {
     { condition = line_begin }
   ),
   s(
-    { trig = 'btr', snippetType = 'autosnippet' },
+    { trig = "btr", snippetType = "autosnippet" },
     fmta(
       [[
       \begin{tabular}{<>}
@@ -238,7 +238,7 @@ return {
     { condition = line_begin }
   ),
   s(
-    { trig = 'cha', snippetType = 'autosnippet' },
+    { trig = "cha", snippetType = "autosnippet" },
     fmta(
       [[
         \chapter{<>}
@@ -250,7 +250,7 @@ return {
     { condition = line_begin }
   ),
   s(
-    { trig = 'sec', snippetType = 'autosnippet' },
+    { trig = "sec", snippetType = "autosnippet" },
     fmta(
       [[
         \section{<>}
@@ -262,7 +262,7 @@ return {
     { condition = line_begin }
   ),
   s(
-    { trig = 'ssec', snippetType = 'autosnippet' },
+    { trig = "ssec", snippetType = "autosnippet" },
     fmta(
       [[
         \subsection{<>}
@@ -274,7 +274,7 @@ return {
     { condition = line_begin }
   ),
   s(
-    { trig = 'sss', snippetType = 'autosnippet' },
+    { trig = "sss", snippetType = "autosnippet" },
     fmta(
       [[
         \subsubsection{<>}

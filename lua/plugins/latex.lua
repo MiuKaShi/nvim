@@ -1,28 +1,28 @@
 return {
   {
-    'ryleelyman/latex.nvim',
+    "ryleelyman/latex.nvim",
     opts = {
       conceals = {
         add = {
-          ['colon'] = ':',
-          ['coloneqq'] = '≔',
-          [','] = ' ',
+          ["colon"] = ":",
+          ["coloneqq"] = "≔",
+          [","] = " ",
         },
       },
       imaps = {
-        add = { ['\\emptyset'] = '0', ['\\Alpha'] = 'A' },
-        default_leader = ';',
+        add = { ["\\emptyset"] = "0", ["\\Alpha"] = "A" },
+        default_leader = ";",
       },
       -- surrounds = { enabled = true },
     },
-    ft = 'tex',
+    ft = "tex",
   },
 
   -- inverse serach for LaTeX
   {
-    'f3fora/nvim-texlabconfig',
+    "f3fora/nvim-texlabconfig",
     config = true,
-    build = 'go build',
-    ft = 'tex',
+    build = "go build",
+    ft = "tex",
   },
 }
