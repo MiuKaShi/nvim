@@ -14,7 +14,7 @@ return {
     "nvim-telescope/telescope-ui-select.nvim",
   },
   keys = {
-    { "/", Util.tele_builtin("live_grep", { previewer = false }), desc = "LSP search" },
+    { "<leader>/", Util.tele_builtin("live_grep", { previewer = false }), desc = "LSP search" },
     { "<leader>fb", Util.tele_builtin "buffers", desc = "buffer list" },
     { "<leader>fl", Util.tele_builtin "lsp_document_symbols", desc = "LSP search" },
     { "<leader>fw", Util.tele_builtin "grep_string", desc = "Find cursor word" },
