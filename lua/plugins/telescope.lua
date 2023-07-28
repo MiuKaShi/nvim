@@ -7,13 +7,14 @@ return {
   version = false, -- telescope did only one release, so use HEAD for now
   dependencies = {
     "nvim-lua/plenary.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-telescope/telescope-frecency.nvim",
     "tsakirist/telescope-lazy.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
   },
   keys = {
-    { "<leader>/", Util.tele_builtin("live_grep", { previewer = false }), desc = "LSP search" },
+    { "/", Util.tele_builtin("live_grep", { previewer = false }), desc = "LSP search" },
     { "<leader>fb", Util.tele_builtin "buffers", desc = "buffer list" },
     { "<leader>fl", Util.tele_builtin "lsp_document_symbols", desc = "LSP search" },
     { "<leader>fw", Util.tele_builtin "grep_string", desc = "Find cursor word" },

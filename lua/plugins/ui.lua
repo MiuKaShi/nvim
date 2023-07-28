@@ -2,7 +2,39 @@ return {
   -- ui components
   { "MunifTanjim/nui.nvim", lazy = true },
   -- icons
-  { "nvim-tree/nvim-web-devicons", lazy = true },
+  {
+    "nvim-tree/nvim-web-devicons",
+    lazy = true,
+    opts = function()
+      return {
+        override = {
+          Dockerfile = { icon = "", color = "#b8b5ff", name = "Dockerfile" },
+          css = { icon = "", color = "#61afef", name = "css" },
+          deb = { icon = "", color = "#a3b8ef", name = "deb" },
+          html = { icon = "", color = "#DE8C92", name = "html" },
+          jpeg = { icon = " ", color = "#BD77DC", name = "jpeg" },
+          jpg = { icon = " ", color = "#BD77DC", name = "jpg" },
+          js = { icon = "", color = "#EBCB8B", name = "js" },
+          kt = { icon = "󱈙", color = "#ffcb91", name = "kt" },
+          lock = { icon = "", color = "#DE6B74", name = "lock" },
+          md = { icon = "", color = "#b8b5ff", name = "mp3" },
+          mp3 = { icon = "", color = "#C8CCD4", name = "mp3" },
+          mp4 = { icon = "", color = "#C8CCD4", name = "mp4" },
+          out = { icon = "", color = "#C8CCD4", name = "out" },
+          png = { icon = " ", color = "#BD77DC", name = "png" },
+          py = { icon = "", color = "#a7c5eb", name = "py" },
+          rb = { icon = "", color = "#ff75a0", name = "rb" },
+          rpm = { icon = "", color = "#fca2aa", name = "rpm" },
+          toml = { icon = "", color = "#61afef", name = "toml" },
+          ts = { icon = "ﯤ", color = "#519ABA", name = "ts" },
+          vue = { icon = "﵂", color = "#7eca9c", name = "vue" },
+          xz = { icon = "", color = "#EBCB8B", name = "xz" },
+          yaml = { icon = "", color = "#EBCB8B", name = "xz" },
+          zip = { icon = "", color = "#EBCB8B", name = "zip" },
+        },
+      }
+    end,
+  },
 
   {
     "shellRaining/hlchunk.nvim",
@@ -104,6 +136,18 @@ return {
           icons_enabled = true,
           component_separators = "|",
           section_separators = { left = "", right = "" },
+          disabled_filetypes = {
+            winbar = {},
+            statusline = { "alpha", "dashboard" },
+          },
+          ignore_focus = {},
+          always_divide_middle = true,
+          globalstatus = false,
+          refresh = {
+            statusline = 1000,
+            tabline = 1000,
+            winbar = 1000,
+          },
         },
         sections = {
           lualine_a = { "mode" },
@@ -133,12 +177,12 @@ return {
             },
           },
           lualine_y = {
-            -- util.getwords,
+            util.getwords,
             { "progress", separator = " ", padding = { left = 1, right = 0 } },
             { "location", padding = { left = 0, right = 1 } },
           },
           lualine_z = {
-            function() return " " .. os.date "%R" end,
+            function() return "󱑁 " .. os.date "%R" end,
           },
         },
         extensions = {},
@@ -151,6 +195,26 @@ return {
     "utilyre/sentiment.nvim",
     event = "BufReadPost",
     config = true,
+  },
+
+  -- Enhanced search
+  {
+    "kevinhwang91/nvim-hlslens",
+    keys = {
+      { "n", [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]] },
+      { "N", [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]] },
+      { "*", [[*<Cmd>lua require('hlslens').start()<CR>]] },
+      { "#", [[#<Cmd>lua require('hlslens').start()<CR>]] },
+      { "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]] },
+      { "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]] },
+    },
+    config = function() require("hlslens").setup() end,
+  },
+
+  {
+    "nvim-zh/colorful-winsep.nvim",
+    config = true,
+    event = { "WinNew" },
   },
 
   -- File manager

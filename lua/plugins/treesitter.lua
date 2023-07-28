@@ -39,7 +39,11 @@ return {
       },
       highlight = {
         enable = true,
-        disable = { "markdown" },
+        disable = {
+          "css",
+          "latex",
+          "markdown",
+        },
         -- additional_vim_regex_highlighting = { 'markdown' },
       },
       autopairs = { enable = true },

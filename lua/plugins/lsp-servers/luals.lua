@@ -22,6 +22,9 @@ M.setup = function(on_attach, capabilities)
           enable = true,
           settype = true,
         },
+        completion = {
+          callSnippet = "Replace",
+        },
       },
     },
   }

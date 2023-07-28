@@ -70,7 +70,6 @@ return {
       local compare = require "cmp.config.compare"
       local cmp_kinds = require("config").icons.cmp_kinds
       local has_words_before = function()
-        if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match "^%s*$" == nil
       end
@@ -84,6 +83,8 @@ return {
         { "╰", "CmpBorder" },
         { "│", "CmpBorder" },
       }
+      local setcmphl = require("util").setcmphl()
+
       return {
         completion = { completeopt = "menu,menuone,noinsert" },
         snippet = {
