@@ -1,3 +1,4 @@
+-- improve startup time.
 vim.loader.enable()
 
 -- DISABLE REMOTE PLUGINS

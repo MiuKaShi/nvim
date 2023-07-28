@@ -69,9 +69,10 @@ return {
       })
       local compare = require "cmp.config.compare"
       local cmp_kinds = require("config").icons.cmp_kinds
-      local function has_words_before()
+      local has_words_before = function()
+        if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+        return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match "^%s*$" == nil
       end
       local border_thin = {
         { "╭", "CmpBorder" },
@@ -89,6 +90,7 @@ return {
           expand = function(args) require("luasnip").lsp_expand(args.body) end,
         },
         mapping = cmp.mapping.preset.insert {
+          ["<C-y>"] = cmp.config.disable,
           ["<CR>"] = cmp.config.disable,
           ["<C-j>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
           ["<C-k>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
@@ -98,17 +100,8 @@ return {
           ["<C-e>"] = cmp.mapping.abort(),
           ["<Tab>"] = cmp.mapping {
             i = function(fallback)
-              if cmp.visible() then
-                local entry = cmp.get_selected_entry()
-                if not entry then
-                  cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
-                else
-                  if has_words_before() then
-                    cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
-                  else
-                    cmp.confirm { behavior = cmp.ConfirmBehavior.Insert, select = false }
-                  end
-                end
+              if cmp.visible() and has_words_before() then
+                cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
               else
                 fallback()
               end
