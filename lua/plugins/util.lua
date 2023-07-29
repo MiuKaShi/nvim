@@ -16,6 +16,8 @@ return {
     config = function()
       vim.g.GfList_map_n_gf = "gf"
       vim.g.GfList_map_v_gf = "gf"
+      vim.g.GfList_terminal = "st"
+      vim.g.GfList_editor = "nvim"
     end,
   },
   { "junegunn/fzf", build = "./install --bin", event = "VeryLazy" },

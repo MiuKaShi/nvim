@@ -83,7 +83,7 @@ return {
   s({ trig = "ii", snippetType = "autosnippet" }, fmta("$<>$", i(1)), { condition = markdown.in_text }),
   s({ trig = "dd", snippetType = "autosnippet" }, fmta("$$\n<>\n$$", i(1)), { condition = markdown.in_text }),
   s(
-    { trig = "add", name = "Align Math", snippetType = "autosnippet" },
+    { trig = "aa", name = "Align Math", snippetType = "autosnippet" },
     fmta(
       [[
             <>
