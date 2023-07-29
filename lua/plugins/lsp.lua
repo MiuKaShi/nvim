@@ -152,4 +152,25 @@ return {
       },
     },
   },
+
+  -- funcion check
+  {
+    "SmiteshP/nvim-navbuddy",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+    },
+    opts = {
+      window = { border = "rounded" },
+      lsp = { auto_attach = true },
+    },
+    keys = {
+      {
+        "<leader>n",
+        function() require("nvim-navbuddy").open() end,
+        desc = "Navigator",
+      },
+    },
+  },
 }

@@ -34,6 +34,7 @@ return {
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
       "mstanciu552/cmp-matlab",
+      "lukas-reineke/cmp-under-comparator",
       {
         "zbirenbaum/copilot-cmp",
         dependencies = "zbirenbaum/copilot.lua",
@@ -67,7 +68,6 @@ return {
           { name = "path", priority = 600, max_item_count = 4 },
         },
       })
-      local compare = require "cmp.config.compare"
       local cmp_kinds = require("config").icons.cmp_kinds
       local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -130,14 +130,15 @@ return {
         },
         sorting = {
           comparators = {
-            compare.sort_text,
-            compare.offset,
-            compare.exact,
-            compare.score,
-            compare.recently_used,
-            compare.kind,
-            compare.length,
-            compare.order,
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            require("cmp-under-comparator").under,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
           },
         },
         duplicates = {

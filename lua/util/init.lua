@@ -101,6 +101,12 @@ function M.getwords()
   end
 end
 
+-- Width of side windows
+M.width = function()
+  local columns = vim.go.columns
+  return math.floor(columns * 0.2) > 25 and math.floor(columns * 0.2) or 25
+end
+
 -- CMP highlight
 function M.setcmphl()
   vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#82AAFF", bg = "NONE", bold = true })

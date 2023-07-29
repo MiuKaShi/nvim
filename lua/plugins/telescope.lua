@@ -13,21 +13,6 @@ return {
     "nvim-telescope/telescope-file-browser.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
   },
-  keys = {
-    { "<leader>/", Util.tele_builtin("live_grep", { previewer = false }), desc = "LSP search" },
-    { "<leader>fb", Util.tele_builtin "buffers", desc = "buffer list" },
-    { "<leader>fl", Util.tele_builtin "lsp_document_symbols", desc = "LSP search" },
-    { "<leader>fw", Util.tele_builtin "grep_string", desc = "Find cursor word" },
-    { "<leader>ff", Util.tele_builtin "find_files", desc = "Find Files" },
-    { "<leader>fm", Util.tele_builtin "builtin", desc = "Telescope Meta" },
-    { "<leader>fh", Util.tele_builtin "help_tags", desc = "Help Tags" },
-    { "<C-f>", Util.tele_builtin "current_buffer_fuzzy_find", desc = "Search current buffer" },
-    {
-      "<leader>fr",
-      function() require("telescope").extensions.frecency.frecency() end,
-      desc = "Recent Files",
-    },
-  },
   config = function(_, _)
     -- local fb_actions = require("telescope._extensions.file_browser.actions")
     local home = os.getenv "HOME"
@@ -131,6 +116,12 @@ return {
         live_grep = { path_display = { "shorten" } },
       },
       extensions = {
+        fzf = {
+          fuzzy = true, -- false will only do exact matching
+          override_generic_sorter = false, -- override the generic sorter
+          override_file_sorter = true, -- override the file sorter
+          case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+        },
         frecency = {
           theme = themes.get_dropdown,
           show_scores = true,
@@ -147,6 +138,7 @@ return {
     local telescope = require "telescope"
     telescope.setup(opts)
     local extns = {
+      "fzf",
       "file_browser",
       "frecency",
       "ui-select",
@@ -155,4 +147,20 @@ return {
       telescope.load_extension(extn)
     end
   end,
+  keys = {
+    { "<leader>/", Util.tele_builtin("live_grep", { previewer = false }), desc = "LSP search" },
+    { "<leader>fb", Util.tele_builtin "buffers", desc = "buffer list" },
+    { "<leader>fs", Util.tele_builtin "lsp_document_symbols", desc = "LSP search" },
+    { "<leader>fc", Util.tele_builtin "colorscheme", desc = "Colorscheme" },
+    { "<leader>fw", Util.tele_builtin "grep_string", desc = "Find cursor word" },
+    { "<leader>ff", Util.tele_builtin "find_files", desc = "Find Files" },
+    { "<leader>fm", Util.tele_builtin "builtin", desc = "Telescope Meta" },
+    { "<leader>fh", Util.tele_builtin "help_tags", desc = "Help Tags" },
+    { "<C-f>", Util.tele_builtin "current_buffer_fuzzy_find", desc = "Search current buffer" },
+    {
+      "<leader>fr",
+      function() require("telescope").extensions.frecency.frecency() end,
+      desc = "Recent Files",
+    },
+  },
 }

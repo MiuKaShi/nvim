@@ -193,8 +193,20 @@ return {
   -- Enhanced matchparen
   {
     "utilyre/sentiment.nvim",
-    event = "BufReadPost",
-    config = true,
+    event = "VeryLazy",
+    opts = {
+      included_buftypes = {
+        [""] = true,
+      },
+      excluded_filetypes = {},
+      delay = 50,
+      limit = 100,
+      pairs = {
+        { "(", ")" },
+        { "{", "}" },
+        { "[", "]" },
+      },
+    },
   },
 
   -- Enhanced search

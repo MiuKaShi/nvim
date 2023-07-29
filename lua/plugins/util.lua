@@ -23,3 +23,4 @@ return {
   { "junegunn/fzf", build = "./install --bin", event = "VeryLazy" },
   -- { 'skywind3000/asyncrun.vim', cmd = 'AsyncRun' } -- 异步运行
 }
+

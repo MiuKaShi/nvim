@@ -1,4 +1,5 @@
 return {
+  -- gruvbox
   {
     "ellisonleao/gruvbox.nvim",
     enabled = true,
@@ -43,4 +44,10 @@ return {
   ]]
     end,
   },
+  -- citruszest
+  -- {
+  --   "zootedb0t/citruszest.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  -- },
 }
