@@ -1,5 +1,4 @@
 return {
-  -- gruvbox
   {
     "ellisonleao/gruvbox.nvim",
     enabled = true,
@@ -28,8 +27,6 @@ return {
         dim_inactive = false,
         transparent_mode = true,
       }
-      -- load the colorscheme here
-      vim.cmd [[colorscheme gruvbox]]
       vim.cmd [[
   hi Normal ctermbg=NONE guibg=NONE
   hi NonText ctermbg=NONE guibg=NONE
@@ -44,10 +41,4 @@ return {
   ]]
     end,
   },
-  -- citruszest
-  -- {
-  --   "zootedb0t/citruszest.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  -- },
 }

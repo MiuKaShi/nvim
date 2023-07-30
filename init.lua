@@ -9,3 +9,6 @@ vim.g.loaded_perl_provider = 0
 
 require "config.options"
 require "config.lazy"
+
+-- load the colorscheme here
+vim.cmd.colorscheme "gruvbox"
