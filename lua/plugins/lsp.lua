@@ -1,3 +1,6 @@
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+
 return {
   -- lspconfig
   { "folke/neodev.nvim", opts = {}, ft = "lua" },
@@ -15,18 +18,49 @@ return {
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
 
+      -- diagnostics config
+      vim.diagnostic.config {
+        virtual_text = { spacing = 4, prefix = "●" },
+        severity_sort = true,
+      }
+
+      -- lspconfig
+
+      local function lsp_keymaps(client, bufnr)
+        vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+				-- stylua: ignore
+				local keymaps = {
+					{ "J",          '<cmd>Lspsaga peek_definition<CR>',       method = "definition" },
+					{ "K",          '<cmd>Lspsaga hover_doc<CR>',             method = "document" },
+					{ "gr",         '<cmd>Lspsaga rename<CR>',                method = "rename" },
+					{ "gl",         '<cmd>Lspsaga show_line_diagnostics<CR>', method = "diagnostics" },
+					{ "gh",         '<cmd>Lspsaga finder ref<CR>',            method = "references" },
+					{ "<leader>ca", '<cmd>Lspsaga code_action<CR>',           mode = { "n", "v" },   method = "codeAction" },
+					{ "[e",         '<cmd>Lspsaga diagnostic_jump_prev<CR>',  method = "jumpprev" },
+					{ "]e",         '<cmd>Lspsaga diagnostic_jump_next<CR>',  method = "jumpnext" },
+				}
+
+        for _, keys in ipairs(keymaps) do
+          if client.supports_method("textDocument/" .. keys.method) then
+            vim.keymap.set(keys.mode or "n", keys[1], keys[2], { buffer = bufnr, desc = keys.method })
+          end
+        end
+      end
+
       local function lsp_highlight(client, bufnr)
-        if client.server_capabilities.documentHighlightProvider then
-          vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
-          vim.api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
-          vim.api.nvim_create_autocmd(
-            "CursorHold",
-            { callback = vim.lsp.buf.document_highlight, buffer = bufnr, group = "lsp_document_highlight" }
-          )
-          vim.api.nvim_create_autocmd(
-            "CursorMoved",
-            { callback = vim.lsp.buf.clear_references, buffer = bufnr, group = "lsp_document_highlight" }
-          )
+        if client.supports_method "textDocument/documentHighlight" then
+          local group = augroup("lsp_document_highlight", {})
+          autocmd({ "CursorHold", "CursorHoldI" }, {
+            group = group,
+            buffer = bufnr,
+            callback = vim.lsp.buf.document_highlight,
+          })
+          autocmd({ "CursorMoved", "CursorMovedI" }, {
+            group = group,
+            buffer = bufnr,
+            callback = vim.lsp.buf.clear_references,
+          })
         end
       end
 
@@ -43,20 +77,16 @@ return {
           vim.keymap.set("v", "<leader>bf", vim.lsp.buf.format, { buffer = bufnr, desc = "Range Formmating" })
         end
       end
-      -- diagnostics config
-      vim.diagnostic.config {
-        virtual_text = { spacing = 4, prefix = "●" },
-        severity_sort = true,
-      }
-      -- lspconfig
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-      if has_cmp then capabilities = cmp_nvim_lsp.default_capabilities(capabilities) end
 
       local on_attach = function(client, bufnr)
+        lsp_keymaps(client, bufnr)
         lsp_highlight(client, bufnr)
         lsp_formatting(client, bufnr)
       end
+
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+      if has_cmp then capabilities = cmp_nvim_lsp.default_capabilities(capabilities) end
 
       for _, server in ipairs {
         "pyright",

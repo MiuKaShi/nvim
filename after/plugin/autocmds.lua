@@ -13,23 +13,6 @@ autocmd('BufReadPost', {
   end,
 })
 
-autocmd('LspAttach', {
-  group = augroup('UserLspConfig', {}),
-  callback = function(args)
-    local bufnr = args.buf
-    local bufopts = { buffer = bufnr }
-    vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
-    vim.keymap.set('n', 'J', '<cmd>Lspsaga peek_definition<CR>', bufopts) -- 预览定义
-    vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', bufopts) -- 显示文档定义
-    vim.keymap.set('n', 'gr', '<cmd>Lspsaga rename<CR>', bufopts) -- 重命名变量
-    vim.keymap.set('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>', bufopts) -- 诊断问题
-    vim.keymap.set('n', 'gh', '<cmd>Lspsaga finder ref<CR>', bufopts) -- 查找变量名
-    vim.keymap.set({ 'n', 'v' }, '<leader>ca', '<cmd>Lspsaga code_action<CR>', bufopts)
-    vim.keymap.set('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>', bufopts) -- 滚动hover 上
-    vim.keymap.set('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<CR>', bufopts) -- 滚动hover 下
-  end,
-})
-
 -- resize splits if window got resized
 autocmd({ 'VimResized' }, {
   group = augroup('resize_splits', {}),

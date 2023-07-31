@@ -22,6 +22,9 @@ map("n", "<A-Tab>", "<cmd>bnext<CR>") -- buffer 跳转
 map("n", "<leader>bc", "<cmd>bd<CR>") -- buffer 关闭
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>")
 
+-- paste without yanking
+map({ "x" }, "p", "P", { silent = true })
+
 -- better movement
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
