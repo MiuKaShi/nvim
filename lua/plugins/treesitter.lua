@@ -3,13 +3,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
+    event = "BufReadPre",
     cmd = { "TSUpdateSync" },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      init = function() vim.g.rainbow_delimiters = { query = { latex = "rainbow-delimiters" } } end,
-      "HiPhish/nvim-ts-rainbow2",
-    },
     opts = {
       ensure_installed = {
         "bash",
@@ -57,11 +52,31 @@ return {
         },
       },
       indent = { enable = false },
+      matchup = {
+        enable = true, -- mandatory, false will disable the whole extension
+        include_match_words = true,
+        -- disable = { "c", "ruby" },
+      },
       rainbow = {
         enable = true,
         disable = { "jsx" },
       },
     },
     config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
+  },
+
+  {
+    "HiPhish/nvim-ts-rainbow2",
+    event = "BufReadPre",
+    dependencies = "nvim-treesitter",
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "BufReadPost",
+    dependencies = "nvim-treesitter",
+    opts = {
+      max_lines = 3,
+    },
   },
 }

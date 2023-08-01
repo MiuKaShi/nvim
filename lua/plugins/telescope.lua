@@ -19,18 +19,41 @@ return {
     local themes = require "telescope.themes"
     local opts = {
       defaults = {
-        sorting_strategy = "ascending",
-        layout_config = {
-          prompt_position = "top",
-          width = 0.8,
-          height = 0.9,
-          horizontal = {
-            preview_cutoff = 0,
-          },
+        vimgrep_arguments = {
+          "rg",
+          "-L",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
         },
         prompt_prefix = "   ",
         selection_caret = " ",
-        path_display = { "absolute" },
+        entry_prefix = "  ",
+        initial_mode = "insert",
+        selection_strategy = "reset",
+        sorting_strategy = "ascending",
+        layout_strategy = "horizontal",
+        layout_config = {
+          horizontal = {
+            prompt_position = "top",
+            preview_width = 0.55,
+            results_width = 0.8,
+          },
+          vertical = {
+            mirror = false,
+          },
+          width = 0.87,
+          height = 0.80,
+          preview_cutoff = 120,
+        },
+        path_display = { "truncate" },
+        winblend = 0,
+        border = {},
+        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+        color_devicons = true,
         set_env = { ["COLORTERM"] = "truecolor" },
         file_ignore_patterns = {
           ".git/",
@@ -87,7 +110,6 @@ return {
         },
         mappings = {
           i = {
-            ["<C-a>"] = { "<esc>0i", type = "command" },
             ["<Esc>"] = require("telescope.actions").close,
           },
         },
@@ -157,6 +179,7 @@ return {
     { "<leader>fm", Util.tele_builtin "builtin", desc = "Telescope Meta" },
     { "<leader>fh", Util.tele_builtin "help_tags", desc = "Help Tags" },
     { "<C-f>", Util.tele_builtin "current_buffer_fuzzy_find", desc = "Search current buffer" },
+    { "z=", "<cmd>Telescope spell_suggest<CR>", desc = "Spell suggest" },
     {
       "<leader>fr",
       function() require("telescope").extensions.frecency.frecency() end,

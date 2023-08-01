@@ -12,7 +12,8 @@ local rep = require("luasnip.extras").rep
 local context = require "snippets.context"
 local username = vim.env.USER:gsub("^%l", string.upper)
 return {
-  s("date", f(function() return os.date "%D - %H:%M" end)),
+  s("date", f(function() return os.date "%Y-%m-%d" end)),
+  s("time", p(os.date, "%T")),
   s("choicenode", c(1, { t "choice 1", t "choice 2", t "choice 3" })),
   s({ trig = "todo", name = "TODO", dscr = "TODO:" }, {
     t("TODO(" .. username .. "): "),

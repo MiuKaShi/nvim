@@ -124,6 +124,12 @@ return {
   },
 
   {
+    "echasnovski/mini.trailspace",
+    event = "VeryLazy",
+    config = true,
+  },
+
+  {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
@@ -164,6 +170,7 @@ return {
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+            { function() return vim.opt.spell:get() and "[SPELL]" or "" end },
           },
           lualine_x = {
             util.rime_status,

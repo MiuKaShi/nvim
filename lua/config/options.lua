@@ -3,7 +3,7 @@ vim.g.maplocalleader = " "
 
 local options = {
   -- misc
-  clipboard = "unnamedplus",
+  clipboard = "unnamedplus", -- 使用系统剪切板
   encoding = "utf-8",
   fileencoding = "utf-8",
   termencoding = "utf-8",
@@ -19,8 +19,8 @@ local options = {
   fillchars = { eob = " ", diff = " " },
   laststatus = 0, -- hide status
   pumheight = 10, -- Height of the pop up menu
-  scrolloff = 4, -- Number of lines to keep above and below the cursor
-  sidescrolloff = 4, -- Number of columns to keep at the sides of the cursor
+  scrolloff = 5, -- Number of lines to keep above and below the cursor
+  sidescrolloff = 5, -- Number of columns to keep at the sides of the cursor
   termguicolors = true, -- Enable 24-bit RGB color
   grepformat = "%f:%l:%c:%m",
   grepprg = "rg --hidden --vimgrep --smart-case --", -- Replace Vimgrep with Ripgrep
@@ -40,6 +40,7 @@ local options = {
   backspace = "indent,eol,start", -- 指定 backspace 可以删除的内容
   showmatch = true, --括号高亮
   visualbell = true, --视觉提示
+  autochdir = true, -- 总是在当前目录下执行命令
 
   -- Spell
   spellsuggest = "best,9", --优先使用最好的9个建议
@@ -58,6 +59,9 @@ local options = {
   -- Time
   timeoutlen = 300, -- 键位响应视觉
   updatetime = 50, -- default updatetime 4000ms is not good for async update (vim/signify)
+  timeout = true,
+  ttimeout = true,
+  ttimeoutlen = 10,
 
   -- Wrap
   -- wrap = false,  -- Disable wrapping
@@ -65,6 +69,14 @@ local options = {
   breakindent = true,
   linebreak = true,
   showbreak = "↪ ", --断行提示符
+
+  -- fold
+  foldenable = true,
+  foldmethod = "manual", -- 折叠的方式
+  foldlevel = 100, -- 折叠的级别（100）
+  foldlevelstart = 100,
+  -- o.foldcolumn = "1"
+  fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" },
 
   -- search
   smartcase = true,

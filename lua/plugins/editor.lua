@@ -18,13 +18,44 @@ return {
     "stevearc/aerial.nvim",
     opts = {
       backends = { "lsp", "treesitter", "markdown", "man" },
-      filter_kind = false,
+      filter_kind = {
+        "Array",
+        "Boolean",
+        "Class",
+        "Constant",
+        "Constructor",
+        "Enum",
+        "EnumMember",
+        "Event",
+        "Field",
+        "File",
+        "Function",
+        "Interface",
+        "Key",
+        "Method",
+        "Module",
+        "Namespace",
+        "Null",
+        "Number",
+        "Object",
+        "Operator",
+        "Package",
+        "Property",
+        -- "String",
+        "Struct",
+        "TypeParameter",
+        "Variable",
+      },
       show_guides = true,
       layout = { min_width = 30, default_direction = "left" },
     },
     cmd = "AerialToggle",
 		-- stylua: ignore
-		keys = { { "<leader>o", function() require("aerial").toggle() end, desc = "Aerial" } },
+		keys = {
+			{ "<leader>aa", "<cmd>AerialToggle<CR>", desc = "Toggle aerial" },
+			{ "[f",         "<cmd>AerialPrev<CR>",   desc = "Previous symbol" },
+			{ "]f",         "<cmd>AerialNext<CR>",   desc = "Next symbol" },
+		},
   },
 
   -- diffview
@@ -33,7 +64,7 @@ return {
     opts = { enhanced_diff_hl = true },
     cmd = { "DiffviewOpen", "DiffviewFileHistory" },
 		-- stylua: ignore
-		keys = { { "<leader>gd", function() require("diffview").open({}) end, desc = "Diff View" } },
+		keys = { { "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Diff View" } },
   },
 
   -- Navigate with search labels
@@ -95,6 +126,13 @@ return {
         silent = true,
       },
     },
+  },
+
+  -- logical match
+  {
+    "andymass/vim-matchup",
+    event = "BufReadPost",
+    config = function() vim.g.matchup_matchparen_offscreen = { method = "status_manual" } end,
   },
 
   -- comment

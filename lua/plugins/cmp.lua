@@ -35,6 +35,7 @@ return {
       "saadparwaiz1/cmp_luasnip",
       "mstanciu552/cmp-matlab",
       "lukas-reineke/cmp-under-comparator",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       {
         "zbirenbaum/copilot-cmp",
         dependencies = "zbirenbaum/copilot.lua",
@@ -42,32 +43,10 @@ return {
       },
       -- 'lukas-reineke/cmp-rg',
     },
-    opts = function()
+    config = function()
       local cmp = require "cmp"
-      cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = { { name = "path" }, { name = "cmdline" } },
-      })
-      cmp.setup.cmdline({ "/", "?" }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = { { name = "buffer" } },
-      })
-      cmp.setup.filetype({ "markdown.pandoc", "tex" }, {
-        sources = cmp.config.sources {
-          { name = "nvim_lsp", priority = 1000 },
-          { name = "buffer", keyword_length = 3, priority = 900 },
-          { name = "luasnip", priority = 800, option = { show_autosnippets = true } },
-        },
-      })
-      cmp.setup.filetype({ "julia", "matlab", "python", "lua" }, {
-        sources = cmp.config.sources {
-          { name = "nvim_lsp", priority = 1000 },
-          { name = "luasnip", priority = 900, option = { show_autosnippets = true } },
-          -- { name = "copilot", priority = 850, max_item_count = 3 },
-          { name = "buffer", keyword_length = 3, priority = 700 },
-          { name = "path", priority = 600, max_item_count = 4 },
-        },
-      })
+      -- limit the height of windows
+      vim.opt.pumheight = 16
       local cmp_kinds = require("config").icons.cmp_kinds
       local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -83,9 +62,7 @@ return {
         { "╰", "CmpBorder" },
         { "│", "CmpBorder" },
       }
-      local setcmphl = require("util").setcmphl()
-
-      return {
+      cmp.setup {
         completion = { completeopt = "menu,menuone,noinsert" },
         snippet = {
           expand = function(args) require("luasnip").lsp_expand(args.body) end,
@@ -112,9 +89,18 @@ return {
         },
         formatting = {
           fields = { "kind", "abbr", "menu" },
-          format = function(entry, vim_item)
-            vim_item.kind = cmp_kinds[vim_item.kind]
-            vim_item.menu = ({
+          format = function(entry, item)
+            -- limit the width of windows
+            local ELLIPSIS_CHAR = "…"
+            local MAX_LABEL_WIDTH = 25
+            local content = item.abbr
+            if #content > MAX_LABEL_WIDTH then
+              item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. ELLIPSIS_CHAR
+            end
+            -- Kind icons
+            item.kind = cmp_kinds[item.kind]
+            -- Source menu
+            item.menu = ({
               buffer = "[Text]",
               copilot = "[Cop]",
               nvim_lsp = "[LSP]",
@@ -123,9 +109,9 @@ return {
               luasnip = "[Snip]",
               cmp_matlab = "[MATLAB]",
               -- rg = '[RG]',
-              -- neorg    = '[Norg]',
+              -- neorg  = '[Norg]',
             })[entry.source.name]
-            return vim_item
+            return item
           end,
         },
         sorting = {
@@ -177,6 +163,32 @@ return {
           -- {name = 'cmp_octave'}
         },
       }
+
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = { { name = "path" }, { name = "cmdline" } },
+      })
+      cmp.setup.cmdline({ "/", "?" }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = { { name = "buffer" } },
+      })
+      cmp.setup.filetype({ "markdown.pandoc", "tex" }, {
+        sources = cmp.config.sources {
+          { name = "nvim_lsp", priority = 1000 },
+          { name = "nvim_lsp_signature_help", priority = 900 },
+          { name = "buffer", keyword_length = 3, priority = 800 },
+          { name = "luasnip", priority = 700, option = { show_autosnippets = true } },
+        },
+      })
+      cmp.setup.filetype({ "julia", "matlab", "python", "lua" }, {
+        sources = cmp.config.sources {
+          { name = "nvim_lsp", priority = 1000 },
+          { name = "luasnip", priority = 900, option = { show_autosnippets = true } },
+          -- { name = "copilot", priority = 850, max_item_count = 3 },
+          { name = "buffer", keyword_length = 3, priority = 700 },
+          { name = "path", priority = 600, max_item_count = 4 },
+        },
+      })
     end,
   },
 }
