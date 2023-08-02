@@ -1,3 +1,5 @@
-.DS_Store
+.gitignore
 spell/
-plugin/packer_compiled.lua
+mydict/_CET.txt
+mydict/_GRE.txt
+mydict/_TEX.txt

@@ -10,6 +10,7 @@ abnormal
 aboard
 abolish
 abortion
+abrasive
 abroad
 abrupt
 abscission
@@ -71,8 +72,10 @@ adapt
 addict
 addition
 additional
+additive
 adequate
 adhere
+adhesion
 adjacent
 adjoin
 adjunct
@@ -85,6 +88,7 @@ admonish
 adolescent
 adopt
 adore
+adsorption
 adult
 adulterate
 advanced
@@ -143,12 +147,14 @@ allowance
 alloy
 allure
 ally
+alogrithm
 alongside
 alphabet
 alter
 alternate
 alternative
 altitude
+alumina
 aluminium
 amalgamate
 amateur
@@ -191,6 +197,7 @@ anonymous
 antecedent
 antediluvian
 anticipate
+antifriction
 antipathy
 antique
 anxiety
@@ -430,6 +437,7 @@ billion
 bind
 biography
 biology
+biotribology
 bizarre
 blade
 blandishment
@@ -608,6 +616,7 @@ causal
 caustic
 caution
 cautious
+cavitation
 cavity
 cease
 celestial
@@ -728,6 +737,8 @@ cocaine
 cocktail
 coda
 codify
+coefficiency
+coefficient
 cognitive
 cognizant
 coherent
@@ -1191,6 +1202,7 @@ differ
 differentiate
 diffidence
 diffuse
+diffusion
 digest
 digital
 dignity
@@ -1380,6 +1392,8 @@ eject
 elaborate
 elapse
 elastic
+elastohydrodynamic
+elastoplastic
 elbow
 elderly
 elect
@@ -1402,6 +1416,8 @@ eliminate
 elite
 elixir
 eloquent
+Elrod
+Elrod-Adams
 elsewhere
 Elysian
 emaciated
@@ -1677,6 +1693,7 @@ fidelity
 fierce
 figure
 filibuster
+filler
 filter
 finally
 finance
@@ -1943,6 +1960,7 @@ handy
 happen
 harangue
 harbour
+hardcfacing
 harden
 hardship
 hardware
@@ -1952,6 +1970,7 @@ harmony
 harness
 harrowing
 harsh
+Hartman
 haste
 hasty
 hatch
@@ -1986,6 +2005,7 @@ herd
 heritage
 hermetic
 heroic
+Hertzian
 hesitate
 heterodox
 hierarchy
@@ -2048,6 +2068,7 @@ hut
 hydrogen
 hyperbole
 hypothesis
+hyrodynamic
 hysterical
 iconoclastic
 ideal
@@ -2323,6 +2344,7 @@ jeopardize
 jerk
 jet
 jewel
+JFO
 jibe
 jocose
 jog
@@ -2375,6 +2397,7 @@ lap
 largely
 lascivious
 laser
+laser-lattice
 lash
 lassitude
 latent
@@ -2455,6 +2478,7 @@ litigation
 litter
 liver
 living-room
+load-carrying
 loaf
 loan
 lobby
@@ -2481,7 +2505,10 @@ lover
 lower
 loyal
 loyalty
+lubrcation
+lubricant
 lubricate
+lubricating
 lucid
 lucky
 lucre
@@ -2605,6 +2632,8 @@ metropolitan
 mettle
 mettlesome
 microcosm
+micro-cutting
+micro-fracture
 microphone
 microscope
 midst
@@ -2715,6 +2744,8 @@ myth
 naive
 naked
 namely
+nanoindenter
+nanotribology
 napkin
 narrative
 nasty
@@ -2722,6 +2753,7 @@ nationality
 naturally
 nature
 naval
+Navier-Stokes
 navigation
 navy
 nearby
@@ -2744,6 +2776,7 @@ nest
 network
 neutral
 nevertheless
+Newtonian
 nexus
 nickel
 nickname
@@ -2753,6 +2786,7 @@ nil
 nitrogen
 nominal
 nominate
+non-Bingham
 nonetheless
 nonplussed
 nonsense
@@ -2902,6 +2936,7 @@ owing
 owl
 owner
 ownership
+oxidative
 oxide
 oxygen
 ozone
@@ -2974,6 +3009,7 @@ pedal
 pedantic
 pedestrian
 peel
+peening
 peer
 peg
 pellucid
@@ -2981,6 +3017,7 @@ penalty
 penchant
 pendulum
 penetrate
+penetrometer
 penguin
 peninsula
 pension
@@ -3021,6 +3058,7 @@ pervasive
 pessimistic
 pest
 petition
+Petroff
 petrol
 petroleum
 petty
@@ -3046,6 +3084,7 @@ pillow
 pilot
 pinch
 pine
+Pin-on-disk
 pint
 piquant
 pique
@@ -3379,6 +3418,7 @@ recession
 recipe
 recipient
 reciprocal
+reciprocating
 recite
 reckless
 reckon
@@ -3430,6 +3470,7 @@ region
 register
 regulate
 regulation
+Rehbinder
 rehearsal
 reign
 rein
@@ -3441,6 +3482,7 @@ relationship
 relative
 relativity
 relax
+relaxation
 relay
 release
 relegate
@@ -3547,6 +3589,8 @@ revolt
 revolutionary
 revolve
 reward
+Reynolds
+rheometer
 rhythm
 rib
 ribbon
@@ -3574,6 +3618,7 @@ rocket
 rococo
 rod
 roller
+rolling
 romance
 romantic
 rope
@@ -3581,12 +3626,14 @@ rot
 rotary
 rotate
 rotten
+roughness
 rouse
 route
 routine
 royal
 royalty
 rub
+rubbing
 rubric
 rude
 rue
@@ -3650,18 +3697,21 @@ scissors
 scold
 scope
 score
+scoring
 scorn
 scout
 scramble
 scrap
 scrape
 scratch
+scratching
 scream
 screen
 screw
 script
 scrub
 scrutiny
+scuffing
 sculpture
 seal
 seam
@@ -3677,8 +3727,11 @@ seemingly
 segment
 segregate
 seismic
+seizure
 select
 selection
+selective
+self-bonding
 selfish
 semester
 semiconductor
@@ -3781,6 +3834,7 @@ slender
 slice
 slick
 slide
+sliding
 slight
 slim
 slip
@@ -3788,9 +3842,11 @@ slippery
 slogan
 slope
 slot
+sludge
 slum
 slump
 smash
+smearing
 smuggle
 snack
 snap
@@ -3825,6 +3881,7 @@ solvent
 somatic
 somehow
 somewhat
+Sommerfeld
 sophisticated
 soporific
 sordid
@@ -3885,6 +3942,7 @@ spy
 squad
 squalor
 squeeze
+squeezing
 stab
 stability
 stabilize
@@ -3953,6 +4011,7 @@ strengthen
 stress
 stretch
 striated
+Stribeck
 stricture
 stride
 strident
@@ -3993,6 +4052,7 @@ substantiate
 substantive
 substitute
 subsume
+subsurface
 subtle
 subtract
 suburb
@@ -4003,6 +4063,7 @@ successive
 successor
 succor
 suck
+suction
 sue
 suffer
 suffice
@@ -4101,6 +4162,7 @@ tariff
 tautology
 tax
 taxonomy
+Taylor
 tease
 technician
 technique
@@ -4135,6 +4197,7 @@ terrific
 terrify
 territory
 terror
+tester
 testify
 testimony
 textile
@@ -4154,9 +4217,11 @@ thermometer
 thesis
 thespian
 thick
+thickener
 thigh
 thinking
 thirsty
+thixotropy
 thorn
 thorough
 thoughtful
@@ -4193,6 +4258,7 @@ toll
 tome
 tone
 topic
+topography
 torch
 torpor
 torque
@@ -4208,6 +4274,7 @@ toxic
 trace
 tract
 tractable
+tractive
 tractor
 trademark
 tradition
@@ -4250,7 +4317,13 @@ trepidation
 trial
 triangle
 tribe
+tribochemistry
+tribocracking
+triboelement
+tribological
 tribology
+tribometer
+tribopair
 tribute
 trifle
 trigger
@@ -4395,6 +4468,7 @@ vexation
 via
 viable
 vibrate
+vibration
 vice
 vicinity
 vicious
@@ -4417,6 +4491,10 @@ virtuoso
 virus
 visa
 visage
+visco-elasticity
+viscosimeter
+viscosity
+viscosity-temperature
 viscous
 visible
 vision
@@ -4460,11 +4538,13 @@ wary
 waterproof
 watertight
 watt
+waveness
 wax
 weaken
 wealth
 wealthy
 weapon
+wear
 weary
 weave
 web
@@ -4530,4 +4610,5 @@ yoke
 youngster
 zealot
 zinc
+zirconium
 zone
