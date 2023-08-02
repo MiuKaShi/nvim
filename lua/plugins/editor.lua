@@ -200,6 +200,9 @@ return {
         ["."] = false,
       },
     },
+    keys = {
+      { "<leader>uc", function() require("copilot.suggestion").toggle_auto_trigger() end, desc = "Copilot toggle" },
+    },
   },
 
   -- GPT
