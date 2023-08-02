@@ -61,21 +61,17 @@ map("n", "<Leader>[", "10<C-w><")
 map("n", "<Leader>]", "10<C-w>>")
 
 -- vim-bookmarks
-map("n", "mm", "<cmd>BookmarkToggle<CR>")
-map("n", "mn", "<cmd>BookmarkNext<CR>")
-map("n", "mp", "<cmd>BookmarkPrev<CR>")
-map("n", "mc", "<cmd>BookmarkClear<CR>")
+-- map("n", "mm", "<cmd>BookmarkToggle<CR>")
+-- map("n", "mn", "<cmd>BookmarkNext<CR>")
+-- map("n", "mp", "<cmd>BookmarkPrev<CR>")
+-- map("n", "mc", "<cmd>BookmarkClear<CR>")
 
-map("n", "<leader>e", "<cmd>Lf<CR>") -- finder
 map("n", "<leader>i", "<cmd>setlocal spell! spelllang=en_us<CR>") -- spell check
-map("n", "<leader>o", "<cmd>AerialToggle<CR>") -- Outlines
 
 map("n", "<leader>hn", "<cmd>nohl<CR>") -- disable highlight
 map("n", "<leader><leader>s", "<cmd>w ! sudo tee > /dev/null %<CR>") -- force save files
-map("n", "<leader>gd", "<cmd>DiffviewOpen<CR>")
-map("n", "<leader>gx", "<cmd>DiffviewClose<CR>")
-map("n", "<leader>cc", ":!compiler <c-r>%<CR><CR>")
-map("n", "<leader>cp", '<Cmd>call jobstart(["autoprev", expand("%:p")])<CR>')
+map("n", "<leader>pc", ":!compiler <c-r>%<CR><CR>")
+map("n", "<leader>pv", '<Cmd>call jobstart(["autoprev", expand("%:p")])<CR>')
 
 -- command line mode
 map("c", "<C-a>", "<Home>")

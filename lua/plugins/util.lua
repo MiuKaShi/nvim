@@ -22,5 +22,37 @@ return {
   },
   { "junegunn/fzf", build = "./install --bin", event = "VeryLazy" },
   -- { 'skywind3000/asyncrun.vim', cmd = 'AsyncRun' } -- 异步运行
+  -- terminal manager
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    cmd = { "ToggleTerm" },
+    config = function()
+      require("toggleterm").setup {
+        size = function(term)
+          if term.direction == "horizontal" then
+            return 15
+          elseif term.direction == "vertical" then
+            return vim.o.columns * 0.4
+          end
+        end,
+        highlights = {
+          NormalFloat = {
+            link = "NvimTreeNormal",
+          },
+        },
+        direction = "float",
+        open_mapping = [[<c-\>]],
+        close_on_exit = true,
+        float_opts = {
+          border = "single",
+        },
+        on_open = function(_, _, _, _) vim.cmd "set nocursorline" end,
+      }
+    end,
+    keys = {
+      { "<leader>e", function() require("util").togglecli "lf" end, desc = "lf manager" },
+      { "<leader>g", function() require("util").togglecli "lazygit" end, desc = "git lazygit" },
+    },
+  },
 }
-

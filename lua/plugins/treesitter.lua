@@ -45,10 +45,10 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "<CR>",
-          node_incremental = "<CR>",
-          scope_incremental = "<TAB>",
+          init_selection = "<TAB>",
+          node_incremental = "<TAB>",
           node_decremental = "<BS>",
+          scope_incremental = "<CR>",
         },
       },
       indent = { enable = false },

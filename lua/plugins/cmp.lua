@@ -36,6 +36,7 @@ return {
       "mstanciu552/cmp-matlab",
       "lukas-reineke/cmp-under-comparator",
       "hrsh7th/cmp-nvim-lsp-signature-help",
+      "octaltree/cmp-look",
       {
         "zbirenbaum/copilot-cmp",
         dependencies = "zbirenbaum/copilot.lua",
@@ -48,10 +49,12 @@ return {
       -- limit the height of windows
       vim.opt.pumheight = 16
       local cmp_kinds = require("config").icons.cmp_kinds
+
       local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match "^%s*$" == nil
       end
+
       local border_thin = {
         { "╭", "CmpBorder" },
         { "─", "CmpBorder" },
@@ -62,6 +65,25 @@ return {
         { "╰", "CmpBorder" },
         { "│", "CmpBorder" },
       }
+
+      local cmp_sources = {
+        -- { name = "copilot", priority = 850, max_item_count = 3 },
+        {
+          name = "buffer",
+          priority = 800,
+          keyword_length = 3,
+          max_item_count = 5,
+          option = {
+            get_bufnrs = function() return vim.api.nvim_list_bufs() end,
+          },
+        },
+        { name = "luasnip", priority = 700, option = { show_autosnippets = true } },
+        { name = "path", priority = 600, max_item_count = 4 },
+        -- { name = 'neorg' },
+        -- { name = 'cmp_tabnine' },
+        -- {name = 'cmp_octave'}
+      }
+
       cmp.setup {
         completion = { completeopt = "menu,menuone,noinsert" },
         snippet = {
@@ -145,23 +167,7 @@ return {
           },
         },
         matching = { disallow_prefix_unmatching = true },
-        sources = {
-          { name = "luasnip", priority = 900, option = { show_autosnippets = true } },
-          -- { name = "copilot", priority = 850, max_item_count = 3 },
-          {
-            name = "buffer",
-            priority = 800,
-            keyword_length = 3,
-            max_item_count = 5,
-            option = {
-              get_bufnrs = function() return vim.api.nvim_list_bufs() end,
-            },
-          },
-          { name = "path", priority = 700, max_item_count = 4 },
-          -- { name = 'neorg' },
-          -- { name = 'cmp_tabnine' },
-          -- {name = 'cmp_octave'}
-        },
+        sources = cmp_sources,
       }
 
       cmp.setup.cmdline(":", {
@@ -178,17 +184,33 @@ return {
           { name = "nvim_lsp_signature_help", priority = 900 },
           { name = "buffer", keyword_length = 3, priority = 800 },
           { name = "luasnip", priority = 700, option = { show_autosnippets = true } },
+          {
+            name = "look",
+            keyword_length = 2,
+            max_item_count = 20,
+            option = {
+              convert_case = true,
+              loud = true,
+              dict = vim.fn.stdpath "config" .. "/mydict/words.txt",
+            },
+          },
         },
       })
       cmp.setup.filetype({ "julia", "matlab", "python", "lua" }, {
         sources = cmp.config.sources {
           { name = "nvim_lsp", priority = 1000 },
-          { name = "luasnip", priority = 900, option = { show_autosnippets = true } },
           -- { name = "copilot", priority = 850, max_item_count = 3 },
-          { name = "buffer", keyword_length = 3, priority = 700 },
+          { name = "buffer", keyword_length = 3, priority = 800 },
+          { name = "luasnip", priority = 700, option = { show_autosnippets = true } },
           { name = "path", priority = 600, max_item_count = 4 },
         },
       })
     end,
+    keys = {
+      { "<leader>cs", function() require("util").cmp_toggle_source "luasnip" end },
+      { "<leader>cc", function() require("util").cmp_toggle_source "copilot" end },
+      { "<leader>cl", function() require("util").cmp_toggle_source "look" end },
+      { "<leader>cb", function() require("util").cmp_toggle_source "buffer" end },
+    },
   },
 }

@@ -52,7 +52,7 @@ return {
     cmd = "AerialToggle",
 		-- stylua: ignore
 		keys = {
-			{ "<leader>aa", "<cmd>AerialToggle<CR>", desc = "Toggle aerial" },
+			{ "<leader>o", "<cmd>AerialToggle<CR>", desc = "Toggle aerial" },
 			{ "[f",         "<cmd>AerialPrev<CR>",   desc = "Previous symbol" },
 			{ "]f",         "<cmd>AerialNext<CR>",   desc = "Next symbol" },
 		},
@@ -62,9 +62,12 @@ return {
   {
     "sindrets/diffview.nvim",
     opts = { enhanced_diff_hl = true },
-    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
 		-- stylua: ignore
-		keys = { { "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Diff View" } },
+		keys = { 
+			{ "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Diff View" },
+			{ "<leader>gx", "<cmd>DiffviewClose<CR>", desc = "Diff Close" },
+		},
   },
 
   -- Navigate with search labels
@@ -221,6 +224,14 @@ return {
     "windwp/nvim-spectre",
     cmd = { "Spectre" },
     opts = { open_cmd = "noswapfile vnew" },
+    keys = {
+      { "<leader>sp", function() require("spectre").toggle() end, desc = "Toggle Spectre" },
+      {
+        "<leader>sw",
+        function() require("spectre").open_visual { select_word = true } end,
+        desc = "Search current word",
+      },
+    },
   },
   {
     "AckslD/muren.nvim",
@@ -263,12 +274,15 @@ return {
   },
 
   -- markdown
-  { "vim-pandoc/vim-pandoc-syntax", ft = "markdown.pandoc" }, -- markdown 高亮
+  --  高亮
+  { "vim-pandoc/vim-pandoc-syntax", ft = "markdown.pandoc" },
+  -- 表格
   {
     "dhruvasagar/vim-table-mode",
     ft = { "markdown" },
     config = function() vim.keymap.set("n", "<leader>tt", ":TableModeToggle<cr>") end,
-  }, -- markdown 表格
+  },
+  -- 预览
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreview" },

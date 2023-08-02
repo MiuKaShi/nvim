@@ -102,9 +102,43 @@ function M.getwords()
 end
 
 -- Width of side windows
-M.width = function()
+function M.width()
   local columns = vim.go.columns
   return math.floor(columns * 0.2) > 25 and math.floor(columns * 0.2) or 25
+end
+
+-- Width of side windows
+function M.togglecli(cli)
+  local Terminal = require("toggleterm.terminal").Terminal
+  return Terminal:new({ cmd = cli, hidden = true, direction = "float" }):toggle()
+end
+
+-- cmp toggle source
+function M.cmp_toggle_source(src)
+  local cmp = require "cmp"
+  local sources = cmp.get_config().sources
+  -- remove source
+  for i = #sources, 1, -1 do
+    if sources[i].name == src then
+      table.remove(sources, i)
+      cmp.setup.buffer { sources = sources }
+      print("remove source: " .. src)
+      return
+    end
+  end
+  --add source
+  local priority = ({
+    ["nvim_lsp"] = function() return 1000 end,
+    ["nvim_lsp_signature_help"] = function() return 900 end,
+    ["copilot"] = function() return 850 end,
+    ["buffer"] = function() return 800 end,
+    ["luasnip"] = function() return 700 end,
+    ["path"] = function() return 600 end,
+    ["look"] = function() return 200 end,
+  })[src] or function() return 100 end -- 默认优先级
+  table.insert(sources, { name = src, priority() })
+  cmp.setup.buffer { sources = sources }
+  print("add source: " .. src)
 end
 
 -- CMP highlight

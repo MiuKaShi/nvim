@@ -60,10 +60,10 @@ return {
         "julials",
         "texlab",
       } do
-        require("plugins.lsp.lsp-servers." .. server).setup(on_attach, capabilities)
+        require("plugins.lsp.servers." .. server).setup(on_attach, capabilities)
       end
       -- rime_ls server
-      require "plugins.lsp.lsp-servers.rimels"
+      require "plugins.lsp.servers.rimels"
     end,
   },
 
@@ -115,6 +115,8 @@ return {
   {
     "folke/trouble.nvim",
     opts = {
+      mode = "document_diagnostics",
+      auto_close = true,
       position = "bottom",
       signs = {
         error = "🔥",
@@ -130,13 +132,11 @@ return {
         next = "j",
       },
     },
+
     cmd = "TroubleToggle",
     keys = {
-      {
-        "<leader>xx",
-        function() require("trouble").toggle() end,
-        desc = "Trouble",
-      },
+      { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "trouble toggle" },
+      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "trouble toggle quickfix" },
     },
   },
 
