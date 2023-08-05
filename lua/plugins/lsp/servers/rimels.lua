@@ -33,7 +33,7 @@ local rime_on_attach = function(client, _)
   -- keymaps for executing command
   vim.keymap.set("n", "<leader><space>", function() toggle_rime() end)
   vim.keymap.set("i", "<C-x>", function() toggle_rime() end)
-  vim.keymap.set("n", "<lsader>rs", function() vim.lsp.buf.execute_command { command = "rime-ls.sync-user-data" } end)
+  vim.keymap.set("n", "<leader>rs", function() vim.lsp.buf.execute_command { command = "rime-ls.sync-user-data" } end)
 end
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers

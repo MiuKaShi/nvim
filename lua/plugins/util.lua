@@ -8,7 +8,7 @@ return {
     config = function() vim.g.startuptime_tries = 10 end,
   },
   -- normal/insert模式切换的输入法记忆
-  { "h-hg/fcitx.nvim", event = "InsertEnter" },
+  -- { "h-hg/fcitx.nvim", event = "InsertEnter" },
   { "wakatime/vim-wakatime", event = "InsertEnter" },
   {
     "MiuKaShi/vim-gf-list",
