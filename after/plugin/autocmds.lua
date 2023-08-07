@@ -97,3 +97,34 @@ autocmd("CursorMoved", {
   callback = function() start_hl() end,
   desc = "Auto hlsearch",
 })
+
+-- For colorscheme that don't support transparency. Set transparent_nvim value in options.lua.
+if vim.g.transparent_nvim then
+  autocmd("ColorScheme", {
+    pattern = "*",
+    callback = function()
+      local hl_group = {
+        "Normal",
+        "NonText",
+        "LineNr",
+        "SignColumn",
+        "MsgArea",
+        "Pmenu",
+        "TelescopeBorder",
+        "TelescopeNormal",
+        "TelescopePromptNormal",
+        "WhichKeyFloat",
+        "NormalFloat",
+        "NormalNC",
+        "NvimTreeNormal",
+        "NvimTreeNormalNC",
+        "EndOfBuffer",
+        "VertSplit",
+        "FloatBorder",
+      }
+      for _, name in ipairs(hl_group) do
+        vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
+      end
+    end,
+  })
+end

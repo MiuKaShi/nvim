@@ -227,7 +227,14 @@ return {
       { "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]] },
       { "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]] },
     },
-    config = function() require("hlslens").setup() end,
+    config = function()
+      vim.cmd [[
+ 	 	 	 	 hi HlSearchFloat guibg=None guifg=green gui=underline
+ 	 	 	 	 hi HlSearchLensNear guibg=None guifg=red gui=italic
+ 	 	 	 	 hi HlSearchLens guibg=None guifg=green gui=underline
+			]]
+      require("hlslens").setup()
+    end,
   },
 
   {
