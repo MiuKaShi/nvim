@@ -134,8 +134,19 @@ return {
   -- logical match
   {
     "andymass/vim-matchup",
-    event = "BufReadPost",
-    config = function() vim.g.matchup_matchparen_offscreen = { method = "status_manual" } end,
+    ft = {
+      "sh",
+      "c",
+      "cpp",
+      "matlab",
+      "lua",
+    },
+    init = function()
+      vim.g.matchup_surround_enabled = 1
+      vim.g.matchup_transmute_enabled = 1
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end,
+    config = function() vim.cmd "highlight MatchParen gui=italic,bold guifg=#cc241d guibg=#689d6a" end,
   },
 
   -- comment

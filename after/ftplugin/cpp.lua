@@ -1,1 +1,1 @@
-vim.opt.mps:append '=:;'
+vim.opt.mps:append "=:;"

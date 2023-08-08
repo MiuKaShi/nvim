@@ -70,8 +70,6 @@ map("n", "<leader>i", "<cmd>setlocal spell! spelllang=en_us<CR>") -- spell check
 
 map("n", "<leader>hn", "<cmd>nohl<CR>") -- disable highlight
 map("n", "<leader><leader>s", "<cmd>w ! sudo tee > /dev/null %<CR>") -- force save files
-map("n", "<leader>pc", ":!compiler <c-r>%<CR><CR>")
-map("n", "<leader>pv", '<Cmd>call jobstart(["autoprev", expand("%:p")])<CR>')
 
 -- command line mode
 map("c", "<C-a>", "<Home>")

@@ -208,7 +208,7 @@ return {
     end,
     keys = {
       { "<leader>cs", function() require("util").cmp_toggle_source "luasnip" end },
-      { "<leader>cc", function() require("util").cmp_toggle_source "copilot" end },
+      { "<leader>cg", function() require("util").cmp_toggle_source "copilot" end },
       { "<leader>cl", function() require("util").cmp_toggle_source "look" end },
       { "<leader>cb", function() require("util").cmp_toggle_source "buffer" end },
     },
