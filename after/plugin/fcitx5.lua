@@ -39,7 +39,8 @@ local function fcitx5_smart()
   local surrounded_by_not_english = is_surrounded_by_not_english()
   -- local in_comment = code_comment()
   -- If in_comment and surrounded_by_not_english then fn.system("fcitx5-remote" .. " -o") end
-  if surrounded_by_not_english then fn.system("fcitx5-remote" .. " -o") end
+
+  if not vim.g.rime_enabled and surrounded_by_not_english then fn.system("fcitx5-remote" .. " -o") end
 end
 
 local fcitx5 = api.nvim_create_augroup("fcitx5", { clear = true })
