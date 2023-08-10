@@ -236,6 +236,19 @@ return {
       require("hlslens").setup()
     end,
   },
+  -- emphasized undo/redos
+  {
+    "tzachar/highlight-undo.nvim",
+    event = "VeryLazy",
+    keys = { "u", "U" },
+    opts = {
+      duration = 250,
+      keymaps = {
+        { "n", "u", "silent undo", { desc = "󰕌 Undo", silent = true } },
+        { "n", "U", "silent redo", { desc = "󰑎 Redo", silent = true } },
+      },
+    },
+  },
 
   {
     "nvim-zh/colorful-winsep.nvim",

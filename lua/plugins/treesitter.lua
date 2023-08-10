@@ -45,9 +45,9 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "<TAB>",
-          node_incremental = "<TAB>",
-          node_decremental = "<BS>",
+          init_selection = "+",
+          node_incremental = "+",
+          node_decremental = "-",
           scope_incremental = "<CR>",
         },
       },
@@ -78,5 +78,10 @@ return {
     opts = {
       max_lines = 3,
     },
+  },
+
+  { -- tons of text objects
+    "chrisgrieser/nvim-various-textobjs",
+    lazy = true, -- loaded by keymaps
   },
 }

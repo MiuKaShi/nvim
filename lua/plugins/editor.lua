@@ -288,6 +288,11 @@ return {
   },
 
   -- markdown
+  {
+    "MiuKaShi/markdowny.nvim",
+    ft = { "markdown" },
+    config = function() require("markdowny").setup { remove_keymaps = true } end,
+  },
   --  高亮
   { "vim-pandoc/vim-pandoc-syntax", ft = "markdown.pandoc" },
   -- 表格
@@ -381,5 +386,63 @@ endfunction
     keys = {
       { "<leader>u", "<Cmd>UndotreeToggle<CR>", desc = "Undo Tree" },
     },
+  },
+  -- fold
+  {
+    "chrisgrieser/nvim-origami",
+    event = "BufReadPost", -- later will not save folds
+    opts = true, -- needed
+  },
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = "kevinhwang91/promise-async",
+    event = "BufReadPost",
+    config = function()
+      vim.opt.foldlevel = 99
+      vim.opt.foldlevelstart = 99
+      local foldIcon = ""
+      local hlgroup = "NonText"
+      local function foldTextFormatter(virtText, lnum, endLnum, width, truncate)
+        local newVirtText = {}
+        local suffix = "  " .. foldIcon .. "  " .. tostring(endLnum - lnum)
+        local sufWidth = vim.fn.strdisplaywidth(suffix)
+        local targetWidth = width - sufWidth
+        local curWidth = 0
+        for _, chunk in ipairs(virtText) do
+          local chunkText = chunk[1]
+          local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+          if targetWidth > curWidth + chunkWidth then
+            table.insert(newVirtText, chunk)
+          else
+            chunkText = truncate(chunkText, targetWidth - curWidth)
+            local hlGroup = chunk[2]
+            table.insert(newVirtText, { chunkText, hlGroup })
+            chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            if curWidth + chunkWidth < targetWidth then
+              suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+            end
+            break
+          end
+          curWidth = curWidth + chunkWidth
+        end
+        table.insert(newVirtText, { suffix, hlgroup })
+        return newVirtText
+      end
+      require("ufo").setup {
+        provider_selector = function(_, ft, _)
+          local lspWithOutFolding = { "markdown", "bash", "sh", "bash", "zsh", "css" }
+          if vim.tbl_contains(lspWithOutFolding, ft) then
+            return { "treesitter", "indent" }
+          elseif ft == "html" then
+            return { "indent" } -- lsp & treesitter do not provide folds
+          else
+            return { "lsp", "indent" }
+          end
+        end,
+        close_fold_kinds = { "imports" },
+        open_fold_hl_timeout = 500,
+        fold_virt_text_handler = foldTextFormatter,
+      }
+    end,
   },
 }
