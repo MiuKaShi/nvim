@@ -25,6 +25,8 @@ local sources = {
   formatting.prettierd.with {
     filetypes = { "css", "json", "yaml", "markdown" },
   },
+  -- code blocks
+  formatting.cbfmt,
   -- c
   formatting.astyle.with {
     filetypes = { "c" },
@@ -79,6 +81,7 @@ local sources = {
   },
   formatting.shfmt.with {
     extra_args = { "-i", "4", "-ci", "-bn" },
+    extra_filetypes = { "zsh" },
   },
 
   --diagnostics

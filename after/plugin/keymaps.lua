@@ -77,6 +77,9 @@ map("c", "<C-e>", "<End>")
 map("c", "<C-h>", "<BS>")
 map("c", "<C-k>", "<C-f>D<C-c><C-c>:<Up>")
 
+-- flip word
+map("n", "<leader>t", function() require("util.flipper").flipWord() end, { desc = "switch common words / toggle casing" })
+
 -- better gx
 map("", "gx", '<Cmd>call jobstart(["linkhandler", expand("<cfile>")], {"detach": v:true})<CR>', {})
 
