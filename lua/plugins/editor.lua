@@ -430,7 +430,7 @@ endfunction
       end
       require("ufo").setup {
         provider_selector = function(_, ft, _)
-          local lspWithOutFolding = { "markdown", "bash", "sh", "bash", "zsh", "css" }
+          local lspWithOutFolding = { "markdown", "bash", "sh", "bash", "zsh", "css", "yaml" }
           if vim.tbl_contains(lspWithOutFolding, ft) then
             return { "treesitter", "indent" }
           elseif ft == "html" then

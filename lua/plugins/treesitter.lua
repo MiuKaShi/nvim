@@ -1,7 +1,6 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
     event = "BufReadPre",
     cmd = { "TSUpdateSync" },
@@ -39,17 +38,22 @@ return {
           "latex",
           "markdown",
         },
-        -- additional_vim_regex_highlighting = { 'markdown' },
+        -- additional_vim_regex_highlighting = { "markdown" },
       },
       autopairs = { enable = true },
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "+",
-          node_incremental = "+",
-          node_decremental = "-",
-          scope_incremental = "<CR>",
+          init_selection = "<CR>",
+          node_incremental = "<CR>",
+          node_decremental = "<BS>",
+          scope_incremental = "<TAB>",
         },
+        is_supported = function()
+          local mode = vim.api.nvim_get_mode().mode
+          if mode == "c" then return false end
+          return true
+        end,
       },
       indent = { enable = false },
       matchup = {
@@ -67,7 +71,7 @@ return {
 
   {
     "HiPhish/nvim-ts-rainbow2",
-    event = "BufReadPre",
+    event = "BufReadPost",
     dependencies = "nvim-treesitter",
   },
 
@@ -84,4 +88,10 @@ return {
     "chrisgrieser/nvim-various-textobjs",
     lazy = true, -- loaded by keymaps
   },
+  -- {
+  --   "sustech-data/wildfire.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = "nvim-treesitter",
+  --   config = function() require("wildfire").setup() end,
+  -- },
 }

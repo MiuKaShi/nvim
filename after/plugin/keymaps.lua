@@ -41,13 +41,18 @@ map("n", ">", "v>g")
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
 
--- split window
-map("n", "<Leader>s", "<cmd>sp<CR>")
-map("n", "<Leader>v", "<cmd>vsp<CR>")
-map("n", "<Leader>h", "<C-w>h")
-map("n", "<Leader>l", "<C-w>l")
-map("n", "<Leader>j", "<C-w>j")
-map("n", "<Leader>k", "<C-w>k")
+-- windows
+map("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
+map("n", "<leader>wd", "<C-W>c", { desc = "Delete window" })
+map("n", "<leader>ws", "<C-W>v", { desc = "Split window right" })
+map("n", "<leader>wv", "<C-W>s", { desc = "Split window below" })
+map("n", "<leader>wo", "<C-W>o", { desc = "Close other window" })
+
+-- Add undo break-points
+map("i", ",", ",<c-g>u")
+map("i", ".", ".<c-g>u")
+map("i", ";", ";<c-g>u")
+map("i", "=", "=<c-g>u")
 
 -- toggle comment
 
@@ -78,7 +83,12 @@ map("c", "<C-h>", "<BS>")
 map("c", "<C-k>", "<C-f>D<C-c><C-c>:<Up>")
 
 -- flip word
-map("n", "<leader>t", function() require("util.flipper").flipWord() end, { desc = "switch common words / toggle casing" })
+map(
+  "n",
+  "<leader>t",
+  function() require("util.flipper").flipWord() end,
+  { desc = "switch common words / toggle casing" }
+)
 
 -- better gx
 map("", "gx", '<Cmd>call jobstart(["linkhandler", expand("<cfile>")], {"detach": v:true})<CR>', {})

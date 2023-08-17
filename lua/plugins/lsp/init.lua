@@ -52,13 +52,13 @@ return {
         "gopls",
         "jsonls",
         "htmls",
-        "yamlls",
         "bashls",
         "vimls",
         "luals",
         "fortls",
         "julials",
         "texlab",
+        "yamlls",
       } do
         require("plugins.lsp.servers." .. server).setup(on_attach, capabilities)
       end
