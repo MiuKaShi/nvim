@@ -28,8 +28,6 @@ return {
         "regex",
         "vim",
         "vimdoc",
-        "markdown",
-        "markdown_inline",
       },
       highlight = {
         enable = true,

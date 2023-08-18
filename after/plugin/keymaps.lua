@@ -83,12 +83,7 @@ map("c", "<C-h>", "<BS>")
 map("c", "<C-k>", "<C-f>D<C-c><C-c>:<Up>")
 
 -- flip word
-map(
-  "n",
-  "<leader>t",
-  function() require("util.flipper").flipWord() end,
-  { desc = "switch common words / toggle casing" }
-)
+map("n", "<leader>t", function() require("util.flipper").flipWord() end, { desc = "switch common words" })
 
 -- better gx
 map("", "gx", '<Cmd>call jobstart(["linkhandler", expand("<cfile>")], {"detach": v:true})<CR>', {})
@@ -100,10 +95,7 @@ vim.cmd [[autocmd FileType markdown.pandoc inoremap <buffer> <silent> @@ <Esc>:B
 map("n", "<leader>us", function() util.toggle "spell" end, { desc = "Toggle Spelling" })
 map("n", "<leader>uw", function() util.toggle "wrap" end, { desc = "Toggle Word Wrap" })
 map("n", "<leader>.", util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
+
+-- stylua: ignore start
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-map(
-  "n",
-  "<leader>ul",
-  function() util.toggle("conceallevel", false, { 0, conceallevel }) end,
-  { desc = "Toggle Conceal" }
-)
+map("n","<leader>ul",function() util.toggle("conceallevel", false, { 0, conceallevel }) end,{ desc = "Toggle Conceal" })

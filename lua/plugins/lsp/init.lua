@@ -15,6 +15,14 @@ return {
         vim.fn.sign_define(sign_name, { texthl = sign_name, text = icon, numhl = "" })
       end
 
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = "single",
+      })
+
+      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+        border = "single",
+      })
+
       -- diagnostics config
       vim.diagnostic.config {
         update_in_insert = false,
@@ -33,6 +41,7 @@ return {
           prefix = "",
         },
       }
+      require("lspconfig.ui.windows").default_options.border = "single"
 
       -- attach
       local on_attach = function(client, bufnr) require("plugins.lsp.attach").on_attach(client, bufnr) end
@@ -68,47 +77,71 @@ return {
   },
 
   -- lsp enhancement
+  -- {
+  --   "nvimdev/lspsaga.nvim",
+  --   opts = {
+  --     symbol_in_winbar = {
+  --       enable = false,
+  --     },
+  --     lightbulb = {
+  --       enable = false,
+  --     },
+  --     ui = {
+  --       theme = "round",
+  --       winblend = 0,
+  --       title = false,
+  --       border = "single",
+  --       expand = "",
+  --       collapse = "",
+  --       colors = {
+  --         normal_bg = "none",
+  --         title_bg = "none",
+  --         red = "#ea6962",
+  --         magenta = "#98869a",
+  --         orange = "#e78a4e",
+  --         yellow = "#d8a657",
+  --         green = "#a9b665",
+  --         cyan = "#89b482",
+  --         blue = "#7daea3",
+  --         purple = "#d3869b",
+  --         white = "#d1d4cf",
+  --         black = "#1e2030",
+  --       },
+  --       scroll_preview = {
+  --         scroll_down = "<C-9>",
+  --         scroll_up = "<C-0>",
+  --       },
+  --     },
+  --   },
+  --   cmd = "Lspsaga",
+  -- -- stylua: ignore
+  -- keys = {
+  -- 	{ "gh", function() require("lspsaga.finder"):new({}) end, silent = true, desc = "Lsp Finder" }
+  -- },
+  -- },
+
   {
-    "nvimdev/lspsaga.nvim",
+    "dnlhc/glance.nvim",
     opts = {
-      symbol_in_winbar = {
-        enable = false,
-      },
-      lightbulb = {
-        enable = false,
-      },
-      ui = {
-        theme = "round",
-        winblend = 0,
-        title = false,
-        border = "single",
-        expand = "",
-        collapse = "",
-        colors = {
-          normal_bg = "none",
-          title_bg = "none",
-          red = "#ea6962",
-          magenta = "#98869a",
-          orange = "#e78a4e",
-          yellow = "#d8a657",
-          green = "#a9b665",
-          cyan = "#89b482",
-          blue = "#7daea3",
-          purple = "#d3869b",
-          white = "#d1d4cf",
-          black = "#1e2030",
-        },
-        scroll_preview = {
-          scroll_down = "<C-9>",
-          scroll_up = "<C-0>",
-        },
+      border = { enable = true },
+      hooks = {
+        ---Don't open glance when there is only one result and it is located in the current buffer, open otherwise
+        before_open = function(results, open, jump)
+          local uri = vim.uri_from_bufnr(0)
+          if #results == 1 then
+            local target_uri = results[1].uri or results[1].targetUri
+
+            if target_uri == uri then
+              jump(results[1])
+            else
+              open(results)
+            end
+          else
+            open(results)
+          end
+        end,
       },
     },
-    cmd = "Lspsaga",
-		-- stylua: ignore
-		keys = {
-			{ "gh", function() require("lspsaga.finder"):new({}) end, silent = true, desc = "Lsp Finder" }
-		},
   },
 
   -- code check

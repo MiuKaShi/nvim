@@ -50,12 +50,11 @@ return {
       layout = { min_width = 30, default_direction = "left" },
     },
     cmd = "AerialToggle",
-		-- stylua: ignore
-		keys = {
-			{ "<leader>o", "<cmd>AerialToggle<CR>", desc = "Toggle aerial" },
-			{ "[f",         "<cmd>AerialPrev<CR>",   desc = "Previous symbol" },
-			{ "]f",         "<cmd>AerialNext<CR>",   desc = "Next symbol" },
-		},
+    keys = {
+      { "<leader>o", "<cmd>AerialToggle<CR>", desc = "Toggle aerial" },
+      { "[f", "<cmd>AerialPrev<CR>", desc = "Previous symbol" },
+      { "]f", "<cmd>AerialNext<CR>", desc = "Next symbol" },
+    },
   },
 
   -- diffview
@@ -63,11 +62,10 @@ return {
     "sindrets/diffview.nvim",
     opts = { enhanced_diff_hl = true },
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
-		-- stylua: ignore
-		keys = { 
-			{ "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Diff View" },
-			{ "<leader>gx", "<cmd>DiffviewClose<CR>", desc = "Diff Close" },
-		},
+    keys = {
+      { "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Diff View" },
+      { "<leader>gx", "<cmd>DiffviewClose<CR>", desc = "Diff Close" },
+    },
   },
 
   -- Navigate with search labels
@@ -93,41 +91,21 @@ return {
         },
       },
     },
-		-- stylua: ignore
-		keys = {
-			{ "s", mode = { "n", "o", "x" }, function() require("flash").jump() end,       desc = "Flash" },
-			{ "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-		},
+    keys = {
+      { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+    },
   },
 
   -- align
   {
     "Vonr/align.nvim",
+		-- stylua: ignore
     keys = {
-      {
-        "aa",
-        mode = { "x" },
-        function() require("align").align_to_char(1, true) end,
-        silent = true,
-      },
-      {
-        "as",
-        mode = { "x" },
-        function() require("align").align_to_char(2, true, true) end,
-        silent = true,
-      },
-      {
-        "aw",
-        mode = { "x" },
-        function() require("align").align_to_string(false, true, true) end,
-        silent = true,
-      },
-      {
-        "ar",
-        mode = { "x" },
-        function() require("align").align_to_string(true, true, true) end,
-        silent = true,
-      },
+      { "aa", mode = { "x" }, function() require("align").align_to_char(1, true) end, silent = true },
+      { "as", mode = { "x" }, function() require("align").align_to_char(2, true, true) end, silent = true },
+      { "aw", mode = { "x" }, function() require("align").align_to_string(false, true, true) end, silent = true },
+      { "ar", mode = { "x" }, function() require("align").align_to_string(true, true, true) end, silent = true },
     },
   },
 
@@ -164,19 +142,10 @@ return {
   {
     "dwrdx/mywords.nvim",
     event = { "InsertEnter" },
+		-- stylua: ignore
     keys = {
-      {
-        "<leader>hh",
-        function() require("mywords").hl_toggle() end,
-        silent = true,
-        desc = "highlight words",
-      },
-      {
-        "<leader>hx",
-        function() require("mywords").uhl_all() end,
-        silent = true,
-        desc = "unhighlight words",
-      },
+      { "<leader>hh", function() require("mywords").hl_toggle() end, silent = true, desc = "highlight words" },
+      { "<leader>hx", function() require("mywords").uhl_all() end, silent = true, desc = "unhighlight words" },
     },
   },
 
@@ -238,13 +207,10 @@ return {
     "windwp/nvim-spectre",
     cmd = { "Spectre" },
     opts = { open_cmd = "noswapfile vnew" },
+		-- stylua: ignore
     keys = {
       { "<leader>sp", function() require("spectre").toggle() end, desc = "Toggle Spectre" },
-      {
-        "<leader>sw",
-        function() require("spectre").open_visual { select_word = true } end,
-        desc = "Search current word",
-      },
+      { "<leader>sw", function() require("spectre").open_visual { select_word = true } end, desc = "Search current word" },
     },
   },
   {

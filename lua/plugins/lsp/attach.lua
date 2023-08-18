@@ -3,16 +3,17 @@ local M = {}
 function M.get_keymaps()
 	-- stylua: ignore start
 	return {
-		{ "J",          '<cmd>Lspsaga peek_definition<CR>',       desc = "definition" },
-		{ "K",          '<cmd>Lspsaga hover_doc<CR>',             desc = "document" },
-		{ "gr",         '<cmd>Lspsaga rename<CR>',                desc = "rename" },
-		{ "gl",         '<cmd>Lspsaga show_line_diagnostics<CR>', desc = "diagnostics" },
-		{ "gh",         '<cmd>Lspsaga finder ref<CR>',            desc = "references" },
-		{ "<leader>ca", '<cmd>Lspsaga code_action<CR>',           mode = { "n", "v" },   desc = "codeAction" },
-		{ "[e",         '<cmd>Lspsaga diagnostic_jump_prev<CR>',  desc = "jumpprev" },
-		{ "]e",         '<cmd>Lspsaga diagnostic_jump_next<CR>',  desc = "jumpnext" },
-		{ "<leader>bf", M.format,                                 desc = "Format",       has = "documentFormatting" },
-		{ "<leader>bf", M.format,                                 desc = "Format Range", mode = "v", has =	"documentRangeFormatting" },
+		{ "J",          function() require("glance").open("definitions") end,  desc = "definition" },
+		{ "gt",         function() require("glance").open("type_definitions") end, desc = "typeDefinition" },
+		{ "gh",         function() require("glance").open("references") end,  desc = "references" },
+		{ "K",          vim.lsp.buf.hover,         desc = "document" },
+		{ "gr",         vim.lsp.buf.rename,        desc = "rename" },
+		{ "<leader>ca", vim.lsp.buf.code_action,   mode = { "n", "v" },   desc = "codeAction" },
+		{ "gl",         vim.diagnostic.open_float, desc = "Float Diagnostics" },
+		{ "[e",         vim.diagnostic.goto_prev,  desc = "jumpprev" },
+		{ "]e",         vim.diagnostic.goto_next,  desc = "jumpnext" },
+		{ "<leader>bf", M.format,                  desc = "Format",       has = "documentFormatting" },
+		{ "<leader>bf", M.format,                  desc = "Format Range", mode = "v", has =	"documentRangeFormatting" },
 	}
   -- stylua: ignore end
 end

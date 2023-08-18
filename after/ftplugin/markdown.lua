@@ -34,13 +34,13 @@ vim.keymap.set("n", "<leader>cp", '<Cmd>call jobstart(["autoprev", expand("%:p")
 vim.keymap.set("n", "<C-b>", "bi**<Esc>ea**<Esc>", { buffer = 0 })
 vim.keymap.set("v", "<C-b>", ":lua require('markdowny').bold()<cr>", { buffer = 0 })
 
-vim.keymap.set("n", "<C-i>", "bi_<Esc>ea_<Esc>", { buffer = 0 })
-vim.keymap.set("v", "<C-i>", ":lua require('markdowny').italic()<cr>", { buffer = 0 })
+vim.keymap.set("n", "<C-e>", "bi_<Esc>ea_<Esc>", { buffer = 0 })
+vim.keymap.set("v", "<C-e>", ":lua require('markdowny').italic()<cr>", { buffer = 0 })
 
 vim.keymap.set("n", "<C-l>", "bi[<Esc>ea]()<Esc>hp", { buffer = 0 })
 vim.keymap.set("v", "<C-l>", ":lua require('markdowny').link()<cr>", { buffer = 0 })
 
-vim.keymap.set("v", "<C-e>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
+vim.keymap.set("v", "<C-c>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
 
 --text-obj
 vim.keymap.set({ "o", "x" }, "il", "<cmd>lua require('various-textobjs').mdlink(true)<CR>", { desc = "inner md link textobj", buffer = true })
