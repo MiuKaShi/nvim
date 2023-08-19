@@ -68,6 +68,7 @@ return {
         "julials",
         "texlab",
         "yamlls",
+        "matlabls",
       } do
         require("plugins.lsp.servers." .. server).setup(on_attach, capabilities)
       end

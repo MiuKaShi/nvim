@@ -3,6 +3,7 @@ local helpers = require "null-ls.helpers"
 local methods = require "null-ls.methods"
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
+
 local mh_style = {
   name = "mh_style",
   meta = {
@@ -86,8 +87,9 @@ local sources = {
 
   --diagnostics
   -- MATLAB
-  diagnostics.mlint,
+  -- diagnostics.mlint,
   helpers.make_builtin(mh_style),
+
   -- markdown
   diagnostics.markdownlint.with {
     args = {
