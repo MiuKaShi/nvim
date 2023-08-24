@@ -394,6 +394,10 @@ endfunction
         table.insert(newVirtText, { suffix, hlgroup })
         return newVirtText
       end
+      for _, lvl in pairs { 1, 2, 3, 4, 5 } do
+        local desc = lvl < 4 and "󰘖 Set Fold Level" or "which_key_ignore"
+        vim.keymap.set("n", "z" .. tostring(lvl), function() require("ufo").closeFoldsWith(lvl) end, { desc = desc })
+      end
       require("ufo").setup {
         provider_selector = function(_, ft, _)
           local lspWithOutFolding = { "markdown", "bash", "sh", "bash", "zsh", "css", "yaml" }
@@ -410,5 +414,10 @@ endfunction
         fold_virt_text_handler = foldTextFormatter,
       }
     end,
+		-- stylua: ignore
+    keys = {
+      { "zr", function() require("ufo").openFoldsExceptKinds { "comments" } end, silent = true, desc = "󰘖 󱃄 Open All Folds except comments" },
+      { "zm", function() require("ufo").closeAllFolds() end, silent = true, desc = "󰘖 󱃄 Close All Folds" },
+    },
   },
 }

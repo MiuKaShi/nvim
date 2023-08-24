@@ -170,9 +170,9 @@ return {
     end
   end,
   keys = {
-    { "<leader>/", Util.tele_builtin("live_grep", { previewer = false }), desc = "LSP search" },
+    { "<leader>/", Util.tele_builtin("live_grep", { previewer = false }), desc = "Grep search" },
     { "<leader>fb", Util.tele_builtin "buffers", desc = "buffer list" },
-    { "<leader>fs", Util.tele_builtin "lsp_document_symbols", desc = "LSP search" },
+    { "<leader>fs", Util.tele_builtin "lsp_document_symbols", desc = "󰒕 Symbols" },
     { "<leader>fc", Util.tele_builtin "colorscheme", desc = "Colorscheme" },
     { "<leader>fw", Util.tele_builtin "grep_string", desc = "Find cursor word" },
     { "<leader>ff", Util.tele_builtin "find_files", desc = "Find Files" },

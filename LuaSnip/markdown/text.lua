@@ -23,64 +23,64 @@ local get_visual = function(args, parent)
 end
 
 return {
-	s({ trig = "meta", name = "Markdown front matter (YAML format)" }, {
-		t { "---", "title: " },
-		i(1),
-		t { "", "date: " },
-		p(os.date, "%Y-%m-%dT%H:%M:%S+0800"),
-		t { "", 'tags: ["' },
-		i(2),
-		t { '"]', 'categories: ["' },
-		i(3),
-		t { '"]', 'series: ["' },
-		i(4),
-		t { '"]', "---", "", "" },
-		i(0),
-	}, {
-		condition = pos.on_top * conds_expand.line_begin,
-		show_condition = pos.on_top * pos.line_begin,
-	}),
-	s(
-		{ trig = "link", name = "Markdown Links", dscr = "Insert a Link" },
-		fmta("[<>](<>)", { i(1), f(function(_, snip) return snip.env.TM_SELECTED_TEXT[1] or {} end, {}) })
-	),
-	s(
-		{ trig = "qa", name = "Q&A" },
-		fmta(
-			[[
+  s({ trig = "meta", name = "Markdown front matter (YAML format)" }, {
+    t { "---", "title: " },
+    i(1),
+    t { "", "date: " },
+    p(os.date, "%Y-%m-%dT%H:%M:%S+0800"),
+    t { "", 'tags: ["' },
+    i(2),
+    t { '"]', 'categories: ["' },
+    i(3),
+    t { '"]', 'series: ["' },
+    i(4),
+    t { '"]', "---", "", "" },
+    i(0),
+  }, {
+    condition = pos.on_top * conds_expand.line_begin,
+    show_condition = pos.on_top * pos.line_begin,
+  }),
+  s(
+    { trig = "link", name = "Markdown Links", dscr = "Insert a Link" },
+    fmta("[<>](<>)", { i(1), f(function(_, snip) return snip.env.TM_SELECTED_TEXT[1] or {} end, {}) })
+  ),
+  s(
+    { trig = "qa", name = "Q&A" },
+    fmta(
+      [[
                 **Q<>:** <>
                 **A:** <>
 
                 *Answer:*
             ]],
-			{
-				i(1),
-				d(2, get_visual),
-				i(3),
-			}
-		)
-	),
-	s({ trig = ",b", snippetType = "autosnippet", name = "bold" }, fmta("**<>**", { i(1) })),
-	s({ trig = ",t", snippetType = "autosnippet", name = "italic" }, fmta("*<>*", { i(1) })),
-	s({ trig = ",s", snippetType = "autosnippet", name = "strikethrough" }, fmta("~~<>~~", { i(1) })),
-	s(
-		{ trig = ",c", snippetType = "autosnippet", name = "Insert fenced code block" },
-		fmta(
-			[[
+      {
+        i(1),
+        d(2, get_visual),
+        i(3),
+      }
+    )
+  ),
+  s({ trig = ",b", snippetType = "autosnippet", name = "bold" }, fmta("**<>**", { i(1) })),
+  s({ trig = ",t", snippetType = "autosnippet", name = "italic" }, fmta("*<>*", { i(1) })),
+  s({ trig = ",s", snippetType = "autosnippet", name = "strikethrough" }, fmta("~~<>~~", { i(1) })),
+  s(
+    { trig = ",c", snippetType = "autosnippet", name = "Insert fenced code block" },
+    fmta(
+      [[
       ```<>
       <>
       ```
       ]],
-			{ i(1), i(0) }
-		)
-	),
-	s(
-		{ trig = "img", name = "Image" },
-		fmt(
-			[[
+      { i(1), i(0) }
+    )
+  ),
+  s(
+    { trig = "img", name = "Image" },
+    fmt(
+      [[
 			[{}]({} "{}") {}
 			]],
-			{ i(1, "alt text"), i(2, "source"), i(3, "title"), i(0) }
-		)
-	),
+      { i(1, "alt text"), i(2, "source"), i(3, "title"), i(0) }
+    )
+  ),
 }

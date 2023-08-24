@@ -6,12 +6,19 @@ local function map(mode, shortcut, command, opts)
   vim.keymap.set(mode, shortcut, command, opts)
 end
 
+-- search keymaps
+map("n", "?", function() vim.cmd.Telescope "keymaps" end, { desc = "⌨️  Search Keymaps" })
+
 -------------
 -- insert mode
 -------------
-
 map("i", "<C-a>", "<Esc>0i")
 map("i", "<C-e>", "<End>")
+-- indent properly when entering insert mode on empty lines
+map("n", "i", function()
+  if vim.api.nvim_get_current_line():find "^%s*$" then return [["_cc]] end
+  return "i"
+end, { expr = true, desc = "better i" })
 
 -------------
 -- normal mode
@@ -28,8 +35,16 @@ map({ "x" }, "p", "P", { silent = true })
 -- better movement
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-map({ "n", "v", "o" }, "H", "^", { desc = "Use 'H' as '^'" })
-map({ "n", "v", "o" }, "L", "$", { desc = "Use 'L' as '$'" })
+map({ "n", "v", "o" }, "H", "^")
+map({ "n", "v", "o" }, "L", "$")
+
+-- paragraph-wise movement
+map({ "n", "x" }, "gk", "{gk")
+map({ "n", "x" }, "gj", "}gj")
+
+-- SEARCH
+map("n", "+", "*", { desc = "Search word under cursor" })
+map("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "* Visual Star" })
 
 -- better indenting
 map("v", "<", "<gv")
@@ -65,6 +80,22 @@ map("n", "<Leader>-", "10<C-w>-")
 map("n", "<Leader>[", "10<C-w><")
 map("n", "<Leader>]", "10<C-w>>")
 
+-- WHITESPACE CONTROL
+map("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
+map("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
+map("n", "<Tab>", ">>", { desc = "󰉶 indent" })
+map("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
+map("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
+map("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
+map("n", "X", "mz$x`z", { desc = "Delete char at EoL" })
+map("n", "~", "~h", { desc = "Toggle Case" })
+
+-- Fix Spelling
+map("n", "z.", "1z=")
+-- Move selection right
+map("x", "<Right>", [["zx"zpgvlolo]])
+map("x", "<Left>", [["zdh"zPgvhoho]])
+
 -- vim-bookmarks
 -- map("n", "mm", "<cmd>BookmarkToggle<CR>")
 -- map("n", "mn", "<cmd>BookmarkNext<CR>")
@@ -73,7 +104,6 @@ map("n", "<Leader>]", "10<C-w>>")
 
 map("n", "<leader>i", "<cmd>setlocal spell! spelllang=en_us<CR>") -- spell check
 
-map("n", "<leader>hn", "<cmd>nohl<CR>") -- disable highlight
 map("n", "<leader><leader>s", "<cmd>w ! sudo tee > /dev/null %<CR>") -- force save files
 
 -- command line mode
@@ -94,7 +124,11 @@ vim.cmd [[autocmd FileType markdown.pandoc inoremap <buffer> <silent> @@ <Esc>:B
 -- toggle options
 map("n", "<leader>us", function() util.toggle "spell" end, { desc = "Toggle Spelling" })
 map("n", "<leader>uw", function() util.toggle "wrap" end, { desc = "Toggle Word Wrap" })
-map("n", "<leader>.", util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
+map("n", "<leader>.", util.toggle_diagnostics, { desc = "Toggle   Diagnostics" })
+
+-- FOLDING
+-- stylua: ignore
+map("n", "zz", function() vim.cmd("%foldclose") end, { desc = "󰘖 Close toplevel folds" })
 
 -- stylua: ignore start
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
