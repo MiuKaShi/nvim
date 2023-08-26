@@ -80,17 +80,18 @@ end
 --     ),
 
 return {
+  -- equations.
   s({ trig = "ii", snippetType = "autosnippet" }, fmta("$<>$", i(1)), { condition = markdown.in_text }),
   s({ trig = "dd", snippetType = "autosnippet" }, fmta("$$\n<>\n$$", i(1)), { condition = markdown.in_text }),
   s(
-    { trig = "aa", name = "Align Math", snippetType = "autosnippet" },
+    { trig = "ldd", name = "Align Math", snippetType = "autosnippet" },
     fmta(
       [[
             <>
             $$
-            \begin{align}
+            \begin{aligned}
                 <>
-            \end{align}
+            \end{aligned}
             $$
             <>
             ]],
@@ -111,6 +112,26 @@ return {
             \begin{cases}
                 <>
             \end{cases}
+            $$
+            <>
+            ]],
+      {
+        f(function(_, snip) return snip.captures[1] end),
+        d(1, get_visual),
+        i(0),
+      }
+    ),
+    { condition = markdown.in_text }
+  ),
+  s(
+    { trig = "rdd", name = "Array Math", snippetType = "autosnippet" },
+    fmta(
+      [[
+            <>
+            $$
+            \begin{array}{lcl}
+                <>
+            \end{array}
             $$
             <>
             ]],
@@ -154,16 +175,6 @@ return {
       i(2),
       d(3, get_visual),
       i(4, "x"),
-    }),
-    { condition = markdown.in_mathzone }
-  ),
-
-  -- PREABMLE
-  s(
-    { name = "Derivative", trig = "de", wordTrig = false, snippetType = "autosnippet" },
-    fmta("\\drv{d<>}{d<>}", {
-      i(1),
-      i(2),
     }),
     { condition = markdown.in_mathzone }
   ),

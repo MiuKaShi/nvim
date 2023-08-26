@@ -3,10 +3,11 @@ local M = {}
 M.setup = function(on_attach, capabilities)
   require("lspconfig").clangd.setup {
     on_attach = on_attach,
-    capabilities = capabilities,
+    capabilities = vim.tbl_extend("force", capabilities, {
+      offsetEncoding = "utf-8",
+    }),
     cmd = {
       "clangd", -- NOTE: 只支持clangd 13.0.0 及其以下版本，新版本会有问题
-      "--offset-encoding=utf-16",
       "--background-index", -- 后台建立索引，并持久化到disk
       "--clang-tidy", -- 开启clang-tidy
       -- 指定clang-tidy的检查参数， 摘抄自cmu15445. 全部参数可参考 https://clang.llvm.org/extra/clang-tidy/checks

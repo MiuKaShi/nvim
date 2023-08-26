@@ -4,51 +4,51 @@
  */
 
 body {
-    --secondary-background-color: #fdf6e3;
+  --secondary-background-color: #fdf6e3;
 }
 
 #page-ctn {
-    max-width: 100vw;
+  max-width: 100vw;
 }
 
 #page-header {
-    background-color: var(--color-bg-tertiary);
-    border-style: none;
+  background-color: var(--color-bg-tertiary);
+  border-style: none;
 }
 
 :root {
-    --color-text-primary: #5c6a72;
-    --color-text-tertiary: #666;
-    --color-text-link: #4078c0;
-    --color-bg-primary: #fdf6e3;
-    --color-bg-secondary: #fff9e8;
-    --color-bg-tertiary: #f8f0dc;
-    --color-border-primary: #5c6a72;
-    --color-border-secondary: #dfddc8;
-    --color-border-tertiary: #d1d5da;
-    --color-kbd-foreground: #5c6a72;
-    --color-markdown-blockquote-border: #dfddc8;
-    --color-markdown-table-border: #dfddc8;
-    --color-markdown-table-tr-border: #c6cbd1;
-    --color-markdown-code-bg: #dfddc8;
+  --color-text-primary: #5c6a72;
+  --color-text-tertiary: #666;
+  --color-text-link: #4078c0;
+  --color-bg-primary: #fdf6e3;
+  --color-bg-secondary: #fff9e8;
+  --color-bg-tertiary: #f8f0dc;
+  --color-border-primary: #5c6a72;
+  --color-border-secondary: #dfddc8;
+  --color-border-tertiary: #d1d5da;
+  --color-kbd-foreground: #5c6a72;
+  --color-markdown-blockquote-border: #dfddc8;
+  --color-markdown-table-border: #dfddc8;
+  --color-markdown-table-tr-border: #c6cbd1;
+  --color-markdown-code-bg: #dfddc8;
 }
 
 [data-theme="dark"] {
-    --secondary-background-color: #2f383e;
-    --color-text-primary: #d3c6aa;
-    --color-text-tertiary: #8b949e;
-    --color-text-link: #58a6ff;
-    --color-bg-primary: #2f383e;
-    --color-bg-secondary: #2b3339;
-    --color-bg-tertiary: #323d43;
-    --color-border-primary: #30363d;
-    --color-border-secondary: #4b565c;
-    --color-border-tertiary: #6e7681;
-    --color-kbd-foreground: #b1bac4;
-    --color-markdown-blockquote-border: #4b565c;
-    --color-markdown-table-border: #4b565c;
-    --color-markdown-table-tr-border: #272c32;
-    --color-markdown-code-bg: #4b565c;
+  --secondary-background-color: #2f383e;
+  --color-text-primary: #d3c6aa;
+  --color-text-tertiary: #8b949e;
+  --color-text-link: #58a6ff;
+  --color-bg-primary: #2f383e;
+  --color-bg-secondary: #2b3339;
+  --color-bg-tertiary: #323d43;
+  --color-border-primary: #30363d;
+  --color-border-secondary: #4b565c;
+  --color-border-tertiary: #6e7681;
+  --color-kbd-foreground: #b1bac4;
+  --color-markdown-blockquote-border: #4b565c;
+  --color-markdown-table-border: #4b565c;
+  --color-markdown-table-tr-border: #272c32;
+  --color-markdown-code-bg: #4b565c;
 }
 
 .markdown-body ol ol,
@@ -63,8 +63,10 @@ body {
   margin-bottom: 0;
 }
 .markdown-body {
-  font-family: "Times New Roman", "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 2.0rem;
+  font-family: "Times New Roman", "Helvetica Neue", Helvetica, "Segoe UI", Arial,
+    freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-size: 2rem;
   color: var(--color-text-primary);
   line-height: 1.6;
   word-wrap: break-word;
@@ -186,7 +188,7 @@ body {
   list-style-type: disc;
 }
 .markdown-body dl {
-  margin-bottom: 1.3em
+  margin-bottom: 1.3em;
 }
 .markdown-body dl dt {
   font-weight: 700;
@@ -228,7 +230,12 @@ body {
 .markdown-body kbd {
   display: inline-block;
   padding: 5px 6px;
-  font: 14px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  font:
+    14px SFMono-Regular,
+    Consolas,
+    Liberation Mono,
+    Menlo,
+    monospace;
   line-height: 10px;
   color: var(--color-kbd-foreground);
   vertical-align: middle;
@@ -304,7 +311,17 @@ body {
   list-style-type: none;
 }
 .task-list-item input {
-  font: 13px/1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font:
+    13px/1.4 Helvetica,
+    arial,
+    nimbussansl,
+    liberationsans,
+    freesans,
+    clean,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
   margin: 0 0.35em 0.25em -1.6em;
   vertical-align: middle;
 }

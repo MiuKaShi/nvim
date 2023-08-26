@@ -188,6 +188,7 @@ return {
             name = "look",
             keyword_length = 2,
             max_item_count = 20,
+    				priority = -100,
             option = {
               convert_case = true,
               loud = true,
