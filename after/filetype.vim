@@ -11,4 +11,5 @@ augroup filetypedetect
   au BufRead,BufNewFile *.pxi set filetype=cython
   au BufRead,BufNewFile *.snippets set filetype=snippets
   au BufRead,BufNewFile *.isy set filetype=xml
+  au BufRead,BufNewFile *.zsh set filetype=sh
 augroup END

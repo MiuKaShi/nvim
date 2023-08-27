@@ -255,4 +255,115 @@ return {
     config = true,
     event = { "WinNew" },
   },
+
+  -- prompt ui
+  {
+    "folke/noice.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+    event = "VeryLazy",
+    init = function()
+			-- stylua: ignore
+			vim.keymap.set("n", "<Esc>", function() vim.cmd.Noice("dismiss") end, { desc = "󰎟 Clear Notifications" })
+    end,
+    opts = {
+      routes = {
+        { filter = { event = "msg_show", find = "B written$" }, view = "mini" },
+        -- nvim-early-retirement
+        { filter = { event = "notify", find = "^Auto%-Closing Buffer:" }, view = "mini" },
+        -- nvim-treesitter
+        { filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+        -- unneeded info on search patterns
+        { filter = { event = "msg_show", find = "^/." }, skip = true },
+        { filter = { event = "msg_show", find = "^?." }, skip = true },
+        { filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
+        -- redirect to split
+        { filter = { event = "msg_show", min_height = 10 }, view = "split" },
+      },
+      cmdline = {
+        view = "cmdline",
+        format = {
+          search_down = { icon = "  " },
+          cmdline = { icon = " " },
+          IncRename = {
+            pattern = "^:IncRename ",
+            icon = " ",
+            conceal = true,
+            opts = {
+              border = { style = "single" },
+              relative = "cursor",
+              size = { width = 30 }, -- `max_width` does not work, so fixed value
+              position = { row = -3, col = 0 },
+            },
+          },
+        },
+      },
+      views = {
+        mini = { timeout = 3000 },
+        hover = {
+          border = { style = "single" },
+          size = { max_width = 80 },
+          win_options = { scrolloff = 4 },
+        },
+        split = {
+          enter = true,
+          size = "40%",
+          close = { keys = { "q" } },
+          win_options = { scrolloff = 2 },
+        },
+      },
+      commands = {
+        history = {
+          view = "split",
+          filter_opts = { reverse = true }, -- show newest entries first
+          opts = { enter = true },
+        },
+      },
+
+      -- DISABLED, since conflicts with existing plugins I prefer to use
+      popupmenu = { backend = "cmp" }, -- replace with nvim-cmp, since more sources
+      messages = { view_search = false }, -- replaced by nvim-hlslens
+      lsp = {
+        progress = { enabled = false }, -- replaced with nvim-dr-lsp, since this one cannot filter null-ls
+        signature = { enabled = false }, -- replaced with lsp_signature.nvim
+
+        -- ENABLED features
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+      },
+    },
+  },
+  -- Notifications
+  {
+    "rcarriga/nvim-notify",
+    opts = {
+      render = "minimal", -- minimal|default|compact
+      top_down = false,
+      max_width = 70,
+      max_height = 10,
+      minimum_width = 15,
+      level = 0, -- minimum severity level to display (0 = display all)
+      timeout = 1500,
+      stages = "static",
+      on_open = function(win)
+        if not vim.api.nvim_win_is_valid(win) then return end
+        vim.api.nvim_win_set_config(win, { border = "single" })
+      end,
+    },
+    init = function()
+      -- copy [l]ast [n]otice
+      vim.keymap.set("n", "<leader>ln", function()
+        local history = require("notify").history()
+        if #history == 0 then
+          vim.notify("No Notification in this session.", vim.log.levels.WARN)
+          return
+        end
+        local msg = history[#history].message
+        vim.fn.setreg("+", msg)
+        vim.notify("Last Notification copied.", vim.log.levels.TRACE)
+      end, { desc = "󰎟 Copy Last Notification" })
+    end,
+  },
 }

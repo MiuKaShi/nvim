@@ -1,23 +1,5 @@
 local M = {}
 
-function M.get_keymaps()
-	-- stylua: ignore start
-	return {
-		{ "J",          function() require("glance").open("definitions") end,  desc = "definition" },
-		{ "gt",         function() require("glance").open("type_definitions") end, desc = "typeDefinition" },
-		{ "gh",         function() require("glance").open("references") end,  desc = "references" },
-		{ "K",          vim.lsp.buf.hover,         desc = "󰒕 Hover" },
-		{ "gr",         vim.lsp.buf.rename,        desc = "rename" },
-		{ "<leader>ca", vim.lsp.buf.code_action,   mode = { "n", "v" },   desc = "󰒕 Code Action" },
-		{ "gl",         vim.diagnostic.open_float, desc = "Float Diagnostics" },
-		{ "[e",         vim.diagnostic.goto_prev,  desc = "󰒕 Previous Diagnostic"  },
-		{ "]e",         vim.diagnostic.goto_next,  desc = "󰒕 Next Diagnostic" },
-		{ "<leader>bf", M.format,                  desc = "Format",       has = "documentFormatting" },
-		{ "<leader>bf", M.format,                  desc = "Format Range", mode = "v", has =	"documentRangeFormatting" },
-	}
-  -- stylua: ignore end
-end
-
 function M.format()
   local buf = vim.api.nvim_get_current_buf()
   local ft = vim.bo[buf].filetype
@@ -33,25 +15,24 @@ function M.format()
 end
 
 function M.on_attach(client, buffer)
-  local Keys = require "lazy.core.handler.keys"
-  local keymaps = {}
+  vim.bo[buffer].omnifunc = "v:lua.vim.lsp.omnifunc"
+  local keymaps = {
+    { "K", vim.lsp.buf.hover, method = "hover" },
+    { "gd", function() require("glance").open "definitions" end, method = "definition" },
+    { "gt", function() require("glance").open "type_definitions" end, method = "typeDefinition" },
+    { "gh", function() require("glance").open "references" end, method = "references" },
+    { "gi", function() require("glance").open "implementations" end, method = "implementation" },
+    { "gr", ":IncRename ", method = "rename" },
+    { "gD", vim.lsp.buf.declaration, method = "declaration" },
+    { "<C-k>", vim.lsp.buf.signature_help, method = "signatureHelp" },
+    { "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, method = "codeAction" },
+    { "<leader>bf", M.format, desc = "Format", method = "formatting" },
+    { "<leader>bf", M.format, desc = "Format Range", mode = "v", method = "rangeFormatting" },
+  }
 
-  for _, value in ipairs(M.get_keymaps()) do
-    local keys = Keys.parse(value)
-    if keys[2] == vim.NIL or keys[2] == false then
-      keymaps[keys.id] = nil
-    else
-      keymaps[keys.id] = keys
-    end
-  end
-
-  for _, keys in pairs(keymaps) do
-    if not keys.has or client.server_capabilities[keys.has .. "Provider"] then
-      local opts = Keys.opts(keys)
-      opts.has = nil
-      opts.silent = true
-      opts.buffer = buffer
-      vim.keymap.set(keys.mode or "n", keys[1], keys[2], opts)
+  for _, keys in ipairs(keymaps) do
+    if client.supports_method("textDocument/" .. keys.method) then
+      vim.keymap.set(keys.mode or "n", keys[1], keys[2], { buffer = buffer, desc = keys.method })
     end
   end
 

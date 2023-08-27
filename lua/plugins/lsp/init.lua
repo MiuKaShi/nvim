@@ -23,6 +23,11 @@ return {
         border = "single",
       })
 
+      -- diagnostic keymaps
+      vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
+      vim.keymap.set("n", "[e", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostics" })
+      vim.keymap.set("n", "]e", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostics" })
+
       -- diagnostics config
       vim.diagnostic.config {
         update_in_insert = false,
@@ -33,12 +38,9 @@ return {
           prefix = "●",
         },
         float = {
-          focusable = false,
-          style = "minimal",
+          focusable = true,
           border = "single",
-          source = "always",
-          header = "",
-          prefix = "",
+          source = "if_many",
         },
       }
       require("lspconfig.ui.windows").default_options.border = "single"
@@ -192,6 +194,19 @@ return {
         function() require("nvim-navbuddy").open() end,
         desc = "Navigator",
       },
+    },
+  },
+
+  { -- better LSP variable-rename
+    "smjonas/inc-rename.nvim",
+    event = "CmdlineEnter", -- loading with `cmd = "IncRename` does not work with incremental preview
+    opts = {
+      -- if more than one file is changed, save all buffers
+      post_hook = function(results)
+        if not results.changes then return end
+        local filesChanged = #vim.tbl_keys(results.changes)
+        if filesChanged > 1 then vim.cmd.wall() end
+      end,
     },
   },
 
