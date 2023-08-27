@@ -122,7 +122,7 @@ function M.cmp_toggle_source(src)
     if sources[i].name == src then
       table.remove(sources, i)
       cmp.setup.buffer { sources = sources }
-      print("remove source: " .. src)
+			vim.notify("remove source:.".. src, vim.log.levels.WARN)
       return
     end
   end
@@ -212,12 +212,14 @@ function M.toggle_diagnostics()
     vim.opt.ruler = true
     vim.opt.laststatus = 2
     vim.opt.showcmd = true
+		vim.notify("Diagnostic Enable", vim.log.levels.INFO)
   else
     vim.diagnostic.disable(0)
     vim.opt.showmode = false
     vim.opt.ruler = false
     vim.opt.laststatus = 0
     vim.opt.showcmd = false
+		vim.notify("Diagnostic Disable", vim.log.levels.WARN)
   end
 end
 
