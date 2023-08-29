@@ -66,9 +66,6 @@ function M.on_attach(client, buffer)
       callback = vim.lsp.buf.clear_references,
     })
   end
-
-  -- inlay hint
-  if client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint(buffer, true) end
 end
 
 return M

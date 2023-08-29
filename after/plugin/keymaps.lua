@@ -14,7 +14,8 @@ map("n", "?", function() vim.cmd.Telescope "keymaps" end, { desc = "⌨️  S
 -------------
 map("i", "<C-a>", "<Esc>0i")
 map("i", "<C-e>", "<End>")
--- indent properly when entering insert mode on empty lines
+
+-- better i
 map("n", "i", function()
   if vim.api.nvim_get_current_line():find "^%s*$" then return [["_cc]] end
   return "i"
@@ -23,6 +24,9 @@ end, { expr = true, desc = "better i" })
 -------------
 -- normal mode
 -------------
+
+--Delete char at EoL
+map("n", "X", "mz$x`z")
 
 -- buffer
 map("n", "<A-Tab>", "<cmd>bnext<CR>") -- buffer 跳转
@@ -88,7 +92,6 @@ map("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 map("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
 map("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 map("n", "X", "mz$x`z", { desc = "Delete char at EoL" })
-map("n", "~", "~h", { desc = "Toggle Case" })
 
 -- Fix Spelling
 map("n", "z.", "1z=")
@@ -112,6 +115,24 @@ map("c", "<C-e>", "<End>")
 map("c", "<C-h>", "<BS>")
 map("c", "<C-k>", "<C-f>D<C-c><C-c>:<Up>")
 
+-- better ~
+map("n", "~", function()
+  local col = vim.fn.col "." -- fn.col correctly considers tab-indentation
+  local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
+  local isLetter = charUnderCursor:find "^%a$"
+  if isLetter then return "~h" end
+  local brackets = {
+    ["("] = ")",
+    ["["] = "]",
+    ["{"] = "}",
+    ["<"] = ">",
+  }
+  for openBracket, closeBracket in pairs(brackets) do
+    if charUnderCursor == openBracket then return "r" .. closeBracket end
+    if charUnderCursor == closeBracket then return "r" .. openBracket end
+  end
+end, { desc = "~ for letters and characters", expr = true })
+
 -- flip word
 map("n", "<leader>t", function() require("util.flipper").flipWord() end, { desc = "switch common words" })
 
@@ -125,6 +146,7 @@ vim.cmd [[autocmd FileType markdown.pandoc inoremap <buffer> <silent> @@ <Esc>:B
 map("n", "<leader>us", function() util.toggle "spell" end, { desc = "Toggle Spelling" })
 map("n", "<leader>uw", function() util.toggle "wrap" end, { desc = "Toggle Word Wrap" })
 map("n", "<leader>.", util.toggle_diagnostics, { desc = "Toggle   Diagnostics" })
+
 
 -- FOLDING
 -- stylua: ignore

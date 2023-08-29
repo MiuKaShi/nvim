@@ -40,7 +40,8 @@ return {
         float = {
           focusable = true,
           border = "single",
-          source = "if_many",
+          max_width = 70,
+          header = "", -- remove "Diagnostics:" heading
         },
       }
       require("lspconfig.ui.windows").default_options.border = "single"
@@ -49,12 +50,14 @@ return {
       local on_attach = function(client, bufnr) require("plugins.lsp.attach").on_attach(client, bufnr) end
 
       -- capabilities
-      local capabilities = vim.tbl_deep_extend(
-        "force",
-        {},
-        vim.lsp.protocol.make_client_capabilities(),
-        require("cmp_nvim_lsp").default_capabilities()
-      )
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      -- Enable snippets-completion (for nvim_cmp)
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      -- Enable folding (for nvim-ufo)
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
 
       for _, server in ipairs {
         "pyright",
@@ -189,11 +192,19 @@ return {
       lsp = { auto_attach = true },
     },
     keys = {
-      {
-        "<leader>n",
-        function() require("nvim-navbuddy").open() end,
-        desc = "Navigator",
-      },
+			-- stylua: ignore
+      { "<leader>n", function() require("nvim-navbuddy").open() end, desc = "Navigator" },
+    },
+  },
+
+  { -- signature hints
+    "ray-x/lsp_signature.nvim",
+    -- loading on `require` or InsertEnter ignores the config, so loading on LspAttach
+    event = "LspAttach",
+    opts = {
+      floating_window = false,
+      hint_prefix = "󰘎 ",
+      hint_scheme = "NonText", -- = highlight group
     },
   },
 

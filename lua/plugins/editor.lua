@@ -10,7 +10,13 @@ return {
   {
     "kylechui/nvim-surround",
     config = true,
-    keys = { "cs", "ds", "ys", "yS" },
+    keys = {
+      { "ys", desc = "󰅪 Add Surround Operator" },
+      { "yS", desc = "󰅪 Surround to EoL" },
+      { "ds", desc = "󰅪 Delete Surround Operator" },
+      { "cs", desc = "󰅪 Change Surround Operator" },
+      { "s", mode = "x", desc = "󰅪 Add Surround Operator" },
+    },
   },
 
   -- symbols outline
@@ -147,59 +153,6 @@ return {
       { "<leader>hh", function() require("mywords").hl_toggle() end, silent = true, desc = "highlight words" },
       { "<leader>hx", function() require("mywords").uhl_all() end, silent = true, desc = "unhighlight words" },
     },
-  },
-
-  -- github copilot
-  {
-    "zbirenbaum/copilot.lua",
-    build = ":Copilot auth",
-    cmd = "Copilot",
-    opts = {
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
-        keymap = {
-          accept = "<C-y>",
-          close = "<Esc>",
-          next = "<C-z>",
-          prev = "<C-x>",
-          select = "<CR>",
-          dismiss = "<C-c>",
-        },
-      },
-      panel = { enabled = false },
-      filetypes = {
-        yaml = false,
-        markdown = false,
-        help = false,
-        gitcommit = false,
-        gitrebase = false,
-        hgcommit = false,
-        svn = false,
-        cvs = false,
-        ["."] = false,
-      },
-    },
-    keys = {
-      { "<leader>uc", function() require("copilot.suggestion").toggle_auto_trigger() end, desc = "Copilot toggle" },
-    },
-  },
-
-  -- GPT
-  {
-    "james1236/backseat.nvim",
-    cmd = {
-      "Backseat",
-      "BackseatAsk",
-      "BackseatClear",
-    },
-    config = function()
-      vim.g.backseat_openai_api_key = ""
-      vim.g.backseat_openai_model_id = "gpt-3.5-turbo"
-      vim.g.backseat_language = "chinese"
-      vim.keymap.set("n", "<leader>ba", ":Backseat<CR>") -- auto comments
-      vim.keymap.set("n", "<leader>bx", ":BackseatClear<CR>") -- clean comments
-    end,
   },
 
   -- search/replace in multiple files
@@ -354,11 +307,11 @@ endfunction
     },
   },
   -- fold
-  {
-    "chrisgrieser/nvim-origami",
-    event = "BufReadPost", -- later will not save folds
-    opts = true, -- needed
-  },
+  -- {
+  --   "chrisgrieser/nvim-origami",
+  --   event = "BufReadPost", -- later will not save folds
+  --   opts = true, -- needed
+  -- },
   {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
@@ -394,22 +347,16 @@ endfunction
         table.insert(newVirtText, { suffix, hlgroup })
         return newVirtText
       end
-      for _, lvl in pairs { 1, 2, 3, 4, 5 } do
-        local desc = lvl < 4 and "󰘖 Set Fold Level" or "which_key_ignore"
-        vim.keymap.set("n", "z" .. tostring(lvl), function() require("ufo").closeFoldsWith(lvl) end, { desc = desc })
-      end
       require("ufo").setup {
         provider_selector = function(_, ft, _)
-          local lspWithOutFolding = { "markdown", "bash", "sh", "bash", "zsh", "css", "yaml" }
+          local lspWithOutFolding = { "markdown", "bash", "sh", "bash", "zsh", "css", "html", "python" }
           if vim.tbl_contains(lspWithOutFolding, ft) then
             return { "treesitter", "indent" }
-          elseif ft == "html" then
-            return { "indent" } -- lsp & treesitter do not provide folds
           else
             return { "lsp", "indent" }
           end
         end,
-        close_fold_kinds = { "imports" },
+        close_fold_kinds = { "imports", "comment" },
         open_fold_hl_timeout = 500,
         fold_virt_text_handler = foldTextFormatter,
       }
@@ -418,6 +365,10 @@ endfunction
     keys = {
       { "zr", function() require("ufo").openFoldsExceptKinds { "comments" } end, silent = true, desc = "󰘖 󱃄 Open All Folds except comments" },
       { "zm", function() require("ufo").closeAllFolds() end, silent = true, desc = "󰘖 󱃄 Close All Folds" },
+			{ "z1", function() require("ufo").closeFoldsWith(1) end, desc = "󰘖 󱃄 Close Level 1 Folds" },
+			{ "z2", function() require("ufo").closeFoldsWith(2) end, desc = "󰘖 󱃄 Close Level 2 Folds" },
+			{ "z3", function() require("ufo").closeFoldsWith(3) end, desc = "󰘖 󱃄 Close Level 3 Folds" },
+			{ "z4", function() require("ufo").closeFoldsWith(4) end, desc = "󰘖 󱃄 Close Level 4 Folds" },
     },
   },
 }

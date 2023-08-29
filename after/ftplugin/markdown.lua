@@ -49,3 +49,7 @@ vim.keymap.set({ "o", "x" }, "al", "<cmd>lua require('various-textobjs').mdlink(
 -- ic/ac: code block textobj
 vim.keymap.set({ "o", "x" }, "ic", "<cmd>lua require('various-textobjs').mdFencedCodeBlock(true)<CR>", { desc = "inner md code block textobj", buffer = true })
 vim.keymap.set({ "o", "x" }, "ac", "<cmd>lua require('various-textobjs').mdFencedCodeBlock(false)<CR>", { desc = "outer md code block textobj", buffer = true })
+
+-- Heading jump to next/prev heading
+vim.keymap.set({ "n", "x" }, "<C-j>", [[/^#\+ <CR><cmd>nohl<CR>]], { desc = " # Next Heading", buffer = true })
+vim.keymap.set({ "n", "x" }, "<C-k>", [[?^#\+ <CR><cmd>nohl<CR>]], { desc = " # Prev Heading", buffer = true })

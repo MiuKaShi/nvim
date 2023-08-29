@@ -223,4 +223,13 @@ function M.toggle_diagnostics()
   end
 end
 
+M.textobjectRemaps = {
+	c = "}", -- [c]urly brace
+	r = "]", -- [r]ectangular bracket
+	m = "W", -- [m]assive word
+	q = '"', -- [q]uote
+	z = "'", -- [z]ingle quote
+	e = "`", -- t[e]mplate string / inline cod[e]
+}
+
 return M

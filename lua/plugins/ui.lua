@@ -31,6 +31,14 @@ return {
           xz = { icon = "", color = "#EBCB8B", name = "xz" },
           yaml = { icon = "", color = "#EBCB8B", name = "xz" },
           zip = { icon = "", color = "#EBCB8B", name = "zip" },
+					applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
+					bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
+					http = { icon = "󰴚", name = "HTTP request" }, -- for rest.nvim
+					noice = { icon = "󰎟", name = "noice.nvim" },
+					lazy = { icon = "󰒲", name = "lazy.nvim" },
+					mason = { icon = "", name = "mason.nvim" },
+					octo = { icon = "", name = "octo.nvim" },
+					TelescopePrompt = { icon = "", name = "Telescope" },
         },
       }
     end,
@@ -216,7 +224,7 @@ return {
     },
   },
 
-  -- Enhanced search
+  -- Enhanced search count
   {
     "kevinhwang91/nvim-hlslens",
     keys = {
@@ -227,14 +235,28 @@ return {
       { "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]] },
       { "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]] },
     },
-    config = function()
+		init = function()
       vim.cmd [[
  	 	 	 	 hi HlSearchFloat guibg=None guifg=green gui=underline
  	 	 	 	 hi HlSearchLensNear guibg=None guifg=red gui=italic
  	 	 	 	 hi HlSearchLens guibg=None guifg=green gui=underline
 			]]
-      require("hlslens").setup()
-    end,
+		end,
+		opts = {
+			nearest_only = true,
+			-- format virtual text
+			override_lens = function(render, posList, nearest, idx, _)
+				local lnum, col = unpack(posList[idx])
+				local text = ("%d/%d"):format(idx, #posList)
+				local chunks = {
+					{ " ", "Ignore" }, -- = padding
+					{ "👉 ", "HLSearchReversed" },
+					{ text, "HlSearchLensNear" },
+					{ " 👈", "HLSearchReversed" },
+				}
+				render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
+			end,
+		},
   },
   -- emphasized undo/redos
   {
