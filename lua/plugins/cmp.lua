@@ -113,11 +113,16 @@ return {
           fields = { "kind", "abbr", "menu" },
           format = function(entry, item)
             -- limit the width of windows
+            local get_ws = function(max, len)
+              return (" "):rep(max - len) -- Add whitespace (max-len) times
+            end
             local ELLIPSIS_CHAR = "…"
             local MAX_LABEL_WIDTH = 25
             local content = item.abbr
             if #content > MAX_LABEL_WIDTH then
               item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. ELLIPSIS_CHAR
+            else
+              item.abbr = content .. get_ws(MAX_LABEL_WIDTH, #content)
             end
             -- Kind icons
             item.kind = cmp_kinds[item.kind]
@@ -188,7 +193,7 @@ return {
             name = "look",
             keyword_length = 2,
             max_item_count = 20,
-    				priority = -100,
+            priority = -100,
             option = {
               convert_case = true,
               loud = true,

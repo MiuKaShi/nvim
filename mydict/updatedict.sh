@@ -6,8 +6,7 @@
 # STU: My  words
 
 dic_list=(
-    "_CET.txt"
-    "_GRE.txt"
+    "_EN.txt"
     "_TEC.txt"
 )
 

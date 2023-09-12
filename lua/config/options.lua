@@ -14,7 +14,6 @@ local options = {
     number = true,
     -- colorcolumn = '120',
     cmdheight = 0,
-    fillchars = { eob = " ", diff = " " },
     laststatus = 0, -- hide status
     pumheight = 10, -- Height of the pop up menu
     scrolloff = 5, -- Number of lines to keep above and below the cursor

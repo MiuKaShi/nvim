@@ -148,27 +148,6 @@ local options = {
       },
     },
   },
-  -- exclude from indent lines
-  ft_exclude = {
-    "aerial",
-    "chatgpt",
-    "checkhealth",
-    "conf",
-    "crunner",
-    "dashboard",
-    "dap-repl",
-    "help",
-    "lazy",
-    "lspinfo",
-    "man",
-    "markdown",
-    "mason",
-    "neo-tree",
-    "norg",
-    "notify",
-    "qf",
-    "query",
-  },
 }
 
 setmetatable(M, {

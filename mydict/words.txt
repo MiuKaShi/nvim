@@ -1946,6 +1946,7 @@ guy
 gym
 gymnasium
 halcyon
+half-Sommerfeld
 hallowed
 halt
 hammer
@@ -3881,6 +3882,7 @@ solvent
 somatic
 somehow
 somewhat
+Sommerfeld
 Sommerfeld
 sophisticated
 soporific
