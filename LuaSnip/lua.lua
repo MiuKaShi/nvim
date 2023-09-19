@@ -2,7 +2,9 @@ local ls = require "luasnip"
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
+local f = ls.function_node
 local fmt = require("luasnip.extras.fmt").fmt
+local fmta = require("luasnip.extras.fmt").fmta
 return {
   s("p", {
     t "print(",
@@ -74,13 +76,6 @@ return {
         f(function(args) return args[1] end, { 3 }),
       }
     )
-  ),
-  s(
-    "localreq",
-    fmt('local {} = require("{}")', {
-      l(l._1:match("[^.]*$"):gsub("[^%a]+", "_"), 1),
-      i(1, "module"),
-    })
   ),
   ls.parser.parse_snippet("lm", "local M = {}\n\n$1 \n\nreturn M"),
 }

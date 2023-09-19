@@ -40,7 +40,7 @@ return {
         float = {
           focusable = true,
           border = "single",
-          max_width = 70,
+          max_width = 75,
           header = "", -- remove "Diagnostics:" heading
         },
       }

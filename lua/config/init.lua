@@ -88,6 +88,7 @@ local options = {
       Info = " ",
     },
     git = {
+      branch = "  ",
       added = " ",
       modified = " ",
       removed = " ",
