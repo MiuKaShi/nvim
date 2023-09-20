@@ -147,11 +147,6 @@ map("n", "<leader>us", function() util.toggle "spell" end, { desc = "Toggle Spel
 map("n", "<leader>uw", function() util.toggle "wrap" end, { desc = "Toggle Word Wrap" })
 map("n", "<leader>.", util.toggle_diagnostics, { desc = "Toggle   Diagnostics" })
 
-
--- FOLDING
--- stylua: ignore
-map("n", "zz", function() vim.cmd("%foldclose") end, { desc = "󰘖 Close toplevel folds" })
-
 -- stylua: ignore start
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 map("n","<leader>ul",function() util.toggle("conceallevel", false, { 0, conceallevel }) end,{ desc = "Toggle Conceal" })
