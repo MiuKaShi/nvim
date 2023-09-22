@@ -7,7 +7,6 @@ return {
   version = false, -- telescope did only one release, so use HEAD for now
   dependencies = {
     "nvim-lua/plenary.nvim",
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-telescope/telescope-frecency.nvim",
     "tsakirist/telescope-lazy.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
@@ -138,12 +137,6 @@ return {
         live_grep = { path_display = { "shorten" } },
       },
       extensions = {
-        fzf = {
-          fuzzy = true, -- false will only do exact matching
-          override_generic_sorter = false, -- override the generic sorter
-          override_file_sorter = true, -- override the file sorter
-          case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-        },
         frecency = {
           theme = themes.get_dropdown,
           show_scores = true,
@@ -160,7 +153,6 @@ return {
     local telescope = require "telescope"
     telescope.setup(opts)
     local extns = {
-      "fzf",
       "file_browser",
       "frecency",
       "ui-select",

@@ -67,12 +67,14 @@ return {
     config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
   },
 
+  -- rainbow brackets
   {
-    "HiPhish/nvim-ts-rainbow2",
+    "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
     event = "BufReadPost",
-    dependencies = "nvim-treesitter",
+    dependencies = "nvim-treesitter/nvim-treesitter",
   },
 
+  --text context
   {
     "nvim-treesitter/nvim-treesitter-context",
     event = "BufReadPost",
@@ -82,10 +84,12 @@ return {
     },
   },
 
-  { -- tons of text objects
+  -- tons of text objects
+  {
     "chrisgrieser/nvim-various-textobjs",
     lazy = true, -- loaded by keymaps
   },
+
   -- {
   --   "sustech-data/wildfire.nvim",
   --   event = "VeryLazy",

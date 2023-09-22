@@ -1,4 +1,5 @@
 return {
+
   -- library used by other plugins
   { "nvim-lua/plenary.nvim", lazy = true },
   { "kkharji/sqlite.lua", lazy = true },

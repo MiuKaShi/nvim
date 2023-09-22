@@ -1,6 +1,8 @@
 return {
+
   -- ui components
   { "MunifTanjim/nui.nvim", lazy = true },
+
   -- icons
   {
     "nvim-tree/nvim-web-devicons",
@@ -31,19 +33,20 @@ return {
           xz = { icon = "", color = "#EBCB8B", name = "xz" },
           yaml = { icon = "", color = "#EBCB8B", name = "xz" },
           zip = { icon = "", color = "#EBCB8B", name = "zip" },
-					applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
-					bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
-					http = { icon = "󰴚", name = "HTTP request" }, -- for rest.nvim
-					noice = { icon = "󰎟", name = "noice.nvim" },
-					lazy = { icon = "󰒲", name = "lazy.nvim" },
-					mason = { icon = "", name = "mason.nvim" },
-					octo = { icon = "", name = "octo.nvim" },
-					TelescopePrompt = { icon = "", name = "Telescope" },
+          applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
+          bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
+          http = { icon = "󰴚", name = "HTTP request" }, -- for rest.nvim
+          noice = { icon = "󰎟", name = "noice.nvim" },
+          lazy = { icon = "󰒲", name = "lazy.nvim" },
+          mason = { icon = "", name = "mason.nvim" },
+          octo = { icon = "", name = "octo.nvim" },
+          TelescopePrompt = { icon = "", name = "Telescope" },
         },
       }
     end,
   },
 
+  -- indent rainbow line color
   {
     "shellRaining/hlchunk.nvim",
     event = "BufReadPost",
@@ -114,6 +117,7 @@ return {
     end,
   },
 
+  -- TODO: TODO highlight
   {
     "echasnovski/mini.hipatterns",
     event = "BufReadPre",
@@ -131,12 +135,14 @@ return {
     end,
   },
 
+  -- trailing whitespace
   {
     "echasnovski/mini.trailspace",
     event = "VeryLazy",
     config = true,
   },
 
+  -- Bottom statusline
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -235,29 +241,30 @@ return {
       { "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]] },
       { "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]] },
     },
-		init = function()
+    init = function()
       vim.cmd [[
  	 	 	 	 hi HlSearchFloat guibg=None guifg=green gui=underline
  	 	 	 	 hi HlSearchLensNear guibg=None guifg=red gui=italic
  	 	 	 	 hi HlSearchLens guibg=None guifg=green gui=underline
 			]]
-		end,
-		opts = {
-			nearest_only = true,
-			-- format virtual text
-			override_lens = function(render, posList, nearest, idx, _)
-				local lnum, col = unpack(posList[idx])
-				local text = ("%d/%d"):format(idx, #posList)
-				local chunks = {
-					{ " ", "Ignore" }, -- = padding
-					{ "👉 ", "HLSearchReversed" },
-					{ text, "HlSearchLensNear" },
-					{ " 👈", "HLSearchReversed" },
-				}
-				render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
-			end,
-		},
+    end,
+    opts = {
+      nearest_only = true,
+      -- format virtual text
+      override_lens = function(render, posList, nearest, idx, _)
+        local lnum, col = unpack(posList[idx])
+        local text = ("%d/%d"):format(idx, #posList)
+        local chunks = {
+          { " ", "Ignore" }, -- = padding
+          { "👉 ", "HLSearchReversed" },
+          { text, "HlSearchLensNear" },
+          { " 👈", "HLSearchReversed" },
+        }
+        render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
+      end,
+    },
   },
+
   -- emphasized undo/redos
   {
     "tzachar/highlight-undo.nvim",
@@ -272,6 +279,7 @@ return {
     },
   },
 
+  -- window border color
   {
     "nvim-zh/colorful-winsep.nvim",
     config = true,
@@ -357,6 +365,7 @@ return {
       },
     },
   },
+
   -- Notifications
   {
     "rcarriga/nvim-notify",

@@ -3,9 +3,11 @@ return {
   -- auto pairs
   {
     "altermo/ultimate-autopair.nvim",
+    branch = "v0.6",
     config = true,
-    event = { "InsertEnter" },
+    event = { "InsertEnter", "CmdlineEnter" },
   },
+
   -- surround
   {
     "kylechui/nvim-surround",
@@ -166,6 +168,8 @@ return {
       { "<leader>sw", function() require("spectre").open_visual { select_word = true } end, desc = "Search current word" },
     },
   },
+
+  -- Multiple replacements
   {
     "AckslD/muren.nvim",
     config = true,
@@ -183,6 +187,7 @@ return {
       { "<C-d>", "<Plug>(fzf-complete-wordnet)", mode = { "i" } },
     },
   },
+
   -- bib
   {
     "MiuKaShi/bibtexcite.vim",
@@ -212,15 +217,18 @@ return {
     ft = { "markdown" },
     config = function() require("markdowny").setup { remove_keymaps = true } end,
   },
+
   --  高亮
   { "vim-pandoc/vim-pandoc-syntax", ft = "markdown.pandoc" },
+
   -- 表格
   {
     "dhruvasagar/vim-table-mode",
     ft = { "markdown" },
     config = function() vim.keymap.set("n", "<leader>tt", ":TableModeToggle<cr>") end,
   },
-  -- 预览
+
+  -- Markdown预览
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreview" },
@@ -250,6 +258,7 @@ endfunction
       }
     end,
   },
+
   -- obsidian
   {
     "epwalsh/obsidian.nvim",
@@ -285,7 +294,8 @@ endfunction
       { "<leader>nn", "<CMD>ObsidianNew<CR>", desc = "[O]bsidian [N]ew" },
     },
   },
-  -- obsidian
+
+  -- undo history
   {
     "mbbill/undotree",
     config = function()
@@ -306,12 +316,14 @@ endfunction
       { "<leader>u", "<Cmd>UndotreeToggle<CR>", desc = "󰕌  Undotree" },
     },
   },
-  -- fold
+
   -- {
   --   "chrisgrieser/nvim-origami",
   --   event = "BufReadPost", -- later will not save folds
   --   opts = true, -- needed
   -- },
+
+  -- fold
   {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
