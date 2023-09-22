@@ -237,7 +237,7 @@ return {
     config = function()
       vim.cmd [[
 function! g:Open_browser(url)
-    execute "silent" "!surf" a:url "&"
+    execute "silent" "!WEBKIT_DISABLE_COMPOSITING_MODE=1 surf" a:url "&"
 endfunction
 ]]
       vim.g.mkdp_browserfunc = "g:Open_browser"
