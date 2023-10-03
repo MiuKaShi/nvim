@@ -7,6 +7,10 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 
+-- if neovide
+if vim.fn.has "gui_running" == 1 then require "config.neovide" end
+
+-- load config
 require "config.options"
 require "config.lazy"
 

@@ -69,21 +69,20 @@ return {
       }
 
       local cmp_sources = {
-        -- { name = "copilot", priority = 850, max_item_count = 3 },
-        {
-          name = "buffer",
-          priority = 800,
-          keyword_length = 3,
-          max_item_count = 5,
-          option = {
-            get_bufnrs = function() return vim.api.nvim_list_bufs() end,
-          },
-        },
-        { name = "luasnip", priority = 700, option = { show_autosnippets = true } },
-        { name = "path", priority = 600, max_item_count = 4 },
-        -- { name = 'neorg' },
-        -- { name = 'cmp_tabnine' },
-        -- {name = 'cmp_octave'}
+        nvim_lsp = { name = "nvim_lsp", priority = 1000 },
+        nvim_lsp_signature_help = { name = "nvim_lsp_signature_help", priority = 950 },
+        buffer = { name = "buffer", priority = 900, keyword_length = 3, max_item_count = 5 },
+				-- stylua: ignore start
+        look = { name = "look", keyword_length = 2, priority = 850, option = { convert_case = true, loud = true, dict = vim.fn.stdpath "config" .. "/mydict/words.txt",} },
+        luasnip = { name = "luasnip", priority = 800, option = { show_autosnippets = true } },
+        copilot = { name = "copilot", priority = 700, max_item_count = 3 },
+        matlab = { name = "cmp_matlab", priority = 650, max_item_count = 3 },
+        path = { name = "path", priority = 600, max_item_count = 4 },
+      }
+      local defaultSources = {
+        cmp_sources.buffer,
+        cmp_sources.luasnip,
+        cmp_sources.path,
       }
 
       cmp.setup {
@@ -110,6 +109,16 @@ return {
             end,
           },
           ["<S-Tab>"] = cmp.config.disable,
+        },
+        performance = {
+          -- PERF lower values for lag-free performance
+          -- default values: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18
+          -- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L425
+          debounce = 30,
+          throttle = 20,
+          fetching_timeout = 250,
+          async_budget = 0.8,
+          max_view_entries = 100,
         },
         formatting = {
           fields = { "kind", "abbr", "menu" },
@@ -146,10 +155,10 @@ return {
         sorting = {
           comparators = {
             cmp.config.compare.offset,
+            cmp.config.compare.recently_used,
+            require("cmp-under-comparator").under,
             cmp.config.compare.exact,
             cmp.config.compare.score,
-            require("cmp-under-comparator").under,
-            cmp.config.compare.recently_used,
             cmp.config.compare.kind,
             cmp.config.compare.sort_text,
             cmp.config.compare.length,
@@ -174,43 +183,54 @@ return {
           },
         },
         matching = { disallow_prefix_unmatching = true },
-        sources = cmp_sources,
+        sources = cmp.config.sources(defaultSources),
       }
 
       cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
-        sources = { { name = "path" }, { name = "cmdline" } },
+        sources = {
+          cmp_sources.path,
+          cmp_sources.cmdline,
+        },
       })
       cmp.setup.cmdline({ "/", "?" }, {
         mapping = cmp.mapping.preset.cmdline(),
-        sources = { { name = "buffer" } },
-      })
-      cmp.setup.filetype({ "markdown.pandoc", "tex", "text" }, {
-        sources = cmp.config.sources {
-          { name = "nvim_lsp", priority = 1000 },
-          { name = "nvim_lsp_signature_help", priority = 900 },
-          { name = "buffer", keyword_length = 3, priority = 800 },
-          { name = "luasnip", priority = 700, option = { show_autosnippets = true } },
-          {
-            name = "look",
-            keyword_length = 2,
-            max_item_count = 20,
-            priority = -100,
-            option = {
-              convert_case = true,
-              loud = true,
-              dict = vim.fn.stdpath "config" .. "/mydict/words.txt",
-            },
-          },
+        sources = {
+          cmp_sources.buffer,
         },
       })
-      cmp.setup.filetype({ "julia", "matlab", "python", "lua" }, {
+      cmp.setup.filetype({ "markdown.pandoc", "markdown" }, {
         sources = cmp.config.sources {
-          { name = "nvim_lsp", priority = 1000 },
-          -- { name = "copilot", priority = 850, max_item_count = 3 },
-          { name = "buffer", keyword_length = 3, priority = 800 },
-          { name = "luasnip", priority = 700, option = { show_autosnippets = true } },
-          { name = "path", priority = 600, max_item_count = 4 },
+          cmp_sources.buffer,
+          cmp_sources.look,
+          cmp_sources.luasnip,
+        },
+      })
+      cmp.setup.filetype({ "tex", "text" }, {
+        sources = cmp.config.sources {
+          cmp_sources.nvim_lsp,
+          cmp_sources.nvim_lsp_signature_help,
+          cmp_sources.buffer,
+          cmp_sources.luasnip,
+          cmp_sources.look,
+        },
+      })
+      cmp.setup.filetype({ "matlab" }, {
+        sources = cmp.config.sources {
+          cmp_sources.matlab,
+          cmp_sources.buffer,
+          cmp_sources.path,
+          -- cmp_sources.nvim_lsp,
+          -- cmp_sources.copilot,
+        },
+      })
+      cmp.setup.filetype({ "julia", "python", "lua" }, {
+        sources = cmp.config.sources {
+          cmp_sources.nvim_lsp,
+          cmp_sources.buffer,
+          cmp_sources.luasnip,
+          cmp_sources.path,
+          -- cmp_sources.copilot,
         },
       })
     end,

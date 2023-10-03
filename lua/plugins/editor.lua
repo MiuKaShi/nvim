@@ -3,7 +3,6 @@ return {
   -- auto pairs
   {
     "altermo/ultimate-autopair.nvim",
-    branch = "v0.6",
     config = true,
     event = { "InsertEnter", "CmdlineEnter" },
   },
@@ -166,6 +165,33 @@ return {
     keys = {
       { "<leader>sp", function() require("spectre").toggle() end, desc = "Toggle Spectre" },
       { "<leader>sw", function() require("spectre").open_visual { select_word = true } end, desc = "Search current word" },
+    },
+  },
+
+  -- split-join lines
+  {
+    "Wansmer/treesj",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    keys = {
+      { "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
+    },
+    opts = {
+      use_default_keymaps = false,
+      cursor_behavior = "start", -- start|end|hold
+      max_join_length = 140,
+      langs = {
+        -- python docstrings
+        python = {
+          string_content = {
+            both = { fallback = function() vim.cmd "normal! gww" end },
+          },
+        },
+        comment = {
+          source = {
+            both = { fallback = function() vim.cmd "normal! gww" end },
+          },
+        },
+      },
     },
   },
 

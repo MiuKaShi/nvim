@@ -1,9 +1,18 @@
 vim.opt_local.shiftwidth = 2
 vim.opt_local.tabstop = 2
 vim.opt_local.softtabstop = 2
+
+-- hide links and some markup (similar to Obsidian's live preview)
 vim.opt_local.conceallevel = 2
+
 vim.opt_local.expandtab = true
 vim.opt_local.spelllang = "en_us,cjk"
+
+-- decrease line length without zen mode plugins
+vim.opt_local.signcolumn = "yes:9"
+
+-- do not auto-wrap text
+vim.opt_local.formatoptions:remove { "t", "c" }
 
 -- pandoc sytanx setting
 vim.g["pandoc#syntax#conceal#blacklist"] = {
@@ -30,6 +39,9 @@ vim.keymap.set("n", "<leader>p", "<cmd>MarkdownPreviewToggle<CR>") -- 预览
 vim.keymap.set("n", "<leader>cc", ":!compiler <c-r>%<CR><CR>")
 vim.keymap.set("n", "<leader>cp", '<Cmd>call jobstart(["autoprev", expand("%:p")])<CR>')
 
+
+vim.keymap.set("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task", buffer = true })
+vim.keymap.set("n", "<leader>-", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
 
 vim.keymap.set("n", "<C-b>", "bi**<Esc>ea**<Esc>", { buffer = 0 })
 vim.keymap.set("v", "<C-b>", ":lua require('markdowny').bold()<cr>", { buffer = 0 })
