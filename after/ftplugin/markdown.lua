@@ -9,7 +9,7 @@ vim.opt_local.expandtab = true
 vim.opt_local.spelllang = "en_us,cjk"
 
 -- decrease line length without zen mode plugins
-vim.opt_local.signcolumn = "yes:9"
+-- vim.opt_local.signcolumn = "yes:9"
 
 -- do not auto-wrap text
 vim.opt_local.formatoptions:remove { "t", "c" }

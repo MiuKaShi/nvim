@@ -201,6 +201,7 @@ return {
       })
       cmp.setup.filetype({ "markdown.pandoc", "markdown" }, {
         sources = cmp.config.sources {
+          cmp_sources.nvim_lsp,
           cmp_sources.buffer,
           cmp_sources.look,
           cmp_sources.luasnip,
