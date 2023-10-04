@@ -5,7 +5,7 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "null-ls.nvim",
+      "none-ls.nvim",
     },
     config = function()
       -- diagnostics signs
@@ -221,9 +221,9 @@ return {
     },
   },
 
-  -- null-ls
+  -- none-ls
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     config = function() require "plugins.lsp.null-ls" end,
   },
 }

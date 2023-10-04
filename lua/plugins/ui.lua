@@ -353,7 +353,7 @@ return {
       popupmenu = { backend = "cmp" }, -- replace with nvim-cmp, since more sources
       messages = { view_search = false }, -- replaced by nvim-hlslens
       lsp = {
-        progress = { enabled = false }, -- replaced with nvim-dr-lsp, since this one cannot filter null-ls
+        progress = { enabled = false }, -- replaced with nvim-dr-lsp
         signature = { enabled = false }, -- replaced with lsp_signature.nvim
 
         -- ENABLED features
