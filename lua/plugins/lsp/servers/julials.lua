@@ -11,15 +11,17 @@ M.setup = function(on_attach, capabilities)
       julia = {
         usePlotPane = false,
         symbolCacheDownload = false,
+        enableCrashReporter = false,
         runtimeCompletions = true,
         singleFileSupport = true,
         useRevise = true,
         lint = {
-          NumThreads = 16,
+          NumThreads = 6,
           missingrefs = "all",
           iter = true,
           lazy = true,
           modname = true,
+          pirates = true,
         },
       },
     },
