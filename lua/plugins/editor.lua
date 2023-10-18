@@ -351,6 +351,15 @@ endfunction
 
   -- fold
   {
+    "chrisgrieser/nvim-origami",
+    event = "BufReadPost", -- later will not save folds
+    opts = {
+      setupFoldKeymaps = false,
+    },
+    keys = { { "<BS>", function() require("origami").h() end, desc = "toggle fold" } },
+  },
+
+  {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
     event = "BufReadPost",
@@ -409,4 +418,51 @@ endfunction
 			{ "z4", function() require("ufo").closeFoldsWith(4) end, desc = "󰘖 󱃄 Close Level 4 Folds" },
     },
   },
+
+  -- Zen mode
+  -- {
+  --   "folke/zen-mode.nvim",
+  --   dependencies = {
+  --     {
+  --       "folke/twilight.nvim",
+  --       opts = {
+  --         dimming = {
+  --           alpha = 0.25, -- amount of dimming
+  --         },
+  --         context = 6, -- amount of lines we will try to show around the current line
+  --         treesitter = false,
+  --       },
+  --     },
+  --     { "arnamak/stay-centered.nvim", config = function() require("stay-centered").setup() end },
+  --   },
+  --   keys = {
+  --     { "<leader>zz", "<CMD>ZenMode<CR>" },
+  --     { "<leader>zt", "<CMD>Twilight<CR>" },
+  --   },
+  --   opts = {
+  --     window = {
+  --       backdrop = 0.95,
+  --       width = 120,
+  --       height = 1,
+  --       options = {
+  --         signcolumn = "no", -- disable signcolumn
+  --         number = false, -- disable number column
+  --         relativenumber = false, -- disable relative numbers
+  --         cursorline = false, -- disable cursorline
+  --         cursorcolumn = false, -- disable cursor column
+  --         foldcolumn = "0", -- disable fold column
+  --         list = false, -- disable whitespace characters
+  --       },
+  --     },
+  --     plugins = {
+  --       options = {
+  --         enabled = true,
+  --         showcmd = true,
+  --       },
+  --       twilight = { enabled = true },
+  --       gitsigns = { enabled = true },
+  --       tmux = { enabled = true },
+  --     },
+  --   },
+  -- },
 }

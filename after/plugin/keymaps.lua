@@ -84,7 +84,7 @@ map("n", "<Leader>-", "10<C-w>-")
 map("n", "<Leader>[", "10<C-w><")
 map("n", "<Leader>]", "10<C-w>>")
 
--- WHITESPACE CONTROL
+-- Whitespace control
 map("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
 map("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
 map("n", "<Tab>", ">>", { desc = "󰉶 indent" })
@@ -93,7 +93,7 @@ map("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
 map("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 map("n", "X", "mz$x`z", { desc = "Delete char at EoL" })
 
--- Fix Spelling
+-- Fix spelling
 map("n", "z.", "1z=")
 -- Move selection right
 map("x", "<Right>", [["zx"zpgvlolo]])

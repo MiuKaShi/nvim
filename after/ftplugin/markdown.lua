@@ -1,6 +1,7 @@
 vim.opt_local.shiftwidth = 2
 vim.opt_local.tabstop = 2
 vim.opt_local.softtabstop = 2
+vim.opt_local.scrolloff = 10
 
 -- hide links and some markup (similar to Obsidian's live preview)
 vim.opt_local.conceallevel = 2

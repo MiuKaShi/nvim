@@ -12,4 +12,5 @@ augroup filetypedetect
   au BufRead,BufNewFile *.snippets set filetype=snippets
   au BufRead,BufNewFile *.isy set filetype=xml
   au BufRead,BufNewFile *.zsh set filetype=sh
+  au BufRead,BufNewFile *.rasi set filetype=css
 augroup END

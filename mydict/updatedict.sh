@@ -11,7 +11,11 @@ dic_list=(
 )
 
 # Merge all word lists into one file
-cat "${dic_list[@]}" >all_words.txt
+sort -u "${dic_list[@]}" >sorted_words.txt
 
-# Sort the words and remove duplicates
-sort all_words.txt | uniq >words.txt && rm all_words.txt
+
+# convert to lowercase
+tr '[:upper:]' '[:lower:]' < sorted_words.txt > words.txt
+
+# remove ^M
+rm -f sorted_words.txt && sed -i -e "s/\r//g" words.txt

@@ -146,6 +146,7 @@ return {
               cmdline = "[Cmd]",
               luasnip = "[Snip]",
               cmp_matlab = "[MATLAB]",
+              look = "[Dict]",
               -- rg = '[RG]',
               -- neorg  = '[Norg]',
             })[entry.source.name]

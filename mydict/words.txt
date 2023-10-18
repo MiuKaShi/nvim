@@ -429,7 +429,7 @@ bet
 betray
 bewilder
 beyond
-Bible
+bible
 bibliography
 bid
 bifurcate
@@ -674,8 +674,8 @@ cholesterol
 chop
 chord
 chorus
-Christ
-Christian
+christ
+christian
 chronic
 chunk
 churlish
@@ -1362,7 +1362,7 @@ eagle
 earnest
 earthquake
 ease
-Easter
+easter
 ebullient
 eccentric
 echo
@@ -1416,10 +1416,10 @@ eliminate
 elite
 elixir
 eloquent
-Elrod
-Elrod-Adams
+elrod
+elrod-adams
 elsewhere
-Elysian
+elysian
 emaciated
 embark
 embarrass
@@ -1946,7 +1946,7 @@ guy
 gym
 gymnasium
 halcyon
-half-Sommerfeld
+half-sommerfeld
 hallowed
 halt
 hammer
@@ -1971,7 +1971,7 @@ harmony
 harness
 harrowing
 harsh
-Hartman
+hartman
 haste
 hasty
 hatch
@@ -2006,7 +2006,7 @@ herd
 heritage
 hermetic
 heroic
-Hertzian
+hertzian
 hesitate
 heterodox
 hierarchy
@@ -2345,7 +2345,7 @@ jeopardize
 jerk
 jet
 jewel
-JFO
+jfo
 jibe
 jocose
 jog
@@ -2567,7 +2567,7 @@ marry
 marsh
 marshal
 marvelous
-Marxist
+marxist
 masculine
 mask
 mass
@@ -2754,7 +2754,7 @@ nationality
 naturally
 nature
 naval
-Navier-Stokes
+navier-stokes
 navigation
 navy
 nearby
@@ -2767,7 +2767,7 @@ negative
 neglect
 negligible
 negotiate
-Negro
+negro
 neighbourhood
 neologism
 neophyte
@@ -2777,7 +2777,7 @@ nest
 network
 neutral
 nevertheless
-Newtonian
+newtonian
 nexus
 nickel
 nickname
@@ -2787,7 +2787,7 @@ nil
 nitrogen
 nominal
 nominate
-non-Bingham
+non-bingham
 nonetheless
 nonplussed
 nonsense
@@ -3059,7 +3059,7 @@ pervasive
 pessimistic
 pest
 petition
-Petroff
+petroff
 petrol
 petroleum
 petty
@@ -3085,7 +3085,7 @@ pillow
 pilot
 pinch
 pine
-Pin-on-disk
+pin-on-disk
 pint
 piquant
 pique
@@ -3471,7 +3471,7 @@ region
 register
 regulate
 regulation
-Rehbinder
+rehbinder
 rehearsal
 reign
 rein
@@ -3590,7 +3590,7 @@ revolt
 revolutionary
 revolve
 reward
-Reynolds
+reynolds
 rheometer
 rhythm
 rib
@@ -3882,8 +3882,8 @@ solvent
 somatic
 somehow
 somewhat
-Sommerfeld
-Sommerfeld
+sommerfeld
+sommerfeld
 sophisticated
 soporific
 sordid
@@ -4013,7 +4013,7 @@ strengthen
 stress
 stretch
 striated
-Stribeck
+stribeck
 stricture
 stride
 strident
@@ -4164,7 +4164,7 @@ tariff
 tautology
 tax
 taxonomy
-Taylor
+taylor
 tease
 technician
 technique
@@ -4602,7 +4602,7 @@ wrinkle
 wrist
 writer
 writing
-X-ray
+x-ray
 yacht
 yawn
 yearly

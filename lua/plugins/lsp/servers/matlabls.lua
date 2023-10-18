@@ -10,7 +10,10 @@ M.setup = function(on_attach, capabilities)
     single_file_support = true,
     settings = {
       matlab = {
+        indexWorkspace = false,
         installPath = "/home/miuka/.local/MATLAB/R2023a",
+        matlabConnectionTiming = "onStart",
+        telemetry = true,
       },
     },
   }
