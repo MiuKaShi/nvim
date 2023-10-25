@@ -5,11 +5,9 @@ local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
-local c = ls.choice_node
 local p = require("luasnip.extras").partial
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
-local rep = require("luasnip.extras").rep
 
 local conds_expand = require "luasnip.extras.conditions.expand"
 local pos = require "snippets.position"
@@ -41,11 +39,11 @@ return {
     show_condition = pos.on_top * pos.line_begin,
   }),
   s(
-    { trig = "link", name = "Markdown Links", dscr = "Insert a Link" },
+    { trig = ",l", name = "Markdown Links", dscr = "Insert a Link" },
     fmta("[<>](<>)", { i(1), f(function(_, snip) return snip.env.TM_SELECTED_TEXT[1] or {} end, {}) })
   ),
   s(
-    { trig = "qa", name = "Q&A" },
+    { trig = ",q", name = "Q&A" },
     fmta(
       [[
                 **Q<>:** <>

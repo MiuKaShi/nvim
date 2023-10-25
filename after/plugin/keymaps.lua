@@ -105,8 +105,6 @@ map("x", "<Left>", [["zdh"zPgvhoho]])
 -- map("n", "mp", "<cmd>BookmarkPrev<CR>")
 -- map("n", "mc", "<cmd>BookmarkClear<CR>")
 
-map("n", "<leader>i", "<cmd>setlocal spell! spelllang=en_us<CR>") -- spell check
-
 map("n", "<leader><leader>s", "<cmd>w ! sudo tee > /dev/null %<CR>") -- force save files
 
 -- command line mode
@@ -116,22 +114,10 @@ map("c", "<C-h>", "<BS>")
 map("c", "<C-k>", "<C-f>D<C-c><C-c>:<Up>")
 
 -- better ~
-map("n", "~", function()
-  local col = vim.fn.col "." -- fn.col correctly considers tab-indentation
-  local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
-  local isLetter = charUnderCursor:find "^%a$"
-  if isLetter then return "~h" end
-  local brackets = {
-    ["("] = ")",
-    ["["] = "]",
-    ["{"] = "}",
-    ["<"] = ">",
-  }
-  for openBracket, closeBracket in pairs(brackets) do
-    if charUnderCursor == openBracket then return "r" .. closeBracket end
-    if charUnderCursor == closeBracket then return "r" .. openBracket end
-  end
-end, { desc = "~ for letters and characters", expr = true })
+map("n", "~", function() util.toggleCase() end, { desc = "better ~" })
+
+-- quick comment
+map("n", "wq", function() util.duplicateAsComment() end, { desc = " Duplicate Line as Comment" })
 
 -- flip word
 map("n", "<leader>t", function() require("util.flipper").flipWord() end, { desc = "switch common words" })
@@ -143,8 +129,8 @@ map("", "gx", '<Cmd>call jobstart(["linkhandler", expand("<cfile>")], {"detach":
 vim.cmd [[autocmd FileType markdown.pandoc inoremap <buffer> <silent> @@ <Esc>:BibtexciteInsert<CR>]]
 
 -- toggle options
-map("n", "<leader>us", function() util.toggle "spell" end, { desc = "Toggle Spelling" })
 map("n", "<leader>uw", function() util.toggle "wrap" end, { desc = "Toggle Word Wrap" })
+map("n", "<leader>i", util.toggle_spellcheck, { desc = "Toggle Spelling" })
 map("n", "<leader>.", util.toggle_diagnostics, { desc = "Toggle   Diagnostics" })
 
 -- stylua: ignore start

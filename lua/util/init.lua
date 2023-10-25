@@ -91,6 +91,45 @@ function M.rime_status()
   end
 end
 
+-- better toggleCase
+local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
+function M.toggleCase()
+  local toggleSigns = {
+    ["="] = "!",
+    ["|"] = "&",
+    [","] = ";",
+    ["'"] = '"',
+    ["^"] = "$",
+    ["/"] = "*",
+    ["+"] = "-",
+    ["("] = ")",
+    ["["] = "]",
+    ["{"] = "}",
+    ["<"] = ">",
+  }
+  local col = vim.fn.col "." -- fn.col correctly considers tab-indentation
+  local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
+  local isLetter = charUnderCursor:lower() ~= charUnderCursor:upper() -- so it works with diacritics
+  if isLetter then
+    normal "~h"
+    return
+  end
+  for left, right in pairs(toggleSigns) do
+    if charUnderCursor == left then normal("r" .. right) end
+    if charUnderCursor == right then normal("r" .. left) end
+  end
+end
+
+-- duplicateAsComment
+function M.duplicateAsComment()
+  local ln, col = unpack(vim.api.nvim_win_get_cursor(0))
+  local curLine = vim.api.nvim_get_current_line()
+  local indent, content = curLine:match "^(%s*)(.*)"
+  local commentedLine = indent .. vim.bo.commentstring:format(content)
+  vim.api.nvim_buf_set_lines(0, ln - 1, ln, false, { commentedLine, curLine })
+  vim.api.nvim_win_set_cursor(0, { ln + 1, col })
+end
+
 -- word count
 function M.getwords()
   if vim.bo.filetype == "md" or vim.bo.filetype == "text" or vim.bo.filetype == "markdown.pandoc" then
@@ -204,6 +243,21 @@ function M.toggle(option, silent, values)
   end
 end
 
+-- toggle spellcheck
+function M.toggle_spellcheck()
+  if vim.opt.spell:get() then
+    vim.opt.spell = false
+  else
+    vim.opt.spell = true
+    vim.cmd [[
+		syn match myExCapitalWords +\<[A-Z]\w*\>+ contains=@NoSpell
+		syn match NoSpellAcronym '\<\(\u\|\d\)\{3,}s\?\>' contains=@NoSpell
+		syn match LowerCaseAtStart "^\s*\l" contains=@NoSpell
+		]]
+  end
+end
+
+-- toggle diagnostic
 vim.diagnostic.disable(1)
 function M.toggle_diagnostics()
   if vim.diagnostic.is_disabled(0) then

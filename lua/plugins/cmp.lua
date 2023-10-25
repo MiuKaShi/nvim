@@ -124,9 +124,7 @@ return {
           fields = { "kind", "abbr", "menu" },
           format = function(entry, item)
             -- limit the width of windows
-            local get_ws = function(max, len)
-              return (" "):rep(max - len) -- Add whitespace (max-len) times
-            end
+            local get_ws = function(max, len) return string.rep(" ", (max - len)) end
             local ELLIPSIS_CHAR = "…"
             local MAX_LABEL_WIDTH = 25
             local content = item.abbr

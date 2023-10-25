@@ -93,6 +93,7 @@ adult
 adulterate
 advanced
 advantage
+advection
 adventure
 adverse
 advertise
@@ -983,6 +984,7 @@ corrupt
 cosmology
 costly
 costume
+couette
 council
 counsel
 counter
@@ -3123,6 +3125,7 @@ plutocracy
 poem
 poet
 poetry
+poiseuille
 poison
 poisonous
 poke

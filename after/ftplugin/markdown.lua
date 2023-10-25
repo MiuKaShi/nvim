@@ -7,7 +7,7 @@ vim.opt_local.scrolloff = 10
 vim.opt_local.conceallevel = 2
 
 vim.opt_local.expandtab = true
-vim.opt_local.spelllang = "en_us,cjk"
+vim.opt_local.spelllang = {"en_us", "cjk"}
 
 -- decrease line length without zen mode plugins
 -- vim.opt_local.signcolumn = "yes:9"

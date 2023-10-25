@@ -10,14 +10,14 @@ vim.defer_fn(function() vim.fn.serverstart "/tmp/nvim_server.pipe" end, delay)
 --------------------------------------------------------------------------------
 
 -- SIZE & FONT
-vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2"
+vim.opt.guifont = "monospace:h20"
 
 g.neovide_scale_factor = 1
-g.neovide_refresh_rate = 5
+g.neovide_refresh_rate = 60
 local function setNeovideScaleFactor(delta) g.neovide_scale_factor = g.neovide_scale_factor + delta end
 
--- vim.keymap.set({ "n", "x", "i" }, "<A-+>", function() setNeovideScaleFactor(0.01) end)
--- vim.keymap.set({ "n", "x", "i" }, "<A-->", function() setNeovideScaleFactor(-0.01) end)
+vim.keymap.set({ "n", "x", "i" }, "<A-j>", function() setNeovideScaleFactor(-0.01) end)
+vim.keymap.set({ "n", "x", "i" }, "<A-k>", function() setNeovideScaleFactor(0.01) end)
 
 --------------------------------------------------------------------------------
 

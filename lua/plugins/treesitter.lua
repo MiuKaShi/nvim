@@ -21,6 +21,7 @@ return {
         "lua",
         "luap",
         "luadoc",
+        "foam",
         "toml",
         "yaml",
         "julia",
