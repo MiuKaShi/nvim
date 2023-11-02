@@ -254,12 +254,19 @@ return {
     config = function() vim.keymap.set("n", "<leader>tt", ":TableModeToggle<cr>") end,
   },
 
+  -- 中文格式化
+  {
+    "hotoo/pangu.vim",
+    cmd = { "Pangu", "PanguAll" },
+    config = function() end,
+  },
+
   -- Markdown预览
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreview" },
     ft = { "markdown" },
-    build = "cd app && npm install",
+    build = function() vim.fn["mkdp#util#install"]() end,
     config = function()
       vim.cmd [[
 function! g:Open_browser(url)
@@ -268,7 +275,7 @@ endfunction
 ]]
       vim.g.mkdp_browserfunc = "g:Open_browser"
       vim.g.mkdp_markdown_css = "/home/miuka/.config/nvim/markdown.css"
-      -- vim.g.mkdp_highlight_css = '/home/miuka/.cache/wal/colors'
+      vim.g.mkdp_highlight_css = "/home/miuka/.config/nvim/colors-light.css"
       vim.g.mkdp_page_title = "${name}.md"
       vim.g.mkdp_preview_options = {
         mkit = {},
@@ -429,7 +436,7 @@ endfunction
   --         dimming = {
   --           alpha = 0.25, -- amount of dimming
   --         },
-  --         context = 6, -- amount of lines we will try to show around the current line
+  --         context = 3, -- amount of lines we will try to show around the current line
   --         treesitter = false,
   --       },
   --     },

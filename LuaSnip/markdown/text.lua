@@ -62,6 +62,88 @@ return {
   s({ trig = ",t", snippetType = "autosnippet", name = "italic" }, fmta("*<>*", { i(1) })),
   s({ trig = ",s", snippetType = "autosnippet", name = "strikethrough" }, fmta("~~<>~~", { i(1) })),
   s(
+    { trig = "bbox", snippetType = "autosnippet", name = "Insert box" },
+    fmta(
+      [[
+  :::{.box}
+
+  Content<>
+
+  :::
+      ]],
+      { i(1)  }
+    )
+  ),
+  s(
+    { trig = "box1", snippetType = "autosnippet", name = "Insert black box" },
+    fmta(
+      [[
+  :::{.box .black}
+	 >> Title<>
+
+  Content<>
+
+  :::
+      ]],
+      { i(1), i(0) }
+    )
+  ),
+  s(
+    { trig = "box2", snippetType = "autosnippet", name = "Insert red box" },
+    fmta(
+      [[
+  :::{.box .red}
+	 >> Title<>
+
+  Content<>
+
+  :::
+      ]],
+      { i(1), i(0) }
+    )
+  ),
+  s(
+    { trig = "box3", snippetType = "autosnippet", name = "Insert blue box" },
+    fmta(
+      [[
+  :::{.box .blue}
+	 >> Title<>
+
+  Content<>
+
+  :::
+      ]],
+      { i(1), i(0) }
+    )
+  ),
+  s(
+    { trig = "box4", snippetType = "autosnippet", name = "Insert green box" },
+    fmta(
+      [[
+  :::{.box .green}
+	 >> Title<>
+
+  Content<>
+
+  :::
+      ]],
+      { i(1), i(0) }
+    )
+  ),
+  s(
+    { trig = "box5", snippetType = "autosnippet", name = "Insert green box" },
+    fmta(
+      [[
+  :::{.box .plain}
+
+  Content<>
+
+  :::
+      ]],
+      { i(1) }
+    )
+  ),
+	s(
     { trig = ",c", snippetType = "autosnippet", name = "Insert fenced code block" },
     fmta(
       [[
@@ -73,7 +155,7 @@ return {
     )
   ),
   s(
-    { trig = "img", name = "Image" },
+    { trig = ",i", name = "Image" },
     fmt(
       [[
 			[{}]({} "{}") {}

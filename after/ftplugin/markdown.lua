@@ -7,7 +7,7 @@ vim.opt_local.scrolloff = 10
 vim.opt_local.conceallevel = 2
 
 vim.opt_local.expandtab = true
-vim.opt_local.spelllang = {"en_us", "cjk"}
+vim.opt_local.spelllang = { "en_us", "cjk" }
 
 -- decrease line length without zen mode plugins
 -- vim.opt_local.signcolumn = "yes:9"
@@ -17,12 +17,38 @@ vim.opt_local.formatoptions:remove { "t", "c" }
 
 -- pandoc sytanx setting
 vim.g["pandoc#syntax#conceal#blacklist"] = {
+  "titleblock",
+  "image",
+  "block",
+  "strikeout",
+  "footnote",
+  "quotes",
+  "ellipses",
+  "dashes",
   "atx",
   "ellipses",
   "emdashes",
   "codeblock_start",
   "codeblock_delim",
 }
+vim.g["pandoc#syntax#conceal#cchar_overrides"] = { atx = "#" }
+vim.g["pandoc#syntax#style#emphases"] = 0
+vim.g["pandoc#syntax#style#underline_special"] = 0
+vim.g["pandoc#modules#disabled"] = {
+  "folding",
+  "toc",
+  "templates",
+  "yaml",
+  "formatting",
+  "keyboard",
+  "executors",
+  "bibliographies",
+  "spell",
+  "hypertext",
+  "menu",
+}
+vim.g["pandoc#syntax#style#use_definition_lists"] = 0
+
 vim.g.tex_conceal = "amgs" --disable equation conceal
 vim.g["pandoc#syntax#codeblocks#embeds#langs"] =
   { "python", "bash=sh", "c", "cpp", "latex=tex", "diff", "julia", "rust" }
@@ -34,6 +60,13 @@ hi pandocStrongEmphasis gui=bold,italic cterm=bold,italic
 hi pandocStrongInEmphasis gui=bold,italic cterm=bold,italic
 hi pandocEmphasisInStrong gui=bold,italic cterm=bold,italic
 ]]
+
+-- 保存时自动格式化 markdown
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*.markdown", "*.md", "*.text", "*.txt" },
+  command = "PanguAll",
+  -- nested = true,
+})
 
 -- stylua: ignore start
 vim.keymap.set("n", "<leader>p", "<cmd>MarkdownPreviewToggle<CR>") -- 预览

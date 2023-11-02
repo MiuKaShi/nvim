@@ -29,7 +29,7 @@ local sources = {
       "--no-semi",
       "--single-quote",
       "--jsx-single-quote",
-      "--prose-wrap=always",
+      -- "--prose-wrap=always",
     },
   },
   -- code blocks

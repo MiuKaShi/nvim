@@ -11,85 +11,85 @@ local markdown = require "snippets.markdown"
 
 return {
   s({ trig = "alp", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\alpha ",
+    t "\\alpha",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Alp", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Alpha ",
+    t "\\Alpha",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "beta", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\beta ",
+    t "\\beta",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Beta", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Beta ",
+    t "\\Beta",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "gam", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\gamma ",
+    t "\\gamma",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Gam", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Gamma ",
+    t "\\Gamma",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "del", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\delta ",
+    t "\\delta",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Del", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Delta ",
+    t "\\Delta",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "eps", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\epsilon ",
+    t "\\epsilon",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "vps", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\varepsilon ",
+    t "\\varepsilon",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Eps", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Epsilon ",
+    t "\\Epsilon",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "zeta", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\zeta ",
+    t "\\zeta",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Zeta", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Zeta ",
+    t "\\Zeta",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "eta", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\eta ",
+    t "\\eta",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Eta", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Eta ",
+    t "\\Eta",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "the", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\theta ",
+    t "\\theta",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "The", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Theta ",
+    t "\\Theta",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "iot", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\iota ",
+    t "\\iota",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Iot", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Iota ",
+    t "\\Iota",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "kap", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\kappa ",
+    t "\\kappa",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Kap", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Kappa ",
+    t "\\Kappa",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "lam", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\lambda ",
+    t "\\lambda",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Lam", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Lambda ",
+    t "\\Lambda",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "mu", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\mu ",
+    t "\\mu",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Mu", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Mu ",
+    t "\\Mu",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "nu", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\nu ",
+    t "\\nu",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Nu", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Nu ",
+    t "\\Nu",
   }, { condition = markdown.in_mathzone }),
   -- s({ trig = "xi", snippetType = "autosnippet", wordTrig = false }, {
   --   t("\\xi "),
@@ -98,69 +98,69 @@ return {
   --   t("\\Xi "),
   -- }, { condition = markdown.in_mathzone }),
   s({ trig = "omi", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\omicron ",
+    t "\\omicron",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "pi", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\pi ",
+    t "\\pi",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "\\pii", snippetType = "autosnippet", wordTrig = false, priority = 2000 }, {
-    t "p_i ",
+    t "p_i",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Pi", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Pi ",
+    t "\\Pi",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "rho", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\rho ",
+    t "\\rho",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Rho", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Rho ",
+    t "\\Rho",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "sig", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\sigma ",
+    t "\\sigma",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Sig", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Sigma ",
+    t "\\Sigma",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "tau", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\tau ",
+    t "\\tau",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Tau", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Tau ",
+    t "\\Tau",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "ups", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\ups ",
+    t "\\ups",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Ups", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Ups ",
+    t "\\Ups",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "phi", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\phi ",
+    t "\\phi",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Phi", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Phi ",
+    t "\\Phi",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "vhi", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\varphi ",
+    t "\\varphi",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Vhi", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Varphi ",
+    t "\\Varphi",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "chi", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\chi ",
+    t "\\chi",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Chi", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Chi ",
+    t "\\Chi",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "psi", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\psi ",
+    t "\\psi",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Psi", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Psi ",
+    t "\\Psi",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "ome", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\omega ",
+    t "\\omega",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "Ome", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Omega ",
+    t "\\Omega",
   }, { condition = markdown.in_mathzone }),
 }
