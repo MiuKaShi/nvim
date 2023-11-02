@@ -12,7 +12,10 @@ M.setup = function(on_attach, capabilities)
         runtime = {
           version = "LuaJIT",
         },
-        diagnostics = { globals = { "vim", "use" } },
+        diagnostics = {
+          globals = { "vim" }, -- when contributing to nvim plugins missing a .luarc.json
+          disable = { "trailing-space" }, -- formatter already does that
+        },
         workspace = {
           library = {
             vim.fn.stdpath "data" .. "/lazy/emmylua-nvim",
@@ -21,11 +24,15 @@ M.setup = function(on_attach, capabilities)
         },
         telemetry = { enable = false },
         hint = {
-          enable = true,
-          settype = true,
+          enable = true, -- enabled inlay hints
+          setType = true,
+          arrayIndex = "Disable",
         },
         completion = {
           callSnippet = "Replace",
+          keywordSnippet = "Replace",
+          displayContext = 6,
+          postfix = ".", -- useful for `table.insert` and the like
         },
       },
     },

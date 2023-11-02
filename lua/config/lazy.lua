@@ -16,7 +16,14 @@ require("lazy").setup {
   diff = {
     cmd = "diffview.nvim",
   },
-  ui = { border = "single" },
+  ui = {
+    wrap = true,
+    border = "single",
+    size = {
+      width = 0.98, -- fixes breaking in word
+      height = 1,
+    },
+  },
   change_detection = { enabled = false },
   performance = {
     rtp = {
@@ -48,3 +55,12 @@ require("lazy").setup {
     },
   },
 }
+
+-- 5s after startup, notify if there many plugin updates
+vim.defer_fn(function()
+  if not require("lazy.status").has_updates() then return end
+  local threshold = 15
+  local numberOfUpdates = tonumber(require("lazy.status").updates():match "%d+")
+  if numberOfUpdates < threshold then return end
+  vim.notify(("󱧕 %s plugin updates"):format(numberOfUpdates), vim.log.levels.INFO, { title = "Lazy" })
+end, 5000)

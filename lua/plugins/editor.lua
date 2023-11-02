@@ -332,12 +332,10 @@ endfunction
   {
     "mbbill/undotree",
     config = function()
-      local util = require "util"
-      local width = util.width()
-
-      vim.g.undotree_SplitWidth = width
-      vim.g.undotree_WindowLayout = 2
+      vim.g.undotree_WindowLayout = 3
+      vim.g.undotree_DiffpanelHeight = 10
       vim.g.undotree_ShortIndicators = 1
+      vim.g.undotree_SplitWidth = 30
       vim.g.undotree_DiffAutoOpen = 0
       vim.g.undotree_SetFocusWhenToggle = 1
       vim.g.undotree_HelpLine = 1

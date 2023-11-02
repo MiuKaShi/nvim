@@ -3,10 +3,7 @@ local g = vim.g
 -- REMOTE CONTROL
 -- nvim server (RPC) to remote control neovide instances
 -- https://neovim.io/doc/user/remote.html
-local removed, _ = pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
-local delay = removed and 400 or 0
-vim.defer_fn(function() vim.fn.serverstart "/tmp/nvim_server.pipe" end, delay)
-
+vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, 400)
 --------------------------------------------------------------------------------
 
 -- SIZE & FONT
