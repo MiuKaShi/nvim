@@ -78,6 +78,7 @@ return {
         copilot = { name = "copilot", priority = 700, max_item_count = 3 },
         matlab = { name = "cmp_matlab", priority = 650, max_item_count = 3 },
         path = { name = "path", priority = 600, max_item_count = 4 },
+        cmdline = { name = "cmdline", priority = 630, max_item_count = 4 },
       }
       local defaultSources = {
         cmp_sources.buffer,
