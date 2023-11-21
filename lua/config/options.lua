@@ -23,6 +23,7 @@ local options = {
     grepprg = "rg --hidden --vimgrep --smart-case --", -- Replace Vimgrep with Ripgrep
     syntax = "on", -- 打开语法高亮
     signcolumn = "yes:1", -- 显示标记列,设置宽度为1
+		ttyfast = true, -- 优化tty速度
     cursorline = true, -- 高亮光标
     cursorlineopt = "number", -- 高亮行号
     numberwidth = 3, -- 行号宽度

@@ -39,11 +39,11 @@ return {
     show_condition = pos.on_top * pos.line_begin,
   }),
   s(
-    { trig = ",l", name = "Markdown Links", dscr = "Insert a Link" },
+    { trig = ";l", name = "Markdown Links", dscr = "Insert a Link" },
     fmta("[<>](<>)", { i(1), f(function(_, snip) return snip.env.TM_SELECTED_TEXT[1] or {} end, {}) })
   ),
   s(
-    { trig = ",q", name = "Q&A" },
+    { trig = ";q", name = "Q&A" },
     fmta(
       [[
                 **Q<>:** <>
@@ -58,9 +58,9 @@ return {
       }
     )
   ),
-  s({ trig = ",b", snippetType = "autosnippet", name = "bold" }, fmta("**<>**", { i(1) })),
-  s({ trig = ",t", snippetType = "autosnippet", name = "italic" }, fmta("*<>*", { i(1) })),
-  s({ trig = ",s", snippetType = "autosnippet", name = "strikethrough" }, fmta("~~<>~~", { i(1) })),
+  s({ trig = ";b", snippetType = "autosnippet", name = "bold" }, fmta("**<>**", { i(1) })),
+  s({ trig = ";t", snippetType = "autosnippet", name = "italic" }, fmta("*<>*", { i(1) })),
+  s({ trig = ";s", snippetType = "autosnippet", name = "strikethrough" }, fmta("~~<>~~", { i(1) })),
   s(
     { trig = "bbox", snippetType = "autosnippet", name = "Insert box" },
     fmta(
@@ -144,7 +144,7 @@ return {
     )
   ),
 	s(
-    { trig = ",c", snippetType = "autosnippet", name = "Insert fenced code block" },
+    { trig = ";c", snippetType = "autosnippet", name = "Insert fenced code block" },
     fmta(
       [[
       ```<>
@@ -155,7 +155,7 @@ return {
     )
   ),
   s(
-    { trig = ",i", name = "Image" },
+    { trig = ";i", name = "Image" },
     fmt(
       [[
 			[{}]({} "{}") {}
