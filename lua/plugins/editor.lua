@@ -247,12 +247,6 @@ return {
   --  高亮
   { "vim-pandoc/vim-pandoc-syntax", ft = "markdown.pandoc" },
 
-  -- 表格
-  {
-    "dhruvasagar/vim-table-mode",
-    ft = { "markdown" },
-    config = function() vim.keymap.set("n", "<leader>tt", ":TableModeToggle<cr>") end,
-  },
 
   -- 中文格式化
   {
