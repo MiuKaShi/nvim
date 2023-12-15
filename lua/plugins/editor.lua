@@ -67,11 +67,22 @@ return {
   -- diffview
   {
     "sindrets/diffview.nvim",
-    opts = { enhanced_diff_hl = true },
+		opts = {
+			enhanced_diff_hl = true,
+			hooks = {
+				diff_buf_read = function()
+					vim.opt_local.wrap = false
+					vim.opt_local.list = false
+					vim.opt_local.colorcolumn = "80"
+					vim.opt_local.winbar = ""
+				end,
+			},
+		},
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
     keys = {
-      { "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Diff View" },
-      { "<leader>gx", "<cmd>DiffviewClose<CR>", desc = "Diff Close" },
+			{ "<leader>gd", function() require("diffview").open({}) end, desc = "Open Diffview" },
+			{ "<leader>gc", "<Cmd>DiffviewClose<CR>", desc = "Close Diffview" },
+			{ "<leader>gf", "<Cmd>DiffviewFileHistory<CR>", mode = { 'n', 'x' }, desc = "Close Diffview" },
     },
   },
 
@@ -363,8 +374,6 @@ endfunction
     dependencies = "kevinhwang91/promise-async",
     event = "BufReadPost",
     config = function()
-      vim.opt.foldlevel = 99
-      vim.opt.foldlevelstart = 99
       local foldIcon = ""
       local hlgroup = "NonText"
       local function foldTextFormatter(virtText, lnum, endLnum, width, truncate)

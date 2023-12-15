@@ -130,8 +130,9 @@ vim.cmd [[autocmd FileType markdown.pandoc inoremap <buffer> <silent> @@ <Esc>:B
 
 -- toggle options
 map("n", "<leader>uw", function() util.toggle "wrap" end, { desc = "Toggle Word Wrap" })
-map("n", "<leader>i", util.toggle_spellcheck, { desc = "Toggle Spelling" })
-map("n", "<leader>.", util.toggle_diagnostics, { desc = "Toggle   Diagnostics" })
+map("n", "<leader>uh", function() util.inlay_hints() end, { desc = "Toggle Word Wrap" })
+map("n", "<leader>i", function() util.toggle_spellcheck() end, { desc = "Toggle Spelling" })
+map("n", "<leader>.", function() util.toggle_diagnostics() end, { desc = "Toggle   Diagnostics" })
 
 -- stylua: ignore start
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3

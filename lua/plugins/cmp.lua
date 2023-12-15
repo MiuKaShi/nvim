@@ -14,6 +14,7 @@ return {
         enable_autosnippets = true,
         store_selection_keys = "`",
         ext_opts = {
+          [types.insertNode] = { active = { virt_text = { { "●", "Boolean" } } } },
           [types.choiceNode] = { active = { virt_text = { { "↺", "markdownBold" } } } },
         },
       }

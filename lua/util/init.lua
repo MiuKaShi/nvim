@@ -243,6 +243,14 @@ function M.toggle(option, silent, values)
   end
 end
 
+-- toggle inlay hints
+function M.inlay_hints(buf, value)
+	if value == nil then
+		value = not vim.lsp.inlay_hint.is_enabled(buf)
+	end
+	vim.lsp.inlay_hint.enable(buf, value)
+end
+
 -- toggle spellcheck
 function M.toggle_spellcheck()
   if vim.opt.spell:get() then
