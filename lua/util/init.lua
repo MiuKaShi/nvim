@@ -1,5 +1,4 @@
 local api = vim.api
-local Util = require "lazy.core.util"
 
 local M = {}
 
@@ -224,32 +223,13 @@ end
 
 ---@param silent boolean?
 ---@param values? {[1]:any, [2]:any}
-function M.toggle(option, silent, values)
-  if values then
-    if api.nvim_get_option_value(option, {}) == values[1] then
-      vim.opt_local[option] = values[2]
-    else
-      vim.opt_local[option] = values[1]
-    end
-    return Util.info("Set " .. option .. " to " .. api.nvim_get_option_value(option, {}), { title = "Option" })
-  end
-  vim.opt_local[option] = not api.nvim_get_option_value(option, {})
-  if not silent then
-    if api.nvim_get_option_value(option, {}) then
-      Util.info("Enabled " .. option, { title = "Option" })
-    else
-      Util.warn("Disabled " .. option, { title = "Option" })
-    end
-  end
-end
 
 -- toggle inlay hints
-function M.inlay_hints(buf, value)
-	if value == nil then
-		value = not vim.lsp.inlay_hint.is_enabled(buf)
-	end
-	vim.lsp.inlay_hint.enable(buf, value)
+function M.inlay_hints()
+  local inlay_hint_status = vim.lsp.inlay_hint.is_enabled(0)
+  vim.lsp.inlay_hint.enable(0, not inlay_hint_status)
 end
+
 
 -- toggle spellcheck
 function M.toggle_spellcheck()

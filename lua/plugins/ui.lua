@@ -286,7 +286,7 @@ return {
     event = { "WinNew" },
   },
 
-  -- prompt ui
+  -- prompt UI
   {
     "folke/noice.nvim",
     dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },

@@ -4,7 +4,6 @@ local options = {
     clipboard = "unnamedplus", -- 使用系统剪切板
     encoding = "utf-8",
     fileencoding = "utf-8",
-    termencoding = "utf-8",
     shell = "zsh",
 
     -- UI
@@ -33,7 +32,6 @@ local options = {
     formatoptions = "jcroqlnt", -- tcqj
 
     -- opt
-    go = "a",
     mouse = "a", --启用鼠标支持
     backspace = "indent,eol,start", -- 指定 backspace 可以删除的内容
     showmatch = true, --括号高亮

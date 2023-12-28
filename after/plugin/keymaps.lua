@@ -113,8 +113,6 @@ map("c", "<C-e>", "<End>")
 map("c", "<C-h>", "<BS>")
 map("c", "<C-k>", "<C-f>D<C-c><C-c>:<Up>")
 
--- better ~
-map("n", "~", function() util.toggleCase() end, { desc = "better ~" })
 
 -- quick comment
 map("n", "wq", function() util.duplicateAsComment() end, { desc = " Duplicate Line as Comment" })
@@ -129,11 +127,8 @@ map("", "gx", '<Cmd>call jobstart(["linkhandler", expand("<cfile>")], {"detach":
 vim.cmd [[autocmd FileType markdown.pandoc inoremap <buffer> <silent> @@ <Esc>:BibtexciteInsert<CR>]]
 
 -- toggle options
-map("n", "<leader>uw", function() util.toggle "wrap" end, { desc = "Toggle Word Wrap" })
-map("n", "<leader>uh", function() util.inlay_hints() end, { desc = "Toggle Word Wrap" })
+map("n", "~", function() util.toggleCase() end, { desc = "better ~" })
+map("n", "<leader>uw", "<cmd>set wrap!<CR>", { desc = "Toggle Word Wrap" })
+map("n", "<leader>uh", function() util.inlay_hints() end, { desc = "Toggle Inlay Hints" })
 map("n", "<leader>i", function() util.toggle_spellcheck() end, { desc = "Toggle Spelling" })
 map("n", "<leader>.", function() util.toggle_diagnostics() end, { desc = "Toggle   Diagnostics" })
-
--- stylua: ignore start
-local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-map("n","<leader>ul",function() util.toggle("conceallevel", false, { 0, conceallevel }) end,{ desc = "Toggle Conceal" })

@@ -67,22 +67,22 @@ return {
   -- diffview
   {
     "sindrets/diffview.nvim",
-		opts = {
-			enhanced_diff_hl = true,
-			hooks = {
-				diff_buf_read = function()
-					vim.opt_local.wrap = false
-					vim.opt_local.list = false
-					vim.opt_local.colorcolumn = "80"
-					vim.opt_local.winbar = ""
-				end,
-			},
-		},
+    opts = {
+      enhanced_diff_hl = true,
+      hooks = {
+        diff_buf_read = function()
+          vim.opt_local.wrap = false
+          vim.opt_local.list = false
+          vim.opt_local.colorcolumn = "80"
+          vim.opt_local.winbar = ""
+        end,
+      },
+    },
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
     keys = {
-			{ "<leader>gd", function() require("diffview").open({}) end, desc = "Open Diffview" },
-			{ "<leader>gc", "<Cmd>DiffviewClose<CR>", desc = "Close Diffview" },
-			{ "<leader>gf", "<Cmd>DiffviewFileHistory<CR>", mode = { 'n', 'x' }, desc = "Close Diffview" },
+      { "<leader>gd", function() require("diffview").open {} end, desc = "Open Diffview" },
+      { "<leader>gc", "<Cmd>DiffviewClose<CR>", desc = "Close Diffview" },
+      { "<leader>gf", "<Cmd>DiffviewFileHistory<CR>", mode = { "n", "x" }, desc = "Close Diffview" },
     },
   },
 
@@ -189,18 +189,24 @@ return {
     opts = {
       use_default_keymaps = false,
       cursor_behavior = "start", -- start|end|hold
-      max_join_length = 140,
+      max_join_length = 160,
       langs = {
-        -- python docstrings
-        python = {
-          string_content = {
-            both = { fallback = function() vim.cmd "normal! gww" end },
-          },
+        python = { -- python docstrings
+          string_content = { both = { fallback = function() vim.cmd "normal! gww" end } },
         },
         comment = {
-          source = {
-            both = { fallback = function() vim.cmd "normal! gww" end },
-          },
+          source = { both = { fallback = function() vim.cmd "normal! gww" end } },
+        },
+        html = {
+          fragment = { both = { fallback = function() vim.cmd "normal! gww" end } },
+        },
+        markdown_inline = {
+          inline = { both = { fallback = function() vim.cmd "normal! gww" end } },
+        },
+        markdown = {
+          element = { both = { fallback = function() vim.cmd "normal! gww" end } },
+          list_marker_minus = { both = { fallback = function() vim.cmd "normal! gww" end } },
+          list_marker_dot = { both = { fallback = function() vim.cmd "normal! gww" end } },
         },
       },
     },
@@ -257,7 +263,6 @@ return {
 
   --  高亮
   { "vim-pandoc/vim-pandoc-syntax", ft = "markdown.pandoc" },
-
 
   -- 中文格式化
   {
