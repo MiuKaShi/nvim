@@ -221,9 +221,6 @@ function M.setcmphl()
   -- vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = "#D8EEEB", bg = "#58B5A8" })
 end
 
----@param silent boolean?
----@param values? {[1]:any, [2]:any}
-
 -- toggle inlay hints
 function M.inlay_hints()
   local inlay_hint_status = vim.lsp.inlay_hint.is_enabled(0)
@@ -233,16 +230,16 @@ end
 
 -- toggle spellcheck
 function M.toggle_spellcheck()
-  if vim.opt.spell:get() then
-    vim.opt.spell = false
-  else
-    vim.opt.spell = true
+	if vim.wo.spell then
+		vim.wo.spell = false
+	else
+		vim.wo.spell = true
     vim.cmd [[
 		syn match myExCapitalWords +\<[A-Z]\w*\>+ contains=@NoSpell
 		syn match NoSpellAcronym '\<\(\u\|\d\)\{3,}s\?\>' contains=@NoSpell
 		syn match LowerCaseAtStart "^\s*\l" contains=@NoSpell
 		]]
-  end
+	end
 end
 
 -- toggle diagnostic
