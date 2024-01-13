@@ -276,7 +276,7 @@ return {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreview" },
     ft = { "markdown" },
-		build = "cd app && npm install && git restore .",
+    build = "cd app && npm install && git restore .",
     config = function()
       vim.cmd [[
 function! g:Open_browser(url)

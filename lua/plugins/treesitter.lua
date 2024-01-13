@@ -53,7 +53,7 @@ return {
           "latex",
           "markdown",
         },
-        -- additional_vim_regex_highlighting = { "markdown" },
+        -- additional_vim_regex_highlighting = { "org" },
       },
       autopairs = { enable = true },
       incremental_selection = {
@@ -109,26 +109,26 @@ return {
   --text context
   {
     "nvim-treesitter/nvim-treesitter-context",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		event = "VeryLazy",
-		keys = {
-			{
-				"gk",
-				function() require("treesitter-context").go_to_context() end,
-				desc = " Goto Context",
-			},
-			{ "<leader>ot", vim.cmd.TSContextToggle, desc = " Treesitter Context" },
-		},
-		opts = {
-			max_lines = 4,
-			multiline_threshold = 1, -- only show 1 line per context
-		},
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    event = "VeryLazy",
+    keys = {
+      {
+        "gk",
+        function() require("treesitter-context").go_to_context() end,
+        desc = " Goto Context",
+      },
+      { "<leader>ot", vim.cmd.TSContextToggle, desc = " Treesitter Context" },
+    },
+    opts = {
+      max_lines = 4,
+      multiline_threshold = 1, -- only show 1 line per context
+    },
   },
 
   -- tons of text objects
   {
     "chrisgrieser/nvim-various-textobjs",
-		keys = {
+    keys = {
 			-- stylua: ignore start
 			{ "iv", "<cmd>lua require('various-textobjs').value('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner value" },
 			{ "av", "<cmd>lua require('various-textobjs').value('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer value" },
@@ -176,8 +176,8 @@ return {
 			-- shell
 			{ "i|", "<cmd>lua require('various-textobjs').shellPipe('inner')<CR>", mode = { "x", "o" }, ft = "sh", desc = "󱡔 inner pipe" },
 			{ "a|", "<cmd>lua require('various-textobjs').shellPipe('outer')<CR>", mode = { "x", "o" }, ft = "sh", desc = "󱡔 outer pipe" },
-			-- stylua: ignore end
-		},
+      -- stylua: ignore end
+    },
   },
 
   -- {

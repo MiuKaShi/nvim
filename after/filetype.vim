@@ -13,4 +13,10 @@ augroup filetypedetect
   au BufRead,BufNewFile *.isy set filetype=xml
   au BufRead,BufNewFile *.zsh set filetype=sh
   au BufRead,BufNewFile *.rasi set filetype=css
+	au BufRead,BufNewFile *.log set filetype=log
+	au BufRead,BufNewFile *_log set filetype=log
+	au BufRead,BufNewFile *.LOG set filetype=log
+	au BufRead,BufNewFile *_LOG set filetype=log
+	au BufRead,BufNewFile *.org set filetype=org
+	au BufNewFile,BufRead *.el set filetype=elisp
 augroup END
