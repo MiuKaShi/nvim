@@ -3,7 +3,7 @@ local g = vim.g
 -- REMOTE CONTROL
 -- nvim server (RPC) to remote control neovide instances
 -- https://neovim.io/doc/user/remote.html
-vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, 400)
+vim.defer_fn(function() vim.fn.serverstart "/tmp/nvim_server.pipe" end, 400)
 --------------------------------------------------------------------------------
 
 -- SIZE & FONT
@@ -29,6 +29,18 @@ g.neovide_hide_mouse_when_typing = true
 -- Window Appearance
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
 g.neovide_scroll_animation_length = 1
+
+-- Helper function for transparency formatting
+local alpha = function() return string.format("%x", math.floor(255 * (vim.g.transparency or 0.8))) end
+g.neovide_transparency = 0.65
+g.transparency = 0.65
+g.neovide_background_color = "#0f1117" .. alpha()
+
+
+---- The following should enable floating window transparency --------------------------------------
+g.neovide_window_floating_blur = 0.65
+g.neovide_window_floating_opacity = 0
+g.neovide_floating_blur = 0.65
 
 --------------------------------------------------------------------------------
 -- CURSOR
