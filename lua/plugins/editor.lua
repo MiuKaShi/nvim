@@ -142,6 +142,10 @@ return {
       vim.g.matchup_transmute_enabled = 1
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
     end,
+		keys = {
+			{ "m", "<Plug>(matchup-%)", desc = "Goto Matching Bracket" },
+		},
+		dependencies = "nvim-treesitter/nvim-treesitter",
     config = function() vim.cmd "highlight MatchParen gui=italic,bold guifg=#cc241d guibg=#689d6a" end,
   },
 

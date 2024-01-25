@@ -15,13 +15,13 @@ return {
         vim.fn.sign_define(sign_name, { texthl = sign_name, text = icon, numhl = "" })
       end
 
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "single",
-      })
+      --vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+      --border = "single",
+      --})
 
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = "single",
-      })
+      --vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+      --border = "single",
+      --})
 
       -- diagnostic keymaps
       vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
@@ -123,7 +123,7 @@ return {
   --   cmd = "Lspsaga",
   -- -- stylua: ignore
   -- keys = {
-  -- 	{ "gh", function() require("lspsaga.finder"):new({}) end, silent = true, desc = "Lsp Finder" }
+  --    { "gh", function() require("lspsaga.finder"):new({}) end, silent = true, desc = "Lsp Finder" }
   -- },
   -- },
 
@@ -193,23 +193,28 @@ return {
       lsp = { auto_attach = true },
     },
     keys = {
-			-- stylua: ignore
+            -- stylua: ignore
       { "<leader>n", function() require("nvim-navbuddy").open() end, desc = "Navigator" },
     },
   },
 
-  { -- signature hints
+  -- signature hints
+  {
     "ray-x/lsp_signature.nvim",
-    -- loading on `require` or InsertEnter ignores the config, so loading on LspAttach
     event = "LspAttach",
+    dependencies = "folke/noice.nvim",
     opts = {
+      noice = true, -- render via noice.nvim
+      hint_prefix = "󰏪 ",
+      hint_scheme = "@variable.parameter", -- highlight group
+      hint_inline = function() return vim.lsp.inlay_hint ~= nil end,
       floating_window = false,
-      hint_prefix = "󰘎 ",
-      hint_scheme = "NonText", -- = highlight group
+      always_trigger = true,
     },
   },
 
-  { -- better LSP variable-rename
+  -- better LSP variable-rename
+  {
     "smjonas/inc-rename.nvim",
     event = "CmdlineEnter", -- loading with `cmd = "IncRename` does not work with incremental preview
     opts = {
@@ -227,4 +232,44 @@ return {
     "nvimtools/none-ls.nvim",
     config = function() require "plugins.lsp.null-ls" end,
   },
+
+  -- counts of functions
+  {
+    "Wansmer/symbol-usage.nvim",
+    event = (vim.fn.has "nvim-0.10.0" == 1 and "LspAttach" or "BufReadPre"), -- TODO
+    opts = {
+      hl = { link = "NonText" },
+      vt_position = "end_of_line",
+      request_pending_text = false, -- no "Loading…" PENDING https://github.com/Wansmer/symbol-usage.nvim/issues/24
+      references = { enabled = true, include_declaration = false },
+      definition = { enabled = false },
+      implementation = { enabled = false },
+      -- available symbolkinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
+      kinds = {
+        vim.lsp.protocol.SymbolKind.Function,
+        vim.lsp.protocol.SymbolKind.Method,
+        vim.lsp.protocol.SymbolKind.Object,
+      },
+      text_format = function(symbol)
+        if symbol.references == 0 then return "" end
+        return "🌿 " .. symbol.references
+      end,
+    },
+  },
+  -- add ignore-comments & lookup rules
+  -- {
+  --   "chrisgrieser/nvim-rulebook",
+  --   keys = {
+  --     {
+  --       "<leader>rl",
+  --       function() require("rulebook").lookupRule() end,
+  --       desc = " Lookup Rule",
+  --     },
+  --     {
+  --       "<leader>rg",
+  --       function() require("rulebook").ignoreRule() end,
+  --       desc = "󰅜 Ignore Rule",
+  --     },
+  --   },
+  -- },
 }

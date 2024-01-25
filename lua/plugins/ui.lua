@@ -243,10 +243,10 @@ return {
     },
     init = function()
       vim.cmd [[
- 	 	 	 	 hi HlSearchFloat guibg=None guifg=green gui=underline
- 	 	 	 	 hi HlSearchLensNear guibg=None guifg=red gui=italic
- 	 	 	 	 hi HlSearchLens guibg=None guifg=green gui=underline
-			]]
+                 hi HlSearchFloat guibg=None guifg=green gui=underline
+                 hi HlSearchLensNear guibg=None guifg=red gui=italic
+                 hi HlSearchLens guibg=None guifg=green gui=underline
+            ]]
     end,
     opts = {
       nearest_only = true,
@@ -291,72 +291,93 @@ return {
     "folke/noice.nvim",
     dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
     event = "VeryLazy",
-    init = function()
-			-- stylua: ignore
-			vim.keymap.set("n", "<Esc>", function() vim.cmd.Noice("dismiss") end, { desc = "󰎟 Clear Notifications" })
-    end,
     opts = {
       routes = {
-        { filter = { event = "msg_show", find = "B written$" }, view = "mini" },
+        -- FIX jedi bug https://github.com/pappasam/jedi-language-server/issues/296
+        { filter = { event = "msg_show", find = "^}$" }, skip = true },
+        -- redirect to popup when message is long
+        { filter = { min_height = 10 }, view = "popup" },
+        -- write/deletion messages
+        { filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
+        { filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
+        { filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
+        -- unneeded info on search patterns
+        { filter = { event = "msg_show", find = "^[/?]." }, skip = true },
+        { filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
+        -- Word added to spellfile via `zg`
+        { filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
+        -- Diagnostics
+        {
+          filter = { event = "msg_show", find = "No more valid diagnostics to move to" },
+          view = "mini",
+        },
+        -- :make
+        { filter = { event = "msg_show", find = "^:!make" }, skip = true },
+        { filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
         -- nvim-early-retirement
-        { filter = { event = "notify", find = "^Auto%-Closing Buffer:" }, view = "mini" },
+        { filter = { event = "notify", find = "^Auto%-closing " }, view = "mini" },
+        -- E211 no longer needed, since early-retirement closes deleted buffers
+        { filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
         -- nvim-treesitter
         { filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
-        -- unneeded info on search patterns
-        { filter = { event = "msg_show", find = "^/." }, skip = true },
-        { filter = { event = "msg_show", find = "^?." }, skip = true },
-        { filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
-        -- redirect to split
-        { filter = { event = "msg_show", min_height = 10 }, view = "split" },
+        { filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
       },
       cmdline = {
-        view = "cmdline",
+        view = "cmdline", -- cmdline|cmdline_popup
         format = {
-          search_down = { icon = "  " },
-          cmdline = { icon = " " },
-          IncRename = {
-            pattern = "^:IncRename ",
-            icon = " ",
-            conceal = true,
-            opts = {
-              border = { style = "single" },
-              relative = "cursor",
-              size = { width = 30 }, -- `max_width` does not work, so fixed value
-              position = { row = -3, col = 0 },
-            },
-          },
+          search_down = { icon = "  ", view = "cmdline" }, -- FIX needs to be set explicitly
+          cmdline = { view = "cmdline_popup" },
+          lua = { view = "cmdline_popup" },
+          help = { view = "cmdline_popup" },
         },
       },
       views = {
-        mini = { timeout = 3000 },
+        cmdline_popup = {
+          border = { style = "single" },
+        },
+        mini = {
+          timeout = 3000,
+          zindex = 10, -- lower, so it does not cover nvim-notify
+          position = { col = -3 }, -- to the left to avoid collision with scrollbar
+          format = { "{title} ", "{message}" }, -- leave out "{level}"
+        },
         hover = {
           border = { style = "single" },
           size = { max_width = 80 },
-          win_options = { scrolloff = 4 },
+          win_options = { scrolloff = 4, wrap = true },
+        },
+        popup = {
+          border = { style = "single" },
+          size = { width = 90, height = 25 },
+          win_options = { scrolloff = 8, wrap = true },
+          close = { keys = { "q" } },
         },
         split = {
           enter = true,
-          size = "40%",
+          size = "50%",
           close = { keys = { "q" } },
-          win_options = { scrolloff = 2 },
+          win_options = { scrolloff = 6 },
         },
       },
+
       commands = {
+        -- options for `:Noice history`
         history = {
           view = "split",
           filter_opts = { reverse = true }, -- show newest entries first
-          opts = { enter = true },
+          -- https://github.com/folke/noice.nvim#-formatting
+          opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
+        },
+        last = {
+          view = "popup",
+          -- https://github.com/folke/noice.nvim#-formatting
+          opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
         },
       },
-
-      -- DISABLED, since conflicts with existing plugins I prefer to use
-      popupmenu = { backend = "cmp" }, -- replace with nvim-cmp, since more sources
-      messages = { view_search = false }, -- replaced by nvim-hlslens
       lsp = {
-        progress = { enabled = false }, -- replaced with nvim-dr-lsp
+        progress = { enabled = false },
         signature = { enabled = false }, -- replaced with lsp_signature.nvim
-
-        -- ENABLED features
+        hover = { enabled = true },
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,

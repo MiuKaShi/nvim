@@ -11,7 +11,7 @@ M.setup = function(on_attach, capabilities)
     settings = {
       matlab = {
         indexWorkspace = false,
-        installPath = "/home/miuka/.local/MATLAB/R2024a",
+        installPath = "/home/miuka/.local/MATLAB/R2023b",
         matlabConnectionTiming = "onStart",
         telemetry = true,
       },

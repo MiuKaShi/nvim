@@ -14,7 +14,7 @@ local mh_style = {
   filetypes = { "matlab" },
   generator_opts = {
     command = "/home/miuka/.local/bin/mh_style",
-    args = { "--input-encoding=utf-8", "--fix", "$FILENAME" },
+    args = { "--input-encoding=utf-8", "--fix", "--brief", "$FILENAME" },
     to_temp_file = true,
   },
   factory = helpers.formatter_factory,
@@ -99,6 +99,9 @@ local sources = {
   --diagnostics
   -- MATLAB
   -- diagnostics.mlint,
+  diagnostics.mlint.with {
+    command = "/home/miuka/.local/MATLAB/R2023b/bin/glnxa64/mlint",
+  },
   helpers.make_builtin(mh_style),
 
   -- markdown
