@@ -62,11 +62,12 @@ require("lazy").setup {
   },
 }
 
--- 5s after startup, notify if there many plugin updates
-vim.defer_fn(function()
+local function checkForPluginUpdates()
   if not require("lazy.status").has_updates() then return end
-  local threshold = 15
+  local threshold = 20
   local numberOfUpdates = tonumber(require("lazy.status").updates():match "%d+")
   if numberOfUpdates < threshold then return end
   vim.notify(("󱧕 %s plugin updates"):format(numberOfUpdates), vim.log.levels.INFO, { title = "Lazy" })
-end, 5000)
+end
+
+vim.defer_fn(checkForPluginUpdates, 5000)

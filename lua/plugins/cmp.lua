@@ -139,16 +139,16 @@ return {
             item.kind = cmp_kinds[item.kind]
             -- Source menu
             item.menu = ({
-              buffer = "[Text]",
-              copilot = "[Cop]",
-              nvim_lsp = "[LSP]",
-              path = "[Path]",
-              cmdline = "[Cmd]",
-              luasnip = "[Snip]",
-              cmp_matlab = "[MATLAB]",
-              look = "[Dict]",
-              -- rg = '[RG]',
-              -- neorg  = '[Norg]',
+              buffer = "Text",
+              copilot = "Cop",
+              nvim_lsp = "LSP",
+              path = "Path",
+              cmdline = "Cmd",
+              luasnip = "Snip",
+              cmp_matlab = "MATLAB",
+              look = "Dict",
+              -- rg = 'RG',
+              -- neorg  = 'Norg',
             })[entry.source.name]
             return item
           end,
