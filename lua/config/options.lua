@@ -89,8 +89,6 @@ local options = {
   },
 
   g = {
-    mapleader = " ",
-    maplocalleader = " ",
     highlighturl_enabled = true, -- highlight URLs
     transparent_nvim = true, -- Set true to transparent
   },

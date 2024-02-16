@@ -129,6 +129,30 @@ function M.duplicateAsComment()
   vim.api.nvim_win_set_cursor(0, { ln + 1, col })
 end
 
+-- https://jupytext.readthedocs.io/en/latest/formats-scripts.html#the-percent-format
+function M.insertDoublePercentCom()
+	if vim.bo.commentstring == "" then return end
+	local curLine = vim.api.nvim_get_current_line()
+	local doublePercentCom = vim.bo.commentstring:format("%%")
+	local ln = vim.api.nvim_win_get_cursor(0)[1]
+	if curLine == "" then
+		vim.api.nvim_set_current_line(doublePercentCom)
+		ln = ln - 1
+	else
+		vim.api.nvim_buf_set_lines(0, ln, ln, false, { doublePercentCom })
+	end
+	vim.api.nvim_buf_add_highlight(0, 0, "DiagnosticVirtualTextHint", ln, 0, -1)
+end
+
+function M.removeDoublePercentComs()
+	if vim.bo.commentstring == "" then return end
+	local cursorBefore = vim.api.nvim_win_get_cursor(0)
+	local doublePercentCom = vim.bo.commentstring:format("%%")
+	vim.cmd("% substitute/" .. doublePercentCom .. "//")
+	vim.api.nvim_win_set_cursor(0, cursorBefore)
+end
+
+
 -- word count
 function M.getwords()
   if vim.bo.filetype == "md" or vim.bo.filetype == "text" or vim.bo.filetype == "markdown.pandoc" then

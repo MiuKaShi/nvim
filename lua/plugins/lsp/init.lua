@@ -23,10 +23,6 @@ return {
       --border = "single",
       --})
 
-      -- diagnostic keymaps
-      vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
-      vim.keymap.set("n", "[e", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostics" })
-      vim.keymap.set("n", "]e", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostics" })
 
       -- diagnostics config
       vim.diagnostic.config {

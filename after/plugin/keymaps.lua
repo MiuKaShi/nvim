@@ -42,6 +42,16 @@ map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true
 map({ "n", "v", "o" }, "H", "^")
 map({ "n", "v", "o" }, "L", "$")
 
+-- diagnostics
+map("n", "gl", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
+map("n", "[e", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
+map("n", "]e", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
+
+-- quickfix
+map("n", "gq", vim.cmd.cnext, { desc = " Next Quickfix" })
+map("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
+map("n", "dQ", function() vim.cmd.cexpr "[]" end, { desc = " Clear Quickfix List" })
+
 -- paragraph-wise movement
 map({ "n", "x" }, "gk", "{gk")
 map({ "n", "x" }, "gj", "}gj")
@@ -108,14 +118,16 @@ map("x", "<Left>", [["zdh"zPgvhoho]])
 map("n", "<leader><leader>s", "<cmd>w ! sudo tee > /dev/null %<CR>") -- force save files
 
 -- command line mode
-map("c", "<C-a>", "<Home>")
-map("c", "<C-e>", "<End>")
-map("c", "<C-h>", "<BS>")
-map("c", "<C-k>", "<C-f>D<C-c><C-c>:<Up>")
-
+map({ "i", "c" }, "<C-a>", "<Home>")
+map({ "i", "c" }, "<C-e>", "<End>")
+map("c", "<BS>", function()
+  if vim.fn.getcmdline() ~= "" then return "<BS>" end
+end, { desc = "Restricted <BS>", expr = true })
 
 -- quick comment
 map("n", "wq", function() util.duplicateAsComment() end, { desc = " Duplicate Line as Comment" })
+map("n", "qn", function() util.insertDoublePercentCom() end, { desc = " Insert %% Comment" })
+map("n", "dN", function() util.removeDoublePercentComs() end, { desc = " Remove %% Comments" })
 
 -- flip word
 map("n", "<leader>t", function() require("util.flipper").flipWord() end, { desc = "switch common words" })

@@ -295,6 +295,8 @@ return {
       routes = {
         -- FIX jedi bug https://github.com/pappasam/jedi-language-server/issues/296
         { filter = { event = "msg_show", find = "^}$" }, skip = true },
+        -- FIX lsp signature bug
+        { filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
         -- redirect to popup when message is long
         { filter = { min_height = 10 }, view = "popup" },
         -- write/deletion messages
@@ -311,6 +313,8 @@ return {
           filter = { event = "msg_show", find = "No more valid diagnostics to move to" },
           view = "mini",
         },
+        -- code actions
+        { filter = { event = "notify", find = "No code actions available" }, view = "mini" },
         -- :make
         { filter = { event = "msg_show", find = "^:!make" }, skip = true },
         { filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
@@ -391,14 +395,14 @@ return {
   {
     "rcarriga/nvim-notify",
     opts = {
-      render = "minimal", -- minimal|default|compact
-      top_down = false,
-      max_width = 70,
-      max_height = 10,
+      render = "wrapped-compact", -- best for shorter max_width
+      max_width = 50,
       minimum_width = 15,
+      top_down = false,
       level = 0, -- minimum severity level to display (0 = display all)
-      timeout = 1500,
+      timeout = 6000,
       stages = "static",
+      icons = { ERROR = "", WARN = "", INFO = "", TRACE = "", DEBUG = "" },
       on_open = function(win)
         if not vim.api.nvim_win_is_valid(win) then return end
         vim.api.nvim_win_set_config(win, { border = "single" })
