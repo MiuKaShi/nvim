@@ -23,7 +23,6 @@ return {
       --border = "single",
       --})
 
-
       -- diagnostics config
       vim.diagnostic.config {
         update_in_insert = false,
@@ -189,7 +188,7 @@ return {
       lsp = { auto_attach = true },
     },
     keys = {
-            -- stylua: ignore
+      -- stylua: ignore
       { "<leader>n", function() require("nvim-navbuddy").open() end, desc = "Navigator" },
     },
   },

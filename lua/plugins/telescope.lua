@@ -196,7 +196,7 @@ return {
           -- INFO workspace symbols are not working correctly in lua
           prompt_prefix = "󰒕 ",
           fname_width = 0, -- can see filename in preview title
-          symbol_width = 25,
+          symbol_width = 30,
           ignore_symbols = { "variable", "constant", "property" },
           ignore_folders = {
             "node_modules", -- ts/js

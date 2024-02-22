@@ -214,6 +214,7 @@ return {
   -- Enhanced matchparen
   {
     "utilyre/sentiment.nvim",
+    version = "*",
     event = "VeryLazy",
     opts = {
       included_buftypes = {

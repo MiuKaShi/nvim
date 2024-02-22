@@ -142,10 +142,10 @@ return {
       vim.g.matchup_transmute_enabled = 1
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
     end,
-		keys = {
-			{ "m", "<Plug>(matchup-%)", desc = "Goto Matching Bracket" },
-		},
-		dependencies = "nvim-treesitter/nvim-treesitter",
+    keys = {
+      { "m", "<Plug>(matchup-%)", desc = "Goto Matching Bracket" },
+    },
+    dependencies = "nvim-treesitter/nvim-treesitter",
     config = function() vim.cmd "highlight MatchParen gui=italic,bold guifg=#cc241d guibg=#689d6a" end,
   },
 
@@ -309,6 +309,8 @@ endfunction
   -- obsidian
   {
     "epwalsh/obsidian.nvim",
+    version = "*",
+    dependencies = { "nvim-lua/plenary.nvim" },
     event = { "BufReadPre /home/miuka/notes/**.md" },
     cmd = {
       "ObsidianFollowLink",
@@ -319,26 +321,47 @@ endfunction
       "ObsidianBacklinks",
       "ObsidianOpen",
       "ObsidianNew",
+      "ObsidianToday",
       "ObsidianLinkNew",
     },
     opts = {
       dir = "~/notes",
+      notes_subdir = "day_notes",
+      daily_notes = {
+        folder = "day_notes",
+        date_format = "%Y%m%d%H%M%S",
+        template = nil,
+      },
+      new_notes_location = "notes_subdir",
       completion = {
         nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
+        min_chars = 2,
       },
-      notes_subdir = "day_notes",
       note_id_func = function(title)
         local suffix = tostring(os.date "%Y%m%d%H%M%S")
         return suffix
       end,
+      disable_frontmatter = false,
+      note_frontmatter_func = function(note)
+        -- Add the title of the note as an alias.
+        if note.title then note:add_alias(note.title) end
+        local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+        if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+          for k, v in pairs(note.metadata) do
+            out[k] = v
+          end
+        end
+        return out
+      end,
       mappings = {},
     },
     keys = {
-      { "<leader>nj", "<CMD>ObsidianFollowLink<CR>", desc = "[O]bsidian [F]ollow [L]ink" },
-      { "<leader>nk", "<CMD>ObsidianBacklinks<CR>", desc = "[O]bsidian [B]acklinks" },
-      { "<leader>no", "<CMD>ObsidianOpen<CR>", desc = "[O]bsidian [O]pen" },
-      { "<leader>ns", "<CMD>ObsidianSearch<CR>", desc = "[O]bsidian [S]earch" },
-      { "<leader>nn", "<CMD>ObsidianNew<CR>", desc = "[O]bsidian [N]ew" },
+      { "<leader>nj", "<CMD>ObsidianFollowLink<CR>", desc = "Obsidian Follow Link" },
+      { "<leader>nk", "<CMD>ObsidianBacklinks<CR>", desc = "Obsidian Backlinks" },
+      { "<leader>no", "<CMD>ObsidianOpen<CR>", desc = "Obsidian Open" },
+      { "<leader>nt", "<CMD>ObsidianTags<CR>", desc = "Obsidian Tag" },
+      { "<leader>ns", "<CMD>ObsidianSearch<CR>", desc = "Obsidian Search" },
+      { "<leader>nn", "<CMD>ObsidianNew<CR>", desc = "Obsidian New" },
     },
   },
 
