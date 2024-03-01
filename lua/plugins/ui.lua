@@ -397,9 +397,10 @@ return {
     "rcarriga/nvim-notify",
     opts = {
       render = "wrapped-compact", -- best for shorter max_width
-      max_width = 50,
+      max_width = 30,
       minimum_width = 15,
       top_down = false,
+      fps = 5,
       level = 0, -- minimum severity level to display (0 = display all)
       timeout = 6000,
       stages = "static",
