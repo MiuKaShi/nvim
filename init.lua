@@ -20,4 +20,3 @@ require "config.lazy"
 
 -- load the colorscheme here
 vim.cmd.colorscheme "gruvbox"
-

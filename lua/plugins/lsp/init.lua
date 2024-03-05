@@ -225,7 +225,7 @@ return {
   -- none-ls
   {
     "nvimtools/none-ls.nvim",
-    commit = "bb680d7",
+    -- commit = "bb680d7",
     config = function() require "plugins.lsp.null-ls" end,
   },
 

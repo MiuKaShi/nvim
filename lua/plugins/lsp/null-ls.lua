@@ -65,8 +65,6 @@ local sources = {
       "--preserve-date",
     },
   },
-  -- Latex
-  formatting.latexindent,
   -- CMake
   formatting.cmake_format,
   -- Fortran

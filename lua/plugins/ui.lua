@@ -121,10 +121,24 @@ return {
   {
     "echasnovski/mini.hipatterns",
     event = "BufReadPre",
+    -- dependencies = { "echasnovski/mini.extra" },
+    init = function()
+      vim.cmd [[
+			hi! MiniHipatternsTodo guifg=#ffffff guibg=#7daea3 gui=italic
+			hi! MiniHipatternsFixme guifg=#ffffff guibg=#ea6962 gui=italic
+			hi! MiniHipatternsHack guifg=#ffffff guibg=#d8a657 gui=italic
+			hi! MiniHipatternsNote guifg=#ffffff guibg=#a9b665 gui=italic
+			]]
+    end,
     opts = function()
       local hi = require "mini.hipatterns"
+      -- local hi_words = require("mini.extra").gen_highlighter.words
       return {
         highlighters = {
+          --  fixme = hi_words({ "FIXME", "BUG", "ROBUSTNESS" }, "MiniHipatternsFixme"),
+          --  todo = hi_words({ "TODO", "Todo", "REVIEW", "INCOMPLETE" }, "MiniHipatternsTodo"),
+          --  hack = hi_words({ "HACK", "XXX" }, "MiniHipatternsHack"),
+          --  note = hi_words({ "NOTE", "INFO" }, "MiniHipatternsNote"),
           fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
           hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
           todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
