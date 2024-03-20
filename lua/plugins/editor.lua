@@ -443,7 +443,7 @@ endfunction
             return { "lsp", "indent" }
           end
         end,
-        close_fold_kinds = { "imports", "comment" },
+        close_fold_kinds_for_ft = { default = { "imports", "comment" } },
         open_fold_hl_timeout = 500,
         fold_virt_text_handler = foldTextFormatter,
       }
