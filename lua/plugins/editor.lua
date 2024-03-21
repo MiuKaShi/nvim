@@ -25,6 +25,36 @@ return {
     "stevearc/aerial.nvim",
     opts = {
       backends = { "lsp", "treesitter", "markdown", "man" },
+      icons = {
+        Array = "󰅨 ",
+        Boolean = " ",
+        Class = " ",
+        Constant = " ",
+        Constructor = " ",
+        Enum = " ",
+        EnumMember = " ",
+        Event = " ",
+        Field = " ",
+        File = " ",
+        Folder = " ",
+        Function = "󰡱 ",
+        Interface = " ",
+        Key = " ",
+        Method = " ",
+        Module = " ",
+        Number = "󰎠 ",
+        Null = "󰟢 ",
+        Object = " ",
+        Operator = " ",
+        Property = " ",
+        Reference = " ",
+        Struct = " ",
+        String = "󰅳 ",
+        TypeParameter = " ",
+        Unit = " ",
+        Value = " ",
+        Variable = " ",
+      },
       filter_kind = {
         "Array",
         "Boolean",
@@ -71,10 +101,10 @@ return {
       enhanced_diff_hl = true,
       hooks = {
         diff_buf_read = function()
-          vim.opt_local.wrap = false
-          vim.opt_local.list = false
-          vim.opt_local.colorcolumn = "80"
-          vim.opt_local.winbar = ""
+          vim.wo.wrap = false
+          vim.wo.list = false
+          vim.wo.colorcolumn = "80"
+          vim.wo.winbar = ""
         end,
       },
     },

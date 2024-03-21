@@ -74,7 +74,8 @@ return {
         require("plugins.lsp.servers." .. server).setup(on_attach, capabilities)
       end
       -- rime_ls server
-      require "plugins.lsp.servers.rimels"
+      -- require "plugins.lsp.servers.rimels"
+      require("plugins.lsp.servers.rimels").setup_rime()
     end,
   },
 
