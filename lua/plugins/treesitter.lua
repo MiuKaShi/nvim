@@ -15,10 +15,11 @@ vim.treesitter.query.add_directive("offset-first-n!", offset_first_n, true)
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    -- commit = "19ac9e8",
+    main = "nvim-treesitter",
     build = ":TSUpdate",
     dependencies = { "hiphish/rainbow-delimiters.nvim" },
-    event = "BufReadPre",
-    main = "nvim-treesitter",
+    event = "VeryLazy",
     cmd = { "TSUpdateSync" },
     opts = {
       ensure_installed = {

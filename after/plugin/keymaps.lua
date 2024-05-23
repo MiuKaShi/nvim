@@ -40,7 +40,7 @@ map({ "x" }, "p", "P", { silent = true })
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map({ "n", "v", "o" }, "H", "^")
-map({ "n", "v", "o" }, "L", "$")
+map({ "n", "v", "o" }, "L", "$zv")
 
 -- diagnostics
 map("n", "gl", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
@@ -141,6 +141,7 @@ vim.cmd [[autocmd FileType markdown.pandoc inoremap <buffer> <silent> @@ <Esc>:B
 -- toggle options
 map("n", "~", function() util.toggleCase() end, { desc = "better ~" })
 map("n", "<leader>uw", "<cmd>set wrap!<CR>", { desc = "Toggle Word Wrap" })
-map("n", "<leader>uh", function() util.inlay_hints() end, { desc = "Toggle Inlay Hints" })
+map("n", "<leader>uh", function() util.toggle_inlay_hints() end, { desc = "Toggle Inlay Hints" })
+map("n", "<leader>uT", function() util.toggle_ts_highlight() end, { desc = "Toggle Treesitter Highlight" })
 map("n", "<leader>i", function() util.toggle_spellcheck() end, { desc = "Toggle Spelling" })
 map("n", "<leader>.", function() util.toggle_diagnostics() end, { desc = "Toggle   Diagnostics" })

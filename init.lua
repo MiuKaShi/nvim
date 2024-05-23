@@ -18,5 +18,7 @@ vim.g.maplocalleader = " "
 require "config.options"
 require "config.lazy"
 
+vim.lsp.set_log_level "debug"
+
 -- load the colorscheme here
 vim.cmd.colorscheme "gruvbox"

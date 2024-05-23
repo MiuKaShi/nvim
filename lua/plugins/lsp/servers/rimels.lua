@@ -41,6 +41,10 @@ A language server for librime
   -- if cmp_ok then capabilities = cmp_nvim_lsp.default_capabilities(capabilities) end
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
+  -- 检查log目录
+  local rime_log_dir = vim.fn.expand "~/.local/share/rime-ls/log"
+  if vim.fn.isdirectory(rime_log_dir) == 0 then vim.fn.mkdir(rime_log_dir, "p") end
+
   require("lspconfig").rime_ls.setup {
     name = "rime_ls",
     -- cmd = vim.lsp.rpc.connect("127.0.0.1", 9257),
@@ -49,7 +53,7 @@ A language server for librime
       enabled = vim.g.rime_enabled,
       shared_data_dir = vim.fn.expand "/usr/share/rime-data", -- rime 公共目录
       user_data_dir = vim.fn.expand "~/.local/share/rime-ls", -- 指定用户目录, 最好新建一个
-      log_dir = vim.fn.expand "~/.local/share/rime-ls/log", -- 日志目录
+      log_dir = rime_log_dir, -- 日志目录,必须存在文件
       trigger_characters = {}, -- 为空表示全局开启
       override_server_capabilities = { trigger_characters = {} },
       always_incomplete = false, -- [since v0.2.3] true 强制补全永远刷新整个列表，而不是使用过滤

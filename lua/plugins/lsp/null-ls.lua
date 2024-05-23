@@ -98,7 +98,7 @@ local sources = {
   -- MATLAB
   -- diagnostics.mlint,
   diagnostics.mlint.with {
-    command = "/home/miuka/.local/MATLAB/R2023b/bin/glnxa64/mlint",
+    command = "/home/miuka/.local/MATLAB/R2024a/bin/glnxa64/mlint",
   },
   helpers.make_builtin(mh_style),
 

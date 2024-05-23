@@ -25,10 +25,14 @@ require("lazy").setup {
   ui = {
     wrap = true,
     border = "single",
-    size = {
-      width = 0.98, -- fixes breaking in word
-      height = 1,
-    },
+    pills = false,
+    size = { width = 0.85, height = 0.85 },
+    backdrop = 70, -- 0-100 opacity
+  },
+  checker = {
+    enabled = true,
+    notify = false,
+    frequency = 60 * 60 * 24, -- 1 day
   },
   change_detection = { enabled = false },
   performance = {

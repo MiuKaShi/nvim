@@ -108,14 +108,15 @@ function M.toggleCase()
   }
   local col = vim.fn.col "." -- fn.col correctly considers tab-indentation
   local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
-  local isLetter = charUnderCursor:lower() ~= charUnderCursor:upper() -- so it works with diacritics
-  if isLetter then
-    normal "~h"
-    return
-  end
+  local changeTo
   for left, right in pairs(toggleSigns) do
-    if charUnderCursor == left then normal("r" .. right) end
-    if charUnderCursor == right then normal("r" .. left) end
+    if charUnderCursor == left then changeTo = right end
+    if charUnderCursor == right then changeTo = left end
+  end
+  if changeTo then
+    normal("r" .. changeTo)
+  else
+    normal "v~" -- (`v~` instead of `~h` so dot-repetition doesn't move cursor)
   end
 end
 
@@ -131,27 +132,26 @@ end
 
 -- https://jupytext.readthedocs.io/en/latest/formats-scripts.html#the-percent-format
 function M.insertDoublePercentCom()
-	if vim.bo.commentstring == "" then return end
-	local curLine = vim.api.nvim_get_current_line()
-	local doublePercentCom = vim.bo.commentstring:format("%%")
-	local ln = vim.api.nvim_win_get_cursor(0)[1]
-	if curLine == "" then
-		vim.api.nvim_set_current_line(doublePercentCom)
-		ln = ln - 1
-	else
-		vim.api.nvim_buf_set_lines(0, ln, ln, false, { doublePercentCom })
-	end
-	vim.api.nvim_buf_add_highlight(0, 0, "DiagnosticVirtualTextHint", ln, 0, -1)
+  if vim.bo.commentstring == "" then return end
+  local curLine = vim.api.nvim_get_current_line()
+  local doublePercentCom = vim.bo.commentstring:format "%%"
+  local ln = vim.api.nvim_win_get_cursor(0)[1]
+  if curLine == "" then
+    vim.api.nvim_set_current_line(doublePercentCom)
+    ln = ln - 1
+  else
+    vim.api.nvim_buf_set_lines(0, ln, ln, false, { doublePercentCom })
+  end
+  vim.api.nvim_buf_add_highlight(0, 0, "DiagnosticVirtualTextHint", ln, 0, -1)
 end
 
 function M.removeDoublePercentComs()
-	if vim.bo.commentstring == "" then return end
-	local cursorBefore = vim.api.nvim_win_get_cursor(0)
-	local doublePercentCom = vim.bo.commentstring:format("%%")
-	vim.cmd("% substitute/" .. doublePercentCom .. "//")
-	vim.api.nvim_win_set_cursor(0, cursorBefore)
+  if vim.bo.commentstring == "" then return end
+  local cursorBefore = vim.api.nvim_win_get_cursor(0)
+  local doublePercentCom = vim.bo.commentstring:format "%%"
+  vim.cmd("% substitute/" .. doublePercentCom .. "//")
+  vim.api.nvim_win_set_cursor(0, cursorBefore)
 end
-
 
 -- word count
 function M.getwords()
@@ -246,24 +246,31 @@ function M.setcmphl()
 end
 
 -- toggle inlay hints
-function M.inlay_hints()
-  local inlay_hint_status = vim.lsp.inlay_hint.is_enabled(0)
-  vim.lsp.inlay_hint.enable(0, not inlay_hint_status)
-end
-
+function M.toggle_inlay_hints() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end
 
 -- toggle spellcheck
 function M.toggle_spellcheck()
-	if vim.wo.spell then
-		vim.wo.spell = false
-	else
-		vim.wo.spell = true
+  if vim.wo.spell then
+    vim.wo.spell = false
+  else
+    vim.wo.spell = true
     vim.cmd [[
 		syn match myExCapitalWords +\<[A-Z]\w*\>+ contains=@NoSpell
 		syn match NoSpellAcronym '\<\(\u\|\d\)\{3,}s\?\>' contains=@NoSpell
 		syn match LowerCaseAtStart "^\s*\l" contains=@NoSpell
 		]]
-	end
+  end
+end
+
+-- toggle treesitter highlight
+function M.toggle_ts_highlight()
+  if vim.b.ts_highlight then
+    vim.treesitter.stop()
+    vim.notify("Disabled treesitter highlight", vim.log.levels.WARN)
+  else
+    vim.treesitter.start()
+    vim.notify("Enabled treesitter highlight", vim.log.levels.INFO)
+  end
 end
 
 -- toggle diagnostic

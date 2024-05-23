@@ -291,7 +291,8 @@ return {
   -- markdown
   {
     "MiuKaShi/markdowny.nvim",
-    ft = { "markdown" },
+    ft = { "markdown.pandoc" },
+    lazy = true,
     config = function() require("markdowny").setup { remove_keymaps = true } end,
   },
 
@@ -308,8 +309,8 @@ return {
   -- Markdown预览
   {
     "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreview" },
-    ft = { "markdown" },
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    lazy = false,
     build = "cd app && npm install && git restore .",
     config = function()
       vim.cmd [[
@@ -435,12 +436,36 @@ endfunction
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
     event = "VimEnter",
-    config = function()
-      local foldIcon = ""
-      local hlgroup = "NonText"
-      local function foldTextFormatter(virtText, lnum, endLnum, width, truncate)
+		-- stylua: ignore
+    keys = {
+			{ "zr", function() require("ufo").openFoldsExceptKinds { "comment", "imports" } end, desc = " 󱃄 Open All Regular Folds" },
+      { "zm", function() require("ufo").closeAllFolds() end, silent = true, desc = "󰘖 󱃄 Close All Folds" },
+			{ "zk", function() require("ufo").goPreviousClosedFold() end, desc = " 󱃄 Goto Prev Fold" },
+			{ "zj", function() require("ufo").goNextClosedFold() end, desc = " 󱃄 Goto Next Fold" },
+			{ "z1", function() require("ufo").closeFoldsWith(1) end, desc = "󰘖 󱃄 Close Level 1 Folds" },
+			{ "z2", function() require("ufo").closeFoldsWith(2) end, desc = "󰘖 󱃄 Close Level 2 Folds" },
+			{ "z3", function() require("ufo").closeFoldsWith(3) end, desc = "󰘖 󱃄 Close Level 3 Folds" },
+			{ "z4", function() require("ufo").closeFoldsWith(4) end, desc = "󰘖 󱃄 Close Level 4 Folds" },
+    },
+    opts = {
+      provider_selector = function(_, ft, _)
+        -- INFO some filetypes only allow indent, some only LSP, some only
+        -- treesitter. However, ufo only accepts two kinds as priority,
+        -- therefore making this function necessary :/
+        local lspWithOutFolding = { "markdown", "sh", "css", "html", "python" }
+        if vim.tbl_contains(lspWithOutFolding, ft) then return { "treesitter", "indent" } end
+        return { "lsp", "indent" }
+      end,
+      -- when opening the buffer, close these fold kinds
+      -- use `:UfoInspect` to get available fold kinds from the LSP
+      close_fold_kinds_for_ft = {
+        default = { "imports", "comment" },
+      },
+      open_fold_hl_timeout = 800,
+      fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
+        local hlgroup = "NonText"
         local newVirtText = {}
-        local suffix = "  " .. foldIcon .. "  " .. tostring(endLnum - lnum)
+        local suffix = "   " .. tostring(endLnum - lnum)
         local sufWidth = vim.fn.strdisplaywidth(suffix)
         local targetWidth = width - sufWidth
         local curWidth = 0
@@ -463,31 +488,7 @@ endfunction
         end
         table.insert(newVirtText, { suffix, hlgroup })
         return newVirtText
-      end
-      require("ufo").setup {
-        provider_selector = function(_, ft, _)
-          local lspWithOutFolding = { "markdown", "bash", "sh", "bash", "zsh", "css", "html", "python" }
-          if vim.tbl_contains(lspWithOutFolding, ft) then
-            return { "treesitter", "indent" }
-          else
-            return { "lsp", "indent" }
-          end
-        end,
-        close_fold_kinds_for_ft = { default = { "imports", "comment" } },
-        open_fold_hl_timeout = 500,
-        fold_virt_text_handler = foldTextFormatter,
-      }
-    end,
-		-- stylua: ignore
-    keys = {
-			{ "zr", function() require("ufo").openFoldsExceptKinds { "comment", "imports" } end, desc = " 󱃄 Open All Regular Folds" },
-      { "zm", function() require("ufo").closeAllFolds() end, silent = true, desc = "󰘖 󱃄 Close All Folds" },
-			{ "zk", function() require("ufo").goPreviousClosedFold() end, desc = " 󱃄 Goto Prev Fold" },
-			{ "zj", function() require("ufo").goNextClosedFold() end, desc = " 󱃄 Goto Next Fold" },
-			{ "z1", function() require("ufo").closeFoldsWith(1) end, desc = "󰘖 󱃄 Close Level 1 Folds" },
-			{ "z2", function() require("ufo").closeFoldsWith(2) end, desc = "󰘖 󱃄 Close Level 2 Folds" },
-			{ "z3", function() require("ufo").closeFoldsWith(3) end, desc = "󰘖 󱃄 Close Level 3 Folds" },
-			{ "z4", function() require("ufo").closeFoldsWith(4) end, desc = "󰘖 󱃄 Close Level 4 Folds" },
+      end,
     },
   },
 
