@@ -160,16 +160,11 @@ return {
   -- logical match
   {
     "andymass/vim-matchup",
-    ft = {
-      "sh",
-      "c",
-      "cpp",
-      "matlab",
-      "lua",
-    },
+    event = { "BufReadPost" },
     init = function()
       vim.g.matchup_surround_enabled = 1
       vim.g.matchup_transmute_enabled = 1
+      vim.g.matchup_matchparen_deferred = 1 --improves performance a bit
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
     end,
     keys = {

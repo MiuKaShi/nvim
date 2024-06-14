@@ -112,13 +112,12 @@ return {
           ["<S-Tab>"] = cmp.config.disable,
         },
         performance = {
-          -- PERF lower values for lag-free performance
-          -- default values: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18
-          -- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L425
+          -- all reduced, defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18-L25
           debounce = 30,
-          throttle = 20,
-          fetching_timeout = 250,
-          async_budget = 0.8,
+          throttle = 15,
+          fetching_timeout = 300,
+          confirm_resolve_timeout = 40,
+          async_budget = 0.5,
           max_view_entries = 100,
         },
         formatting = {
@@ -157,10 +156,9 @@ return {
             cmp.config.compare.offset,
             cmp.config.compare.recently_used,
             require("cmp-under-comparator").under,
-            cmp.config.compare.exact,
             cmp.config.compare.score,
+            cmp.config.compare.exact,
             cmp.config.compare.kind,
-            cmp.config.compare.sort_text,
             cmp.config.compare.length,
             cmp.config.compare.order,
           },

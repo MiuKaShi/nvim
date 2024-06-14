@@ -74,4 +74,4 @@ local function checkForPluginUpdates()
   vim.notify(("󱧕 %s plugin updates"):format(numberOfUpdates), vim.log.levels.INFO, { title = "Lazy" })
 end
 
-vim.defer_fn(checkForPluginUpdates, 5000)
+vim.defer_fn(checkForPluginUpdates, 10000)

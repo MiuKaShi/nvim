@@ -12,8 +12,12 @@ map("n", "?", function() vim.cmd.Telescope "keymaps" end, { desc = "⌨️  S
 -------------
 -- insert mode
 -------------
-map("i", "<C-a>", "<Esc>0i")
-map("i", "<C-e>", "<End>")
+map({ "i", "c" }, "<C-a>", "<Home>")
+map({ "i", "c" }, "<C-e>", "<End>")
+map("n", "i", function()
+  if vim.api.nvim_get_current_line():find "^%s*$" then return [["_cc]] end
+  return "i"
+end, { desc = "correctly indented i", expr = true })
 
 -- better i
 map("n", "i", function()
@@ -25,8 +29,11 @@ end, { expr = true, desc = "better i" })
 -- normal mode
 -------------
 
---Delete char at EoL
-map("n", "X", "mz$x`z")
+-- Delete trailing character
+map("n", "X", function()
+  local updatedLine = vim.api.nvim_get_current_line():gsub("%s+$", ""):sub(1, -2)
+  vim.api.nvim_set_current_line(updatedLine)
+end, { desc = "󱎘 Delete char at EoL" })
 
 -- buffer
 map("n", "<A-Tab>", "<cmd>bnext<CR>") -- buffer 跳转
@@ -39,7 +46,8 @@ map({ "x" }, "p", "P", { silent = true })
 -- better movement
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-map({ "n", "v", "o" }, "H", "^")
+map({ "n", "x" }, "H", "0^")
+map("o", "H", "^")
 map({ "n", "v", "o" }, "L", "$zv")
 
 -- diagnostics
@@ -84,9 +92,7 @@ map("i", ";", ";<c-g>u")
 map("i", "=", "=<c-g>u")
 
 -- toggle comment
-
-vim.cmd [[nmap <leader>; gcc<esc>]]
-vim.cmd [[vmap <leader>; gcc<esc>]]
+map({ "n", "v" }, "<Leader>;", "gcc", { desc = " Comment Line", remap = true })
 
 -- resize split window
 map("n", "<Leader>=", "10<C-w>+")
@@ -97,17 +103,25 @@ map("n", "<Leader>]", "10<C-w>>")
 -- Whitespace control
 map("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
 map("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
-map("n", "<Tab>", ">>", { desc = "󰉶 indent" })
-map("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
-map("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
-map("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
-map("n", "X", "mz$x`z", { desc = "Delete char at EoL" })
+map("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
+map("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
+map("x", "<Tab>", ">gv", { desc = "󰉶 indent selection" })
+map("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
+map("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
+map("i", "<Tab>", "<C-t>", { desc = "󰉵 indent line" })
+
+-- Close all top-level folds
+map("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
 -- Fix spelling
-map("n", "z.", "1z=")
+map("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 -- Move selection right
 map("x", "<Right>", [["zx"zpgvlolo]])
 map("x", "<Left>", [["zdh"zPgvhoho]])
+
+-- Merging
+map({ "n", "x" }, "M", "J", { desc = "󰗈 Merge up" })
+map({ "n", "x" }, "gm", '"zdd"zpkJ', { desc = "󰗈 Merge down" })
 
 -- vim-bookmarks
 -- map("n", "mm", "<cmd>BookmarkToggle<CR>")
@@ -138,6 +152,21 @@ map("", "gx", '<Cmd>call jobstart(["linkhandler", expand("<cfile>")], {"detach":
 -- bib
 vim.cmd [[autocmd FileType markdown.pandoc inoremap <buffer> <silent> @@ <Esc>:BibtexciteInsert<CR>]]
 
+-- emulate some basic commands from `vim-abolish`
+map("n", "crt", "mzguiwgUl`z", { desc = "󰬴 Titlecase" })
+map("n", "cru", "mzgUiw`z", { desc = "󰬴 UPPERCASE" })
+map("n", "crl", "mzguiw`z", { desc = "󰬴 lowercase" })
+
+-- LINE & CHARACTER MOVEMENT
+map("n", "<Down>", [[<cmd>. move +2<CR>==]], { desc = "󰜮 Move line down" })
+map("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Move line up" })
+map("n", "<Right>", [["zx"zp]], { desc = "➡️ Move char right" })
+map("n", "<Left>", [["zdh"zph]], { desc = "⬅ Move char left" })
+map("x", "<Down>", [[:move '>+1<CR>gv=gv]], { desc = "󰜮 Move selection down", silent = true })
+map("x", "<Up>", [[:move '<-2<CR>gv=gv]], { desc = "󰜷 Move selection up", silent = true })
+map("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
+map("x", "<left>", [["zdh"zpgvhoho]], { desc = "⬅ Move selection left" })
+
 -- toggle options
 map("n", "~", function() util.toggleCase() end, { desc = "better ~" })
 map("n", "<leader>uw", "<cmd>set wrap!<CR>", { desc = "Toggle Word Wrap" })
@@ -145,3 +174,13 @@ map("n", "<leader>uh", function() util.toggle_inlay_hints() end, { desc = "Toggl
 map("n", "<leader>uT", function() util.toggle_ts_highlight() end, { desc = "Toggle Treesitter Highlight" })
 map("n", "<leader>i", function() util.toggle_spellcheck() end, { desc = "Toggle Spelling" })
 map("n", "<leader>.", function() util.toggle_diagnostics() end, { desc = "Toggle   Diagnostics" })
+map("n", "<leader>ul", function()
+  vim.notify("LSP Restarting…", vim.log.levels.WARN)
+  vim.cmd.LspRestart()
+end, { desc = "󰒕 :LspRestart" })
+map(
+	"n",
+	"<leader>uo",
+	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end,
+	{ desc = "󰈉 Conceal" }
+)
