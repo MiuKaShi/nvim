@@ -198,16 +198,14 @@ return {
 
   -- search/replace in multiple files
   {
-    "windwp/nvim-spectre",
-    cmd = { "Spectre" },
-    opts = { open_cmd = "noswapfile vnew" },
+    "MagicDuck/grug-far.nvim",
+    cmd = { "GrugFar" },
 		-- stylua: ignore
     keys = {
-      { "<leader>sp", function() require("spectre").toggle() end, desc = "Toggle Spectre" },
-      { "<leader>sw", function() require("spectre").open_visual { select_word = true } end, desc = "Search current word" },
+      { "<leader>sr", ":GrugFar<CR>", desc = "Grug Far" },
     },
+    config = function() require("grug-far").setup {} end,
   },
-
   -- split-join lines
   {
     "Wansmer/treesj",
@@ -239,13 +237,6 @@ return {
         },
       },
     },
-  },
-
-  -- Multiple replacements
-  {
-    "AckslD/muren.nvim",
-    config = true,
-    cmd = { "MurenToggle", "MurenFresh", "MurenUnique" },
   },
 
   -- word
