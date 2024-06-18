@@ -246,7 +246,9 @@ function M.setcmphl()
 end
 
 -- toggle inlay hints
-function M.toggle_inlay_hints() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end
+function M.toggle_inlay_hints()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
+end
 
 -- toggle spellcheck
 function M.toggle_spellcheck()
