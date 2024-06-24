@@ -83,6 +83,11 @@ local sources = {
       "0",
     },
   },
+  -- glsl
+  formatting.clang_format.with {
+    extra_args = { "-style=chromium" },
+    filetypes = { "glsl" },
+  },
   -- python
   formatting.black.with { extra_args = { "--fast" } },
   -- lua

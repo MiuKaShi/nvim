@@ -19,4 +19,9 @@ augroup filetypedetect
 	au BufRead,BufNewFile *_LOG set filetype=log
 	au BufRead,BufNewFile *.org set filetype=org
 	au BufNewFile,BufRead *.el set filetype=elisp
+	au BufNewFile,BufRead *.geo set filetype=glsl
+	au BufNewFile,BufRead *.frag set filetype=glsl
+	au BufNewFile,BufRead *.vert set filetype=glsl
+	au BufNewFile,BufRead *.step set filetype=ruby
+	au BufNewFile,BufRead *.stl set filetype=stl
 augroup END

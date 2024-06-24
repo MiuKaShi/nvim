@@ -43,6 +43,8 @@ return {
         "yaml",
         "julia",
         "matlab",
+        "glsl",
+        "ruby",
         "regex",
         "vim",
         "vimdoc",
