@@ -160,7 +160,7 @@ return {
   -- logical match
   {
     "andymass/vim-matchup",
-    event = { "BufReadPost" },
+    event = { "BufReadPost", "InsertEnter", "CmdlineEnter" },
     init = function()
       vim.g.matchup_surround_enabled = 1
       vim.g.matchup_transmute_enabled = 1

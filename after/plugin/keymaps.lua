@@ -111,7 +111,7 @@ map("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
 map("i", "<Tab>", "<C-t>", { desc = "󰉵 indent line" })
 
 -- Close all top-level folds
-map("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
+map("n", "zx", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
 -- Fix spelling
 map("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
