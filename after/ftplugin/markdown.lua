@@ -61,7 +61,8 @@ hi pandocStrongInEmphasis gui=bold,italic cterm=bold,italic
 hi pandocEmphasisInStrong gui=bold,italic cterm=bold,italic
 ]]
 
--- 保存时自动格式化 markdown
+-- 保存时自动使用panguALL格式化 markdown
+vim.g["pangu_rule_trailing_whitespace"] = 0 -- 不删除行尾空格
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*.markdown", "*.md", "*.text", "*.txt" },
   command = "PanguAll",
