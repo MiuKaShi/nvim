@@ -37,7 +37,7 @@ function M.on_attach(client, buffer)
   end
 
   -- auto format
-  M.autoformat = false
+  M.autoformat = true
   vim.api.nvim_create_user_command("AutoFormatToggle", function()
     M.autoformat = not M.autoformat
     vim.notify("Format on save: " .. tostring(M.autoformat))

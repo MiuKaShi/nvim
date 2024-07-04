@@ -68,8 +68,8 @@ return {
         "julials",
         "texlab",
         "yamlls",
-        "matlabls",
         "foamls",
+        -- "matlabls",
       } do
         require("plugins.lsp.servers." .. server).setup(on_attach, capabilities)
       end
@@ -227,7 +227,10 @@ return {
   {
     "nvimtools/none-ls.nvim",
     -- commit = "bb680d7",
-    config = function() require "plugins.lsp.null-ls" end,
+    dependencies = {
+      "nvimtools/none-ls-extras.nvim",
+    },
+    config = function() require "plugins.lsp.none-ls" end,
   },
 
   -- counts of functions

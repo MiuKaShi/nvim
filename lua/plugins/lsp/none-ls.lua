@@ -21,7 +21,7 @@ local mh_style = {
 }
 
 local sources = {
-  --formatter
+  ---------formatter------------------
   -- css json markdown yaml
   formatting.prettierd.with {
     filetypes = { "css", "json", "yaml", "markdown" },
@@ -85,7 +85,7 @@ local sources = {
   },
   -- glsl
   formatting.clang_format.with {
-    extra_args = { "-style=chromium" },
+    extra_args = { "-style=file:" .. vim.fn.expand "~/.config/clangd/.clang-format" },
     filetypes = { "glsl" },
   },
   -- python
@@ -98,15 +98,16 @@ local sources = {
     extra_args = { "-i", "4", "-ci", "-bn" },
     extra_filetypes = { "zsh" },
   },
+  -- LaTex
+  -- require "none-ls.formatting.latexindent",
+  -- Matlab
+  helpers.make_builtin(mh_style),
 
-  --diagnostics
+  ---------diagnostics----------------
   -- MATLAB
-  -- diagnostics.mlint,
   diagnostics.mlint.with {
     command = "/home/miuka/.local/MATLAB/R2024a/bin/glnxa64/mlint",
   },
-  helpers.make_builtin(mh_style),
-
   -- markdown
   diagnostics.markdownlint.with {
     args = {
