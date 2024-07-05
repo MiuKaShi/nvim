@@ -84,10 +84,10 @@ local sources = {
     },
   },
   -- glsl
-  formatting.clang_format.with {
-    extra_args = { "-style=file:" .. vim.fn.expand "~/.config/clangd/.clang-format" },
-    filetypes = { "glsl" },
-  },
+  -- formatting.clang_format.with {
+  --   extra_args = { "-style=file:" .. vim.fn.expand "~/.config/clangd/.clang-format" },
+  --   filetypes = { "glsl" },
+  -- },
   -- python
   formatting.black.with { extra_args = { "--fast" } },
   -- lua

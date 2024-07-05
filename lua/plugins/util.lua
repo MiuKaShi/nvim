@@ -54,7 +54,7 @@ return {
     end,
     keys = {
       { "<leader>e", function() require("util").togglecli "lf" end, desc = "lf manager" },
-      { "<leader>g", function() require("util").togglecli "lazygit" end, desc = "git lazygit" },
+      { "<leader>gg", function() require("util").togglecli "lazygit" end, desc = "git lazygit" },
     },
   },
 }

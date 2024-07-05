@@ -219,11 +219,11 @@ return {
           cmp_sources.matlab,
           cmp_sources.buffer,
           cmp_sources.path,
-          -- cmp_sources.nvim_lsp,
+          cmp_sources.nvim_lsp,
           -- cmp_sources.copilot,
         },
       })
-      cmp.setup.filetype({ "julia", "python", "lua" }, {
+      cmp.setup.filetype({ "julia", "python", "lua", "glsl" }, {
         sources = cmp.config.sources {
           cmp_sources.nvim_lsp,
           cmp_sources.buffer,

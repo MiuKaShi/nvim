@@ -48,7 +48,7 @@ A language server for librime
   require("lspconfig").rime_ls.setup {
     name = "rime_ls",
     -- cmd = vim.lsp.rpc.connect("127.0.0.1", 9257),
-    filetypes = { "markdown.pandoc", "tex", "matlab" },
+    filetypes = { "markdown.pandoc", "tex", "matlab", "glsl", "c", "python" },
     init_options = {
       enabled = vim.g.rime_enabled,
       shared_data_dir = vim.fn.expand "/usr/share/rime-data", -- rime 公共目录

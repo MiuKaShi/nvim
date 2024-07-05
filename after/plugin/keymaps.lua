@@ -50,11 +50,6 @@ map({ "n", "x" }, "H", "0^")
 map("o", "H", "^")
 map({ "n", "v", "o" }, "L", "$zv")
 
--- diagnostics
-map("n", "gl", vim.diagnostic.open_float, { desc = "Float Diagnostics" })
-map("n", "[e", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
-map("n", "]e", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
-
 -- quickfix
 map("n", "gq", vim.cmd.cnext, { desc = " Next Quickfix" })
 map("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
@@ -179,8 +174,8 @@ map("n", "<leader>ul", function()
   vim.cmd.LspRestart()
 end, { desc = "󰒕 :LspRestart" })
 map(
-	"n",
-	"<leader>uo",
-	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end,
-	{ desc = "󰈉 Conceal" }
+  "n",
+  "<leader>uo",
+  function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end,
+  { desc = "󰈉 Conceal" }
 )

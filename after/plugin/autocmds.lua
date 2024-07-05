@@ -111,6 +111,14 @@ autocmd("CursorMoved", {
   desc = "Auto hlsearch",
 })
 
+-- 保存时自动使用panguALL格式化 markdown
+vim.g["pangu_rule_trailing_whitespace"] = 0 -- 不删除行尾空格
+autocmd("BufWritePre", {
+  pattern = { "*.markdown", "*.md", "*.geo", "*.text", "*.txt" },
+  command = "PanguAll",
+  -- nested = true,
+})
+
 -- For colorscheme that don't support transparency. Set transparent_nvim value in options.lua.
 if vim.g.transparent_nvim then
   autocmd("ColorScheme", {
