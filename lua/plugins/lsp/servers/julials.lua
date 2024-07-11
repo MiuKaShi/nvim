@@ -11,7 +11,6 @@ M.setup = function(on_attach, capabilities)
       julia = {
         usePlotPane = false,
         symbolCacheDownload = false,
-        enableCrashReporter = false,
         runtimeCompletions = true,
         singleFileSupport = true,
         useRevise = true,
@@ -21,7 +20,6 @@ M.setup = function(on_attach, capabilities)
           iter = true,
           lazy = true,
           modname = true,
-          pirates = true,
         },
       },
     },
