@@ -19,9 +19,6 @@ require("lazy").setup {
     { import = "themes" },
   },
   defaults = { lazy = true, version = false }, -- always use the latest git commit
-  diff = {
-    cmd = "diffview.nvim",
-  },
   ui = {
     wrap = true,
     border = "single",

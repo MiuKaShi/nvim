@@ -4,7 +4,6 @@ return {
   cmd = "Telescope",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope-frecency.nvim",
     "tsakirist/telescope-lazy.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
@@ -229,15 +228,6 @@ return {
           override_file_sorter = true, -- override the file sorter
           case_mode = "smart_case", -- or "ignore_case" or "respect_case"
         },
-        frecency = {
-          theme = themes.get_dropdown,
-          show_scores = true,
-          workspaces = {
-            ["conf"] = home .. "/.config",
-            ["note"] = home .. "/notes",
-            ["proj"] = home .. "/Projects",
-          },
-        },
         file_browser = { theme = "ivy", hijack_netrw = true },
         ["ui-select"] = { themes.get_dropdown() },
       },
@@ -247,7 +237,6 @@ return {
     local extns = {
       "fzf",
       "file_browser",
-      "frecency",
       "ui-select",
     }
     for _, extn in ipairs(extns) do
@@ -265,10 +254,5 @@ return {
     { "<leader>fh", function() vim.cmd.Telescope "help_tags" end, desc = "Help Tags" },
     { "<C-f>", function() vim.cmd.Telescope "current_buffer_fuzzy_find" end, desc = "Search current buffer" },
     { "z=", function() vim.cmd.Telescope "spell_suggest" end, desc = "󰓆 Spell Suggest" },
-    {
-      "<leader>fr",
-      function() require("telescope").extensions.frecency.frecency() end,
-      desc = "Recent Files",
-    },
   },
 }

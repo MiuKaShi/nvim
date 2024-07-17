@@ -35,7 +35,6 @@ Here, I list the plugins in each lua file
 ### telescope.lua
 
 - telescope.nvim: search tool
-- telescope-frecency.nvim: search frequenct files
 - telescope-lazy.nvim: lazy startup
 - telescope-file-browser.nvim: file browser function
 - telescope-ui-select.nvim: telescope custom UI
@@ -46,7 +45,6 @@ Here, I list the plugins in each lua file
 - ultimate-autopair.nvim: autopair bracket
 - nvim-surround: change surround
 - aerial.nvim: outline symbols
-- diffview.nvim: diff view
 - flash.nvim: Enhanced f, t, F, T motions
 - align.nvim: align text
 - vim-matchup: navigate and highlight logical words

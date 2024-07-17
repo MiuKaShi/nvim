@@ -94,28 +94,6 @@ return {
     },
   },
 
-  -- diffview
-  {
-    "sindrets/diffview.nvim",
-    opts = {
-      enhanced_diff_hl = true,
-      hooks = {
-        diff_buf_read = function()
-          vim.wo.wrap = false
-          vim.wo.list = false
-          vim.wo.colorcolumn = "80"
-          vim.wo.winbar = ""
-        end,
-      },
-    },
-    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
-    keys = {
-      { "<leader>gd", function() require("diffview").open {} end, desc = "Open Diffview" },
-      { "<leader>gc", "<Cmd>DiffviewClose<CR>", desc = "Close Diffview" },
-      { "<leader>gf", "<Cmd>DiffviewFileHistory<CR>", mode = { "n", "x" }, desc = "Close Diffview" },
-    },
-  },
-
   -- Navigate with search labels
   {
     "folke/flash.nvim",

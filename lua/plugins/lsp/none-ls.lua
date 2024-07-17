@@ -22,7 +22,7 @@ local mh_style = {
 
 local sources = {
   ---------formatter------------------
-  -- css json markdown yaml
+  -- css/json/markdown/yaml
   formatting.prettierd.with {
     filetypes = { "css", "json", "yaml", "markdown" },
     extra_args = {
@@ -34,7 +34,7 @@ local sources = {
   },
   -- code blocks
   formatting.cbfmt,
-  -- c
+  -- c/cpp/cxx
   formatting.astyle.with {
     filetypes = { "c", "cpp", "cxx" },
     extra_args = {
