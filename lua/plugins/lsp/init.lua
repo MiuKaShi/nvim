@@ -78,7 +78,7 @@ return {
         "texlab",
         "yamlls",
         "foamls",
-        -- "matlabls",
+        "matlabls",
       } do
         require("plugins.lsp.servers." .. server).setup(on_attach, capabilities)
       end
