@@ -36,7 +36,11 @@ local sources = {
   formatting.cbfmt,
   -- c/cpp/cxx
   formatting.astyle.with {
-    filetypes = { "c", "cpp", "cxx" },
+    filetypes = {
+      -- "c",
+      -- "cpp",
+      "cxx",
+    },
     extra_args = {
       "--style=kr",
       "--indent=spaces=4",

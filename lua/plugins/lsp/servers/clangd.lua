@@ -26,8 +26,8 @@ M.setup = function(on_attach, capabilities)
       "--pretty",
     },
     filetypes = {
-      "c",
-      "cpp",
+      -- "c",
+      -- "cpp",
       "objc",
       "objcpp",
     },
