@@ -171,11 +171,10 @@ return {
         next = "j",
       },
     },
-
     cmd = "TroubleToggle",
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "trouble toggle" },
-      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "trouble toggle quickfix" },
+      { "<leader>tt", "<cmd>TroubleToggle<cr>", desc = "trouble toggle" },
+      { "<leader>tq", "<cmd>TroubleToggle quickfix<cr>", desc = "trouble toggle quickfix" },
     },
   },
 
