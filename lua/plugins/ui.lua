@@ -161,6 +161,28 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
+      -- lightweight replacement for fidget.nvim
+      local progressText = ""
+      local function lspProgress() return progressText end
+      vim.api.nvim_create_autocmd("LspProgress", {
+        callback = function(ctx)
+          local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
+          local progress = ctx.data.params.value ---@type {percentage: number, title?: string, kind: string, message?: string}
+          if not (progress and progress.title) then return end
+
+          local icons = { "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
+          local idx = math.floor(#icons / 2)
+          if progress.percentage == 0 then idx = 1 end
+          if progress.percentage and progress.percentage > 0 then
+            idx = math.ceil(progress.percentage / 100 * #icons)
+          end
+          local firstWord = vim.split(progress.title, " ")[1]:lower()
+
+          local text = table.concat({ icons[idx], clientName, firstWord }, " ")
+          progressText = progress.kind == "end" and "" or text
+        end,
+      })
+      --------------------------------------------------------------------------------
       local util = require "util"
       local icons = require("config").icons
       local theme = require("config").themes.lualine
@@ -174,7 +196,15 @@ return {
             winbar = {},
             statusline = { "alpha", "dashboard" },
           },
-          ignore_focus = {},
+          ignore_focus = {
+            "DressingInput",
+            "DressingSelect",
+            "lspinfo",
+            "TelescopePrompt",
+            "checkhealth",
+            "noice",
+            "lazy",
+          },
           always_divide_middle = true,
           globalstatus = false,
           refresh = {
@@ -185,14 +215,24 @@ return {
         },
         sections = {
           lualine_a = { "mode" },
-          lualine_b = { "branch" },
+          lualine_b = {
+            {
+              "branch",
+              cond = function()
+                -- only if not on main or master
+                local curBranch = require("lualine.components.branch.git_branch").get_branch()
+                return curBranch ~= "main" and curBranch ~= "master" and vim.bo.buftype == ""
+              end,
+            },
+          },
           lualine_c = {
+            { lspProgress },
             {
               "diagnostics",
               symbols = {
                 error = icons.diagnostics.Error,
-                warn = icons.diagnostics.Warn,
-                info = icons.diagnostics.Info,
+                warn = icons.diagnostics.Warning,
+                info = icons.diagnostics.Information,
                 hint = icons.diagnostics.Hint,
               },
             },
@@ -213,10 +253,14 @@ return {
           },
           lualine_y = {
             util.getwords,
-            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+            { -- line count
+              function() return vim.api.nvim_buf_line_count(0) .. " ☰" end,
+              cond = function() return vim.bo.buftype == "" end,
+            },
             { "location", padding = { left = 0, right = 1 } },
           },
           lualine_z = {
+            { "selectioncount", fmt = function(str) return str ~= "" and "码" .. str or "" end },
             function() return "󱑍 " .. os.date "%R" end,
           },
         },

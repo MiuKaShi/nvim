@@ -14,12 +14,6 @@ function M.format()
   }
 end
 
-function M.diagnostic_goto(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function() go { severity = severity } end
-end
-
 function M.on_attach(client, buffer)
   vim.bo[buffer].omnifunc = "v:lua.vim.lsp.omnifunc"
   local keymaps = {
@@ -31,12 +25,8 @@ function M.on_attach(client, buffer)
     { "gr", ":IncRename ", method = "rename" },
     { "gD", vim.lsp.buf.declaration, method = "declaration" },
     { "<C-k>", vim.lsp.buf.signature_help, method = "signatureHelp" },
-    { "]d", M.diagnostic_goto(true), desc = "Next Diagnostic", method = "diagnostic" },
-    { "[d", M.diagnostic_goto(false), desc = "Prev Diagnostic", method = "diagnostic" },
-    { "]e", M.diagnostic_goto(true, "ERROR"), desc = "Next Error", method = "diagnostic" },
-    { "[e", M.diagnostic_goto(false, "ERROR"), desc = "Prev Error", method = "diagnostic" },
-    { "]w", M.diagnostic_goto(true, "WARN"), desc = "Next Warning", method = "diagnostic" },
-    { "[w", M.diagnostic_goto(false, "WARN"), desc = "Prev Warning", method = "diagnostic" },
+    { "]d", vim.diagnostic.goto_next, desc = "Next Diagnostic", method = "diagnostic" },
+    { "[d", vim.diagnostic.goto_prev, desc = "Prev Diagnostic", method = "diagnostic" },
     { "<leader>bf", M.format, desc = "Format", method = "formatting" },
     { "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, method = "codeAction" },
     { "<leader>bf", M.format, desc = "Format Range", mode = "v", method = "rangeFormatting" },

@@ -9,13 +9,6 @@ return {
     },
     config = function()
       -- diagnostics signs
-      local icon = require("config").icons
-      local lsp_signs = {
-        ERROR = icon.diagnostics.Error,
-        WARN = icon.diagnostics.Warning,
-        INFO = icon.diagnostics.Information,
-        HINT = icon.diagnostics.Hint,
-      }
       --vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
       --border = "single",
       --})
@@ -25,15 +18,16 @@ return {
       --})
 
       -- diagnostics config
+      local icons = require("config").icons
       vim.diagnostic.config {
         update_in_insert = false,
         underline = true,
         signs = {
           text = {
-            lsp_signs.ERROR,
-            lsp_signs.WARN,
-            lsp_signs.INFO,
-            lsp_signs.HINT,
+            [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = icons.diagnostics.Warning,
+            [vim.diagnostic.severity.INFO] = icons.diagnostics.Information,
+            [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
           },
         },
         severity_sort = true,
