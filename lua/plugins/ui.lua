@@ -327,6 +327,7 @@ return {
   -- emphasized undo/redos
   {
     "tzachar/highlight-undo.nvim",
+    commit = "1ea1c79",
     event = "VeryLazy",
     keys = { "u", "U" },
     opts = {
