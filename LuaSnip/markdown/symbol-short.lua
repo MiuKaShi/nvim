@@ -27,13 +27,10 @@ return {
   s({ trig = "c.", wordTrig = false, snippetType = "autosnippet" }, {
     t "\\cdot",
   }, { condition = markdown.in_mathzone }),
-  s({ trig = "\\cdot.", wordTrig = false, snippetType = "autosnippet" }, {
+  s({ trig = "cdots", wordTrig = false, snippetType = "autosnippet" }, {
     t "\\cdots",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "v.", wordTrig = false, snippetType = "autosnippet" }, {
-    t "\\vdot",
-  }, { condition = markdown.in_mathzone }),
-  s({ trig = "\\vdot.", wordTrig = false, snippetType = "autosnippet" }, {
     t "\\vdots",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "iff", wordTrig = false, snippetType = "autosnippet" }, {
@@ -75,12 +72,6 @@ return {
   s({ trig = "<<", wordTrig = false, snippetType = "autosnippet" }, {
     t "\\ll",
   }, { condition = markdown.in_mathzone }),
-  s({ trig = "cp", wordTrig = false, snippetType = "autosnippet" }, {
-    t "\\cp",
-  }, { condition = markdown.in_mathzone }),
-  s({ trig = "get", wordTrig = false, snippetType = "autosnippet" }, {
-    t "\\get",
-  }, { condition = markdown.in_mathzone }),
   s({ trig = "to", wordTrig = false, snippetType = "autosnippet" }, {
     t "\\to",
   }, { condition = markdown.in_mathzone }),
@@ -91,10 +82,7 @@ return {
     t "\\setminus",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "||", wordTrig = false, snippetType = "autosnippet" }, {
-    t "\\mid",
-  }, { condition = markdown.in_mathzone }),
-  s({ trig = "mid", wordTrig = false, snippetType = "autosnippet" }, {
-    t "\\mid",
+    t "\\mid ",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "nmid", wordTrig = false, snippetType = "autosnippet" }, {
     t "\\nmid",
@@ -156,8 +144,11 @@ return {
   s({ trig = "ss", wordTrig = false, snippetType = "autosnippet" }, {
     t "\\star",
   }, { condition = markdown.in_mathzone }),
+  s({ trig = "oxx", wordTrig = false, snippetType = "autosnippet" }, {
+    t " \\otimes ",
+  }, { condition = markdown.in_mathzone }),
   s({ trig = "xx", wordTrig = false, snippetType = "autosnippet" }, {
-    t "\\times",
+    t " \\times ",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "=>", wordTrig = false, snippetType = "autosnippet" }, {
     t "\\implies",
@@ -177,7 +168,10 @@ return {
   s({ trig = "hbar", wordTrig = false, snippetType = "autosnippet" }, {
     t "\\hbar",
   }, { condition = markdown.in_mathzone }),
-  s({ trig = "ns", wordTrig = false, snippetType = "autosnippet" }, {
+  s({ trig = "bar", wordTrig = false, snippetType = "autosnippet" }, {
+    t "\\bar",
+  }, { condition = markdown.in_mathzone }),
+  s({ trig = "uns", wordTrig = false, snippetType = "autosnippet" }, {
     t "\\unlhd",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "eqv", wordTrig = false, snippetType = "autosnippet" }, {
@@ -189,10 +183,7 @@ return {
   s({ trig = "ell", wordTrig = false, snippetType = "autosnippet", priority = 2000 }, {
     t "\\ell",
   }, { condition = markdown.in_mathzone }),
-  s({ trig = "ot", wordTrig = false, snippetType = "autosnippet" }, {
-    t "\\otimes",
-  }, { condition = markdown.in_mathzone }),
-  s({ trig = "not", wordTrig = false, snippetType = "autosnippet", priority = 2000 }, {
+  s({ trig = "nn", wordTrig = false, snippetType = "autosnippet", priority = 2000 }, {
     t "\\not",
   }, { condition = markdown.in_mathzone }),
   s({ trig = "par", wordTrig = false, snippetType = "autosnippet", priority = 2000 }, {

@@ -84,66 +84,47 @@ return {
   s({ trig = "ii", snippetType = "autosnippet" }, fmta("$<>$", i(1)), { condition = markdown.in_text }),
   s({ trig = "dd", snippetType = "autosnippet" }, fmta("$$\n<>\n$$", i(1)), { condition = markdown.in_text }),
   s(
-    { trig = "ldd", name = "Align Math", snippetType = "autosnippet" },
+    { trig = "mll", name = "Align Math", snippetType = "autosnippet" },
     fmta(
       [[
-            <>
-            $$
             \begin{aligned}
                 <>
             \end{aligned}
-            $$
-            <>
             ]],
       {
-        f(function(_, snip) return snip.captures[1] end),
-        d(1, get_visual),
         i(0),
       }
     ),
-    { condition = markdown.in_text }
+    { condition = markdown.in_mathzone }
   ),
   s(
-    { trig = "cdd", name = "Cases Math", snippetType = "autosnippet" },
+    { trig = "mcc", name = "Cases Math", snippetType = "autosnippet" },
     fmta(
       [[
-            <>
-            $$
             \begin{cases}
                 <>
             \end{cases}
-            $$
-            <>
             ]],
       {
-        f(function(_, snip) return snip.captures[1] end),
-        d(1, get_visual),
         i(0),
       }
     ),
-    { condition = markdown.in_text }
+    { condition = markdown.in_mathzone }
   ),
   s(
-    { trig = "rdd", name = "Array Math", snippetType = "autosnippet" },
+    { trig = "maa", name = "Array Math", snippetType = "autosnippet" },
     fmta(
       [[
-            <>
-            $$
             \begin{array}{lcl}
                 <>
             \end{array}
-            $$
-            <>
             ]],
       {
-        f(function(_, snip) return snip.captures[1] end),
-        d(1, get_visual),
         i(0),
       }
     ),
-    { condition = markdown.in_text }
+    { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "ff", name = "Fraction", snippetType = "autosnippet" },
     fmta("\\frac{<>}{<>}", {
@@ -152,13 +133,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
-  s(
-    { trig = "`", name = "Prime", wordTrig = false, snippetType = "autosnippet" },
-    { t "'" },
-    { condition = markdown.in_mathzone }
-  ),
-
   s(
     { trig = "inti", name = "Indefinite Integral", snippetType = "autosnippet" },
     fmta("\\int <> \\,\\mathrm d<>", {
@@ -167,7 +141,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "intd", name = "Definite Integral", snippetType = "autosnippet" },
     fmta("\\int_{<>}^{<>} <> \\,\\mathrm d<>", {
@@ -178,25 +151,7 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   -- PREABMLE
-  s(
-    { trig = "dyy", name = "Derivative dy/dx", wordTrig = false, snippetType = "autosnippet" },
-    fmta("\\drv{d<>y}{dx<>}", {
-      i(1),
-      i(2),
-    }),
-    { condition = markdown.in_mathzone }
-  ),
-
-  s(
-    { trig = "dxx", name = "Derivative d/dx", wordTrig = false, snippetType = "autosnippet" },
-    fmta("\\drv{d}{dx} \\left( <> \\right)", {
-      d(1, get_visual),
-    }),
-    { condition = markdown.in_mathzone }
-  ),
-
   s(
     { trig = "mbs", name = "Multiply Both Sides by", snippetType = "autosnippet" },
     fmta("\\quad \\biggr| \\times <>", {
@@ -204,7 +159,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "box", name = "Boxed", snippetType = "autosnippet" },
     fmta("\\boxed{<>}", {
@@ -212,7 +166,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "ln", name = "Natural Logarithm", wordTrig = false, snippetType = "autosnippet" },
     fmta("\\ln{<>}", {
@@ -220,12 +173,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-  s(
-    { trig = "inf", name = "Infinity", snippetType = "autosnippet" },
-    { t "\\infty" },
-    { condition = markdown.in_mathzone }
-  ),
-
   s(
     { trig = "lim", name = "Limit", snippetType = "autosnippet" },
     fmta("\\lim_{<> \\to <>} <>", {
@@ -236,12 +183,6 @@ return {
     { condition = markdown.in_mathzone }
   ),
   s(
-    { trig = "imp", name = "Implies", snippetType = "autosnippet" },
-    { t "\\implies" },
-    { condition = markdown.in_mathzone }
-  ),
-
-  s(
     { trig = "aimp", name = "Annotated Implies", snippetType = "autosnippet" },
     fmta("\\xRightarrow[<>]{<>}", {
       i(1),
@@ -249,15 +190,13 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
-    { trig = "tek", name = "Text", snippetType = "autosnippet" },
+    { trig = "tt", name = "Text", snippetType = "autosnippet" },
     fmta("\\text{<>}", {
       d(1, get_visual),
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "aeq", name = "Annotated Equals Sign", snippetType = "autosnippet" },
     fmta("\\overset{<>}{=}", {
@@ -265,7 +204,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "inset", name = "In Set", snippetType = "autosnippet" },
     fmta("\\in \\mathbb{<>}", {
@@ -273,16 +211,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
-  s(
-    { trig = "(, )whr", name = "Where", wordTrig = false, regTrig = true, snippetType = "autosnippet" },
-    fmta("<>\\text{ where } <>", {
-      f(function(_, snip) return snip.captures[1] end),
-      i(0),
-    }),
-    { condition = markdown.in_mathzone }
-  ),
-
   s(
     { trig = "~", name = "Tilde", wordTrig = false, snippetType = "autosnippet" },
     fmta("\\tilde <>", {
@@ -290,7 +218,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "hat", name = "Hat", wordTrig = false, snippetType = "autosnippet" },
     fmta("\\hat <>", {
@@ -298,23 +225,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
-  s(
-    { trig = "pp", name = "Partial", wordTrig = false, snippetType = "autosnippet" },
-    fmta("\\partial <>", {
-      d(1, get_visual),
-    }),
-    { condition = markdown.in_mathzone }
-  ),
-
-  s(
-    { trig = "bar", name = "Bar", wordTrig = false, snippetType = "autosnippet" },
-    fmta("\\bar <>", {
-      d(1, get_visual),
-    }),
-    { condition = markdown.in_mathzone }
-  ),
-
   s(
     { trig = "tg", name = "Tag", snippetType = "autosnippet" },
     fmta("\\tag{<>}", {
@@ -322,27 +232,9 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "cnl", name = "Cancel", snippetType = "autosnippet" },
     fmta("\\cancel{<>}", {
-      d(1, get_visual),
-    }),
-    { condition = markdown.in_mathzone }
-  ),
-
-  s(
-    { trig = "tcnl", name = "Cancel to", snippetType = "autosnippet" },
-    fmta("\\cancelto{<>}{<>}", {
-      i(1),
-      d(2, get_visual),
-    }),
-    { condition = markdown.in_mathzone }
-  ),
-
-  s(
-    { trig = "cnot", name = "Not (crossed out)", snippetType = "autosnippet" },
-    fmta("\\centernot{<>}", {
       d(1, get_visual),
     }),
     { condition = markdown.in_mathzone }
@@ -354,7 +246,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "cos", name = "cos", snippetType = "autosnippet" },
     fmta("\\cos{<>}", {
@@ -362,7 +253,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "tan", name = "tan", snippetType = "autosnippet" },
     fmta("\\tan{<>}", {
@@ -370,7 +260,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "csc", name = "cosec", snippetType = "autosnippet" },
     fmta("\\csc{<>}", {
@@ -378,7 +267,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "sec", name = "sec", snippetType = "autosnippet" },
     fmta("\\sec{<>}", {
@@ -386,7 +274,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "cot", name = "cot", snippetType = "autosnippet" },
     fmta("\\cot{<>}", {
@@ -394,7 +281,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "asin", name = "arcsin", snippetType = "autosnippet" },
     fmta("\\arcsin{<>}", {
@@ -402,7 +288,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "acos", name = "arccos", snippetType = "autosnippet" },
     fmta("\\arccos{<>}", {
@@ -410,7 +295,6 @@ return {
     }),
     { condition = markdown.in_mathzone }
   ),
-
   s(
     { trig = "atan", name = "arctan", snippetType = "autosnippet" },
     fmta("\\arctan{<>}", {

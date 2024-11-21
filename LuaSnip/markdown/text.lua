@@ -71,7 +71,7 @@ return {
 
   :::
       ]],
-      { i(1)  }
+      { i(1) }
     )
   ),
   s(
@@ -143,7 +143,7 @@ return {
       { i(1) }
     )
   ),
-	s(
+  s(
     { trig = ";c", snippetType = "autosnippet", name = "Insert fenced code block" },
     fmta(
       [[
