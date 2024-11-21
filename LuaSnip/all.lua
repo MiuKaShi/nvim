@@ -15,6 +15,7 @@ return {
   s("date", f(function() return os.date "%Y-%m-%d" end)),
   s("time", p(os.date, "%T")),
   s("choicenode", c(1, { t "choice 1", t "choice 2", t "choice 3" })),
+  -- comments
   s({ trig = "todo", name = "TODO", dscr = "TODO:" }, {
     t("TODO(" .. username .. "): "),
     p(os.date, "%Y-%m-%d "),
