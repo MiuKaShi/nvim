@@ -103,12 +103,6 @@ return {
   s({ trig = "pi", snippetType = "autosnippet", wordTrig = false }, {
     t "\\pi",
   }, { condition = markdown.in_mathzone }),
-  s({ trig = "\\pii", snippetType = "autosnippet", wordTrig = false, priority = 2000 }, {
-    t "p_i",
-  }, { condition = markdown.in_mathzone }),
-  s({ trig = "Pi", snippetType = "autosnippet", wordTrig = false }, {
-    t "\\Pi",
-  }, { condition = markdown.in_mathzone }),
   s({ trig = "rho", snippetType = "autosnippet", wordTrig = false }, {
     t "\\rho",
   }, { condition = markdown.in_mathzone }),

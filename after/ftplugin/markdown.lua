@@ -67,20 +67,25 @@ vim.keymap.set("n", "<leader>cc", ":!compiler <c-r>%<CR><CR>")
 vim.keymap.set("n", "<leader>cp", '<Cmd>call jobstart(["autoprev", expand("%:p")])<CR>')
 vim.keymap.set("n", "<leader>tt", "vip:!pandoc -t commonmark_x<CR><CR>",{ desc = " Format Table under Cursor", buffer = true })
 
+-- list
 vim.keymap.set("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task", buffer = true })
 vim.keymap.set("n", "<leader>-", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
 
+-- blod
 vim.keymap.set("n", "<C-b>", "bi**<Esc>ea**<Esc>", { buffer = 0 })
 vim.keymap.set("v", "<C-b>", ":lua require('markdowny').bold()<cr>", { buffer = 0 })
 vim.keymap.set("i", "<C-b>", "****<Left><Left>", { buffer = 0 })
 
+--italic
 vim.keymap.set("n", "<C-e>", "bi_<Esc>ea_<Esc>", { buffer = 0 })
 vim.keymap.set("v", "<C-e>", ":lua require('markdowny').italic()<cr>", { buffer = 0 })
 
+--hyperlink
 vim.keymap.set("n", "<C-l>", "bi[<Esc>ea]()<Esc>hp", { buffer = 0 })
 vim.keymap.set("v", "<C-l>", ":lua require('markdowny').link()<cr>", { buffer = 0 })
 vim.keymap.set("i", "<C-l>", "[]()<Left><Left><Left>", { buffer = true })
 
+--code bar
 vim.keymap.set("v", "<C-c>", ":lua require('markdowny').code()<cr>", { buffer = 0 })
 
 -- Heading jump to next/prev heading

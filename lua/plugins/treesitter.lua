@@ -18,7 +18,7 @@ return {
     -- commit = "19ac9e8",
     main = "nvim-treesitter",
     build = ":TSUpdate",
-    dependencies = { "hiphish/rainbow-delimiters.nvim" },
+    dependencies = { "HiPhish/rainbow-delimiters.nvim" },
     event = "VeryLazy",
     cmd = { "TSUpdateSync" },
     opts = {
