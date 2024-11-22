@@ -2,20 +2,17 @@
 
 # Define a list of dictionaries
 # CET: CET4&6 words
-# GRE: 800 GRE words
-# STU: My  words
+# GRE: 8000 GRE words
+# USER: User words
 
 dic_list=(
-    "_EN.txt"
-    "_TEC.txt"
+    "_CET.txt"
+    "_GRE.txt"
+    "_USER.txt"
 )
 
-# Merge all word lists into one file
-sort -u "${dic_list[@]}" >sorted_words.txt
+# Preprocessing user words
+cat _USER.txt | awk 'NF > 0' | sort -u >temp_file && mv temp_file _USER.txt
 
-
-# convert to lowercase
-tr '[:upper:]' '[:lower:]' < sorted_words.txt > words.txt
-
-# remove ^M
-rm -f sorted_words.txt && sed -i -e "s/\r//g" words.txt
+# Merge and deduplication all word lists into one file
+sort -u "${dic_list[@]}" | sed -e "s/\r//g" >words.txt

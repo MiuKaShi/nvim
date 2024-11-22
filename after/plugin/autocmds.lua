@@ -32,7 +32,7 @@ autocmd({ "VimResized" }, {
 
 -- Highlight on yank
 autocmd("TextYankPost", {
-  callback = function() vim.highlight.on_yank { higroup = "IncSearch", timeout = 200, on_visual = true } end,
+  callback = function() vim.highlight.on_yank { higroup = "IncSearch", timeout = 250, on_visual = true } end,
   pattern = "*",
 })
 
