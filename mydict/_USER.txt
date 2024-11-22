@@ -39,6 +39,7 @@ multifunctional
 multiparametric
 Navier
 neighbouring
+Neovim
 nondimensional
 Nonhomogeneous
 olsson
@@ -56,5 +57,6 @@ tribological
 tribologist
 tribology
 unicode
+Vim
 viscosities
 Wedeven

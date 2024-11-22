@@ -50,7 +50,7 @@
   "nvim-origami": { "branch": "main", "commit": "32be25559e48d277e5a8c4d94774a20da76a9842" },
   "nvim-surround": { "branch": "main", "commit": "dca2e998ff26681ee422b92c6ed39b3d2908d8a9" },
   "nvim-texlabconfig": { "branch": "master", "commit": "b817297fd07bd6c127df56d01f439f2f838c49ed" },
-  "nvim-treesitter": { "branch": "master", "commit": "eff88f4e8b71d92bdcaeca6e4f7e1e146b263614" },
+  "nvim-treesitter": { "branch": "master", "commit": "2d5c122af9c3c842d74a137446dae8ff349206ac" },
   "nvim-ufo": { "branch": "main", "commit": "e9886b2b3381b49cadb11ef62a8c51f662927232" },
   "nvim-various-textobjs": { "branch": "main", "commit": "e5f951dd95083939dfded22e7330c97d8c172ed2" },
   "nvim-web-devicons": { "branch": "master", "commit": "f09be61d05bebcba85bb47be1931322d51b95644" },

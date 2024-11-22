@@ -1655,6 +1655,7 @@ curmudgeon
 curriculum
 currish
 cursive
+cursor
 cursory
 curt
 curtail

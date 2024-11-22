@@ -2881,6 +2881,7 @@ curriculum
 currish
 curse
 cursive
+cursor
 cursory
 curt
 curtail
@@ -3899,6 +3900,7 @@ efficacious
 efficacy
 efficiency
 efficient
+efficiently
 effigy
 effluvia
 effort
@@ -8033,6 +8035,7 @@ neolithic
 neologism
 neonate
 neophyte
+Neovim
 nephew
 nephritis
 nepotism
@@ -12930,6 +12933,7 @@ village
 villager
 villainous
 vim
+Vim
 vindicate
 vindication
 vindictive
