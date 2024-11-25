@@ -79,6 +79,7 @@ vim.keymap.set("i", "<C-b>", "****<Left><Left>", { buffer = 0 })
 --italic
 vim.keymap.set("n", "<C-e>", "bi_<Esc>ea_<Esc>", { buffer = 0 })
 vim.keymap.set("v", "<C-e>", ":lua require('markdowny').italic()<cr>", { buffer = 0 })
+vim.keymap.set("i", "<C-e>", "**<Left>", { buffer = 0 })
 
 --hyperlink
 vim.keymap.set("n", "<C-l>", "bi[<Esc>ea]()<Esc>hp", { buffer = 0 })
