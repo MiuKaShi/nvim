@@ -39,11 +39,11 @@ return {
       "lukas-reineke/cmp-under-comparator",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "octaltree/cmp-look",
-      {
-        "zbirenbaum/copilot-cmp",
-        dependencies = "zbirenbaum/copilot.lua",
-        config = function() require("copilot_cmp").setup() end,
-      },
+      -- {
+      --   "zbirenbaum/copilot-cmp",
+      --   dependencies = "zbirenbaum/copilot.lua",
+      --   config = function() require("copilot_cmp").setup() end,
+      -- },
       -- 'lukas-reineke/cmp-rg',
     },
     config = function()
@@ -75,7 +75,8 @@ return {
 				-- stylua: ignore start
         look = { name = "look", keyword_length = 2, priority = 850, option = { convert_case = true, loud = true, dict = vim.fn.stdpath "config" .. "/mydict/words.txt",} },
         luasnip = { name = "luasnip", priority = 800, option = { show_autosnippets = true } },
-        copilot = { name = "copilot", priority = 700, max_item_count = 3 },
+        -- copilot = { name = "copilot", priority = 700, max_item_count = 3 },
+        supermaven = { name = "supermaven", priority = 700, max_item_count = 3 },
         matlab = { name = "cmp_matlab", priority = 650, max_item_count = 3 },
         path = { name = "path", priority = 600, max_item_count = 4 },
         cmdline = { name = "cmdline", priority = 630, max_item_count = 4 },
@@ -138,13 +139,14 @@ return {
             -- Source menu
             item.menu = ({
               buffer = "[Text]",
-              copilot = "[Cop]",
               nvim_lsp = "[LSP]",
               path = "[Path]",
               cmdline = "[Cmd]",
               luasnip = "[Snip]",
               cmp_matlab = "[MATLAB]",
               look = "[Dict]",
+              supermaven = "[Sup]",
+              -- copilot = "[Cop]",
               -- rg = '[RG]',
               -- neorg  = '[Norg]',
             })[entry.source.name]
@@ -229,13 +231,15 @@ return {
           cmp_sources.buffer,
           cmp_sources.luasnip,
           cmp_sources.path,
+          cmp_sources.supermaven,
           -- cmp_sources.copilot,
         },
       })
     end,
     keys = {
       { "<leader>cs", function() require("util").cmp_toggle_source "luasnip" end },
-      { "<leader>cg", function() require("util").cmp_toggle_source "copilot" end },
+      -- { "<leader>cg", function() require("util").cmp_toggle_source "copilot" end },
+      { "<leader>cg", function() require("util").cmp_toggle_source "supermaven" end },
       { "<leader>cl", function() require("util").cmp_toggle_source "look" end },
       { "<leader>cb", function() require("util").cmp_toggle_source "buffer" end },
     },
