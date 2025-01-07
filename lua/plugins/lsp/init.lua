@@ -228,7 +228,7 @@ return {
   -- none-ls
   {
     "nvimtools/none-ls.nvim",
-    -- commit = "bb680d7",
+    commit = "7e146f3",
     dependencies = {
       "nvimtools/none-ls-extras.nvim",
     },

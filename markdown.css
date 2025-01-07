@@ -1,4 +1,6 @@
-body { background-color: var(--background); }
+body {
+  background-color: var(--background);
+}
 
 .markdown-body ol ol,
 .markdown-body ul ol,
@@ -12,7 +14,8 @@ body { background-color: var(--background); }
   margin-bottom: 0;
 }
 .markdown-body {
-  font-family: "Times New Roman", "SimSun", "Segoe UI", Arial, sans-serif, "Twemoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: 'Times New Roman', 'SimSun', 'Segoe UI', Arial, sans-serif,
+    'Twemoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 20pt;
   color: var(--foreground);
   line-height: 1.6;
@@ -77,7 +80,9 @@ body { background-color: var(--background); }
 .markdown-body pre {
   margin-top: 0;
   margin-bottom: 16px;
-  background-color: var(--background) !important; /* Changes background of code block */
+  background-color: var(
+    --background
+  ) !important; /* Changes background of code block */
 }
 .markdown-body h1 {
   margin: 0.67em 0;
@@ -142,7 +147,7 @@ li::marker {
   color: var(--color14) !important; /* changes color of bullet points */
 }
 .markdown-body dl {
-  margin-bottom: 1.3em
+  margin-bottom: 1.3em;
 }
 .markdown-body dl dt {
   font-weight: 700;
@@ -170,7 +175,9 @@ li::marker {
   border-spacing: 0;
 }
 .markdown-body table tr {
-  background-color: var(--background) !important; /* Changes bacground color of tables */
+  background-color: var(
+    --background
+  ) !important; /* Changes bacground color of tables */
   border-top: 1px solid var(--color4);
 }
 .markdown-body table tr:nth-child(2n) {
@@ -210,7 +217,7 @@ li::marker {
   content: normal;
 }
 .markdown-body code {
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
   padding: 0;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
@@ -222,7 +229,7 @@ li::marker {
 .markdown-body code:before,
 .markdown-body code:after {
   letter-spacing: -0.2em;
-  content: "\00a0";
+  content: '\00a0';
 }
 .markdown-body a {
   color: var(--color2) !important; /* Change style of hyperlinks */
@@ -246,26 +253,35 @@ li::marker {
   list-style-type: none;
 }
 .task-list-item input {
-  font: 13px/1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font:
+    13px/1.4 Helvetica,
+    arial,
+    nimbussansl,
+    liberationsans,
+    freesans,
+    clean,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol';
   margin: 0 0.35em 0.25em -1.6em;
   vertical-align: middle;
 }
 .task-list-item input[disabled] {
   cursor: default;
 }
-.task-list-item input[type="checkbox"] {
+.task-list-item input[type='checkbox'] {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0;
 }
-.task-list-item input[type="radio"] {
+.task-list-item input[type='radio'] {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0;
 }
-
 
 /* Below are the page settings */
 
@@ -296,12 +312,7 @@ li::marker {
   font-size: 14px;
   font-weight: 600;
   color: var(--foreground) !important;
-
-
 }
-
-
-
 
 /* Highlight settings */
 
