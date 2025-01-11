@@ -204,6 +204,7 @@ return {
           providers = {
             lsp = {
               fallbacks = {}, -- do not use `buffer` as fallback
+              score_offset = 20, -- the higher the number, the higher the priority
               transform_items = function(_, items)
                 for _, item in ipairs(items) do
                   if item.kind == require("blink.cmp.types").CompletionItemKind.Snippet then
@@ -241,13 +242,11 @@ return {
             dictionary = {
               module = "blink-cmp-dictionary",
               name = "Dict",
-              score_offset = 20, -- the higher the number, the higher the priority
+              score_offset = 30, -- the higher the number, the higher the priority
               -- enabled = false,
               max_items = 8,
               min_keyword_length = 3,
               opts = {
-                -- The dictionary by default now uses fzf, make sure to have it installed
-                -- https://github.com/Kaiser-Yang/blink-cmp-dictionary/issues/2
                 get_command = "rg",
                 get_command_args = function(prefix)
                   return {
@@ -260,8 +259,7 @@ return {
                     prefix,
                   }
                 end,
-                -- use directories directly
-                dictionary_directories = { vim.fn.expand "~/.config/nvim/mydict" },
+                dictionary_files = { vim.fn.expand "~/.config/nvim/mydict/words.txt" },
                 -- To disable the definitions comment this
                 separate_output = function(output)
                   local items = {}
