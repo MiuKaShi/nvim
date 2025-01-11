@@ -329,7 +329,7 @@ endfunction
       },
       new_notes_location = "notes_subdir",
       completion = {
-        nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
+        nvim_cmp = false, -- if using nvim-cmp, otherwise set to false
         min_chars = 2,
       },
       note_id_func = function(title)

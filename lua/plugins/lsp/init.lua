@@ -77,7 +77,6 @@ return {
         require("plugins.lsp.servers." .. server).setup(on_attach, capabilities)
       end
       -- rime_ls server
-      -- require "plugins.lsp.servers.rimels"
       require("plugins.lsp.servers.rimels").setup_rime()
     end,
   },
@@ -228,7 +227,7 @@ return {
   -- none-ls
   {
     "nvimtools/none-ls.nvim",
-    commit = "7e146f3",
+    -- commit = "7e146f3",
     dependencies = {
       "nvimtools/none-ls-extras.nvim",
     },
