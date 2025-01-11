@@ -36,7 +36,6 @@ g.neovide_transparency = 0.65
 g.transparency = 0.65
 g.neovide_background_color = "#0f1117" .. alpha()
 
-
 ---- The following should enable floating window transparency --------------------------------------
 g.neovide_window_floating_blur = 0.65
 g.neovide_window_floating_opacity = 0

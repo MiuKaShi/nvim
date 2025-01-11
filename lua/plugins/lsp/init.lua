@@ -49,13 +49,16 @@ return {
 
       -- capabilities
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      -- Enable snippets-completion (for nvim_cmp)
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
-      -- Enable folding (for nvim-ufo)
-      capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
-      }
+
+      -- completion capabilities (blink.cmp)
+      local blinkInstalled, blink = pcall(require, "blink.cmp")
+      if blinkInstalled then capabilities = blink.get_lsp_capabilities() end
+
+      -- folding capabilities (nvim-ufo)
+      local ufoInstalled = pcall(require, "ufo")
+      if ufoInstalled then
+        capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
+      end
 
       for _, server in ipairs {
         "pyright",

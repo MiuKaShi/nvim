@@ -92,7 +92,6 @@ return {
                     local source = ctx.item.source_id
                     -- use source-specific icons, and `kind_icon` only for items from LSPs
                     local sourceIcons = {
-                      path = "",
                       cmdline = "[Cmd]",
                       dictionary = "[Dict]",
                       supermaven = "[AI]",
@@ -141,34 +140,7 @@ return {
         appearance = {
           use_nvim_cmp_as_default = true,
           nerd_font_variant = "normal",
-          kind_icons = {
-            -- different icons of the corresponding source
-            Text = "󰉿",
-            Snippet = "󰞘",
-            File = "",
-            Folder = "󰉋",
-            Method = "󰊕",
-            Function = "󰡱",
-            Constructor = "",
-            Field = "󰇽",
-            Variable = "󰀫",
-            Class = "󰜁",
-            Interface = "",
-            Module = "",
-            Property = "󰜢",
-            Unit = "",
-            Value = "󰎠",
-            Enum = "",
-            Keyword = "󰌋",
-            Color = "󰏘",
-            Reference = "",
-            EnumMember = "",
-            Constant = "󰏿",
-            Struct = "󰙅",
-            Event = "",
-            Operator = "󰆕",
-            TypeParameter = "󰅲",
-          },
+          kind_icons = require("config").icons.cmp_kinds,
         },
         sources = {
           default = { "lsp", "snippets", "buffer", "path" },
@@ -200,6 +172,7 @@ return {
               "buffer",
               "supermaven",
             },
+            gitcommit = {},
           },
           providers = {
             lsp = {
@@ -213,6 +186,10 @@ return {
                 end
                 return items
               end,
+            },
+            snippets = {
+              min_keyword_length = 1,
+              score_offset = -1,
             },
             path = {
               opts = { get_cwd = vim.uv.cwd },

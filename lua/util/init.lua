@@ -175,34 +175,6 @@ function M.togglecli(cli)
   return Terminal:new({ cmd = cli, hidden = true, direction = "float" }):toggle()
 end
 
--- cmp toggle source
-function M.cmp_toggle_source(src)
-  local cmp = require "cmp"
-  local sources = cmp.get_config().sources
-  -- remove source
-  for i = #sources, 1, -1 do
-    if sources[i].name == src then
-      table.remove(sources, i)
-      cmp.setup.buffer { sources = sources }
-      vim.notify("remove source:." .. src, vim.log.levels.WARN)
-      return
-    end
-  end
-  --add source
-  local priority = ({
-    ["nvim_lsp"] = function() return 1000 end,
-    ["nvim_lsp_signature_help"] = function() return 900 end,
-    ["copilot"] = function() return 850 end,
-    ["buffer"] = function() return 800 end,
-    ["luasnip"] = function() return 700 end,
-    ["path"] = function() return 600 end,
-    ["look"] = function() return 200 end,
-  })[src] or function() return 100 end -- 默认优先级
-  table.insert(sources, { name = src, priority() })
-  cmp.setup.buffer { sources = sources }
-  print("add source: " .. src)
-end
-
 -- toggle inlay hints
 function M.toggle_inlay_hints()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
