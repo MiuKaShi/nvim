@@ -380,16 +380,10 @@ endfunction
     },
   },
 
-  -- {
-  --   "chrisgrieser/nvim-origami",
-  --   event = "BufReadPost", -- later will not save folds
-  --   opts = true, -- needed
-  -- },
-
   -- fold
   {
     "chrisgrieser/nvim-origami",
-    event = "BufReadPost", -- later will not save folds
+    event = "VeryLazy",
     opts = {
       setupFoldKeymaps = false,
     },

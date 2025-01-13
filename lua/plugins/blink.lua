@@ -64,6 +64,7 @@ return {
       require("blink.cmp").setup {
         completion = {
           list = {
+            -- selection = { auto_insert = true },
             cycle = { from_top = false }, -- cycle at bottom, but not at the top
           },
           documentation = {
@@ -106,7 +107,10 @@ return {
         snippets = {
           preset = "luasnip",
         },
-        signature = { enabled = true },
+        signature = {
+          enabled = true,
+          window = { border = "single" },
+        },
         keymap = {
           preset = "none",
           ["<C-j>"] = { "select_next", "fallback" },

@@ -50,6 +50,40 @@ autocmd("VimResized", {
   desc = "Equalize Splits",
 })
 
+-- simplified version of https://github.com/Aasim-A/scrollEOF.nvim
+autocmd("CursorMoved", {
+  desc = "User: Enforce scrolloff at EoF",
+  callback = function(ctx)
+    if vim.bo[ctx.buf].buftype ~= "" then return end
+
+    local winHeight = vim.api.nvim_win_get_height(0)
+    local visualDistanceToEof = winHeight - vim.fn.winline()
+    local scrolloff = math.min(vim.o.scrolloff, math.floor(winHeight / 2))
+
+    if visualDistanceToEof < scrolloff then
+      local topline = vim.fn.winsaveview().topline
+      -- topline is inaccurate if it is a folded line, thus add number of folded lines
+      local toplineFoldAmount = vim.fn.foldclosedend(topline) - vim.fn.foldclosed(topline)
+      topline = topline + toplineFoldAmount
+      vim.fn.winrestview { topline = topline + scrolloff - visualDistanceToEof }
+    end
+  end,
+})
+-- FIX for some reason `scrolloff` sometimes being set to `0` on new buffers
+local originalScrolloff = vim.o.scrolloff
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
+  desc = "User: FIX scrolloff on entering new buffer",
+  callback = function(ctx)
+    vim.defer_fn(function()
+      if not vim.api.nvim_buf_is_valid(ctx.buf) or vim.bo[ctx.buf].buftype ~= "" then return end
+      if vim.o.scrolloff == 0 then
+        vim.o.scrolloff = originalScrolloff
+        vim.notify("Triggered by [" .. ctx.event .. "]", nil, { title = "Scrolloff fix" })
+      end
+    end, 150)
+  end,
+})
+
 -- For suckless
 autocmd({ "BufWritePost" }, {
   pattern = ".Xresources",
