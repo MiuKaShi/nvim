@@ -68,7 +68,6 @@ local options = {
 
     -- fold
     foldenable = true,
-    foldmethod = "manual", -- 折叠的方式
     foldlevel = 99, -- 折叠的级别（100）
     foldlevelstart = 99,
     -- o.foldcolumn = "1"

@@ -405,10 +405,6 @@ endfunction
 			{ "z3", function() require("ufo").closeFoldsWith(3) end, desc = "󱃄 Close Level 3 Folds" },
 			{ "z4", function() require("ufo").closeFoldsWith(4) end, desc = "󱃄 Close Level 4 Folds" },
     },
-    init = function()
-      vim.opt.foldlevel = 99
-      vim.opt.foldlevelstart = 99
-    end,
     opts = {
       close_fold_kinds_for_ft = {
         default = { "imports", "comment" },

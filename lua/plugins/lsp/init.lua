@@ -54,12 +54,6 @@ return {
       local blinkInstalled, blink = pcall(require, "blink.cmp")
       if blinkInstalled then capabilities = blink.get_lsp_capabilities() end
 
-      -- folding capabilities (nvim-ufo)
-      local ufoInstalled = pcall(require, "ufo")
-      if ufoInstalled then
-        capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
-      end
-
       for _, server in ipairs {
         "pyright",
         "clangd",
