@@ -43,6 +43,7 @@ return {
         "yaml",
         "julia",
         "matlab",
+        "http",
         "glsl",
         "ruby",
         "regex",

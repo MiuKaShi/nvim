@@ -206,24 +206,24 @@ function M.toggle_ts_highlight()
 end
 
 -- toggle diagnostic
--- vim.diagnostic.disable(1)
--- function M.toggle_diagnostics()
---   if vim.diagnostic.is_disabled(0) then
---     vim.diagnostic.enable(0)
---     vim.opt.showmode = true
---     vim.opt.ruler = true
---     vim.opt.laststatus = 2
---     vim.opt.showcmd = true
---     vim.notify("Diagnostic Enable", vim.log.levels.INFO)
---   else
---     vim.diagnostic.disable(0)
---     vim.opt.showmode = false
---     vim.opt.ruler = false
---     vim.opt.laststatus = 0
---     vim.opt.showcmd = false
---     vim.notify("Diagnostic Disable", vim.log.levels.WARN)
---   end
--- end
+vim.diagnostic.disable(1)
+function M.toggle_diagnostics()
+  if vim.diagnostic.is_disabled(0) then
+    vim.diagnostic.enable(0)
+    vim.opt.showmode = true
+    vim.opt.ruler = true
+    vim.opt.laststatus = 2
+    vim.opt.showcmd = true
+    vim.notify("Diagnostic Enable", vim.log.levels.INFO)
+  else
+    vim.diagnostic.disable(0)
+    vim.opt.showmode = false
+    vim.opt.ruler = false
+    vim.opt.laststatus = 0
+    vim.opt.showcmd = false
+    vim.notify("Diagnostic Disable", vim.log.levels.WARN)
+  end
+end
 
 M.textobjectRemaps = {
   c = "}", -- [c]urly brace

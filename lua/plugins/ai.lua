@@ -7,7 +7,7 @@ return {
     cmd = { "SupermavenToggle" },
     opts = {
       keymaps = {
-        accept_suggestion = "<C-y>",
+        accept_suggestion = "<Tab>",
         clear_suggestion = "<C-c>",
         accept_word = "<C-j>",
       },
