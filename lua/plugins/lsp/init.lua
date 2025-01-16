@@ -50,9 +50,9 @@ return {
       -- capabilities
       local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-      -- completion capabilities (blink.cmp)
-      local blinkInstalled, blink = pcall(require, "blink.cmp")
-      if blinkInstalled then capabilities = blink.get_lsp_capabilities() end
+      -- completion capabilities
+      -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+      capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
 
       for _, server in ipairs {
         "pyright",

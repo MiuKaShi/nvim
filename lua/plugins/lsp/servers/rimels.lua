@@ -39,7 +39,7 @@ A language server for librime
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   -- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
   capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-  capabilities.general.positionEncodings = { "utf-8", "utf-16" }
+  capabilities.general.positionEncodings = { "utf-16" }
 
   -- 检查log目录
   local rime_log_dir = vim.fn.expand "~/.local/share/rime-ls/log"
@@ -48,7 +48,7 @@ A language server for librime
   require("lspconfig").rime_ls.setup {
     name = "rime_ls",
     -- cmd = vim.lsp.rpc.connect("127.0.0.1", 9257),
-    filetypes = { "markdown.pandoc", "tex", "matlab", "glsl", "c" },
+    filetypes = { "markdown.pandoc", "tex", "matlab", "glsl", "c", "python" },
     init_options = {
       enabled = vim.g.rime_enabled,
       shared_data_dir = vim.fn.expand "/usr/share/rime-data", -- rime 公共目录

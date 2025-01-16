@@ -121,7 +121,7 @@ return {
           ["<C-f>"] = { "scroll_documentation_up", "fallback" },
           ["<C-c>"] = { "cancel", "fallback" },
           ["<C-x>"] = { "hide" }, -- `hide` keeps `auto_insert`, `cancel` does not
-          ["<C-y>"] = { "show", "select_and_accept" },
+          ["<C-y>"] = { "select_and_accept" },
           ["<Tab>"] = {
             function(cmp)
               if cmp.snippet_active() then
@@ -134,12 +134,6 @@ return {
             "fallback",
           },
           ["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
-          ["<Space>"] = {
-            function(cmp)
-              if vim.g.rime_enabled then return cmp.select_and_accept { expand = false } end
-            end,
-            "fallback",
-          },
         },
         appearance = {
           use_nvim_cmp_as_default = true,
