@@ -88,7 +88,7 @@ return {
     },
     cmd = "AerialToggle",
     keys = {
-      { "<leader>o", "<cmd>AerialToggle<CR>", desc = "Toggle aerial" },
+      { "<leader>oa", "<cmd>AerialToggle<CR>", desc = "Toggle aerial" },
       { "[f", "<cmd>AerialPrev<CR>", desc = "Previous symbol" },
       { "]f", "<cmd>AerialNext<CR>", desc = "Next symbol" },
     },
@@ -138,7 +138,7 @@ return {
   -- logical match
   {
     "andymass/vim-matchup",
-    event = { "BufReadPost", "InsertEnter", "CmdlineEnter" },
+    event = { "BufReadPost" },
     init = function()
       vim.g.matchup_surround_enabled = 1
       vim.g.matchup_transmute_enabled = 1
@@ -149,7 +149,6 @@ return {
       { "m", "<Plug>(matchup-%)", desc = "Goto Matching Bracket" },
     },
     dependencies = "nvim-treesitter/nvim-treesitter",
-    config = function() vim.cmd "highlight MatchParen gui=italic,bold guifg=#cc241d guibg=#689d6a" end,
   },
 
   -- comment

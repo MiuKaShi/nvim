@@ -32,7 +32,7 @@ M.setup = function(on_attach, capabilities)
           callSnippet = "Replace",
           keywordSnippet = "Replace",
           displayContext = 6,
-					showWord = "Disable", -- don't suggest common words as fallback
+          showWord = "Disable", -- don't suggest common words as fallback
           postfix = ".", -- useful for `table.insert` and the like
         },
       },

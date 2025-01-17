@@ -1,12 +1,12 @@
 local keymap = vim.keymap.set
 local cmd = vim.cmd
-local u = require("util")
+local u = require "util"
 
 --------------------------------------------------------------------------------
 -- REMAPPING OF BUILTIN TEXT OBJECTS
 for remap, original in pairs(u.textobjectRemaps) do
-	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = "󱡔 inner " .. original })
-	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. original })
+  keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = "󱡔 inner " .. original })
+  keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. original })
 end
 
 -- QUICK TEXTOBJ OPERATIONS

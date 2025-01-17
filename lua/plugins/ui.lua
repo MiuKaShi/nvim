@@ -241,7 +241,7 @@ return {
             { function() return vim.opt.spell:get() and "[SPELL]" or "" end },
           },
           lualine_x = {
-            util.rime_status,
+            util.rime_status_icon,
             {
               "diff",
               symbols = {

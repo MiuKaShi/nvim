@@ -26,6 +26,9 @@ return {
         overrides = {},
         dim_inactive = false,
         transparent_mode = true,
+        overrides = {
+          MatchParen = { italic = true, bold = true, fg = "#cc241d", bg = "#689d6a" },
+        },
       }
     end,
   },

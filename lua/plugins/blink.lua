@@ -64,7 +64,7 @@ return {
       require("blink.cmp").setup {
         completion = {
           list = {
-            -- selection = { auto_insert = true },
+            selection = { preselect = false, auto_insert = true },
             cycle = { from_top = false }, -- cycle at bottom, but not at the top
           },
           documentation = {
@@ -82,23 +82,27 @@ return {
               align_to = "none", -- keep in place
               treesitter = { "lsp" },
               columns = {
-                { "label", "label_description", "kind_icon", gap = 1 },
+                { "kind_icon" },
+                { "label", "label_description", gap = 1 },
+                { "source_name" },
               },
               components = {
-                label = { width = { max = 35 } },
-                label_description = { width = { max = 20 } },
                 kind_icon = {
                   text = function(ctx)
                     -- detect emmet-ls
                     local source = ctx.item.source_id
                     -- use source-specific icons, and `kind_icon` only for items from LSPs
                     local sourceIcons = {
-                      cmdline = "[Cmd]",
-                      dictionary = "[Dict]",
-                      supermaven = "[AI]",
+                      cmdline = "󰘳",
+                      buffer = "󰦨",
+                      supermaven = "",
                     }
                     return sourceIcons[source] or ctx.kind_icon
                   end,
+                },
+                label_description = { width = { max = 20 } },
+                source_name = {
+                  text = function(ctx) return "[" .. ctx.source_name .. "]" end,
                 },
               },
             },
@@ -122,6 +126,15 @@ return {
           ["<C-c>"] = { "cancel", "fallback" },
           ["<C-x>"] = { "hide" }, -- `hide` keeps `auto_insert`, `cancel` does not
           ["<C-y>"] = { "select_and_accept" },
+          ["<space>"] = {
+            function(cmp)
+              if not vim.g.rime_enabled then return false end
+              local rime_item_index = require("util").get_n_rime_item_index(1)
+              if #rime_item_index ~= 1 then return false end
+              return cmp.accept { index = rime_item_index[1] }
+            end,
+            "fallback",
+          },
           ["<Tab>"] = {
             function(cmp)
               if cmp.snippet_active() then

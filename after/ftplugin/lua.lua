@@ -1,1 +1,1 @@
-vim.cmd("iabbr <buffer> != ~=")
+vim.cmd "iabbr <buffer> != ~="
