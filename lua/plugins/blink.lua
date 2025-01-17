@@ -151,7 +151,7 @@ return {
         appearance = {
           use_nvim_cmp_as_default = true,
           nerd_font_variant = "normal",
-          kind_icons = require("config").icons.cmp_kinds,
+          kind_icons = require("config").icons.kinds,
         },
         sources = {
           default = { "lsp", "snippets", "buffer", "path" },

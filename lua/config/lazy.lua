@@ -40,11 +40,11 @@ require("lazy").setup {
         "tarPlugin",
         "zip",
         "zipPlugin",
-        "getscript",
-        "getscriptPlugin",
-        "vimball",
-        "vimballPlugin",
-        "2html_plugin",
+        "loaded_2html_plugin", -- disable 2html
+        "loaded_getscript", -- disable getscript
+        "loaded_getscriptPlugin", -- disable getscript
+        "loaded_vimball", -- disable vimball
+        "loaded_vimballPlugin", -- disable vimball
         "matchit",
         "matchparen",
         "logiPat",

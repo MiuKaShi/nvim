@@ -145,6 +145,16 @@ autocmd("CursorMoved", {
   desc = "Auto hlsearch",
 })
 
+-- For suckless st
+autocmd({ "BufWritePost" }, {
+  pattern = ".Xresources",
+  callback = function()
+    vim.cmd "!xrdb %"
+    vim.cmd "!pidof st | xargs kill -s USR1"
+  end,
+  desc = "Reload st terminal",
+})
+
 -- 保存时自动使用panguALL格式化 markdown
 vim.g["pangu_rule_trailing_whitespace"] = 0 -- 不删除行尾空格
 autocmd("BufWritePre", {
