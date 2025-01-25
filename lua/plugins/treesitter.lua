@@ -64,7 +64,7 @@ return {
       matchup = {
         enable = true, -- mandatory, false will disable the whole extension
         include_match_words = true,
-        -- disable = { "c", "ruby" },
+        disable = { "bash" },
       },
       rainbow = {
         enable = true,

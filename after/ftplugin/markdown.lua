@@ -51,7 +51,7 @@ vim.g["pandoc#syntax#style#use_definition_lists"] = 0
 
 vim.g.tex_conceal = "amgs" --disable equation conceal
 vim.g["pandoc#syntax#codeblocks#embeds#langs"] =
-  { "python", "bash=sh", "c", "cpp", "latex=tex", "diff", "julia", "rust" }
+  { "python", "bash=sh", "c", "cpp", "latex=tex", "diff", "julia", "rust", "apdl" }
 
 vim.cmd [[
 hi pandocEmphasis     guibg=NONE guifg=#689d6a gui=italic cterm=italic

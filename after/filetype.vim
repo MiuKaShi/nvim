@@ -18,10 +18,13 @@ augroup filetypedetect
 	au BufRead,BufNewFile *.LOG set filetype=log
 	au BufRead,BufNewFile *_LOG set filetype=log
 	au BufRead,BufNewFile *.org set filetype=org
-	au BufNewFile,BufRead *.el set filetype=elisp
-	au BufNewFile,BufRead *.geo set filetype=glsl
-	au BufNewFile,BufRead *.frag set filetype=glsl
-	au BufNewFile,BufRead *.vert set filetype=glsl
-	au BufNewFile,BufRead *.step set filetype=ruby
-	au BufNewFile,BufRead *.stl set filetype=stl
+	au BufRead,BufNewFile *.el set filetype=elisp
+	au BufRead,BufNewFile *.geo set filetype=glsl
+	au BufRead,BufNewFile *.frag set filetype=glsl
+	au BufRead,BufNewFile *.vert set filetype=glsl
+	au BufRead,BufNewFile *.step set filetype=ruby
+	au BufRead,BufNewFile *.stl set filetype=stl
+	au BufRead,BufNewFile *.inp set filetype=apdl
+	au BufRead,BufNewFile *.mac set filetype=apdl
+	au BufRead,BufNewFile *.ans set filetype=apdl
 augroup END
