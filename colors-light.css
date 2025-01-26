@@ -4,7 +4,6 @@
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  /* color: #333; */
   color: var(--color7) !important;
   background: var(--background) !important;
 }
@@ -61,19 +60,16 @@
 
 .hljs-regexp,
 .hljs-link {
-  /* color: #009926; */
   color: var(--color9) !important;
 }
 
 .hljs-symbol,
 .hljs-bullet {
-  /* color: #990073; */
   color: var(--color10) !important;
 }
 
 .hljs-built_in,
 .hljs-builtin-name {
-  /* color: #0086b3; */
   color: var(--color12) !important;
 }
 
