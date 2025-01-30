@@ -205,7 +205,7 @@ li::marker {
   border-top: 1px solid var(--color4);
 }
 .markdown-body table tr:nth-child(2n) {
-  background-color: #f8f8f8;
+  background-color: var(--background);
 }
 .markdown-body table th,
 .markdown-body table td {
@@ -218,7 +218,7 @@ li::marker {
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: #f7f7f7;
+  background-color: var(--background);
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }

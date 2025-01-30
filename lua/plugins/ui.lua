@@ -7,6 +7,7 @@ return {
   {
     "nvim-tree/nvim-web-devicons",
     lazy = true,
+    commit = "37334ad",
     opts = function()
       return {
         override = {
