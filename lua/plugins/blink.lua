@@ -157,18 +157,22 @@ return {
         sources = {
           default = { "lsp", "snippets", "buffer", "path" },
           per_filetype = {
-            ["markdown.pandoc"] = { -- 添加这个新的文件类型配置
-              "lsp",
-              "buffer",
-              "dictionary",
-              "snippets",
-            },
-            markdown = {
-              "lsp",
-              "buffer",
-              "dictionary",
-              "snippets",
-            },
+            ["markdown.pandoc"] = function(ctx)
+              local markdown = require "snippets.markdown"
+              if markdown.in_mathzone() then
+                return { "buffer", "snippets" }
+              else
+                return { "lsp", "buffer", "dictionary" }
+              end
+            end,
+            ["markdown"] = function(ctx)
+              local markdown = require "snippets.markdown"
+              if markdown.in_mathzone() then
+                return { "buffer", "snippets" }
+              else
+                return { "lsp", "buffer", "dictionary" }
+              end
+            end,
             tex = {
               "lsp",
               "path",
