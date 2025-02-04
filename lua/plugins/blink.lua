@@ -39,9 +39,9 @@ return {
       },
     },
     config = function()
-      local has_words_before = function()
+      local has_punctuation_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match "^%s*$" == nil
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%p" ~= nil
       end
       -- if last char is number, and the only completion item is provided by rime-ls, accept it
       require("blink.cmp.completion.list").show_emitter:on(function(event)
@@ -129,6 +129,7 @@ return {
           ["<space>"] = {
             function(cmp)
               if not vim.g.rime_enabled then return false end
+              if has_punctuation_before() then return false end
               local rime_item_index = require("util").get_n_rime_item_index(1)
               if #rime_item_index ~= 1 then return false end
               return cmp.accept { index = rime_item_index[1] }
