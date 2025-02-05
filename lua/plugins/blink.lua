@@ -43,15 +43,16 @@ return {
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%p" ~= nil
       end
-      -- if last char is number, and the only completion item is provided by rime-ls, accept it
+      -- 数字键自动上屏 When there is only one rime item after inputting a number, select it directly
       require("blink.cmp.completion.list").show_emitter:on(function(event)
-        if #event.items ~= 1 then return end
+        if not vim.g.rime_enabled then return end
         local col = vim.fn.col "." - 1
-        if event.context.line:sub(1, col):match "^.*%a+%d+$" == nil then return end
-        local client = vim.lsp.get_client_by_id(event.items[1].client_id)
-        if (not client) or client.name ~= "rime_ls" then return end
-        require("blink.cmp").accept { index = 1 }
+        if event.context.line:sub(col, col):match "%d" == nil then return end
+        local rime_item_index = require("util").get_n_rime_item_index(2, event.items)
+        if #rime_item_index ~= 1 then return end
+        vim.schedule(function() require("blink.cmp").accept { index = rime_item_index[1] } end)
       end)
+
       -- link BlinkCmpKind to CmpItemKind since nvchad/base46 does not support it
       local set_hl = function(hl_group, opts)
         opts.default = true -- Prevents overriding existing definitions
@@ -128,11 +129,11 @@ return {
           ["<C-y>"] = { "select_and_accept" },
           ["<space>"] = {
             function(cmp)
-              if not vim.g.rime_enabled then return false end
               if has_punctuation_before() then return false end
-              local rime_item_index = require("util").get_n_rime_item_index(1)
-              if #rime_item_index ~= 1 then return false end
-              return cmp.accept { index = rime_item_index[1] }
+              -- local rime_item_index = require("util").get_n_rime_item_index(1)
+              -- if #rime_item_index ~= 1 then return false end
+              if vim.g.rime_enabled then return cmp.select_and_accept() end
+              -- return cmp.accept { index = rime_item_index[1] }
             end,
             "fallback",
           },
@@ -238,7 +239,7 @@ return {
               score_offset = 30, -- the higher the number, the higher the priority
               -- enabled = false,
               max_items = 8,
-              min_keyword_length = 3,
+              min_keyword_length = 4,
               opts = {
                 get_command = "rg",
                 get_command_args = function(prefix)
