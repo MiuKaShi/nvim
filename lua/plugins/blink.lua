@@ -1,5 +1,31 @@
 return {
 
+  -- Snippet Engine
+  {
+    "L3MON4D3/LuaSnip",
+    commit = "c9b9a22", -- keep version
+    build = "make install_jsregexp",
+    opts = function()
+      local types = require "luasnip.util.types"
+      require("luasnip.loaders.from_lua").load { paths = "~/.config/nvim/LuaSnip" }
+      return {
+        updateevents = "TextChanged,TextChangedI",
+        history = true,
+        delete_check_events = "TextChanged",
+        enable_autosnippets = true,
+        store_selection_keys = "`",
+        ext_opts = {
+          [types.insertNode] = { active = { virt_text = { { "●", "Boolean" } } } },
+          [types.choiceNode] = { active = { virt_text = { { "↺", "markdownBold" } } } },
+        },
+      }
+    end,
+    keys = {
+      { "<C-l>", function() require("luasnip").jump(1) end, mode = { "i", "s" } },
+      { "<C-h>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+    },
+  },
+
   -- auto completion
   {
     "saghen/blink.cmp",
@@ -15,27 +41,7 @@ return {
       "Kaiser-Yang/blink-cmp-dictionary",
       {
         "L3MON4D3/LuaSnip",
-        build = "make install_jsregexp",
-        version = "v2.*",
-        opts = function()
-          local types = require "luasnip.util.types"
-          require("luasnip.loaders.from_lua").load { paths = "~/.config/nvim/LuaSnip" }
-          return {
-            updateevents = "TextChanged,TextChangedI",
-            history = true,
-            delete_check_events = "TextChanged",
-            enable_autosnippets = true,
-            store_selection_keys = "`",
-            ext_opts = {
-              [types.insertNode] = { active = { virt_text = { { "●", "Boolean" } } } },
-              [types.choiceNode] = { active = { virt_text = { { "↺", "markdownBold" } } } },
-            },
-          }
-        end,
-        keys = {
-          { "<C-l>", function() require("luasnip").jump(1) end, mode = { "i", "s" } },
-          { "<C-h>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-        },
+        commit = "c9b9a22",
       },
     },
     config = function()
@@ -160,7 +166,7 @@ return {
             ["markdown.pandoc"] = function(ctx)
               local markdown = require "snippets.markdown"
               if markdown.in_codeblock() then
-                return { "lsp", "buffer", "path" }
+                return { "buffer", "path" }
               elseif markdown.in_mathzone() then
                 return { "snippets" }
               else
@@ -170,7 +176,7 @@ return {
             ["markdown"] = function(ctx)
               local markdown = require "snippets.markdown"
               if markdown.in_codeblock() then
-                return { "lsp", "buffer", "path" }
+                return { "buffer", "path" }
               elseif markdown.in_mathzone() then
                 return { "snippets" }
               else
