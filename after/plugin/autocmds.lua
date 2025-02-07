@@ -71,7 +71,7 @@ autocmd("CursorMoved", {
 })
 -- FIX for some reason `scrolloff` sometimes being set to `0` on new buffers
 local originalScrolloff = vim.o.scrolloff
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
+autocmd({ "BufReadPost", "BufNew" }, {
   desc = "User: FIX scrolloff on entering new buffer",
   callback = function(ctx)
     vim.defer_fn(function()
@@ -123,7 +123,7 @@ autocmd("BufEnter", {
 })
 
 -- automatically disable search highlight
-local smart_hl = vim.api.nvim_create_augroup("smart_hl", { clear = true })
+local smart_hl = augroup("smart_hl", { clear = true })
 local function stop_hl()
   if vim.v.hlsearch == 0 then return end
   local keycode = vim.api.nvim_replace_termcodes("<Cmd>nohl<CR>", true, false, true)
@@ -154,6 +154,14 @@ autocmd({ "BufWritePost" }, {
   end,
   desc = "Reload st terminal",
 })
+
+-- close ai
+-- autocmd("BufEnter", {
+--   pattern = { "*.markdown", "*.md", "*.geo", "*.text", "*.txt" },
+--   callback = function()
+--     if require("supermaven-nvim.api").is_running() then vim.cmd "SupermavenStop" end
+--   end,
+-- })
 
 -- 保存时自动使用panguALL格式化 markdown
 vim.g["pangu_rule_trailing_whitespace"] = 0 -- 不删除行尾空格

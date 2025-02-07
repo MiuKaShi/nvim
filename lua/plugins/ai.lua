@@ -1,36 +1,38 @@
 return {
 
   -- supermaven
+
   {
     "supermaven-inc/supermaven-nvim",
     event = "InsertEnter",
-    cmd = { "SupermavenToggle" },
-    opts = {
-      keymaps = {
-        accept_suggestion = "<C-y>",
-        clear_suggestion = "<C-c>",
-        accept_word = "<C-j>",
-      },
-      ignore_filetypes = {
-        "help",
-        "gitcommit",
-        "gitrebase",
-        "hgcommit",
-        "svn",
-        "cvs",
-        "text",
-        "markdown",
-        "markdown.pandoc",
-        "pandoc",
-        "markdown_inline",
-        "typst",
-        "tex",
-        "log",
-      },
-      log_level = "off", -- set to "off" to disable logging completely
-      disable_inline_completion = false, -- disables inline completion for use with cmp
-      disable_keymaps = false, -- disables built in keymaps for more manual control
-    },
+    opts = function()
+      vim.g.ai_enabled = true
+      -- make sure supermaven stop in these files !
+      vim.api.nvim_create_autocmd("CursorMovedI", {
+        pattern = { "*.md", "*.m", "*.jl", "*.geo", "*.text", "*.txt", "*.tex" },
+        once = true,
+        callback = function()
+          if require("supermaven-nvim.api").is_running() then vim.cmd "SupermavenStop" end
+        end,
+      })
+      return {
+        keymaps = {
+          accept_suggestion = "<C-y>",
+          clear_suggestion = "<C-c>",
+          accept_word = "<C-j>",
+        },
+        ignore_filetypes = {
+          "help",
+          "gitcommit",
+          "gitrebase",
+          "hgcommit",
+          "log",
+        },
+        log_level = "off", -- set to "off" to disable logging completely
+        disable_inline_completion = false, -- disables inline completion for use with cmp
+        disable_keymaps = false, -- disables built in keymaps for more manual control
+      }
+    end,
     keys = {
       { "<leader>ai", "<cmd>SupermavenToggle<cr>", desc = "Toggle Supermaven [A][I]" },
     },

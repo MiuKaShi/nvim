@@ -185,6 +185,15 @@ function M.toggle_spellcheck()
   end
 end
 
+-- AI_status_icon
+function M.ai_status_icon()
+  if vim.g.ai_enabled then
+    return require("supermaven-nvim.api").is_running() and "󱜙" or "󱚧"
+  else
+    return "󱚧"
+  end
+end
+
 -- rime-ls
 function M.rime_status_icon() return vim.g.rime_enabled and "CN" or "EN" end
 

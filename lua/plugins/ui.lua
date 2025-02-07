@@ -243,6 +243,7 @@ return {
           },
           lualine_x = {
             util.rime_status_icon,
+            util.ai_status_icon,
             {
               "diff",
               symbols = {
