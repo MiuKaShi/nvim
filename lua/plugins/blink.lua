@@ -126,7 +126,6 @@ return {
           ["<C-f>"] = { "scroll_documentation_up", "fallback" },
           ["<C-c>"] = { "cancel", "fallback" },
           ["<C-x>"] = { "hide" }, -- `hide` keeps `auto_insert`, `cancel` does not
-          ["<C-y>"] = { "select_and_accept" },
           ["<space>"] = {
             function(cmp)
               if has_punctuation_before() then return false end
@@ -160,16 +159,20 @@ return {
           per_filetype = {
             ["markdown.pandoc"] = function(ctx)
               local markdown = require "snippets.markdown"
-              if markdown.in_mathzone() then
-                return { "buffer", "snippets" }
+              if markdown.in_codeblock() then
+                return { "lsp", "buffer", "path" }
+              elseif markdown.in_mathzone() then
+                return { "snippets" }
               else
                 return { "lsp", "buffer", "dictionary" }
               end
             end,
             ["markdown"] = function(ctx)
               local markdown = require "snippets.markdown"
-              if markdown.in_mathzone() then
-                return { "buffer", "snippets" }
+              if markdown.in_codeblock() then
+                return { "lsp", "buffer", "path" }
+              elseif markdown.in_mathzone() then
+                return { "snippets" }
               else
                 return { "lsp", "buffer", "dictionary" }
               end
