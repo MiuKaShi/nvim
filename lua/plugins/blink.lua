@@ -109,7 +109,12 @@ return {
                 },
                 label_description = { width = { max = 20 } },
                 source_name = {
-                  text = function(ctx) return "[" .. ctx.source_name .. "]" end,
+                  text = function(ctx)
+                    if ctx.source_name == "LSP" and vim.lsp.get_client_by_id(ctx.item.client_id).name == "rime_ls" then
+                      ctx.source_name = "Rime"
+                    end
+                    return "[" .. ctx.source_name .. "]"
+                  end,
                 },
               },
             },
