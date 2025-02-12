@@ -161,8 +161,8 @@ return {
           ["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
         },
         appearance = {
-          use_nvim_cmp_as_default = true,
-          nerd_font_variant = "normal",
+          use_nvim_cmp_as_default = false,
+          nerd_font_variant = "mono",
           kind_icons = require("config").icons.kinds,
         },
         sources = {
