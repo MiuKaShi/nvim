@@ -16,7 +16,7 @@ local function get_node_at_cursor()
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
   row = row - 1
   col = col - 1
-  local parser = ts.get_parser(buf, "latex")
+  local parser = ts.get_parser(buf, "markdown")
   if not parser then return end
   local root_tree = parser:parse()[1]
   local root = root_tree and root_tree:root()
