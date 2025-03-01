@@ -8,9 +8,10 @@ local options = {
 
     -- UI
     title = true, -- show title
-    showmode = false, -- show mode
+    showmode = false, -- Don't show mode since we have a statusline
     relativenumber = true, -- Show relative line numbers
     number = true,
+    smoothscroll = true, -- Smooth scroll
     -- colorcolumn = '120',
     cmdheight = 0,
     laststatus = 0, -- hide status
@@ -27,6 +28,11 @@ local options = {
     cursorlineopt = "number", -- 高亮行号
     numberwidth = 3, -- 行号宽度
     guicursor = vim.opt.guicursor + { "a:blinkon100" }, -- 光标闪烁速度
+
+    -- Split
+    splitbelow = true,
+    splitkeep = "screen",
+    splitright = true,
 
     -- Format
     formatoptions = "jcroqlnt", -- tcqj

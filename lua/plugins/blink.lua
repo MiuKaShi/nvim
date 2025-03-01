@@ -102,6 +102,7 @@ return {
                     local sourceIcons = {
                       cmdline = "󰘳",
                       buffer = "󰦨",
+                      dictionary = "󰉿",
                       supermaven = "",
                     }
                     return sourceIcons[source] or ctx.kind_icon
@@ -250,10 +251,10 @@ return {
             dictionary = {
               module = "blink-cmp-dictionary",
               name = "Dict",
-              score_offset = 30, -- the higher the number, the higher the priority
               -- enabled = false,
+              score_offset = 30, -- the higher the number, the higher the priority
               max_items = 8,
-              min_keyword_length = 4,
+              min_keyword_length = 3,
               opts = {
                 get_command = "rg",
                 get_command_args = function(prefix)
@@ -269,17 +270,7 @@ return {
                 end,
                 dictionary_files = { vim.fn.expand "~/.config/nvim/mydict/words.txt" },
                 -- To disable the definitions comment this
-                separate_output = function(output)
-                  local items = {}
-                  for line in output:gmatch "[^\r\n]+" do
-                    table.insert(items, {
-                      label = line,
-                      insert_text = line,
-                      documentation = nil,
-                    })
-                  end
-                  return items
-                end,
+                get_documentation = function(item) return nil end,
               },
             },
             pandoc_references = {

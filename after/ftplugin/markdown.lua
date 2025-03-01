@@ -15,6 +15,9 @@ vim.opt_local.spelllang = { "en_us", "cjk" }
 -- do not auto-wrap text
 vim.opt_local.formatoptions:remove { "t", "c" }
 
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
+
 -- pandoc sytanx setting
 vim.g["pandoc#syntax#conceal#blacklist"] = {
   "titleblock",
