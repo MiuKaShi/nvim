@@ -256,13 +256,13 @@ return {
           lualine_y = {
             util.getwords,
             { -- line count
-              function() return vim.api.nvim_buf_line_count(0) .. " ☰" end,
+              function() return "L" .. vim.api.nvim_buf_line_count(0) end,
               cond = function() return vim.bo.buftype == "" end,
             },
             { "location", padding = { left = 0, right = 1 } },
           },
           lualine_z = {
-            { "selectioncount", fmt = function(str) return str ~= "" and "码" .. str or "" end },
+            { "time", fmt = function(str) return str ~= "" and "码" .. str or "" end },
             function() return "󱑍 " .. os.date "%R" end,
           },
         },

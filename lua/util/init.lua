@@ -147,8 +147,8 @@ end
 -- word count
 function M.getwords()
   if vim.bo.filetype == "md" or vim.bo.filetype == "text" or vim.bo.filetype == "markdown.pandoc" then
-    if vim.fn.wordcount().visual_words == nil then return tostring(vim.fn.wordcount().words) end
-    return tostring(vim.fn.wordcount().visual_words)
+    if vim.fn.wordcount().visual_words == nil then return "W" .. tostring(vim.fn.wordcount().words) end
+    return "SW" .. tostring(vim.fn.wordcount().visual_words)
   else
     return ""
   end
