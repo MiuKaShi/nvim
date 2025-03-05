@@ -238,17 +238,17 @@ function M.get_n_rime_item_index(n, items)
 end
 
 -- toggle diagnostic
-vim.diagnostic.disable(1)
+vim.diagnostic.enable(false)
 function M.toggle_diagnostics()
-  if vim.diagnostic.is_disabled(0) then
-    vim.diagnostic.enable(0)
+  if not vim.diagnostic.is_enabled() then
+    vim.diagnostic.enable()
     vim.opt.showmode = true
     vim.opt.ruler = true
     vim.opt.laststatus = 2
     vim.opt.showcmd = true
     vim.notify("Diagnostic Enable", vim.log.levels.INFO)
   else
-    vim.diagnostic.disable(0)
+    vim.diagnostic.enable(false)
     vim.opt.showmode = false
     vim.opt.ruler = false
     vim.opt.laststatus = 0

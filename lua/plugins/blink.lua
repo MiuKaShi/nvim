@@ -3,7 +3,7 @@ return {
   -- Snippet Engine
   {
     "L3MON4D3/LuaSnip",
-    commit = "c9b9a22", -- keep version
+    version = "v2.*",
     build = "make install_jsregexp",
     opts = function()
       local types = require "luasnip.util.types"
@@ -83,8 +83,13 @@ return {
               max_height = 20,
             },
           },
+          -- Displays a preview of the selected item on the current line
+          ghost_text = {
+            enabled = false,
+          },
           menu = {
             border = "single",
+            auto_show = true,
             draw = {
               align_to = "none", -- keep in place
               treesitter = { "lsp" },
@@ -121,6 +126,7 @@ return {
             },
           },
         },
+        cmdline = { completion = { ghost_text = { enabled = false } } },
         snippets = {
           preset = "luasnip",
         },
