@@ -39,7 +39,10 @@ A language server for librime
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   -- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
   capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-  -- capabilities.general.positionEncodings = { "utf-8" }
+
+  if vim.bo.filetype == "md" or vim.bo.filetype == "text" or vim.bo.filetype == "markdown.pandoc" then
+    capabilities.general.positionEncodings = { "utf-8" }
+  end
 
   -- 检查log目录
   local rime_log_dir = vim.fn.expand "~/.local/share/rime-ls/log"
@@ -64,6 +67,7 @@ A language server for librime
       show_filter_text_in_label = false,
       long_filter_text = true,
     },
+    offset_encoding = "utf-8",
     on_attach = rime_on_attach,
     capabilities = capabilities,
   }
