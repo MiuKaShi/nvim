@@ -73,9 +73,6 @@ local options = {
     showbreak = "↪ ", --断行提示符
 
     -- fold
-    foldenable = true,
-    foldlevel = 99, -- 折叠的级别（100）
-    foldlevelstart = 99,
     -- o.foldcolumn = "1"
     fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" },
 
