@@ -219,8 +219,8 @@ return {
           lualine_b = {
             {
               "branch",
-              cond = function()
-                -- only if not on main or master
+              icon = "",
+              cond = function() -- only if not on main or master
                 local curBranch = require("lualine.components.branch.git_branch").get_branch()
                 return curBranch ~= "main" and curBranch ~= "master" and vim.bo.buftype == ""
               end,
@@ -236,6 +236,7 @@ return {
                 info = icons.diagnostics.Information,
                 hint = icons.diagnostics.Hint,
               },
+              cond = function() return vim.diagnostic.is_enabled { bufnr = 0 } end,
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },

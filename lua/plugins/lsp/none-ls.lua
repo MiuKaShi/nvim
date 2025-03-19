@@ -93,7 +93,7 @@ local sources = {
   --   filetypes = { "glsl" },
   -- },
   -- python
-  formatting.black.with { extra_args = { "-l", "80", "-t", "py39", "-S", "--fast" } },
+  -- formatting.black.with { extra_args = { "-l", "80", "-t", "py39", "-S", "--fast" } },
   -- lua
   formatting.stylua.with {
     extra_args = { "--config-path", vim.fn.expand "~/.config/stylua/stylua.toml" },
