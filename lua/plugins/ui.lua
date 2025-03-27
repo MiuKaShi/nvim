@@ -160,7 +160,7 @@ return {
   -- Bottom statusline
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
+    event = "UIEnter",
     opts = function()
       -- lightweight replacement for fidget.nvim
       local progressText = ""
@@ -187,6 +187,7 @@ return {
       local util = require "util"
       local icons = require("config").icons
       local theme = require("config").themes.lualine
+      --------------------------------------------------------------------------------
       return {
         options = {
           theme = theme,
