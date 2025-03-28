@@ -391,17 +391,13 @@ return {
         { filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
       },
       cmdline = {
-        view = "cmdline", -- cmdline|cmdline_popup
         format = {
-          search_down = { icon = "  ", view = "cmdline" }, -- FIX needs to be set explicitly
-          cmdline = { view = "cmdline_popup" },
-          lua = { view = "cmdline_popup" },
-          help = { view = "cmdline_popup" },
+          search_down = { icon = "  ", view = "cmdline" },
         },
       },
       views = {
         cmdline_popup = {
-          border = { style = "single" },
+          border = { style = "none" },
         },
         mini = {
           timeout = 3000,
@@ -415,14 +411,14 @@ return {
           win_options = { scrolloff = 4, wrap = true },
         },
         popup = {
-          border = { style = "single" },
-          size = { width = 90, height = 25 },
+          border = { style = "none" },
+          size = { width = "80%", height = "50%" },
           win_options = { scrolloff = 8, wrap = true },
           close = { keys = { "q" } },
         },
         split = {
           enter = true,
-          size = "50%",
+          size = "70%",
           close = { keys = { "q" } },
           win_options = { scrolloff = 6 },
         },
