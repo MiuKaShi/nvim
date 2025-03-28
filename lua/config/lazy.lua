@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup {
   spec = {
     { import = "plugins" },
-    { import = "themes" },
+    { import = "colorschemes" },
   },
   defaults = { lazy = true, version = false }, -- always use the latest git commit
   ui = {

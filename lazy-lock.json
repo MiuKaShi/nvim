@@ -14,7 +14,7 @@
   "fzf-wordnet.vim": { "branch": "master", "commit": "f4799db06857fe34bd003622dd1c9697f308e1b3" },
   "fzf.vim": { "branch": "master", "commit": "1fff637559f29d5edbdb05e03327954a8cd9e406" },
   "glance.nvim": { "branch": "master", "commit": "cb19b86349cbe634eec0ea768b9a27fdd6d24f34" },
-  "grug-far.nvim": { "branch": "main", "commit": "5da116bc99a03e14be3b824e319f4e49c676af78" },
+  "grug-far.nvim": { "branch": "main", "commit": "00fa27119620bc2314d560d0d11aac936a183abb" },
   "gruvbox.nvim": { "branch": "main", "commit": "c6f42890551b4827253387e93b035568826a9cb7" },
   "highlight-undo.nvim": { "branch": "main", "commit": "1ea1c79372d7d93c88fd97543880927b7635e3d2" },
   "inc-rename.nvim": { "branch": "main", "commit": "87ebe7bee0b83d3b6e4f1494c74abed21b318175" },
