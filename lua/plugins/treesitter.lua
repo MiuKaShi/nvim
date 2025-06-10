@@ -2,9 +2,11 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     -- commit = "19ac9e8",
-    main = "nvim-treesitter",
     build = ":TSUpdate",
-    dependencies = { "HiPhish/rainbow-delimiters.nvim" },
+    main = "nvim-treesitter.configs",
+    dependencies = {
+      "HiPhish/rainbow-delimiters.nvim",
+    },
     event = "VeryLazy",
     cmd = { "TSUpdateSync" },
     opts = {
@@ -71,29 +73,6 @@ return {
         disable = { "jsx" },
       },
     },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-      local rainbow_delimiters = require "rainbow-delimiters"
-      vim.g.rainbow_delimiters = {
-        strategy = {
-          [""] = rainbow_delimiters.strategy["global"],
-          vim = rainbow_delimiters.strategy["local"],
-        },
-        query = {
-          [""] = "rainbow-delimiters",
-          lua = "rainbow-blocks",
-        },
-        highlight = {
-          "RainbowDelimiterRed",
-          "RainbowDelimiterYellow",
-          "RainbowDelimiterBlue",
-          "RainbowDelimiterOrange",
-          "RainbowDelimiterGreen",
-          "RainbowDelimiterViolet",
-          "RainbowDelimiterCyan",
-        },
-      }
-    end,
   },
 
   -- tons of text objects
@@ -149,6 +128,35 @@ return {
       -- stylua: ignore end
     },
   },
+
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    event = "VeryLazy",
+    init = function()
+      local rainbow_delimiters = require "rainbow-delimiters"
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [""] = rainbow_delimiters.strategy["global"],
+          vim = rainbow_delimiters.strategy["local"],
+        },
+        query = {
+          [""] = "rainbow-delimiters",
+          lua = "rainbow-blocks",
+        },
+        highlight = {
+          "RainbowDelimiterRed",
+          "RainbowDelimiterYellow",
+          "RainbowDelimiterBlue",
+          "RainbowDelimiterOrange",
+          "RainbowDelimiterGreen",
+          "RainbowDelimiterViolet",
+          "RainbowDelimiterCyan",
+        },
+      }
+    end,
+  },
+
   -- {
   --   "sustech-data/wildfire.nvim",
   --   event = "VeryLazy",

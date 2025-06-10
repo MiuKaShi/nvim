@@ -29,7 +29,7 @@ return {
   -- auto completion
   {
     "saghen/blink.cmp",
-    event = "InsertEnter",
+    event = "LspAttach",
     version = "*",
     dependencies = {
       {
@@ -41,7 +41,7 @@ return {
       "Kaiser-Yang/blink-cmp-dictionary",
       {
         "L3MON4D3/LuaSnip",
-        commit = "c9b9a22",
+        -- commit = "c9b9a22",
       },
     },
     config = function()
