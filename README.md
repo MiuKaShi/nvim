@@ -49,11 +49,10 @@ Here, I list the plugins in each lua file
 - align.nvim: align text
 - vim-matchup: navigate and highlight logical words
 - mini.comment: add comments
-- mywords.nvim: highlight my words
-- nvim-spectre: search/replace in multiple files
+- mywords. nvim: highlight my words
+- grug-far: search/replace in multiple files
 - treesj: split-join lines
-- muren.nvim: multiple replacements
-- fzf-wordnet.vim: words dict
+- fzf-wordnet. vim: words dict
 - bibtexcite.vim: bib function
 - markdowny.nvim: some keymaps for markdown
 - vim-pandoc-syntax: pandoc md syntax
@@ -62,7 +61,7 @@ Here, I list the plugins in each lua file
 - obsidian.nvim: obisidian plugin
 - undotree: tree of undo
 - nvim-origami: floded anywhere
-- nvim-ufo: moder fold
+- nvim-genghis: file operations
 
 ### latex.lua
 
@@ -71,23 +70,15 @@ Here, I list the plugins in each lua file
 
 ### ai.lua
 
-- copilot.lua: microsoft copilot
-- backseat.nvim: GPT
+- supermaven-nvim: microsoft copilot
 
 ## cmp.lua
 
 - LuaSnip: snippet engine
-- nvim-cmp: auto completion
-- cmp-nvim-lsp: lsp plugin for cmp
-- cmp-buffer: buffer plugin for cmp
-- cmp-cmdline: cmd plugin for cmp
-- cmp-path: path plugin for cmp
-- cmp_luasnip: snippet plugin for cmp
-- cmp-matlab: matlab plugin for cmp
-- cmp-under-comparator: better sort completion for cmp
-- cmp-nvim-lsp-signature-help: signature plugin for cmp
-- cmp-look: dict plguin for cmp
-- copilot-cmp: copilot plugin for cmp
+- blink.cmp: auto completion
+- blink.compat: Compatibility for using nvim-cmp
+- cmp-pandoc-references: pandoc plugin for cmp
+- blink-cmp-dictionary: dict plguin for cmp
 
 ## lsp/init.lua
 

@@ -387,77 +387,20 @@ endfunction
   {
     "chrisgrieser/nvim-origami",
     event = "VeryLazy",
-    opts = {
-      setupFoldKeymaps = false,
-    },
-    keys = { { "<BS>", function() require("origami").h() end, desc = "toggle fold" } },
-  },
-
-  {
-    "kevinhwang91/nvim-ufo",
-    dependencies = "kevinhwang91/promise-async",
-    event = "UIEnter", -- needed for folds to load in time and comments being closed
-		-- stylua: ignore
-    keys = {
-			{ "zr", function() require("ufo").openFoldsExceptKinds { "comment", "imports" } end, desc = "󱃄 Open Regular Folds" },
-      { "zm", function() require("ufo").closeAllFolds() end, silent = true, desc = "󱃄 Close All Folds" },
-			{ "zk", function() require("ufo").goPreviousClosedFold() end, desc = "󱃄 Goto Prev Fold" },
-			{ "zj", function() require("ufo").goNextClosedFold() end, desc = "󱃄 Goto Next Fold" },
-			{ "z1", function() require("ufo").closeFoldsWith(1) end, desc = "󱃄 Close Level 1 Folds" },
-			{ "z2", function() require("ufo").closeFoldsWith(2) end, desc = "󱃄 Close Level 2 Folds" },
-			{ "z3", function() require("ufo").closeFoldsWith(3) end, desc = "󱃄 Close Level 3 Folds" },
-			{ "z4", function() require("ufo").closeFoldsWith(4) end, desc = "󱃄 Close Level 4 Folds" },
-    },
     init = function()
-      vim.opt.foldlevel = 99
+      vim.opt.foldlevel = 99 -- disable vim's auto-fold
       vim.opt.foldlevelstart = 99
     end,
     opts = {
-      close_fold_kinds_for_ft = {
-        default = { "imports", "comment" },
-        json = { "array" },
-        markdown = {}, -- avoid everything becoming folded
-        toml = {},
-        -- use `:UfoInspect` to get see available fold kinds
+      foldtext = {
+        padding = 2,
+        lineCount = { template = "󰘖 %d" },
       },
-      open_fold_hl_timeout = 800,
-      provider_selector = function(_bufnr, ft, _buftype)
-        -- ufo accepts only two kinds as priority, see https://github.com/kevinhwang91/nvim-ufo/issues/256
-        local lspWithOutFolding = { "markdown", "zsh", "bash", "css", "python", "json" }
-        if vim.tbl_contains(lspWithOutFolding, ft) then return { "treesitter", "indent" } end
-        return { "lsp", "indent" }
-      end,
-      -- when opening the buffer, close these fold kinds
-      -- use `:UfoInspect` to get available fold kinds from the LSP
-      fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
-        local hlgroup = "NonText"
-        local icon = ""
-        local newVirtText = {}
-        local suffix = ("  %s %d"):format(icon, endLnum - lnum)
-        local sufWidth = vim.fn.strdisplaywidth(suffix)
-        local targetWidth = width - sufWidth
-        local curWidth = 0
-        for _, chunk in ipairs(virtText) do
-          local chunkText = chunk[1]
-          local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-          if targetWidth > curWidth + chunkWidth then
-            table.insert(newVirtText, chunk)
-          else
-            chunkText = truncate(chunkText, targetWidth - curWidth)
-            local hlGroup = chunk[2]
-            table.insert(newVirtText, { chunkText, hlGroup })
-            chunkWidth = vim.fn.strdisplaywidth(chunkText)
-            if curWidth + chunkWidth < targetWidth then
-              suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
-            end
-            break
-          end
-          curWidth = curWidth + chunkWidth
-        end
-        table.insert(newVirtText, { suffix, hlgroup })
-        return newVirtText
-      end,
+      autoFold = {
+        kinds = { "comment", "imports" }, ---@type lsp.FoldingRangeKind[]
+      },
     },
+    keys = { { "<BS>", function() require("origami").h() end, desc = "toggle fold" } },
   },
 
   -- convenience file operations

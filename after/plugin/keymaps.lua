@@ -153,7 +153,7 @@ map("n", "cru", "mzgUiw`z", { desc = "󰬴 UPPERCASE" })
 map("n", "crl", "mzguiw`z", { desc = "󰬴 lowercase" })
 
 -- LINE & CHARACTER MOVEMENT
-map("n", "<Down>", [[<cmd>. move +2<CR>==]], { desc = "󰜮 Move line down" })
+map("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move line down" })
 map("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Move line up" })
 map("n", "<Right>", [["zx"zp]], { desc = "➡️ Move char right" })
 map("n", "<Left>", [["zdh"zph]], { desc = "⬅ Move char left" })

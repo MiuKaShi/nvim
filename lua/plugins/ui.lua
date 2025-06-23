@@ -48,75 +48,75 @@ return {
   },
 
   -- indent rainbow line color
-  -- {
-  --   "shellRaining/hlchunk.nvim",
-  --   event = "BufReadPost",
-  --   opts = function()
-  --     local langs = {
-  --       help = true,
-  --       aerial = true,
-  --       alpha = true,
-  --       dashboard = true,
-  --       packer = true,
-  --       Trouble = true,
-  --       lspinfo = true,
-  --       terminal = true,
-  --       checkhealth = true,
-  --       man = true,
-  --       mason = true,
-  --       NvimTree = true,
-  --       ["neo-tree"] = true,
-  --       plugin = true,
-  --       lazy = true,
-  --       TelescopePrompt = true,
-  --       markdown = false,
-  --       ["markdown.pandoc"] = false,
-  --     }
-  --     return {
-  --       chunk = {
-  --         enable = true,
-  --         use_treesitter = true,
-  --         notify = false,
-  --         exclude_filetypes = langs,
-  --         style = "#cc241d",
-  --         chars = {
-  --           horizontal_line = "━",
-  --           left_top = "┏",
-  --           vertical_line = "┃",
-  --           left_bottom = "┗",
-  --           right_arrow = "━",
-  --         },
-  --       },
-  --       indent = {
-  --         enable = true,
-  --         use_treesitter = false,
-  --         chars = { "│", "¦", "┆", "┊" },
-  --         exclude_filetypes = {
-  --           lua = true,
-  --           sh = true,
-  --           python = true,
-  --           c = true,
-  --           cpp = true,
-  --           diff = true,
-  --           yaml = true,
-  --           json = true,
-  --         },
-  --       },
-  --       line_num = {
-  --         enable = false,
-  --         use_treesitter = false,
-  --         style = "#fabd2f", -- Candidate colors.
-  --       },
-  --       blank = {
-  --         enable = false,
-  --         chars = { "·" },
-  --         style = {
-  --           vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID "Whitespace"), "fg", "gui"),
-  --         },
-  --       },
-  --     }
-  --   end,
-  -- },
+  {
+    "shellRaining/hlchunk.nvim",
+    event = "BufReadPost",
+    opts = function()
+      local langs = {
+        help = true,
+        aerial = true,
+        alpha = true,
+        dashboard = true,
+        packer = true,
+        Trouble = true,
+        lspinfo = true,
+        terminal = true,
+        checkhealth = true,
+        man = true,
+        mason = true,
+        NvimTree = true,
+        ["neo-tree"] = true,
+        plugin = true,
+        lazy = true,
+        TelescopePrompt = true,
+        markdown = false,
+        ["markdown.pandoc"] = false,
+      }
+      return {
+        chunk = {
+          enable = true,
+          use_treesitter = true,
+          notify = false,
+          exclude_filetypes = langs,
+          style = "#cc241d",
+          chars = {
+            horizontal_line = "─",
+            vertical_line = "│",
+            left_top = "╭",
+            left_bottom = "╰",
+            right_arrow = ">",
+          },
+        },
+        indent = {
+          enable = true,
+          use_treesitter = false,
+          chars = { "│", "¦", "┆", "┊" },
+          exclude_filetypes = {
+            lua = true,
+            sh = true,
+            python = true,
+            c = true,
+            cpp = true,
+            diff = true,
+            yaml = true,
+            json = true,
+          },
+        },
+        line_num = {
+          enable = false,
+          use_treesitter = false,
+          style = "#fabd2f", -- Candidate colors.
+        },
+        blank = {
+          enable = false,
+          chars = { "·" },
+          style = {
+            vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID "Whitespace"), "fg", "gui"),
+          },
+        },
+      }
+    end,
+  },
 
   -- TODO: TODO highlight
   {
