@@ -110,7 +110,7 @@ local sources = {
   ---------diagnostics----------------
   -- MATLAB
   diagnostics.mlint.with {
-    command = "/home/miuka/.local/MATLAB/R2024b/bin/glnxa64/mlint",
+    command = "/home/miuka/.local/MATLAB/R2025a/bin/glnxa64/mlint",
   },
   -- markdown
   diagnostics.markdownlint.with {
