@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function(on_attach, capabilities)
-  require("lspconfig").clangd.setup {
+  vim.lsp.config("clangd", {
     on_attach = on_attach,
     capabilities = vim.tbl_extend("force", capabilities, {
       offsetEncoding = "utf-8",
@@ -41,7 +41,7 @@ M.setup = function(on_attach, capabilities)
       "objc",
       "objcpp",
     },
-  }
+  })
 end
 
 return M

@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function(on_attach, capabilities)
-  require("lspconfig").jsonls.setup {
+  vim.lsp.config("jsonls", {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "vscode-json-language-server", "--stdio" },
@@ -18,7 +18,7 @@ M.setup = function(on_attach, capabilities)
         },
       },
     },
-  }
+  })
 end
 
 return M

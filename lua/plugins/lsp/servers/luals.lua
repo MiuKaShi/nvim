@@ -4,7 +4,7 @@ M.setup = function(on_attach, capabilities)
   -- this block must come before lua LSP setup
   -- require("neodev").setup {}
   -- lua_ls setup
-  require("lspconfig").lua_ls.setup {
+  vim.lsp.config("lua_ls", {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -37,7 +37,7 @@ M.setup = function(on_attach, capabilities)
         },
       },
     },
-  }
+  })
 end
 
 return M

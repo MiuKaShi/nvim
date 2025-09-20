@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function(on_attach, capabilities)
-  require("lspconfig").matlab_ls.setup {
+  vim.lsp.config("matlab_ls", {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "matlab_ls", "--stdio" },
@@ -20,7 +20,7 @@ M.setup = function(on_attach, capabilities)
     handlers = {
       ["textDocument/publishDiagnostics"] = function() end, -- disable diagnostics, null_ls handles this
     },
-  }
+  })
 end
 
 return M

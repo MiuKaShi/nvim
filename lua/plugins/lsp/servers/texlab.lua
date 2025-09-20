@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function(on_attach, capabilities)
-  require("lspconfig").texlab.setup {
+  vim.lsp.config("texlab", {
     cmd = { "texlab" },
     filetypes = { "tex", "bib" },
     on_attach = on_attach,
@@ -29,7 +29,7 @@ M.setup = function(on_attach, capabilities)
         bibtexFormatter = "latexindent",
       },
     },
-  }
+  })
 end
 
 return M

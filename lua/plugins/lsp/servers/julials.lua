@@ -3,7 +3,7 @@
 local M = {}
 
 M.setup = function(on_attach, capabilities)
-  require("lspconfig").julials.setup {
+  vim.lsp.config("julials", {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "juliacli", "server" },
@@ -23,7 +23,7 @@ M.setup = function(on_attach, capabilities)
         },
       },
     },
-  }
+  })
 end
 
 return M

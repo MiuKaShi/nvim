@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function(on_attach, capabilities)
-  require("lspconfig").cssls.setup {
+  vim.lsp.config("cssls", {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "vscode-css-language-server", "--stdio" },
@@ -27,7 +27,7 @@ M.setup = function(on_attach, capabilities)
         },
       },
     },
-  }
+  })
 end
 
 return M

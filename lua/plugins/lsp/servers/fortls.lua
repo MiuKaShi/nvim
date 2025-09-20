@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function(on_attach, capabilities)
-  require("lspconfig").fortls.setup {
+  vim.lsp.config("fortls", {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = {
@@ -16,7 +16,7 @@ M.setup = function(on_attach, capabilities)
       return util.root_pattern(".fortls", ".git")(fname) or vim.fn.getcwd()
     end,
     settings = { nthreads = 2 },
-  }
+  })
 end
 
 return M
