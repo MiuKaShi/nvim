@@ -264,7 +264,7 @@ return {
 
   -- 中文格式化
   {
-    "MiuKaShi/pangu.vim",
+    "hotoo/pangu.vim",
     init = function()
       vim.g["pangu_rule_trailing_whitespace"] = 0 -- 删除前置空白和尾空白。默认开启
       vim.g["pangu_rule_english_writing"] = 1 -- 英文写作模式。默认开启

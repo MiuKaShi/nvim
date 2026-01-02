@@ -6,7 +6,9 @@ local MATH_NODES = {
   math_environment = true,
 }
 
-local ts_utils = require "nvim-treesitter.ts_utils"
+-- local ts_utils = require "nvim-treesitter.ts_utils"
+
+local ok, ts_utils = pcall(require, "nvim-treesitter.ts_utils")
 
 M.in_env = function(env)
   local node = ts_utils.get_node_at_cursor()

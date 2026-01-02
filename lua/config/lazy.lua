@@ -1,16 +1,16 @@
 -- Install lazy.nvim
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  }
+if not vim.uv.fs_stat(lazypath) then
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  local args = { "git", "clone", "--filter=blob:none", "--branch=stable", repo, lazypath }
+  local out = vim.system(args):wait()
+  if out.code ~= 0 then
+    vim.api.nvim_echo({ { "Failed to clone lazy.nvim:\n" .. out.stderr, "ErrorMsg" } }, true, {})
+    vim.fn.getchar() -- wait for keypress
+    os.exit(1)
+  end
 end
-vim.opt.rtp:prepend(lazypath)
+vim.opt.runtimepath:prepend(lazypath)
 
 -- Configure lazy.nvim
 require("lazy").setup {
