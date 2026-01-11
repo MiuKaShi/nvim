@@ -1,42 +1,43 @@
+local ensureInstalled = {
+  "bash",
+  "python",
+  "query",
+  "c",
+  "cpp",
+  "cmake",
+  "comment",
+  "diff",
+  "dockerfile",
+  "go",
+  "json",
+  "latex",
+  "lua",
+  "luap",
+  "luadoc",
+  "foam",
+  "toml",
+  "yaml",
+  "julia",
+  "matlab",
+  "http",
+  "glsl",
+  "ruby",
+  "regex",
+  "vim",
+  "vimdoc",
+}
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
     -- commit = "19ac9e8",
     build = ":TSUpdate",
-    dependencies = {
-      "HiPhish/rainbow-delimiters.nvim",
-    },
-    event = "VeryLazy",
-    cmd = { "TSUpdateSync" },
+    lazy = false,
+    -- dependencies = {
+    --   "hiphish/rainbow-delimiters.nvim", -- WARN This degrades performance
+    -- },
     opts = {
-      ensure_installed = {
-        "bash",
-        "python",
-        "query",
-        "c",
-        "cpp",
-        "cmake",
-        "comment",
-        "diff",
-        "dockerfile",
-        "go",
-        "json",
-        "latex",
-        "lua",
-        "luap",
-        "luadoc",
-        "foam",
-        "toml",
-        "yaml",
-        "julia",
-        "matlab",
-        "http",
-        "glsl",
-        "ruby",
-        "regex",
-        "vim",
-        "vimdoc",
-      },
+      install_dir = vim.fn.stdpath "data" .. "/treesitter",
       highlight = {
         enable = true,
         disable = {
@@ -72,6 +73,29 @@ return {
         disable = { "jsx" },
       },
     },
+    init = function()
+      -- auto-install parsers
+      if vim.fn.executable "tree-sitter" == 1 then
+        vim.defer_fn(function() require("nvim-treesitter").install(ensureInstalled) end, 2000)
+      else
+        local msg = "`tree-sitter-cli` not found. Skipping auto-install of parsers."
+        vim.notify(msg, vim.log.levels.WARN, { title = "Treesitter" })
+      end
+
+      -- comments parser
+      vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
+        desc = "User: highlights for the Treesitter `comments` parser",
+        callback = function()
+          -- FIX todo-comments in languages where LSP overwrites their highlight
+          -- https://github.com/stsewd/tree-sitter-comment/issues/22
+          -- https://github.com/LuaLS/lua-language-server/issues/1809
+          vim.api.nvim_set_hl(0, "@lsp.type.comment", {})
+
+          -- Define `@comment.bold` for `queries/comment/highlights.scm`
+          vim.api.nvim_set_hl(0, "@comment.bold", { bold = true })
+        end,
+      })
+    end,
   },
 
   -- tons of text objects
@@ -128,33 +152,33 @@ return {
     },
   },
 
-  {
-    "HiPhish/rainbow-delimiters.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    event = "VeryLazy",
-    init = function()
-      local rainbow_delimiters = require "rainbow-delimiters"
-      vim.g.rainbow_delimiters = {
-        strategy = {
-          [""] = rainbow_delimiters.strategy["global"],
-          vim = rainbow_delimiters.strategy["local"],
-        },
-        query = {
-          [""] = "rainbow-delimiters",
-          lua = "rainbow-blocks",
-        },
-        highlight = {
-          "RainbowDelimiterRed",
-          "RainbowDelimiterYellow",
-          "RainbowDelimiterBlue",
-          "RainbowDelimiterOrange",
-          "RainbowDelimiterGreen",
-          "RainbowDelimiterViolet",
-          "RainbowDelimiterCyan",
-        },
-      }
-    end,
-  },
+  -- {
+  --   "HiPhish/rainbow-delimiters.nvim",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   event = "VeryLazy",
+  --   init = function()
+  --     local rainbow_delimiters = require "rainbow-delimiters"
+  --     vim.g.rainbow_delimiters = {
+  --       strategy = {
+  --         [""] = rainbow_delimiters.strategy["global"],
+  --         vim = rainbow_delimiters.strategy["local"],
+  --       },
+  --       query = {
+  --         [""] = "rainbow-delimiters",
+  --         lua = "rainbow-blocks",
+  --       },
+  --       highlight = {
+  --         "RainbowDelimiterRed",
+  --         "RainbowDelimiterYellow",
+  --         "RainbowDelimiterBlue",
+  --         "RainbowDelimiterOrange",
+  --         "RainbowDelimiterGreen",
+  --         "RainbowDelimiterViolet",
+  --         "RainbowDelimiterCyan",
+  --       },
+  --     }
+  --   end,
+  -- },
 
   -- {
   --   "sustech-data/wildfire.nvim",

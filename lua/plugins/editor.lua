@@ -392,12 +392,13 @@ endfunction
       vim.opt.foldlevelstart = 99
     end,
     opts = {
+      foldKeymaps = {
+        setup = false, -- setting on my own since I remap `H` and `L`
+        scrollLeftOnCaret = true, -- `^` should scroll left (basically mapped to `0^`)
+      },
       foldtext = {
         padding = 2,
         lineCount = { template = "󰘖 %d" },
-      },
-      autoFold = {
-        kinds = { "comment", "imports" }, ---@type lsp.FoldingRangeKind[]
       },
     },
     keys = { { "<BS>", function() require("origami").h() end, desc = "toggle fold" } },
