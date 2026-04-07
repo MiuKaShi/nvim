@@ -384,25 +384,25 @@ endfunction
   },
 
   -- fold
-  {
-    "chrisgrieser/nvim-origami",
-    event = "VeryLazy",
-    init = function()
-      vim.opt.foldlevel = 99 -- disable vim's auto-fold
-      vim.opt.foldlevelstart = 99
-    end,
-    opts = {
-      foldKeymaps = {
-        setup = false, -- setting on my own since I remap `H` and `L`
-        scrollLeftOnCaret = true, -- `^` should scroll left (basically mapped to `0^`)
-      },
-      foldtext = {
-        padding = 2,
-        lineCount = { template = "󰘖 %d" },
-      },
-    },
-    keys = { { "<BS>", function() require("origami").h() end, desc = "toggle fold" } },
-  },
+  -- {
+  --   "chrisgrieser/nvim-origami",
+  --   event = "VeryLazy",
+  --   init = function()
+  --     vim.opt.foldlevel = 99 -- disable vim's auto-fold
+  --     vim.opt.foldlevelstart = 99
+  --   end,
+  --   opts = {
+  --     foldKeymaps = {
+  --       setup = false, -- setting on my own since I remap `H` and `L`
+  --       scrollLeftOnCaret = true, -- `^` should scroll left (basically mapped to `0^`)
+  --     },
+  --     foldtext = {
+  --       padding = 2,
+  --       lineCount = { template = "󰘖 %d" },
+  --     },
+  --   },
+  --   keys = { { "<BS>", function() require("origami").h() end, desc = "toggle fold" } },
+  -- },
 
   -- convenience file operations
   {

@@ -100,7 +100,7 @@ local sources = {
   },
   formatting.shfmt.with {
     extra_args = { "-i", "4", "-ci", "-bn" },
-    extra_filetypes = { "zsh" },
+    extra_filetypes = { "zsh", "sh" },
   },
   -- LaTex
   -- require "none-ls.formatting.latexindent",

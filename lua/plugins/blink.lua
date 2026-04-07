@@ -29,7 +29,7 @@ return {
   -- auto completion
   {
     "saghen/blink.cmp",
-    event = "LspAttach",
+    event = { "InsertEnter", "CmdlineEnter" },
     version = "*",
     dependencies = {
       {

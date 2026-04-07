@@ -33,7 +33,7 @@ function M.on_attach(client, buffer)
   }
 
   for _, keys in ipairs(keymaps) do
-    if client.supports_method("textDocument/" .. keys.method) then
+    if client:supports_method("textDocument/" .. keys.method) then
       vim.keymap.set(keys.mode or "n", keys[1], keys[2], { buffer = buffer, desc = keys.method })
     end
   end
@@ -44,7 +44,7 @@ function M.on_attach(client, buffer)
     M.autoformat = not M.autoformat
     vim.notify("Format on save: " .. tostring(M.autoformat))
   end, {})
-  if client.supports_method "textDocument/formatting" then
+  if client:supports_method "textDocument/formatting" then
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = vim.api.nvim_create_augroup("LspFormat." .. buffer, {}),
       buffer = buffer,
@@ -55,7 +55,7 @@ function M.on_attach(client, buffer)
   end
 
   -- highlight hint
-  if client.supports_method "textDocument/documentHighlight" then
+  if client:supports_method "textDocument/documentHighlight" then
     local group = vim.api.nvim_create_augroup("lsp_document_highlight", {})
     vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
       group = group,

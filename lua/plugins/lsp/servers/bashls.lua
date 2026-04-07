@@ -5,7 +5,7 @@ M.setup = function(on_attach, capabilities)
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "bash-language-server", "start" },
-    filetypes = { "bash", "sh" },
+    filetypes = { "sh", "bash", "zsh" },
   })
 end
 
