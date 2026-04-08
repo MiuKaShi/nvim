@@ -26,7 +26,7 @@ A language server for librime
 
   local rime_on_attach = function(client, _)
     local toggle_rime = function()
-      client.request("workspace/executeCommand", { command = "rime-ls.toggle-rime" }, function(_, result, ctx, _)
+      client:request("workspace/executeCommand", { command = "rime-ls.toggle-rime" }, function(_, result, ctx, _)
         if ctx.client_id == client.id then vim.g.rime_enabled = result end
       end)
     end
