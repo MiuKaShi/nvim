@@ -73,13 +73,9 @@ return {
     indent = {
       char = "│",
       scope = { hl = "Comment" },
-      chunk = {
-        enabled = false,
-        hl = "Comment",
-      },
       animate = {
         -- slower for more dramatic effect :o
-        duration = { steps = 200, total = 1000 },
+        duration = { step = 50, total = 1000 },
       },
     },
     styles = {

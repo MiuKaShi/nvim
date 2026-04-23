@@ -115,61 +115,9 @@ return {
   opts = {
     picker = {
       sources = {
-        undo = {
-          win = {
-            input = {
-              keys = {
-                -- <CR>: restores the selected undo point
-                ["<D-c>"] = { "yank_add", mode = "i" },
-                ["<D-d>"] = { "yank_del", mode = "i" },
-              },
-            },
-          },
-          layout = "big_preview",
-        },
-        marks = {
-          transform = function(item) return item.label:find "%u" ~= nil end, -- only global marks
-          win = {
-            input = {
-              keys = { ["<D-d>"] = { "delete_mark", mode = "i" } },
-            },
-          },
-          actions = {
-            delete_mark = function(picker)
-              local markName = picker:current().label
-              require("personal-plugins.marks").deleteMark(markName)
-              picker:find() -- reload
-            end,
-          },
-        },
-        explorer = {
-          auto_close = true,
-          layout = { preset = "very_vertical" },
-          win = {
-            list = {
-              keys = {
-                -- consistent with Finder vim mode bindings
-                ["<D-up>"] = "explorer_up",
-                ["h"] = "explorer_close", -- go up folder
-                ["l"] = "confirm", -- enter folder / open file
-                ["zz"] = "explorer_close_all",
-                ["y"] = "explorer_copy",
-                ["n"] = "explorer_add",
-                ["d"] = "explorer_del",
-                ["m"] = "explorer_move",
-                ["o"] = "explorer_open", -- open with system application
-                ["<CR>"] = "explorer_rename",
-                ["-"] = "focus_input", -- i.e. search
-                ["."] = "toggle_hidden_and_ignored",
-
-                -- consistent with `gh` for next hunk and `ge` for next diagnostic
-                ["gh"] = "explorer_git_next",
-                ["gH"] = "explorer_git_prev",
-                ["ge"] = "explorer_diagnostic_next",
-                ["gE"] = "explorer_diagnostic_prev",
-              },
-            },
-          },
+        select = { -- vim.ui.select
+          layout = { layout = { min_width = 40, width = 0.6 } },
+          kinds = {}, -- allows-kind-specific config
         },
         files = {
           cmd = "rg",
@@ -187,7 +135,6 @@ return {
           win = {
             input = {
               keys = {
-                ["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
                 [":"] = { "complete_and_add_colon", mode = "i" },
               },
             },
@@ -222,27 +169,42 @@ return {
             end,
           },
         },
-        recent = {
-          layout = "small_no_preview",
-          filter = {
-            filter = function(item) return vim.fs.basename(item.file) ~= "COMMIT_EDITMSG" end,
+        explorer = {
+          layout = { preset = "small_no_preview", layout = { height = 0.85 } },
+          jump = { close = true },
+          win = {
+            list = {
+              keys = {
+                -- consistent with Finder vim mode bindings
+                ["<D-up>"] = "explorer_up",
+                ["h"] = "explorer_close", -- go up folder
+                ["l"] = "confirm", -- enter folder / open file
+                ["zz"] = "explorer_close_all",
+                ["y"] = "explorer_copy",
+                ["n"] = "explorer_add",
+                ["d"] = "explorer_del",
+                ["m"] = "explorer_move",
+                ["o"] = "explorer_open", -- open with system application
+                ["<CR>"] = "explorer_rename",
+                ["-"] = "focus_input", -- i.e. search
+                ["."] = "toggle_hidden_and_ignored",
+
+                -- consistent with `gh` for next hunk and `ge` for next diagnostic
+                ["gh"] = "explorer_git_next",
+                ["gH"] = "explorer_git_prev",
+                ["ge"] = "explorer_diagnostic_next",
+                ["gE"] = "explorer_diagnostic_prev",
+              },
+            },
           },
         },
+        recent = { layout = "small_no_preview" },
         grep = {
           regex = false, -- use fixed strings by default
           cmd = "rg",
           args = {
             "--sortr=modified", -- sort by recency, slight performance impact
-            ("--ignore-file=" .. vim.fs.normalize "~/.config/ripgrep/ignore"),
-          },
-          layout = "big_preview",
-          win = {
-            input = {
-              keys = {
-                ["<C-i>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
-                ["<C-r>"] = { "toggle_regex", mode = "i" },
-              },
-            },
+            ("--ignore-file=" .. vim.env.HOME .. "/.config/ripgrep/ignore"),
           },
         },
         help = {
@@ -315,7 +277,7 @@ return {
           win = {
             input = {
               keys = {
-                ["<Tab>"] = { "list_down_wrapping", mode = "i" },
+                ["<Tab>"] = { "list_down", mode = "i" },
                 ["<Space>"] = { "git_stage", mode = "i" },
                 -- <CR> opens the file as usual
               },
@@ -327,7 +289,7 @@ return {
           win = {
             input = {
               keys = {
-                ["<Tab>"] = { "list_down_wrapping", mode = "i" },
+                ["<Tab>"] = { "list_down", mode = "i" },
                 ["<Space>"] = { "git_stage", mode = "i" },
                 -- <CR> opens the file as usual
               },
@@ -340,17 +302,21 @@ return {
         gh_pr = {
           layout = "big_preview",
         },
+        treesitter = {
+          layout = "sidebar",
+          filter = { markdown = { "Field" } }, -- requires `queries/markdown/locals.scm`
+        },
+        lsp_symbols = { layout = "sidebar" },
       },
-      formatters = {
-        file = { filename_first = true },
-        selected = { unselected = false }, -- hide selection column when no selected items
-      },
+      formatters = { file = { filename_first = true } },
       previewers = {
-        diff = { builtin = false }, -- use `delta` automatically
-        git = { builtin = false },
+        diff = { wo = { wrap = false } },
       },
       toggles = {
-        regex = { icon = "r", value = true }, -- invert
+        regex = { icon = "regex", value = true }, -- invert -> only display if enabled
+        follow = { icon = "no follow", value = false }, -- invert -> only display if disabled
+        ignored = { icon = "ignored" },
+        hidden = { icon = "hidden" },
       },
       ui_select = true,
       layout = "wide_with_preview", -- = default layout
@@ -370,10 +336,6 @@ return {
             },
           },
         },
-        very_vertical = {
-          preset = "small_no_preview",
-          layout = { height = 0.95, width = 0.45 },
-        },
         wide_with_preview = {
           preset = "small_no_preview",
           layout = {
@@ -383,19 +345,39 @@ return {
               title = "{preview}",
               border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
               width = 0.5,
-              wo = { number = false, statuscolumn = " ", signcolumn = "no" },
             },
           },
-        },
-        toggled_preview = {
-          preset = "big_preview",
-          preview = false,
         },
         big_preview = {
           preset = "wide_with_preview",
           layout = {
-            height = 0.85,
+            height = 0.8,
             [2] = { width = 0.6 }, -- second win is the preview
+          },
+        },
+        sidebar = {
+          preview = "main",
+          cycle = true, -- `list_up/down` action wraps
+          layout = {
+            box = "vertical",
+            position = "left", -- = split window
+            width = 0.3,
+            min_width = 25,
+            { win = "input", height = 1, border = "bottom" },
+            { win = "list" },
+            { win = "preview" },
+          },
+        },
+        sidebar_no_input = {
+          preview = "main",
+          cycle = true, -- `list_up/down` action wraps
+          layout = {
+            box = "vertical",
+            position = "left", -- = split window
+            width = 0.3,
+            min_width = 25,
+            { win = "list" },
+            { win = "preview" },
           },
         },
       },
@@ -404,7 +386,7 @@ return {
           keys = {
             ["<Esc>"] = { "close", mode = "i" }, --> disable normal mode
             ["<CR>"] = { "confirm", mode = "i" },
-            ["<C-j>"] = { "list_down_wrapping", mode = "i" },
+            ["<C-j>"] = { "list_down", mode = "i" },
             ["<C-k>"] = { "list_up", mode = "i" },
             ["<D-Up>"] = { "list_top", mode = "i" },
             ["<D-Down>"] = { "list_bottom", mode = "i" },
@@ -442,15 +424,21 @@ return {
             ["?"] = "toggle_help_list",
           },
         },
-        preview = { keys = { ["<C-CR>"] = { "cycle_win" } } },
+        preview = {
+          keys = {
+            ["q"] = "close",
+            ["<C-CR>"] = "cycle_win",
+            ["<Tab>"] = "list_down", -- cycle list from the preview win
+            ["<S-Tab>"] = "list_up",
+          },
+          wo = {
+            number = false,
+            statuscolumn = " ",
+            signcolumn = "no",
+          },
+        },
       },
       actions = {
-        list_down_wrapping = function(picker)
-          local allVisible = #picker.list.items -- picker:count() only counts unfiltered
-          local current = picker.list.cursor -- picker:current().idx incorrect for `smart` source
-          local action = current == allVisible and "list_top" or "list_down"
-          picker:action(action)
-        end,
         qflist_and_go = function(picker)
           local query = vim.api.nvim_get_current_line()
           local title = ("%s: %s"):format(picker.title, query)
@@ -483,7 +471,6 @@ return {
       prompt = "  ", -- 
       icons = {
         ui = { selected = "󰒆 " },
-        undo = { saved = "" }, -- useless, since I have auto-saving
         git = {
           staged = "󰐖", -- consistent with tinygit
           added = "󰎔",
