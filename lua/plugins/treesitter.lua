@@ -1,6 +1,8 @@
 local ensureInstalled = {
+  "zsh",
   "bash",
   "python",
+  "requirements",
   "query",
   "c",
   "cpp",
@@ -22,6 +24,7 @@ local ensureInstalled = {
   "http",
   "glsl",
   "ruby",
+  "rust",
   "regex",
   "vim",
   "vimdoc",

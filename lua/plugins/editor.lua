@@ -352,6 +352,9 @@ endfunction
         return out
       end,
       mappings = {},
+      ui = {
+        enable = true,
+      },
     },
     keys = {
       { "<leader>nj", "<CMD>ObsidianFollowLink<CR>", desc = "Obsidian Follow Link" },
