@@ -12037,8 +12037,6 @@ teeter
 teetotal
 telecommunications
 telephone
-telescope
-telescopic
 television
 tell
 teller

@@ -32,14 +32,6 @@ Here, I list the plugins in each lua file
 - nvim-treesitter-context: custom textobjs
 - nvim-various-textobjs: operate textobjs
 
-### telescope.lua
-
-- telescope.nvim: search tool
-- telescope-lazy.nvim: lazy startup
-- telescope-file-browser.nvim: file browser function
-- telescope-ui-select.nvim: telescope custom UI
-- nvim-telescope/telescope-fzf-native.nvim: telescope native fzf
-
 ### editor.lua
 
 - ultimate-autopair.nvim: autopair bracket

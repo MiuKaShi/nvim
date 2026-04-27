@@ -6,9 +6,6 @@ local function map(mode, shortcut, command, opts)
   vim.keymap.set(mode, shortcut, command, opts)
 end
 
--- search keymaps
-map("n", "?", function() vim.cmd.Telescope "keymaps" end, { desc = "⌨️  Search Keymaps" })
-
 -------------
 -- insert mode
 -------------

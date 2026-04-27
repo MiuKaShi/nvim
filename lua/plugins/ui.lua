@@ -41,7 +41,6 @@ return {
           lazy = { icon = "󰒲", name = "lazy.nvim" },
           mason = { icon = "", name = "mason.nvim" },
           octo = { icon = "", name = "octo.nvim" },
-          TelescopePrompt = { icon = "", name = "Telescope" },
         },
       }
     end,
@@ -68,7 +67,6 @@ return {
         ["neo-tree"] = true,
         plugin = true,
         lazy = true,
-        TelescopePrompt = true,
         markdown = false,
         ["markdown.pandoc"] = false,
       }
@@ -523,11 +521,6 @@ return {
           min_width = 20,
           max_height = 12,
           min_height = 3,
-        },
-        telescope = {
-          layout_config = {
-            horizontal = { width = { 0.7, max = 75 }, height = 0.6 },
-          },
         },
         get_config = function(opts)
           local useBuiltin = { "plain", "codeaction", "rule_selection" }
