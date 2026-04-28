@@ -10,7 +10,6 @@ return {
   -- surround
   {
     "kylechui/nvim-surround",
-    config = true,
     keys = {
       { "ys", desc = "󰅪 Add Surround Operator" },
       { "yS", desc = "󰅪 Surround to EoL" },
@@ -18,6 +17,41 @@ return {
       { "cs", desc = "󰅪 Change Surround Operator" },
       { "s", mode = "x", desc = "󰅪 Add Surround Operator" },
     },
+    config = function()
+      require("nvim-surround").setup {
+        move_cursor = false,
+        aliases = {
+          c = "}",
+          b = ")",
+          r = "]",
+          q = '"',
+          z = "'",
+          e = "`",
+          k = { '"', "'", "`" },
+          s = { "}", ")", "]", '"', "'", "`" },
+        },
+        surrounds = {
+          invalid_key_behavior = { add = false, find = false, delete = false, change = false },
+          l = {
+            find = "[%w.:_]+%b()",
+            delete = "([%w.:_]+%()().*(%))()",
+          },
+          f = {
+            find = "function ?[%w_]* ?%b().- end",
+            delete = "(function ?[%w_]* ?%b() ?)().-( end)()",
+          },
+          o = {
+            find = "if .- then .- end",
+            delete = "(if .- then )().-( end)()",
+          },
+          R = {
+            add = { "[[", "]]" },
+            find = "%[%[.-%]%]",
+            delete = "(%[%[)().-(%]%])()",
+          },
+        },
+      }
+    end,
   },
 
   -- symbols outline

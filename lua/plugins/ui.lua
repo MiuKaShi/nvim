@@ -353,100 +353,100 @@ return {
   -- },
 
   -- prompt UI
-  {
-    "folke/noice.nvim",
-    dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-    event = "VeryLazy",
-    opts = {
-      routes = {
-        -- FIX jedi bug https://github.com/pappasam/jedi-language-server/issues/296
-        { filter = { event = "msg_show", find = "^}$" }, skip = true },
-        -- FIX lsp signature bug
-        { filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
-        -- redirect to popup when message is long
-        { filter = { min_height = 10 }, view = "popup" },
-        -- write/deletion messages
-        { filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
-        { filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
-        { filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
-        -- unneeded info on search patterns
-        { filter = { event = "msg_show", find = "^[/?]." }, skip = true },
-        { filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
-        -- Word added to spellfile via `zg`
-        { filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
-        -- Diagnostics
-        {
-          filter = { event = "msg_show", find = "No more valid diagnostics to move to" },
-          view = "mini",
-        },
-        -- code actions
-        { filter = { event = "notify", find = "No code actions available" }, view = "mini" },
-        -- :make
-        { filter = { event = "msg_show", find = "^:!make" }, skip = true },
-        { filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
-        -- nvim-early-retirement
-        { filter = { event = "notify", find = "^Auto%-closing " }, view = "mini" },
-        -- E211 no longer needed, since early-retirement closes deleted buffers
-        { filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
-        -- nvim-treesitter
-        { filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
-        { filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
-      },
-      cmdline = {
-        format = {
-          search_down = { icon = "  ", view = "cmdline" },
-        },
-      },
-      views = {
-        cmdline_popup = {
-          border = { style = "none" },
-        },
-        mini = {
-          timeout = 3000,
-          zindex = 10, -- lower, so it does not cover nvim-notify
-          position = { col = -3 }, -- to the left to avoid collision with scrollbar
-          format = { "{title} ", "{message}" }, -- leave out "{level}"
-        },
-        hover = {
-          border = { style = "single" },
-          size = { max_width = 80 },
-          win_options = { scrolloff = 4, wrap = true },
-        },
-        popup = {
-          border = { style = "none" },
-          size = { width = "80%", height = "50%" },
-          win_options = { scrolloff = 8, wrap = true },
-          close = { keys = { "q" } },
-        },
-        split = {
-          enter = true,
-          size = "70%",
-          close = { keys = { "q" } },
-          win_options = { scrolloff = 6 },
-        },
-      },
-
-      commands = {
-        -- options for `:Noice history`
-        history = {
-          view = "split",
-          filter_opts = { reverse = true }, -- show newest entries first
-          -- https://github.com/folke/noice.nvim#-formatting
-          opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
-        },
-        last = {
-          view = "popup",
-          -- https://github.com/folke/noice.nvim#-formatting
-          opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
-        },
-      },
-      lsp = {
-        progress = { enabled = false }, -- using my own
-        signature = { enabled = false }, -- using lsp_signature.nvim
-        hover = { enabled = false },
-      },
-    },
-  },
+  -- {
+  --   "folke/noice.nvim",
+  --   dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+  --   event = "VeryLazy",
+  --   opts = {
+  --     routes = {
+  --       -- FIX jedi bug https://github.com/pappasam/jedi-language-server/issues/296
+  --       { filter = { event = "msg_show", find = "^}$" }, skip = true },
+  --       -- FIX lsp signature bug
+  --       { filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
+  --       -- redirect to popup when message is long
+  --       { filter = { min_height = 10 }, view = "popup" },
+  --       -- write/deletion messages
+  --       { filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
+  --       { filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
+  --       { filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
+  --       -- unneeded info on search patterns
+  --       { filter = { event = "msg_show", find = "^[/?]." }, skip = true },
+  --       { filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
+  --       -- Word added to spellfile via `zg`
+  --       { filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
+  --       -- Diagnostics
+  --       {
+  --         filter = { event = "msg_show", find = "No more valid diagnostics to move to" },
+  --         view = "mini",
+  --       },
+  --       -- code actions
+  --       { filter = { event = "notify", find = "No code actions available" }, view = "mini" },
+  --       -- :make
+  --       { filter = { event = "msg_show", find = "^:!make" }, skip = true },
+  --       { filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
+  --       -- nvim-early-retirement
+  --       { filter = { event = "notify", find = "^Auto%-closing " }, view = "mini" },
+  --       -- E211 no longer needed, since early-retirement closes deleted buffers
+  --       { filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
+  --       -- nvim-treesitter
+  --       { filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+  --       { filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
+  --     },
+  --     cmdline = {
+  --       format = {
+  --         search_down = { icon = "  ", view = "cmdline" },
+  --       },
+  --     },
+  --     views = {
+  --       cmdline_popup = {
+  --         border = { style = "none" },
+  --       },
+  --       mini = {
+  --         timeout = 3000,
+  --         zindex = 10, -- lower, so it does not cover nvim-notify
+  --         position = { col = -3 }, -- to the left to avoid collision with scrollbar
+  --         format = { "{title} ", "{message}" }, -- leave out "{level}"
+  --       },
+  --       hover = {
+  --         border = { style = "single" },
+  --         size = { max_width = 80 },
+  --         win_options = { scrolloff = 4, wrap = true },
+  --       },
+  --       popup = {
+  --         border = { style = "none" },
+  --         size = { width = "80%", height = "50%" },
+  --         win_options = { scrolloff = 8, wrap = true },
+  --         close = { keys = { "q" } },
+  --       },
+  --       split = {
+  --         enter = true,
+  --         size = "70%",
+  --         close = { keys = { "q" } },
+  --         win_options = { scrolloff = 6 },
+  --       },
+  --     },
+  --
+  --     commands = {
+  --       -- options for `:Noice history`
+  --       history = {
+  --         view = "split",
+  --         filter_opts = { reverse = true }, -- show newest entries first
+  --         -- https://github.com/folke/noice.nvim#-formatting
+  --         opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
+  --       },
+  --       last = {
+  --         view = "popup",
+  --         -- https://github.com/folke/noice.nvim#-formatting
+  --         opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
+  --       },
+  --     },
+  --     lsp = {
+  --       progress = { enabled = false }, -- using my own
+  --       signature = { enabled = false }, -- using lsp_signature.nvim
+  --       hover = { enabled = false },
+  --     },
+  --   },
+  -- },
 
   -- Notifications
   {

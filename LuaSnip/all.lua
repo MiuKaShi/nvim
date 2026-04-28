@@ -15,21 +15,4 @@ return {
   s("date", f(function() return os.date "%Y-%m-%d" end)),
   s("time", p(os.date, "%T")),
   s("choicenode", c(1, { t "choice 1", t "choice 2", t "choice 3" })),
-  -- comments
-  s({ trig = "todo", name = "TODO", dscr = "TODO:" }, {
-    t("TODO(" .. username .. "): "),
-    p(os.date, "%Y-%m-%d "),
-  }, { condition = context.in_comments, show_condition = context.in_comments }),
-  s({ trig = "fix", name = "FIXME", dscr = "FIXME:" }, {
-    t("FIXME(" .. username .. "): "),
-    p(os.date, "%Y-%m-%d "),
-  }, { condition = context.in_comments, show_condition = context.in_comments }),
-  s({ trig = "hack", name = "HACK", dscr = "HACK:" }, {
-    t("HACK(" .. username .. "): "),
-    p(os.date, "%Y-%m-%d "),
-  }, { condition = context.in_comments, show_condition = context.in_comments }),
-  s({ trig = "note", name = "NOTE", dscr = "NOTE:" }, {
-    t("NOTE(" .. username .. "): "),
-    p(os.date, "%Y-%m-%d "),
-  }, { condition = context.in_comments, show_condition = context.in_comments }),
 }

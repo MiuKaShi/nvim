@@ -7,8 +7,7 @@ local M = {}
 
 local MATH_NODES = {
   displayed_equation = true,
-  math_environment = true,
-  -- inline_formula = true,
+  inline_formula = true,
 }
 
 local function get_node_at_cursor()
@@ -48,6 +47,46 @@ local function in_tsnode(ntype, pos, buf, mode)
   return ntype(node:type())
 end
 
+function M.in_mathzone()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local current_line = cursor[1] -- 1-indexed
+  local col = cursor[2]
+  local total_lines = vim.api.nvim_buf_line_count(0)
+
+  local lines = vim.api.nvim_buf_get_lines(0, 0, total_lines, false)
+  local cur = lines[current_line] -- current line (1-indexed into lua table)
+
+  -- 1. Fast inline check on current line
+  local before = cur:sub(1, col)
+  local after = cur:sub(col + 1)
+  if before:find "%$%$[^$]*$" and after:find "^[^$]*%$%$" then return true end
+
+  -- 2. Multiline $$ block check
+  local function is_delimiter(l) return l:match "^%s*%$%$%s*$" ~= nil end
+
+  -- Search upward for opening $$
+  local open_found = false
+  for i = current_line - 1, 1, -1 do
+    local l = lines[i]
+    if is_delimiter(l) then
+      open_found = true
+      break
+    end
+    if l:find("%$%$", 1, true) then break end -- plain search, no pattern overhead
+  end
+
+  if not open_found then return false end
+
+  -- Search downward for closing $$
+  for i = current_line + 1, total_lines do
+    local l = lines[i]
+    if is_delimiter(l) then return true end
+    if l:find("%$%$", 1, true) then break end
+  end
+
+  return false
+end
+
 ---Check if the current line is a markdown code block, using regex
 ---to check each line
 function M.in_codeblock_regex(lnum, buf)
@@ -62,7 +101,6 @@ function M.in_codeblock_regex(lnum, buf)
 end
 
 ---Check if the current line is a markdown code block
----@return boolean
 function M.in_codeblock(lnum, buf)
   buf = buf or 0
   lnum = lnum or vim.api.nvim_win_get_cursor(0)[1]
@@ -94,24 +132,6 @@ function M.in_text(check_parent)
   end
   return true
 end
-
--- https://github.com/nvim-treesitter/nvim-treesitter/issues/1184#issuecomment-830388856
-function M.in_mathzone()
-  local node = get_node_at_cursor()
-  while node do
-    if node:type() == "text_mode" then
-      return false
-    elseif MATH_NODES[node:type()] then
-      return true
-    end
-    node = node:parent()
-  end
-  return false
-end
-
----Check if the current line is a markdown comment
-
-function M.in_comment() return not M.in_text() and not M.in_mathzone() and not M.in_codeblock() end
 
 -- function M.in_comment()
 -- 	return vim.fn["vimtex#syntax#in_comment"]() == 1

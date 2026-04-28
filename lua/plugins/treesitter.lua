@@ -33,8 +33,8 @@ local ensureInstalled = {
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    -- commit = "19ac9e8",
     build = ":TSUpdate",
+    branch = "main",
     lazy = false,
     -- dependencies = {
     --   "hiphish/rainbow-delimiters.nvim", -- WARN This degrades performance
@@ -47,6 +47,7 @@ return {
           "css",
           "latex",
           "markdown",
+          -- "python",
         },
         -- additional_vim_regex_highlighting = { "org" },
       },

@@ -199,19 +199,19 @@ return {
   },
 
   -- signature hints
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "LspAttach",
-    dependencies = "folke/noice.nvim",
-    opts = {
-      noice = true, -- render via noice.nvim
-      hint_prefix = "󰏪 ",
-      hint_scheme = "@variable.parameter", -- highlight group
-      hint_inline = function() return vim.lsp.inlay_hint ~= nil end,
-      floating_window = false,
-      always_trigger = true,
-    },
-  },
+  -- {
+  --   "ray-x/lsp_signature.nvim",
+  --   event = "LspAttach",
+  --   dependencies = "folke/noice.nvim",
+  --   opts = {
+  --     noice = true, -- render via noice.nvim
+  --     hint_prefix = "󰏪 ",
+  --     hint_scheme = "@variable.parameter", -- highlight group
+  --     hint_inline = function() return vim.lsp.inlay_hint ~= nil end,
+  --     floating_window = false,
+  --     always_trigger = true,
+  --   },
+  -- },
 
   -- better LSP variable-rename
   {
