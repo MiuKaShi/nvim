@@ -33,9 +33,8 @@ local ensureInstalled = {
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    branch = "main",
     lazy = false,
+    build = ":TSUpdate",
     -- dependencies = {
     --   "hiphish/rainbow-delimiters.nvim", -- WARN This degrades performance
     -- },
@@ -85,6 +84,21 @@ return {
         local msg = "`tree-sitter-cli` not found. Skipping auto-install of parsers."
         vim.notify(msg, vim.log.levels.WARN, { title = "Treesitter" })
       end
+
+      -- auto-start highlights & indentation
+      vim.api.nvim_create_autocmd("FileType", {
+        desc = "Enable treesitter-based features for supported filetypes",
+        callback = function(ctx)
+          -- highlights
+          -- errors for filetypes with no parser
+          local hasStarted = pcall(vim.treesitter.start, ctx.buf)
+          -- indent
+          local dontUseTreesitterIndent = { "zsh", "bash", "markdown", "javascript" }
+          if hasStarted and not vim.list_contains(dontUseTreesitterIndent, ctx.match) then
+            vim.bo[ctx.buf].indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+          end
+        end,
+      })
 
       -- comments parser
       vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
