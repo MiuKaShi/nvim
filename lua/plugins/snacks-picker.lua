@@ -41,13 +41,13 @@ return {
     -- FILES
     { "<leader>ff", betterFileOpen, desc = " Open files" },
     { "gn", function() betterFileOpen(vim.g.notesDir) end, desc = " Notes" },
-    { "gt", function() require("snacks").picker.explorer() end, desc = "󰙅 File tree" },
-    {
-      "gr",
-      function() require("snacks").picker.recent() end,
-      desc = "󰋚 Recent files",
-      nowait = true, -- due to nvim default mappings starting with `gr`
-    },
+    -- { "gt", function() require("snacks").picker.explorer() end, desc = "󰙅 File tree" },
+    -- {
+    --   "gr",
+    --   function() require("snacks").picker.recent() end,
+    --   desc = "󰋚 Recent files",
+    --   nowait = true, -- due to nvim default mappings starting with `gr`
+    -- },
     { "g,", function() betterFileOpen(vim.fn.stdpath "config") end, desc = " nvim config" },
     {
       "gp",

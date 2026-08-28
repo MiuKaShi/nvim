@@ -18,6 +18,7 @@ require "config.lazy"
 require "config.neovide"
 
 -- vim.lsp.set_log_level "debug"
+-- vim.lsp.set_log_level "debug"
 
 -- load the colorscheme here
 vim.cmd.colorscheme "gruvbox"

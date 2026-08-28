@@ -44,12 +44,8 @@ return {
       }
       require("lspconfig.ui.windows").default_options.border = "single"
 
-      -- attach
-      local on_attach = function(client, bufnr) require("plugins.lsp.attach").on_attach(client, bufnr) end
-
       -- capabilities
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-
       -- completion capabilities
       -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
       capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
@@ -60,27 +56,41 @@ return {
         lineFoldingOnly = true,
       }
 
-      for _, server in ipairs {
+      -- Apply to all LSP servers
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
+
+      -- LSPattach
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("my-lsp-attach", { clear = true }),
+
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+          if client then require("plugins.lsp.attach").on_attach(client, args.buf) end
+        end,
+      })
+
+      vim.lsp.enable {
         "pyright",
         "clangd",
         "cssls",
         "gopls",
         "jsonls",
-        "htmls",
+        "html",
         "bashls",
         "vimls",
-        "luals",
+        "lua_ls",
         "fortls",
         "julials",
         "texlab",
         "yamlls",
-        "foamls",
-        "matlabls",
-      } do
-        require("plugins.lsp.servers." .. server).setup(on_attach, capabilities)
-      end
+        "foam_ls",
+        "matlab_ls",
+      }
       -- rime_ls server
-      require("plugins.lsp.servers.rimels").setup_rime()
+      require("plugins.lsp.rimels").setup_rime()
     end,
   },
 

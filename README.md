@@ -92,4 +92,4 @@ Here, I list the plugins in each lua file
 - vim-wakatime: wakatime plugin
 - vim-gf-list: custom gf
 - fzf: fzf plugin
-- toggleterm.nvim: terminal manager
+- toggleterm.nvim: terminal manage

@@ -16,6 +16,8 @@ end
 
 function M.on_attach(client, buffer)
   vim.bo[buffer].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+  -- Common LSP keymaps
   local keymaps = {
     { "K", vim.lsp.buf.hover, method = "hover" },
     { "gd", function() require("glance").open "definitions" end, method = "definition" },
@@ -40,10 +42,13 @@ function M.on_attach(client, buffer)
 
   -- auto format
   M.autoformat = true
-  vim.api.nvim_create_user_command("AutoFormatToggle", function()
-    M.autoformat = not M.autoformat
-    vim.notify("Format on save: " .. tostring(M.autoformat))
-  end, {})
+  if vim.fn.exists ":AutoFormatToggle" == 0 then
+    vim.api.nvim_create_user_command("AutoFormatToggle", function()
+      M.autoformat = not M.autoformat
+      vim.notify("Format on save: " .. tostring(M.autoformat))
+    end, {})
+  end
+
   if client:supports_method "textDocument/formatting" then
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = vim.api.nvim_create_augroup("LspFormat." .. buffer, {}),
