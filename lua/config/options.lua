@@ -106,6 +106,19 @@ vim.opt.shortmess:append { W = true, I = true, c = true, C = true }
 vim.opt.diffopt:append { linematch = 60 } -- diff模式时,最大行数60
 vim.opt.whichwrap:append "[,]" -- 添加[和]用作行移动
 
+-- make zsh files recognized as sh for bash-ls & treesitter
+vim.filetype.add {
+  extension = {
+    zsh = "sh",
+    sh = "sh", -- force sh-files with zsh-shebang to still get sh as filetype
+  },
+  filename = {
+    [".zshrc"] = "sh",
+    [".zshenv"] = "sh",
+    [".ignore"] = "gitignore", -- fd ignore files
+  },
+}
+
 vim.cmd [[filetype plugin indent on]]
 
 -- undofile

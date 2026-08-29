@@ -3,31 +3,17 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- go to last loc when opening a buffer
 autocmd("BufReadPost", {
-  group = augroup("last_loc", {}),
-  callback = function()
-    local mark = vim.api.nvim_buf_get_mark(0, '"')
-    local lcount = vim.api.nvim_buf_line_count(0)
-    if mark[1] > 0 and mark[1] <= lcount then pcall(vim.api.nvim_win_set_cursor, 0, mark) end
+  desc = "User: Restore cursor position",
+  callback = function(ctx)
+    if vim.bo[ctx.buf].buftype ~= "" then return end
+    vim.cmd [[silent! normal! g`"]]
   end,
 })
-
--- make zsh files recognized as sh for bash-ls & treesitter
-vim.filetype.add {
-  extension = {
-    zsh = "sh",
-    sh = "sh", -- force sh-files with zsh-shebang to still get sh as filetype
-  },
-  filename = {
-    [".zshrc"] = "sh",
-    [".zshenv"] = "sh",
-    [".ignore"] = "gitignore", -- fd ignore files
-  },
-}
 
 -- resize splits if window got resized
 autocmd({ "VimResized" }, {
   group = augroup("resize_splits", {}),
-  callback = function() vim.cmd "tabdo wincmd =" end,
+  command = "wincmd =",
 })
 
 -- Highlight on yank
@@ -44,14 +30,8 @@ autocmd("VimLeave", {
   end,
 })
 
--- Equalize splites 均分
-autocmd("VimResized", {
-  callback = function() vim.cmd "wincmd =" end,
-  desc = "Equalize Splits",
-})
-
 -- simplified version of https://github.com/Aasim-A/scrollEOF.nvim
-autocmd("CursorMoved", {
+autocmd({ "CursorMoved", "BufReadPost" }, {
   desc = "User: Enforce scrolloff at EoF",
   callback = function(ctx)
     if vim.bo[ctx.buf].buftype ~= "" then return end
@@ -67,20 +47,6 @@ autocmd("CursorMoved", {
       topline = topline + toplineFoldAmount
       vim.fn.winrestview { topline = topline + scrolloff - visualDistanceToEof }
     end
-  end,
-})
--- FIX for some reason `scrolloff` sometimes being set to `0` on new buffers
-local originalScrolloff = vim.o.scrolloff
-autocmd({ "BufReadPost", "BufNew" }, {
-  desc = "User: FIX scrolloff on entering new buffer",
-  callback = function(ctx)
-    vim.defer_fn(function()
-      if not vim.api.nvim_buf_is_valid(ctx.buf) or vim.bo[ctx.buf].buftype ~= "" then return end
-      if vim.o.scrolloff == 0 then
-        vim.o.scrolloff = originalScrolloff
-        vim.notify("Triggered by [" .. ctx.event .. "]", nil, { title = "Scrolloff fix" })
-      end
-    end, 150)
   end,
 })
 
@@ -139,11 +105,11 @@ autocmd("InsertEnter", {
   callback = function() stop_hl() end,
   desc = "Auto remove hlsearch",
 })
-autocmd("CursorMoved", {
-  group = smart_hl,
-  callback = function() start_hl() end,
-  desc = "Auto hlsearch",
-})
+-- autocmd("CursorMoved", {
+--   group = smart_hl,
+--   callback = function() start_hl() end,
+--   desc = "Auto hlsearch",
+-- })
 
 -- For suckless st
 autocmd({ "BufWritePost" }, {

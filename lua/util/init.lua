@@ -1,48 +1,6 @@
-local api = vim.api
-
 local M = {}
 
 M.root_patterns = { ".git", "lua" }
-
----@param plugin string
-function M.has(plugin) return require("lazy.core.config").plugins[plugin] ~= nil end
-
--- returns the root directory based on:
--- * lsp workspace folders
--- * lsp root_dir
--- * root pattern of filename of the current buffer
--- * root pattern of cwd
----@return string
-function M.get_root()
-  ---@type string?
-  local path = api.nvim_buf_get_name(0)
-  path = path ~= "" and vim.uv.fs_realpath(path) or nil
-  ---@type string[]
-  local roots = {}
-  if path then
-    for _, client in pairs(vim.lsp.get_clients { bufnr = 0 }) do
-      local workspace = client.config.workspace_folders
-      local paths = workspace and vim.tbl_map(function(ws) return vim.uri_to_fname(ws.uri) end, workspace)
-        or client.config.root_dir and { client.config.root_dir }
-        or {}
-      for _, p in ipairs(paths) do
-        local r = vim.uv.fs_realpath(p)
-        if r and path:find(r, 1, true) then roots[#roots + 1] = r end
-      end
-    end
-  end
-  table.sort(roots, function(a, b) return #a > #b end)
-  ---@type string?
-  local root = roots[1]
-  if not root then
-    path = path and vim.fs.dirname(path) or vim.uv.cwd()
-    ---@type string?
-    root = vim.fs.find(M.root_patterns, { path = path, upward = true })[1]
-    root = root and vim.fs.dirname(root) or vim.uv.cwd()
-  end
-  ---@cast root string
-  return root
-end
 
 -- better toggleCase
 local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
@@ -84,7 +42,7 @@ function M.duplicateAsComment()
   vim.api.nvim_win_set_cursor(0, { ln + 1, col })
 end
 
--- https://jupytext.readthedocs.io/en/latest/formats-scripts.html#the-percent-format
+-- insertComments
 function M.insertDoublePercentCom()
   if vim.bo.commentstring == "" then return end
   local curLine = vim.api.nvim_get_current_line()
@@ -99,14 +57,6 @@ function M.insertDoublePercentCom()
   vim.api.nvim_buf_add_highlight(0, 0, "DiagnosticVirtualTextHint", ln, 0, -1)
 end
 
-function M.removeDoublePercentComs()
-  if vim.bo.commentstring == "" then return end
-  local cursorBefore = vim.api.nvim_win_get_cursor(0)
-  local doublePercentCom = vim.bo.commentstring:format "%%"
-  vim.cmd("% substitute/" .. doublePercentCom .. "//")
-  vim.api.nvim_win_set_cursor(0, cursorBefore)
-end
-
 -- word count
 function M.getwords()
   if vim.bo.filetype == "md" or vim.bo.filetype == "text" or vim.bo.filetype == "markdown.pandoc" then
@@ -117,13 +67,7 @@ function M.getwords()
   end
 end
 
--- Width of side windows
-function M.width()
-  local columns = vim.go.columns
-  return math.floor(columns * 0.2) > 25 and math.floor(columns * 0.2) or 25
-end
-
--- Width of side windows
+-- side windows
 function M.togglecli(cli)
   local Terminal = require("toggleterm.terminal").Terminal
   return Terminal:new({ cmd = cli, hidden = true, direction = "float" }):toggle()

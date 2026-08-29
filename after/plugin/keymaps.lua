@@ -133,10 +133,6 @@ end, { desc = "Restricted <BS>", expr = true })
 -- quick comment
 map("n", "wq", function() util.duplicateAsComment() end, { desc = " Duplicate Line as Comment" })
 map("n", "qn", function() util.insertDoublePercentCom() end, { desc = " Insert %% Comment" })
-map("n", "dN", function() util.removeDoublePercentComs() end, { desc = " Remove %% Comments" })
-
--- flip word
-map("n", "<leader>t", function() require("util.flipper").flipWord() end, { desc = "switch common words" })
 
 -- better gx
 map("", "gx", '<Cmd>call jobstart(["linkhandler", expand("<cfile>")], {"detach": v:true})<CR>', {})
