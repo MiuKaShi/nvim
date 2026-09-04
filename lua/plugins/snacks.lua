@@ -1,59 +1,72 @@
+---@param dir string? defaults to cwd
+local function betterFileOpen(dir)
+  local changedFiles = {}
+  local gitDir = require("snacks").git.get_root(dir)
+  if gitDir then
+    local args = { "git", "-C", gitDir, "status", "--porcelain", "--ignored" }
+    local gitStatus = vim.system(args):wait().stdout or ""
+    local changes = vim.split(gitStatus, "\n", { trimempty = true })
+    changedFiles = vim.iter(changes):fold({}, function(acc, line)
+      local relPath = line:sub(4):gsub("^.+ -> ", "") -- gsub for renames
+      local absPath = gitDir .. "/" .. relPath
+      local change = line:sub(1, 2)
+      if change == "??" then change = " A" end -- just nicer highlights for untracked
+      acc[absPath] = change
+      return acc
+    end)
+  end
+  local currentFile = vim.api.nvim_buf_get_name(0)
+  require("snacks").picker.files {
+    cwd = dir,
+    title = "󰝰 " .. vim.fs.basename(dir or vim.uv.cwd()),
+    transform = function(item, _ctx) -- exclude the current file
+      local itemPath = require("snacks").picker.util.path(item)
+      if itemPath == currentFile then return false end
+    end,
+    format = function(item, picker) -- add git status highlights
+      local itemPath = require("snacks").picker.util.path(item)
+      item.status = changedFiles[itemPath]
+      if vim.startswith(item.file, ".") then item.status = "!!" end -- hidden files
+      return require("snacks.picker.format").file(item, picker)
+    end,
+  }
+end
+
+--------------------------------------------------------------------------------
+
 return {
   "folke/snacks.nvim",
   event = "UIEnter",
-
   config = function(_, opts)
     require("snacks").setup(opts)
-
     -- modify certain notifications
-    vim.notify = function(msg, lvl, nOpts) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
-      nOpts = nOpts or {}
+    vim.notify = function(msg, lvl, notiOpts) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
+      if type(msg) ~= "string" then msg = tostring(msg) end
 
       local ignore = (msg == "No code actions available" and vim.bo.ft == "typescript")
-        or msg:find "^Client marksman quit with exit code 1 and signal 0." -- https://github.com/artempyanykh/marksman/issues/348
-        or msg:find "^Error executing vim.schedule.*/_folding_range.lua:311"
+        or msg:find "Vim%(foldclose%):E490: No fold found"
       if ignore then return end
 
-      if msg:find "Hunk %d+ of %d+" then -- gitsigns.nvim
-        nOpts.style = "minimal"
-        msg = msg .. "  "
-        nOpts.icon = "󰊢 "
-        nOpts.id = "gitsigns"
-      elseif msg:find "^%[nvim%-treesitter" then -- treesitter parser update
-        nOpts.id = "treesitter-parser-update"
-      end
-      require("snacks").notifier(msg, lvl, nOpts)
+      if vim.startswith(msg, "[nvim-treesitter/") then notiOpts = { id = "treesitter-update" } end
+      require("snacks").notifier(msg, lvl, notiOpts)
     end
 
     -- disable default keymaps to make the `?` help overview less cluttered
-    require("snacks.picker.config.defaults").defaults.win.input.keys = {}
-    require("snacks.picker.config.defaults").defaults.win.list.keys = {}
-    require("snacks.picker.config.sources").explorer.win.list.keys = {}
-  end,
-
-  keys = {
-    { "ö", function() require("snacks").words.jump(1, true) end, desc = "󰗲 Next reference" },
-    { "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰗲 Prev reference" },
-    {
-      "<leader>oi",
-      function()
-        if require("snacks").indent.enabled then
-          vim.g.prev_listchars = vim.opt_local.listchars:get()
-          vim.opt_local.listchars:append {
-            tab = " ",
-            space = "·",
-            trail = "·",
-            lead = "·",
-          }
-          require("snacks").indent.disable()
-        else
-          vim.opt_local.listchars = vim.g.prev_listchars
-          require("snacks").indent.enable()
+    -- deferred, since they load a bunch of snacks modules
+    vim.defer_fn(function()
+      require("snacks.picker.config.defaults").defaults.win.input.keys = {}
+      require("snacks.picker.config.defaults").defaults.win.list.keys = {}
+      require("snacks.picker.config.sources").explorer.win.list.keys = {}
+      -- picker: remove the numbers from `vim.ui.select`
+      local orig = require("snacks.picker.format").ui_select
+      require("snacks.picker.format").ui_select = function(o)
+        return function(item, picker)
+          local formatted = orig(o)(item, picker)
+          return vim.list_slice(formatted, 3)
         end
-      end,
-      desc = " Invisible chars",
-    },
-  },
+      end
+    end, 4000)
+  end,
   opts = {
     input = {
       icon = "",
@@ -87,5 +100,463 @@ return {
         title = " 󰆽 Git blame ",
       },
     },
+    -- huge picker config
+    picker = {
+      sources = {
+        select = { -- vim.ui.select
+          layout = { layout = { min_width = 40, width = 0.6 } },
+          kinds = {}, -- allows-kind-specific config
+        },
+        files = {
+          cmd = "rg",
+          args = {
+            "--sortr=modified", -- sort by recency, slight performance impact
+            ("--ignore-file=" .. vim.fs.normalize "~/.config/ripgrep/ignore"),
+          },
+          exclude = { -- keep this ignored even if toggling to show hidden/ignored
+            "node_modules",
+            ".DS_Store",
+            "*.zip",
+          },
+          layout = "small_no_preview",
+          matcher = { frecency = true }, -- slight performance impact
+          win = {
+            input = {
+              keys = {
+                [":"] = { "complete_and_add_colon", mode = "i" },
+              },
+            },
+          },
+          -- if binary, open in system application instead
+          confirm = function(picker, item, action)
+            local absPath = require("snacks").picker.util.path(item) or ""
+            local binaryExt = { "pdf", "png", "webp" }
+            local ext = absPath:match ".+%.([^.]+)$" or ""
+            if vim.tbl_contains(binaryExt, ext) then
+              vim.ui.open(absPath)
+              picker:close()
+              return
+            end
+            -- regular file open
+            require("snacks.picker.actions").confirm(picker, item, action)
+          end,
+          actions = {
+            complete_and_add_colon = function(picker)
+              -- snacks allows opening files with `file:lnum`, but it
+              -- only matches if the filename is complete. With this
+              -- action, we complete the filename if using the 1st colon
+              -- in the query.
+              local query = vim.api.nvim_get_current_line()
+              local file = picker:current().file
+              if not file or query:find ":" then
+                vim.fn.feedkeys(":", "n")
+                return
+              end
+              vim.api.nvim_set_current_line(file .. ":")
+              vim.cmd.startinsert { bang = true }
+            end,
+          },
+        },
+        explorer = {
+          layout = { preset = "small_no_preview", layout = { height = 0.85 } },
+          jump = { close = true },
+          win = {
+            list = {
+              keys = {
+                -- consistent with Finder vim mode bindings
+                ["<D-up>"] = "explorer_up",
+                ["h"] = "explorer_close", -- go up folder
+                ["l"] = "confirm", -- enter folder / open file
+                ["zz"] = "explorer_close_all",
+                ["y"] = "explorer_copy",
+                ["n"] = "explorer_add",
+                ["d"] = "explorer_del",
+                ["m"] = "explorer_move",
+                ["o"] = "explorer_open", -- open with system application
+                ["<CR>"] = "explorer_rename",
+                ["-"] = "focus_input", -- i.e. search
+                ["."] = "toggle_hidden_and_ignored",
+
+                -- consistent with `gh` for next hunk and `ge` for next diagnostic
+                ["gh"] = "explorer_git_next",
+                ["gH"] = "explorer_git_prev",
+                ["ge"] = "explorer_diagnostic_next",
+                ["gE"] = "explorer_diagnostic_prev",
+              },
+            },
+          },
+        },
+        recent = { layout = "small_no_preview" },
+        grep = {
+          regex = false, -- use fixed strings by default
+          cmd = "rg",
+          args = {
+            "--sortr=modified", -- sort by recency, slight performance impact
+            ("--ignore-file=" .. vim.env.HOME .. "/.config/ripgrep/ignore"),
+          },
+        },
+        help = {
+          confirm = function(picker)
+            picker:action "help"
+            vim.cmd.only() -- so help is full window
+          end,
+        },
+        keymaps = {
+          -- open keymap definition
+          confirm = function(picker, item)
+            if not item.file then return end
+            picker:close()
+            local lnum = item.pos[1]
+            vim.cmd(("edit +%d %s"):format(lnum, item.file))
+          end,
+          layout = "toggled_preview",
+        },
+        colorschemes = {
+          -- at the bottom, so there is more space to preview
+          layout = { max_height = 8, preset = "ivy" },
+        },
+        icons = {
+          layout = {
+            preset = "small_no_preview",
+            layout = { width = 0.7 },
+          },
+          matcher = { frecency = true }, -- slight performance impact
+          -- PENDING https://github.com/folke/snacks.nvim/pull/2520
+          confirm = function(picker, item, action)
+            picker:close()
+            if not item then return end
+            local value = item[action.field] or item.data or item.text
+            vim.api.nvim_paste(value, true, -1)
+            if picker.input.mode ~= "i" then return end
+            vim.schedule(function()
+              -- `nvim_paste` puts the cursor on the last character, so we need to
+              -- emulate `a` to re-enter insert mode at the correct position. However,
+              -- `:startinsert` does `i` and `:startinsert!` does `A`, so we need to
+              -- check if the cursor is at the end of the line.
+              local col = vim.fn.virtcol "."
+              local eol = vim.fn.virtcol "$" - 1
+              if col == eol then
+                vim.cmd.startinsert { bang = true }
+              else
+                vim.cmd.normal { "l", bang = true }
+                vim.cmd.startinsert()
+              end
+            end)
+          end,
+        },
+        highlights = {
+          confirm = function(picker, item)
+            vim.fn.setreg("+", item.hl_group)
+            vim.notify(item.hl_group, nil, { title = "Copied", icon = "󰅍" })
+            picker:close()
+          end,
+        },
+        git_branches = {
+          all = true, -- = include remotes
+        },
+        git_log = {
+          layout = "toggled_preview",
+        },
+        git_log_file = {
+          layout = "toggled_preview",
+        },
+        git_status = {
+          layout = "big_preview",
+          win = {
+            input = {
+              keys = {
+                ["<Tab>"] = { "list_down", mode = "i" },
+                ["<Space>"] = { "git_stage", mode = "i" },
+                -- <CR> opens the file as usual
+              },
+            },
+          },
+        },
+        git_diff = {
+          layout = "big_preview",
+          win = {
+            input = {
+              keys = {
+                ["<Tab>"] = { "list_down", mode = "i" },
+                ["<Space>"] = { "git_stage", mode = "i" },
+                -- <CR> opens the file as usual
+              },
+            },
+          },
+        },
+        gh_issue = {
+          layout = "big_preview",
+        },
+        gh_pr = {
+          layout = "big_preview",
+        },
+        treesitter = {
+          layout = "sidebar",
+          filter = { markdown = { "Field" } }, -- requires `queries/markdown/locals.scm`
+        },
+        lsp_symbols = { layout = "sidebar" },
+      },
+      formatters = { file = { filename_first = true } },
+      previewers = {
+        diff = { wo = { wrap = false } },
+      },
+      toggles = {
+        regex = { icon = "regex", value = true }, -- invert -> only display if enabled
+        follow = { icon = "no follow", value = false }, -- invert -> only display if disabled
+        ignored = { icon = "ignored" },
+        hidden = { icon = "hidden" },
+      },
+      ui_select = true,
+      layout = "wide_with_preview", -- = default layout
+      layouts = { -- define available layouts
+        small_no_preview = {
+          layout = {
+            box = "horizontal",
+            width = 0.65,
+            height = 0.6,
+            border = "none",
+            {
+              box = "vertical",
+              border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
+              title = "{title} {live} {flags}",
+              { win = "input", height = 1, border = "bottom" },
+              { win = "list", border = "none" },
+            },
+          },
+        },
+        wide_with_preview = {
+          preset = "small_no_preview",
+          layout = {
+            width = 0.99,
+            [2] = { -- as second column
+              win = "preview",
+              title = "{preview}",
+              border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
+              width = 0.5,
+            },
+          },
+        },
+        big_preview = {
+          preset = "wide_with_preview",
+          layout = {
+            height = 0.8,
+            [2] = { width = 0.6 }, -- second win is the preview
+          },
+        },
+        sidebar = {
+          preview = "main",
+          cycle = true, -- `list_up/down` action wraps
+          layout = {
+            box = "vertical",
+            position = "left", -- = split window
+            width = 0.3,
+            min_width = 25,
+            { win = "input", height = 1, border = "bottom" },
+            { win = "list" },
+            { win = "preview" },
+          },
+        },
+        sidebar_no_input = {
+          preview = "main",
+          cycle = true, -- `list_up/down` action wraps
+          layout = {
+            box = "vertical",
+            position = "left", -- = split window
+            width = 0.3,
+            min_width = 25,
+            { win = "list" },
+            { win = "preview" },
+          },
+        },
+      },
+      win = {
+        input = {
+          keys = {
+            ["<Esc>"] = { "close", mode = "i" }, --> disable normal mode
+            ["<CR>"] = { "confirm", mode = "i" },
+            ["<C-j>"] = { "list_down", mode = "i" },
+            ["<C-k>"] = { "list_up", mode = "i" },
+            ["<D-Up>"] = { "list_top", mode = "i" },
+            ["<D-Down>"] = { "list_bottom", mode = "i" },
+
+            ["<M-CR>"] = { "select_and_next", mode = "i" }, -- consistent with `fzf`
+            ["<Up>"] = { "history_back", mode = "i" },
+            ["<Down>"] = { "history_forward", mode = "i" },
+
+            ["<D-f>"] = { "toggle_maximize", mode = "i" }, -- [f]ullscreen
+            ["<D-p>"] = { "toggle_preview", mode = "i" },
+            ["<C-CR>"] = { "cycle_win", mode = "i" },
+            ["<PageUp>"] = { "preview_scroll_up", mode = "i" },
+            ["<PageDown>"] = { "preview_scroll_down", mode = "i" },
+
+            ["<D-s>"] = { "qflist_and_go", mode = "i" },
+            ["<D-c>"] = { "yank", mode = "i" },
+
+            ["!"] = { "inspect", mode = "i" },
+            ["?"] = { "toggle_help_input", mode = "i" },
+          },
+        },
+        list = {
+          keys = {
+            ["<C-CR>"] = "cycle_win",
+            ["<D-p>"] = "toggle_preview",
+            ["G"] = "list_bottom",
+            ["gg"] = "list_top",
+            ["j"] = "list_down",
+            ["k"] = "list_up",
+            ["<Tab>"] = "list_down",
+            ["<S-Tab>"] = "list_up",
+            ["q"] = "close",
+            ["<Esc>"] = "close",
+            ["!"] = "inspect",
+            ["?"] = "toggle_help_list",
+          },
+        },
+        preview = {
+          keys = {
+            ["q"] = "close",
+            ["<C-CR>"] = "cycle_win",
+            ["<Tab>"] = "list_down", -- cycle list from the preview win
+            ["<S-Tab>"] = "list_up",
+          },
+          wo = {
+            number = false,
+            statuscolumn = " ",
+            signcolumn = "no",
+          },
+        },
+      },
+      actions = {
+        qflist_and_go = function(picker)
+          local query = vim.api.nvim_get_current_line()
+          local title = ("%s: %s"):format(picker.title, query)
+          picker:action "qflist"
+          vim.fn.setqflist({}, "a", { title = title }) -- add missing title to qflist
+
+          vim.cmd.cclose()
+          vim.cmd "silent cfirst"
+          vim.cmd.normal { "zv", bang = true } -- open folds
+
+          vim.api.nvim_exec_autocmds("QuickFixCmdPost", {})
+        end,
+        toggle_hidden_and_ignored = function(picker)
+          picker.opts["hidden"] = not picker.opts.hidden
+          picker.opts["ignored"] = not picker.opts.ignored
+
+          if picker.opts.finder ~= "explorer" then
+            -- remove `--ignore-file` extra arg
+            picker.opts["_originalArgs"] = picker.opts["_originalArgs"] or picker.opts.args
+            local noIgnoreFileArgs = vim
+              .iter(picker.opts.args)
+              :filter(function(arg) return not vim.startswith(arg, "--ignore-file=") end)
+              :totable()
+            picker.opts["args"] = picker.opts.hidden and noIgnoreFileArgs or picker.opts["_originalArgs"]
+          end
+
+          picker:find()
+        end,
+      },
+      prompt = "  ", -- 
+      icons = {
+        ui = { selected = "󰒆 " },
+        git = {
+          staged = "󰐖", -- consistent with tinygit
+          added = "󰎔",
+          modified = "󰄯",
+          renamed = "󰏬",
+        },
+      },
+    },
+  },
+
+  ---keymaps
+  keys = {
+    ---WORDS
+    { "ö", function() require("snacks").words.jump(1, true) end, desc = "󰗲 Next reference" },
+    { "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰗲 Prev reference" },
+
+    -- GREP
+    { "<leader>/", function() require("snacks").picker.grep() end, desc = "󰛢 Grep" },
+
+    -- indent
+    {
+      "<leader>oi",
+      function()
+        if require("snacks").indent.enabled then
+          vim.g.prev_listchars = vim.opt_local.listchars:get()
+          vim.opt_local.listchars:append {
+            tab = " ",
+            space = "·",
+            trail = "·",
+            lead = "·",
+          }
+          require("snacks").indent.disable()
+        else
+          vim.opt_local.listchars = vim.g.prev_listchars
+          require("snacks").indent.enable()
+        end
+      end,
+      desc = "Invisible chars",
+    },
+
+    -- FILES
+    { "<leader>ff", betterFileOpen, desc = " Open files" },
+    { "gn", function() betterFileOpen(vim.g.notesDir) end, desc = " Notes" },
+    -- { "gt", function() require("snacks").picker.explorer() end, desc = "󰙅 File tree" },
+    -- {
+    --   "gr",
+    --   function() require("snacks").picker.recent() end,
+    --   desc = "󰋚 Recent files",
+    --   nowait = true, -- due to nvim default mappings starting with `gr`
+    -- },
+    { "g,", function() betterFileOpen(vim.fn.stdpath "config") end, desc = " nvim config" },
+    {
+      "gp",
+      function()
+        require("snacks").picker.files {
+          title = "󰈮 Local plugins",
+          cwd = vim.fn.stdpath "data" .. "/lazy",
+          exclude = { "*/tests/*", "*.toml", "*.tmux", "*.txt" },
+          matcher = { filename_bonus = false }, -- folder more important here
+          formatters = { file = { filename_first = false } },
+        }
+      end,
+      desc = "󰈮 Local plugins",
+    },
+
+		-- LSP
+		-- stylua: ignore start
+		{ "gw", function() require("snacks").picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
+		-- `lsp_symbols` tends to too much clutter like anonymous function
+		{ "<leader>fs", function() require("snacks").picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
+		-- treesitter does not work for markdown, so using LSP symbols here
+		{ "<leader>fs", function() require("snacks").picker.lsp_symbols() end, ft = "markdown", desc = "󰽛 Headings" },
+    -- stylua: ignore end
+
+    -- GIT
+    { "<leader>gs", function() require("snacks").picker.git_status() end, desc = "󰗲 Status" },
+    { "<leader>gl", function() require("snacks").picker.git_log() end, desc = "󰗲 Log" },
+    { "<leader>ga", function() require("snacks").picker.git_diff() end, desc = "󰐖 Hunks" },
+		-- stylua: ignore
+		{ "<leader>gb", function() require("snacks").picker.git_branches() end, desc = "󰗲 Branches" },
+    -- stylua: ignore end
+
+    -- INSPECT
+    { "<leader>iv", function() require("snacks").picker.help() end, desc = "󰋖 Vim help" },
+		-- stylua: ignore start
+		{ "<leader>ih", function() require("snacks").picker.highlights() end, desc = " Highlights" },
+		{ "<leader>is", function() require("snacks").picker.pickers() end, desc = "󰗲 Snacks pickers" },
+		{ "<leader>ik", function() require("snacks").picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
+    -- stylua: ignore end
+    {
+      "<leader>iK",
+      function() require("snacks").picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end,
+      desc = "󰌌 Keymaps (buffer)",
+    },
+
+    -- MISC
+    { "<leader>ms", function() require("snacks").picker.marks() end, desc = "󰃁 Select mark" },
+    { "<leader>ut", function() require("snacks").picker.undo() end, desc = "󰋚 Undo tree" },
+    -- stylua: ignore
   },
 }

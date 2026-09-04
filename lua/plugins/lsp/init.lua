@@ -1,6 +1,5 @@
 return {
   -- lspconfig
-  { "ii14/emmylua-nvim", ft = "lua" },
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -51,10 +50,10 @@ return {
       capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
 
       -- for nvim-ufo
-      capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
-      }
+      -- capabilities.textDocument.foldingRange = {
+      --   dynamicRegistration = false,
+      --   lineFoldingOnly = true,
+      -- }
 
       -- Apply to all LSP servers
       vim.lsp.config("*", {
@@ -64,10 +63,8 @@ return {
       -- LSPattach
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("my-lsp-attach", { clear = true }),
-
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
-
           if client then require("plugins.lsp.attach").on_attach(client, args.buf) end
         end,
       })
@@ -140,25 +137,9 @@ return {
 
   {
     "dnlhc/glance.nvim",
+    cmd = "Glance",
     opts = {
       border = { enable = true },
-      hooks = {
-        ---Don't open glance when there is only one result and it is located in the current buffer, open otherwise
-        before_open = function(results, open, jump)
-          local uri = vim.uri_from_bufnr(0)
-          if #results == 1 then
-            local target_uri = results[1].uri or results[1].targetUri
-
-            if target_uri == uri then
-              jump(results[1])
-            else
-              open(results)
-            end
-          else
-            open(results)
-          end
-        end,
-      },
     },
   },
 
@@ -226,7 +207,7 @@ return {
   -- better LSP variable-rename
   {
     "smjonas/inc-rename.nvim",
-    event = "CmdlineEnter", -- loading with `cmd = "IncRename` does not work with incremental preview
+    cmd = "IncRename",
     opts = {
       -- if more than one file is changed, save all buffers
       post_hook = function(results)
@@ -246,6 +227,9 @@ return {
     },
     config = function() require "plugins.lsp.none-ls" end,
   },
+
+  -- modern lua lsp
+  { "ii14/emmylua-nvim", ft = "lua" },
 
   -- counts of functions
   {

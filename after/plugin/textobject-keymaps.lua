@@ -65,7 +65,6 @@ keymap("o", "rg", "G", { desc = "󱡔 rest of buffer textobj" })
 -- ge: diagnostic textobj (similar to ge for the next diagnostic)
 keymap({ "x", "o" }, "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", { desc = "󱡔 diagnostic textobj" })
 
-
 -- ai/ag/aj: indentation textobjs
 keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation('inner', 'inner')<CR>", { desc = "󱡔 inner indent textobj" })
 keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation('outer', 'outer')<CR>", { desc = "󱡔 outer indent textobj" })

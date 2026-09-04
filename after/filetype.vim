@@ -28,4 +28,5 @@ augroup filetypedetect
 	au BufRead,BufNewFile *.inp set filetype=apdl
 	au BufRead,BufNewFile *.mac set filetype=apdl
 	au BufRead,BufNewFile *.ans set filetype=apdl
+	au BufRead,BufNewFile *.adblock set filetype=adblock commentstring=!\ %s
 augroup END

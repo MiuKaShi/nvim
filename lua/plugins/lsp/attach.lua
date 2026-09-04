@@ -16,14 +16,13 @@ end
 
 function M.on_attach(client, buffer)
   vim.bo[buffer].omnifunc = "v:lua.vim.lsp.omnifunc"
-
   -- Common LSP keymaps
   local keymaps = {
     { "K", vim.lsp.buf.hover, method = "hover" },
-    { "gd", function() require("glance").open "definitions" end, method = "definition" },
-    { "gt", function() require("glance").open "type_definitions" end, method = "typeDefinition" },
-    { "gh", function() require("glance").open "references" end, method = "references" },
-    { "gi", function() require("glance").open "implementations" end, method = "implementation" },
+    { "gd", "<CMD>Glance definitions<CR>", method = "definition" },
+    { "gt", "<CMD>Glance type_definitions<CR>", method = "typeDefinition" },
+    { "gh", "<CMD>Glance references<CR>", method = "references" },
+    { "gi", "<CMD>Glance implementations<CR>", method = "implementation" },
     { "gr", ":IncRename ", method = "rename" },
     { "gD", vim.lsp.buf.declaration, method = "declaration" },
     { "<C-k>", vim.lsp.buf.signature_help, method = "signatureHelp" },
