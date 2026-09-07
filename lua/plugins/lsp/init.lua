@@ -85,6 +85,8 @@ return {
         "yamlls",
         "foam_ls",
         "matlab_ls",
+        -- custom
+        "air",
       }
       -- rime_ls server
       require("plugins.lsp.rimels").setup_rime()

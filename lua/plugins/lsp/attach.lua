@@ -4,7 +4,7 @@ function M.format()
   local buf = vim.api.nvim_get_current_buf()
   local ft = vim.bo[buf].filetype
   local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
-
+  --  formatters clients
   vim.lsp.buf.format {
     bufnr = buf,
     filter = function(client)
@@ -47,7 +47,6 @@ function M.on_attach(client, buffer)
       vim.notify("Format on save: " .. tostring(M.autoformat))
     end, {})
   end
-
   if client:supports_method "textDocument/formatting" then
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = vim.api.nvim_create_augroup("LspFormat." .. buffer, {}),

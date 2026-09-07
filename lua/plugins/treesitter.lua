@@ -4,6 +4,7 @@ local ensureInstalled = {
   "python",
   "requirements",
   "query",
+  "r",
   "c",
   "cpp",
   "cmake",

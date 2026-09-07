@@ -98,6 +98,7 @@ local sources = {
   formatting.stylua.with {
     extra_args = { "--config-path", vim.fn.expand "~/.config/stylua/stylua.toml" },
   },
+  -- sh
   formatting.shfmt.with {
     extra_args = { "-i", "4", "-ci", "-bn" },
     extra_filetypes = { "zsh", "sh" },
@@ -107,7 +108,7 @@ local sources = {
   -- Matlab
   helpers.make_builtin(mh_style),
 
-  ---------diagnostics----------------
+  ---------lint----------------
   -- MATLAB
   diagnostics.mlint.with {
     command = "/home/miuka/.local/MATLAB/R2025b/bin/glnxa64/mlint",
