@@ -3,7 +3,6 @@ return {
   -- Snippet Engine
   {
     "L3MON4D3/LuaSnip",
-    -- version = "v2.*",
     build = "make install_jsregexp",
     opts = function()
       local types = require "luasnip.util.types"
@@ -39,10 +38,7 @@ return {
       },
       "jc-doyle/cmp-pandoc-references",
       "Kaiser-Yang/blink-cmp-dictionary",
-      {
-        "L3MON4D3/LuaSnip",
-        -- commit = "c9b9a22",
-      },
+      "L3MON4D3/LuaSnip",
     },
     config = function()
       local has_punctuation_before = function()

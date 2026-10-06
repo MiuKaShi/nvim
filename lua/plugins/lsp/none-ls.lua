@@ -4,6 +4,7 @@ local methods = require "null-ls.methods"
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 
+--- pipx install miss_hit --include-deps ---
 local mh_style = {
   name = "mh_style",
   meta = {

@@ -1,12 +1,11 @@
 return {
   cmd = { "matlab_ls", "--stdio" },
   filetypes = { "matlab" },
-  -- root_dir = require("lspconfig.util").root_pattern "*.m",
-  root_dir = function(fname) return require("lspconfig.util").find_git_ancestor(fname) or vim.fn.getcwd() end,
+  -- root_dir = require("lspconfig.util").root_pattern(".git", "*.prj"),
   settings = {
     matlab = {
       indexWorkspace = true,
-      -- installPath = "/home/miuka/.local/MATLAB/R2024b", -- bug with this, default is fine
+      installPath = "/home/miuka/.local/MATLAB/R2025b", -- bug with this, default is fine
       matlabConnectionTiming = "onStart",
       telemetry = true,
     },
