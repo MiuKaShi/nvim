@@ -34,7 +34,7 @@ return {
       }
     end,
     keys = {
-      { "<leader>ai", "<cmd>SupermavenToggle<cr>", desc = "Toggle Supermaven [A][I]" },
+      { "<leader>ii", "<cmd>SupermavenToggle<cr>", desc = "Toggle Supermaven [A][I]" },
     },
   },
 

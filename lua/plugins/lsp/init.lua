@@ -3,9 +3,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "none-ls.nvim",
-    },
     config = function()
       -- diagnostics signs
       --vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -218,16 +215,6 @@ return {
         if filesChanged > 1 then vim.cmd.wall() end
       end,
     },
-  },
-
-  -- none-ls
-  {
-    "nvimtools/none-ls.nvim",
-    -- commit = "7e146f3",
-    dependencies = {
-      "nvimtools/none-ls-extras.nvim",
-    },
-    config = function() require "plugins.lsp.none-ls" end,
   },
 
   -- modern lua lsp

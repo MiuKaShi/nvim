@@ -82,7 +82,7 @@ Here, I list the plugins in each lua file
 - nvim-navic: lsp winbar
 - lsp_signature.nvim: lsp signature
 - inc-rename.nvim: better lsp rename
-- none-ls.nvim: formatter engine
+- conform.nvim: formatter engine
 
 ## util.lua
 
