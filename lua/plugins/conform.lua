@@ -1,7 +1,6 @@
 --- pipx install miss_hit --include-deps ---
 return {
   "stevearc/conform.nvim",
-  event = { "BufWritePre" },
   lazy = true,
   cmd = { "ConformInfo" },
   opts = {

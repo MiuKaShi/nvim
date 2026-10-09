@@ -304,7 +304,6 @@ return {
       vim.g["pangu_rule_english_writing"] = 1 -- 英文写作模式。默认开启
     end,
     cmd = { "Pangu", "PanguAll" },
-    config = function() end,
   },
 
   -- Markdown预览
