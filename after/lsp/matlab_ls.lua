@@ -5,7 +5,7 @@ return {
   settings = {
     matlab = {
       indexWorkspace = true,
-      installPath = "/home/miuka/.local/MATLAB/R2025b", -- bug with this, default is fine
+      installPath = "/home/miuka/.local/MATLAB/R2026b", -- bug with this, default is fine
       matlabConnectionTiming = "onStart",
       telemetry = true,
     },

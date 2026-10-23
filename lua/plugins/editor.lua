@@ -254,7 +254,8 @@ return {
   {
     "Avi-D-coder/fzf-wordnet.vim",
     dependencies = {
-      "junegunn/fzf.vim",
+      -- "junegunn/fzf.vim",
+      "ibhagwan/fzf-lua",
     },
     config = function() vim.g.fzf_wordnet_preview_arg = "" end,
     keys = {
@@ -341,7 +342,10 @@ endfunction
   {
     "epwalsh/obsidian.nvim",
     version = "*",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "ibhagwan/fzf-lua",
+    },
     event = { "BufReadPre /home/miuka/notes/**.md" },
     cmd = {
       "ObsidianFollowLink",
@@ -356,6 +360,8 @@ endfunction
       "ObsidianLinkNew",
     },
     opts = {
+      legacy_commands = false, -- this will be removed in 4.0.0
+      picker = { name = "fzf-lua" },
       dir = "~/notes",
       notes_subdir = "day_notes",
       daily_notes = {
